@@ -21,7 +21,7 @@
 
     <?php 
         require_once("./views/common/menu.php");
-        $page_content;
+        echo $page_content;
         require_once("./views/common/footer.php"); 
     ?>
 

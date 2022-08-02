@@ -19,13 +19,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mx-4 mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Accueil</a>
+                    <a class="nav-link" aria-current="page" href="home">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Missions</a>
+                    <a class="nav-link" href="missions">Missions</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Connexion</a>
+                    <a class="nav-link" href="login">Connexion</a>
                 </li>
             </ul>
         </div>
