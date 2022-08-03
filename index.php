@@ -1,15 +1,16 @@
 <?php
 
 require_once("./controllers/MainController.php"); 
-$mainController = new MainController(); // pour accéder à toutes les fonctions 
+$mainController = new MainController(); // to use the functions from the MainController
 
 try {
     if(empty($_GET['page'])){
-        $page = "accueil"; 
+        $page = "home"; 
     } else {
         $url = explode("/", filter_var($_GET['page']), FILTER_SANITIZE_URL);
         $page = $url[0];
     }
+
     
     switch($page) {
         case "home": 

@@ -1,5 +1,14 @@
 <?php
+
+require_once("./models/MissionManager.php"); 
+
 class MainController {
+
+    private $missionManager;
+
+    public function __construct() {
+        $this->missionManager = new MissionManager(); 
+    }
 
     private function generatePage(array $data) {
         extract($data); //function to create variables from the array $data_page (indice of the array becomes variable)
@@ -26,9 +35,13 @@ class MainController {
     }
 
     public function missions() {
+
+        $missions = $this->missionManager->getAll();
+
         $data_page = [
             "page_description" => "Page listant l'ensemble des missions secrètes du KGB",
             "page_title" => "Missions du KGB",
+            "missions" => $missions,
             "view" => "./views/missionsView.php",
             "template" => "./views/common/template.php"
         ];
