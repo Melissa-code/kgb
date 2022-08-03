@@ -21,6 +21,7 @@ class MainController {
     public function home() {
         $data_page = [
             "page_description" => "Page d'accuel du site du KGB",
+            "page_css" => "home.css",
             "page_title" => "Page d'accuel du site du KGB",
             "view" => "./views/homeView.php",
             "template" => "./views/common/template.php"
@@ -45,6 +46,25 @@ class MainController {
             "view" => "./views/missionsView.php",
             "template" => "./views/common/template.php"
         ];
+        $this->generatePage($data_page); 
+    }
+
+    public function oneMission() {
+
+        $mission = $this->missionManager->get("Hercules");
+
+   
+        //var_dump($mission); OK
+
+        $data_page = [
+            "page_description" => "Page affichant le détail d'une mission secrète",
+            "page_title" => "Détail d'une mission",
+            "mission" => "mission",
+            "view" => "./views/oneMissionView.php",
+            "template" => "./views/common/template.php"
+        ];
+        
+        var_dump($data_page);
         $this->generatePage($data_page); 
     }
 

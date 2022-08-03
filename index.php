@@ -1,4 +1,6 @@
 <?php
+// pour avoir le chemin depuis la racine du site
+define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS'])? "https" : "http"). "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
 
 require_once("./controllers/MainController.php"); 
 $mainController = new MainController(); // to use the functions from the MainController
@@ -20,10 +22,14 @@ try {
             $mainController->home();
         break;
         case "missions": 
-            $mainController-> missions();
+            $mainController->missions();
         break;
+        case "oneMission": 
+            $mainController->oneMission();
+        break;
+
         case "login": 
-            $mainController-> login();
+            $mainController->login();
         break;
         default: 
             throw new Exception("La page n'existe pas"); 
@@ -33,3 +39,5 @@ try {
 }
 
 require_once('./views/common/template.php');
+
+

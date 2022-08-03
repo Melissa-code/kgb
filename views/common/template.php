@@ -13,17 +13,24 @@
     <!-- CSS Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./public/CSS/style.css">
+    <link href="<?= URL ?>public/CSS/main.css" rel="stylesheet">
+    <?php 
+        if(!empty($page_css)): ?>
+            <link href="<?= URL ?>public/CSS/<?= $page_css ?>" rel="stylesheet">
+        <?php endif ?>
     <title><?= $page_title ?></title>
 </head>
 
 <body>
 
-    <?php 
-        require_once("./views/common/menu.php");
-        echo $page_content;
-        require_once("./views/common/footer.php"); 
-    ?>
+   
+    <?php require_once("./views/common/header.php"); ?>
+    
+    <main class="container-fluid w-100 h-100" >
+        <?php echo $page_content; ?>
+    </main>
+    
+    <?php require_once("./views/common/footer.php"); ?>
 
 
 

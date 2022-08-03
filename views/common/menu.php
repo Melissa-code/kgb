@@ -5,8 +5,8 @@
     <div class="container-fluid">
         <!-- Logo -->
         <div class="logo mx-4">
-            <a class="navbar-brand" href="#">
-                <img src="./public/assets/images/logo_kgb.png" style="height: 100px"/>
+            <a class="navbar-brand" href="home" alt="logo du site">
+                <img src="<?= URL ?>public/assets/images/logo_kgb.png" width="80" />
             </a>
         </div>
 
@@ -17,17 +17,15 @@
     
         <!-- Target of the button -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mx-4 mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="home">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="missions">Missions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Connexion</a>
-                </li>
+            <ul class="nav col-12 col-lg-auto mx-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a aria-current="page" href="home" class="nav-link px-2 text-dark">Accueil</a></li>
+                <li><a href="missions" class="nav-link px-2 text-dark">Missions</a></li>
             </ul>
+
+            <div class="text-end me-5">
+                <!-- <a class="btn btn-dark" href="login" role="button">Connexion</a> -->
+                <a href="login"><img src="<?= URL ?>public/assets/images/login.svg" width="30" /></a>
+            </div>
         </div>
 
     </div>
