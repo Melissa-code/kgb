@@ -51,15 +51,16 @@ class MainController {
 
     public function oneMission() {
 
+        
         $mission = $this->missionManager->get("Hercules");
+        $mission = $this->missionManager->get($mission->getCode_mission());
 
-   
-        //var_dump($mission); OK
+        var_dump($mission); 
 
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
             "page_title" => "Détail d'une mission",
-            "mission" => "mission",
+            "mission" => $mission,
             "view" => "./views/oneMissionView.php",
             "template" => "./views/common/template.php"
         ];

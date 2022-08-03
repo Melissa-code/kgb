@@ -38,7 +38,7 @@ class MissionManager extends Model {
         $req->execute();
         $data = $req->fetch(); 
         $mission = new Mission($data); 
-        //var_dump($mission).'<br>'; 
+        //var_dump($mission); 
         return $mission;
     }
 
