@@ -15,7 +15,7 @@ foreach($missions as $mission) :?>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item mx-auto"> 
-                        <a href="<?= URL ?>oneMission?q=<?php echo $mission->getCode_mission()?> " class="card-link">Plus de détail >></a>
+                        <a href="<?= URL ?>oneMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="card-link">Plus de détail >></a>
                     </li>
                 </ul>
             </div>

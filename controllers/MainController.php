@@ -52,18 +52,14 @@ class MainController {
     public function oneMission() {
 
         $query = $_SERVER;
-        // print_r($query['SERVER_NAME'].":");
-        // print_r($query['SERVER_PORT']);
-        // print_r($query['REQUEST_URI']); 
         $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
         //echo $url; 
-       
         //echo URL;
         $l = parse_url($url);
         parse_str($l['query'], $params);
         //print_r($params['q']); 
 
-        $mission = $this->missionManager->get($params['q']);
+        $mission = $this->missionManager->get(base64_decode(urldecode( $params['q'])));
         print_r($params['q']); 
         $mission = $this->missionManager->get($mission->getCode_mission());
 
@@ -91,11 +87,11 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
-    public function createMission() {
+    public function createMission($code_mission, $title_mission, $description_mission, $country_mission, $id_duration, $code_status, $name_type) {
         $data_page = [
             "page_description" => "Page de création d'une mission",
             "page_title" => "Création d'un mission",
-            
+            // "mission" => "mission",
             "view" => "./views/createMissionView.php",
             "template" => "./views/common/template.php"
         ];
