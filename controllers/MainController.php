@@ -51,11 +51,25 @@ class MainController {
 
     public function oneMission() {
 
-        
-        $mission = $this->missionManager->get("Hercules");
+        $query = $_SERVER;
+        // print_r($query['SERVER_NAME'].":");
+        // print_r($query['SERVER_PORT']);
+        // print_r($query['REQUEST_URI']); 
+       $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+       //echo $url; 
+       
+
+        //echo URL;
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        // print_r($params['q']); 
+
+
+        $mission = $this->missionManager->get($params['q']);
+        //print_r($params['q']); 
         $mission = $this->missionManager->get($mission->getCode_mission());
 
-        var_dump($mission); 
+        //var_dump($mission); 
 
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
@@ -65,7 +79,7 @@ class MainController {
             "template" => "./views/common/template.php"
         ];
         
-        var_dump($data_page);
+        // var_dump($data_page);
         $this->generatePage($data_page); 
     }
 

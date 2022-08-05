@@ -50,6 +50,7 @@ class Mission {
     /* title_mission */
     public function getTitle_mission(){
         return $this->title_mission;
+      
     }
 
     public function setTitle_mission(string $title_mission){
