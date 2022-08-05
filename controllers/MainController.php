@@ -55,18 +55,16 @@ class MainController {
         // print_r($query['SERVER_NAME'].":");
         // print_r($query['SERVER_PORT']);
         // print_r($query['REQUEST_URI']); 
-       $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
-       //echo $url; 
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        //echo $url; 
        
-
         //echo URL;
         $l = parse_url($url);
         parse_str($l['query'], $params);
-        // print_r($params['q']); 
-
+        //print_r($params['q']); 
 
         $mission = $this->missionManager->get($params['q']);
-        //print_r($params['q']); 
+        print_r($params['q']); 
         $mission = $this->missionManager->get($mission->getCode_mission());
 
         //var_dump($mission); 
@@ -75,8 +73,8 @@ class MainController {
             "page_description" => "Page affichant le détail d'une mission secrète",
             "page_title" => "Détail d'une mission",
             "mission" => $mission,
-            "view" => "./views/oneMissionView.php",
-            "template" => "./views/common/template.php"
+            "view" => "views/oneMissionView.php",
+            "template" => "views/common/template.php"
         ];
         
         // var_dump($data_page);
@@ -88,6 +86,17 @@ class MainController {
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",
             "view" => "./views/loginView.php",
+            "template" => "./views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
+
+    public function createMission() {
+        $data_page = [
+            "page_description" => "Page de création d'une mission",
+            "page_title" => "Création d'un mission",
+            
+            "view" => "./views/createMissionView.php",
             "template" => "./views/common/template.php"
         ];
         $this->generatePage($data_page); 

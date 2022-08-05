@@ -26,7 +26,7 @@
    
     <?php require_once("./views/common/header.php"); ?>
     
-    <main class="container-fluid w-100 h-100" >
+    <main class="container-fluid " >
         <?php echo $page_content; ?>
     </main>
     
