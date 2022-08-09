@@ -1,6 +1,6 @@
 <?php
-require_once("./models/Model.php");
-require_once("./models/Mission.php");
+require_once("models/Model.php");
+require_once("models/Mission.php");
 
 class MissionManager extends Model {
 
@@ -38,6 +38,7 @@ class MissionManager extends Model {
         $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req->execute();
         $data = $req->fetch(); 
+        //print_r($data); 
         $mission = new Mission($data); 
         //var_dump($mission); 
         $req->closeCursor();
@@ -49,27 +50,20 @@ class MissionManager extends Model {
     *
     * return Mission $mission
     */
-    public function createMission($code_mission, $title_mission, $description_mission, $country_mission, $id_duration, $code_status, $name_type) {
-        $missions = [];
+    public function createMissionDb($newMission) : void {
         $pdo = $this->getDb();
         $req = $pdo->prepare("INSERT INTO Missions (code_mission, title_mission, description_mission, country_mission, id_duration, code_status, name_type) VALUES (:code_mission, :title_mission, :description_mission, :country_mission, :id_duration, :code_status, :name_type)");
-        $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
-        $req->bindValue(':title_mission', $title_mission, PDO::PARAM_STR);
-        $req->bindValue(':description_mission', $description_mission, PDO::PARAM_STR);
-        $req->bindValue(':country_mission', $country_mission, PDO::PARAM_STR);
-        $req->bindValue(':id_duration', $id_duration, PDO::PARAM_STR);
-        $req->bindValue(':code_status', $code_status, PDO::PARAM_STR);
-        $req->bindValue(':name_type', $name_type, PDO::PARAM_STR);
-        $result = $req->execute();
+        $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
+        $req->bindValue(':title_mission', $newMission->getTitle_mission(), PDO::PARAM_STR);
+        $req->bindValue(':description_mission', $newMission->getDescription_mission(), PDO::PARAM_STR);
+        $req->bindValue(':country_mission', $newMission->getCountry_mission(), PDO::PARAM_STR);
+        $req->bindValue(':id_duration', $newMission->getId_duration(), PDO::PARAM_INT);
+        $req->bindValue(':code_status', $newMission->getCode_status(), PDO::PARAM_STR);
+        $req->bindValue(':name_type', $newMission->getName_type(), PDO::PARAM_STR);
+        $req->execute();
         $req->closeCursor();
-
-        if($result > 0) {
-            $mission = new Mission($this->getDb());
-            // $this->array_push($mission, )
-            $this->missions[] = $mission;
-        }
-        var_dump($mission);
     }
+
 
 
 

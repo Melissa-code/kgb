@@ -6,6 +6,7 @@ foreach($missions as $mission) :?>
 
     <div class="row m-5">
         <div class="col-8 d-flex mx-auto">
+            
             <!-- Card of a mission -->
             <div class="card mx-2" style="width: 18rem;">
                 <div class="card-body">
@@ -19,12 +20,6 @@ foreach($missions as $mission) :?>
                     </li>
                 </ul>
             </div>
-
-
-     
-
-
-
 
         </div>
     </div>

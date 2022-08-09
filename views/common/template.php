@@ -24,13 +24,13 @@
 <body>
 
    
-    <?php require_once("./views/common/header.php"); ?>
+    <?php require_once("views/common/header.php"); ?>
     
     <main class="container-fluid " >
         <?php echo $page_content; ?>
     </main>
     
-    <?php require_once("./views/common/footer.php"); ?>
+    <?php require_once("views/common/footer.php"); ?>
 
 
 

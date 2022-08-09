@@ -7,7 +7,7 @@
         </div>
 
         <div class="col-12 d-flex justify-content-center" >
-            <form action="<?= URL?>createMission" method="POST" >
+            <form action="<?= URL?>createMissionValidation" method="POST" >
                 <!-- code_mission --> 
                 <div class="mb-3">
                     <label for="code_mission" class="form-label">Nom de code : </label>
@@ -21,7 +21,7 @@
                 <!-- description_mission --> 
                 <div class="mb-3">
                     <label for="description_mission">Description : </label>
-                    <textarea class="form-control" id="description_mission"></textarea>
+                    <textarea class="form-control" id="description_mission" name="description_mission"></textarea>
                 </div>
                 <!-- country_mission --> 
                 <div class="mb-3">
@@ -66,21 +66,31 @@
                     <label class="btn btn-outline-secondary" for="btncheck4">Cible 4 </label>
                     <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
                 </div>
-                <!-- name_type --> 
-                <select class="form-select mb-3" aria-label="Default select example">
-                    <option selected> -- Type de mission -- </option>
-                    <option value="1">Surveillance</option>
-                    <option value="2">Assassinat</option>
-                    <option value="3">Infiltration</option>
+
+                <!-- id_duration --> 
+                <select class="form-select mb-3" aria-label="Default select example" name="id_duration">
+                    <option selected> -- Durée -- </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
                 </select>
+
                 <!-- code_status --> 
-                <select class="form-select mb-3" aria-label="Default select example">
+                <select class="form-select mb-3" aria-label="Default select example" name="code_status">
                     <option selected> -- Statut -- </option>
-                    <option value="1">en préparation</option>
-                    <option value="2">en cours</option>
-                    <option value="3">terminé</option>
-                    <option value="3">échec</option>
+                    <option value="en préparation">en préparation</option>
+                    <option value="en cours">en cours</option>
+                    <option value="terminé">terminé</option>
+                    <option value="échec">échec</option>
                 </select>
+
+                <!-- name_type --> 
+                <select class="form-select mb-3" aria-label="Default select example" name="name_type">
+                    <option selected> -- Type de mission -- </option>
+                    <option value="Surveillance" >Surveillance</option>
+                    <option value="Assassinat">Assassinat</option>
+                    <option value="Infiltration">Infiltration</option>
+                </select>
+
                 <!-- id_hideout --> 
                 <label class="form-label me-3">Planque(s) : </label>
                 <div class="form-check form-check-inline">
@@ -95,6 +105,7 @@
                     <input class="form-check-input" type="radio" name="id_hideout3" id="id_hideout3" value="option3">
                     <label class="form-check-label" for="id_hideout3">planque n° 3</label>
                 </div>
+
                 <!-- name_speciality --> 
                 <select class="form-select mb-3" aria-label="Default select example">
                     <option selected> -- Spécialité -- </option>
@@ -104,12 +115,7 @@
                     <option value="3">Mer</option>
                     <option value="3">A l'étranger</option>
                 </select>
-                <!-- id_duration --> 
-                <select class="form-select mb-3" aria-label="Default select example">
-                    <option selected> -- Durée -- </option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
+
 
                 <button type="submit" class="btn btn-danger d-block mx-auto m-3">Enregistrer</button>
             </form>

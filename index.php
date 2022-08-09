@@ -33,6 +33,9 @@ try {
         case "createMission": 
             $mainController->createMission();
         break;
+        case "createMissionValidation": 
+            $mainController->createMissionValidation();
+        break;
         default: 
             throw new Exception("La page n'existe pas"); 
     }

@@ -1,6 +1,6 @@
 <?php
 
-require_once("./models/MissionManager.php"); 
+require_once("models/MissionManager.php"); 
 
 class MainController {
 
@@ -23,8 +23,8 @@ class MainController {
             "page_description" => "Page d'accuel du site du KGB",
             "page_css" => "home.css",
             "page_title" => "Page d'accuel du site du KGB",
-            "view" => "./views/homeView.php",
-            "template" => "./views/common/template.php"
+            "view" => "views/homeView.php",
+            "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
         // $page_description = "Page d'accuel du site du KGB."; 
@@ -43,8 +43,8 @@ class MainController {
             "page_description" => "Page listant l'ensemble des missions secrètes du KGB",
             "page_title" => "Missions du KGB",
             "missions" => $missions,
-            "view" => "./views/missionsView.php",
-            "template" => "./views/common/template.php"
+            "view" => "views/missionsView.php",
+            "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
     }
@@ -77,44 +77,52 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
+
     public function login() {
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",
-            "view" => "./views/loginView.php",
-            "template" => "./views/common/template.php"
+            "view" => "views/loginView.php",
+            "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
     }
 
-    public function createMission($code_mission, $title_mission, $description_mission, $country_mission, $id_duration, $code_status, $name_type) {
+
+    public function createMission() {
+        
         $data_page = [
             "page_description" => "Page de création d'une mission",
             "page_title" => "Création d'un mission",
-            // "mission" => "mission",
-            "view" => "./views/createMissionView.php",
-            "template" => "./views/common/template.php"
+            //"mission" => $mission,
+            "view" => "views/createMissionView.php",
+            "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
     }
+
+    public function createMissionValidation() {
+
+        if($_POST) {
+            $newMission = new Mission($_POST);
+            $this->missionManager->createMissionDb($newMission); 
+        }
+      
+        var_dump($newMission); 
+        header('location:'.URL."missions");
+    }
+
   
     public function errorPage($msg) {
         $data_page = [
             "page_description" => "Page permettant de gérer les erreurs",
             "page_title" => "Page d'erreur",
             "msg" => $msg,
-            "view" => "./views/errorPageView.php",
-            "template" => "./views/common/template.php"
+            "view" => "views/errorPageView.php",
+            "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
     }
-
-
-
-
-
-
-
 
 
 
