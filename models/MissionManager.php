@@ -9,7 +9,7 @@ class MissionManager extends Model {
     *
     * return array $missions
     */
-    public function getAll() {
+    public function getAll() : array {
         $missions = []; 
         $pdo = $this->getDb();
         $req = $pdo->prepare("SELECT * FROM Missions");
@@ -32,7 +32,7 @@ class MissionManager extends Model {
     * return Mission $mission
     */
    
-    public function get($code_mission) {
+    public function get($code_mission) : Mission {
         $pdo = $this->getDb();
         $req = $pdo->prepare("SELECT * FROM Missions WHERE code_mission = :code_mission");
         $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
@@ -48,9 +48,9 @@ class MissionManager extends Model {
     /**
     * Create a mission
     *
-    * return Mission $mission
+    * 
     */
-    public function createMissionDb($newMission) : void {
+    public function createMissionDb($newMission): void {
         $pdo = $this->getDb();
         $req = $pdo->prepare("INSERT INTO Missions (code_mission, title_mission, description_mission, country_mission, id_duration, code_status, name_type) VALUES (:code_mission, :title_mission, :description_mission, :country_mission, :id_duration, :code_status, :name_type)");
         $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
@@ -64,7 +64,31 @@ class MissionManager extends Model {
         $req->closeCursor();
     }
 
+    /**
+    * Update a mission
+    *
+    * 
+    */
+    public function updateMissionDb(Mission $mission): void{
+        $req =$this->pdo->prepare('UPDATE Missions SET code_mission = :code_mission, title_mission = :title_mission, description_mission = :description_mission, country_mission = :country_mission, id_duration = :id_duration, code_status = :code_status, name_type = :name_type WHERE code_mission = :code_mission');
+        $req->bindValue(':code_mission', $mission->getCode_mission(), PDO::PARAM_STR);
+        $req->bindValue(':title_mission', $mission->getTitle_mission(), PDO::PARAM_STR);
+        $req->bindValue(':description_mission', $mission->getDescription_mission(), PDO::PARAM_STR);
+        $req->bindValue(':country_mission', $mission->getCountry_mission(), PDO::PARAM_STR);
+        $req->bindValue(':id_duration', $mission->getId_duration(), PDO::PARAM_INT);
+        $req->bindValue(':code_status', $mission->getCode_status(), PDO::PARAM_STR);
+        $req->bindValue(':name_type', $mission->getName_type(), PDO::PARAM_STR);
+        $req->execute();
+        $req->closeCursor();
+    }
 
 
+    public function deleteMissionDb(string $code_mission): void {
+        $pdo = $this->getDb();
+        $req = $pdo->prepare('DELETE FROM Missions WHERE code_mission = :code_mission');
+        $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
+        $req->execute();
+        $req->closeCursor();
+    }
 
 }

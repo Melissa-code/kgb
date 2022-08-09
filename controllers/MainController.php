@@ -59,7 +59,7 @@ class MainController {
         parse_str($l['query'], $params);
         //print_r($params['q']); 
 
-        $mission = $this->missionManager->get(base64_decode(urldecode( $params['q'])));
+        $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
         print_r($params['q']); 
         $mission = $this->missionManager->get($mission->getCode_mission());
 
@@ -90,11 +90,9 @@ class MainController {
 
 
     public function createMission() {
-        
         $data_page = [
             "page_description" => "Page de création d'une mission",
             "page_title" => "Création d'un mission",
-            //"mission" => $mission,
             "view" => "views/createMissionView.php",
             "template" => "views/common/template.php"
         ];
@@ -102,13 +100,42 @@ class MainController {
     }
 
     public function createMissionValidation() {
-
         if($_POST) {
             $newMission = new Mission($_POST);
             $this->missionManager->createMissionDb($newMission); 
         }
-      
         var_dump($newMission); 
+        header('location:'.URL."missions");
+    }
+
+
+    public function updateMission() {
+
+        
+    }
+
+    public function updateMissionValidation() {
+    
+        //var_dump($mission); 
+        //header('location:'.URL."missions");
+    }
+
+
+    public function deleteMission() {
+
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        print_r($params['q']); 
+
+        // $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
+        $mission = $this->missionManager->get($params['q']);
+        //print_r($params['q']); 
+        $mission = $this->missionManager->get($mission->getCode_mission());
+        var_dump($mission);
+        
+        $this->missionManager->deleteMissionDb($mission->getCode_mission());
         header('location:'.URL."missions");
     }
 

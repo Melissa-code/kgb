@@ -13,12 +13,8 @@ try {
         $page = $url[0];
     }
 
-    
     switch($page) {
         case "home": 
-            // $page_description = "Page d'accuel du site du KGB."; 
-            // $page_title = "Présentation du site du KGB"; 
-            // $page_content = "<h1>Bienvenu sur le site du KGB</h1>";
             $mainController->home();
         break;
         case "missions": 
@@ -36,6 +32,18 @@ try {
         case "createMissionValidation": 
             $mainController->createMissionValidation();
         break;
+        case "updateMission": 
+            $mainController->updateMission();
+        break;
+        case "updateMissionValidation": 
+            $mainController->updateMissionValidation();
+            echo "mission modifiée"; 
+        break;
+        case "deleteMission": 
+            $mainController->deleteMission();
+            //echo "mission supprimée"; 
+        break;
+
         default: 
             throw new Exception("La page n'existe pas"); 
     }

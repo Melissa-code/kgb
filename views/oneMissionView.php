@@ -8,11 +8,11 @@
         <!-- Card with the detail of a mission --> 
         <div class="card mx-auto mt-5" style="width: 30rem;">
             <div class="card-body">
-                <h5 class="card-title text-muted ">Mission <?= $mission->getCode_mission() ?></h5>
-                <p class="card-text text-muted "><?= $mission->getTitle_mission() ?></p>
+                <h5 class="card-title text-center text-danger fw-bold mb-3">Mission <?= $mission->getCode_mission() ?></h5>
+                <p class="card-text text-dark"><?= $mission->getTitle_mission() ?></p>
+                <p class="card-text text-dark"><?= $mission->getDescription_mission() ?></p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Description: <?= $mission->getDescription_mission() ?></li>
                 <li class="list-group-item">Pays: <?= $mission->getCountry_mission() ?></li>
                 <li class="list-group-item">Agent(s): </li>
                 <li class="list-group-item">Contact(s): </li>
