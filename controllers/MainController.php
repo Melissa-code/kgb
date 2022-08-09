@@ -110,14 +110,33 @@ class MainController {
 
 
     public function updateMission() {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        //print_r($params['q']); 
+        // $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
+        $mission = $this->missionManager->get($params['q']);
+        $mission = $this->missionManager->get($mission->getCode_mission());
+        //var_dump($mission);
 
-        
+        $data_page = [
+            "page_description" => "Page de modification d'une mission",
+            "page_title" => "Modification d'un mission",
+            "mission" => $mission,
+            "view" => "views/updateMissionView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
     }
 
     public function updateMissionValidation() {
-    
-        //var_dump($mission); 
-        //header('location:'.URL."missions");
+        if($_POST) {
+            $mission = new Mission($_POST);
+            $this->missionManager->updateMissionDb($mission); 
+        }
+        // var_dump($mission); 
+        header('location:'.URL."missions");
     }
 
 

@@ -37,11 +37,10 @@ try {
         break;
         case "updateMissionValidation": 
             $mainController->updateMissionValidation();
-            echo "mission modifiée"; 
+            //echo "mission modifiée"; 
         break;
         case "deleteMission": 
             $mainController->deleteMission();
-            //echo "mission supprimée"; 
         break;
 
         default: 

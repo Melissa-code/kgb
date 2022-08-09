@@ -3,7 +3,7 @@
 <div class="row">
         
         <div class="col-12 mb-3">
-            <h1>Modifier une mission  </h1>
+            <h1>Modifier la mission <?= $mission->getCode_mission() ?></h1>
         </div>
 
         <div class="col-12 d-flex justify-content-center" >
@@ -11,22 +11,22 @@
                 <!-- code_mission --> 
                 <div class="mb-3">
                     <label for="code_mission" class="form-label">Nom de code : </label>
-                    <input type="text" class="form-control" id="code_mission" name="code_mission"  >
+                    <input type="text" class="form-control" id="code_mission" name="code_mission" value="<?= $mission->getCode_mission() ?>" >
                 </div>
                 <!-- title_mission --> 
                 <div class="mb-3">
                     <label for="title_mission" class="form-label">Titre : </label>
-                    <input type="text" class="form-control" id="title_mission" name="title_mission">
+                    <input type="text" class="form-control" id="title_mission" name="title_mission" value="<?= $mission->getTitle_mission() ?>">
                 </div>
                 <!-- description_mission --> 
                 <div class="mb-3">
                     <label for="description_mission">Description : </label>
-                    <textarea class="form-control" id="description_mission" name="description_mission"></textarea>
+                    <textarea class="form-control" id="description_mission" name="description_mission"> <?= $mission->getDescription_mission() ?> </textarea>
                 </div>
                 <!-- country_mission --> 
                 <div class="mb-3">
                     <label for="country_mission" class="form-label">Pays : </label>
-                    <input type="text" class="form-control" id="country_mission" name="country_mission">
+                    <input type="text" class="form-control" id="country_mission" name="country_mission" value="<?= $mission->getCountry_mission() ?>">
                 </div>
                 <!-- id_agent --> 
                 <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
@@ -68,25 +68,25 @@
                 </div>
 
                 <!-- id_duration --> 
-                <select class="form-select mb-3" aria-label="Default select example" name="id_duration">
+                <select class="form-select mb-3" aria-label="Default select example" name="id_duration" value="<?= $mission->getId_duration() ?>">
                     <option selected> -- Durée -- </option>
-                    <option value="1">1</option>
+                    <option value="1" selected>1</option>
                     <option value="2">2</option>
                 </select>
 
                 <!-- code_status --> 
-                <select class="form-select mb-3" aria-label="Default select example" name="code_status">
+                <select class="form-select mb-3" aria-label="Default select example" name="code_status" value="<?= $mission->getCode_status() ?>">
                     <option selected> -- Statut -- </option>
-                    <option value="en préparation">en préparation</option>
+                    <option value="en préparation" selected>en préparation</option>
                     <option value="en cours">en cours</option>
                     <option value="terminé">terminé</option>
                     <option value="échec">échec</option>
                 </select>
 
                 <!-- name_type --> 
-                <select class="form-select mb-3" aria-label="Default select example" name="name_type">
+                <select class="form-select mb-3" aria-label="Default select example" name="name_type" value="<?= $mission->getName_type() ?>">
                     <option selected> -- Type de mission -- </option>
-                    <option value="Surveillance" >Surveillance</option>
+                    <option value="Surveillance" selected>Surveillance</option>
                     <option value="Assassinat">Assassinat</option>
                     <option value="Infiltration">Infiltration</option>
                 </select>
@@ -117,7 +117,7 @@
                 </select>
 
 
-                <button type="submit" class="btn btn-danger d-block mx-auto m-3">Enregistrer</button>
+                <button type="submit" class="btn btn-danger d-block mx-auto m-3">Modifier</button>
             </form>
 
     </div>
