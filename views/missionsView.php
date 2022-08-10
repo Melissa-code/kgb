@@ -1,12 +1,22 @@
 
-<h1>Liste des missions</h1>
+<div class="row m-3">
+    <div class="col-12">
 
-<?php 
-foreach($missions as $mission) :?>
+        <h1>Liste des missions</h1>
+
+        <!-- Create a mission button -->
+        <form method="POST" action="<?= URL ?>createMission" class="d-flex justify-content-center m-3">
+            <button class="btn btn-light" type="submit">Ajouter</button>
+        </form>
+    </div>
+</div>
 
     <div class="row m-3">
-        <div class="col-10 ">
-            
+        <div class="col-12 d-flex">
+
+        <?php 
+        foreach($missions as $mission) :?>
+
             <!-- Card of a mission -->
             <div class="card mx-2" style="width: 18rem;">
                 <div class="card-body">
@@ -17,22 +27,20 @@ foreach($missions as $mission) :?>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex mx-auto my-2"> 
                         <!-- Udpate mission button -->
-                        <form method="POST" action="<?= URL ?>updateMission?q=<?= $mission->getCode_mission() ?>" class="me-2">
+                        <form method="POST" action="<?= URL ?>updateMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="me-2">
                             <button class="btn btn-warning" type="submit">Modifier</button>
                         </form>
                         <!-- Delete mission button -->
-                        <form method="POST" action="<?= URL ?>deleteMission?q=<?= $mission->getCode_mission() ?>">
+                        <form method="POST" action="<?= URL ?>deleteMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>">
                             <button class="btn btn-danger" type="submit">Supprimer</button>
                         </form>
                     </li>
-                 
                 </ul>
-                
             </div>
+            <?php endforeach; ?>
 
-        </div>
     </div>
-        
+</div>
 
 
-<?php endforeach; ?>
+

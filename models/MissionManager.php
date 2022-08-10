@@ -2,6 +2,7 @@
 require_once("models/Model.php");
 require_once("models/Mission.php");
 
+
 class MissionManager extends Model {
 
     /**
@@ -23,7 +24,6 @@ class MissionManager extends Model {
         
         $req->closeCursor();
         return $missions;
-
     }
 
     /**
@@ -31,7 +31,6 @@ class MissionManager extends Model {
     *
     * return Mission $mission
     */
-   
     public function get($code_mission) : Mission {
         $pdo = $this->getDb();
         $req = $pdo->prepare("SELECT * FROM Missions WHERE code_mission = :code_mission");
@@ -83,15 +82,17 @@ class MissionManager extends Model {
         $req->closeCursor();
     }
 
-
+    /**
+    * Delete a mission
+    *
+    * 
+    */
     public function deleteMissionDb(string $code_mission): void {
         $pdo = $this->getDb();
         $req = $pdo->prepare('DELETE FROM Missions WHERE code_mission = :code_mission');
         $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
-
-       
     }
 
 }

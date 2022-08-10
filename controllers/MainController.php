@@ -1,16 +1,43 @@
 <?php
-
 require_once("models/MissionManager.php"); 
+
 
 class MainController {
 
-    private $missionManager;
+    private MissionManager $missionManager;
+
 
     public function __construct() {
+
         $this->missionManager = new MissionManager(); 
     }
 
-    private function generatePage(array $data) {
+    /**
+    * Collect the mission by code 
+    * 
+    * Return the mission by code
+    */
+    public function getMissionByCode() : Mission  {
+
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        //print_r($params['q']); 
+        $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
+        //$mission = $this->missionManager->get($params['q']);
+        $mission = $this->missionManager->get($mission->getCode_mission());
+        //var_dump($mission);
+        return $mission; 
+    }
+
+    /**
+    * Collect the data views 
+    * 
+    * 
+    */
+    private function generatePage(array $data) : void {
+
         extract($data); //function to create variables from the array $data_page (indice of the array becomes variable)
         ob_start(); 
         require_once($view);
@@ -18,7 +45,13 @@ class MainController {
         require_once($template);
     }
 
-    public function home() {
+    /**
+    * Collect the data views 
+    * Send the data views to the homeView
+    * 
+    */
+    public function home() : void {
+
         $data_page = [
             "page_description" => "Page d'accuel du site du KGB",
             "page_css" => "home.css",
@@ -27,15 +60,14 @@ class MainController {
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
-        // $page_description = "Page d'accuel du site du KGB."; 
-        // $page_title = "Présentation du site du KGB"; 
-        // ob_start(); 
-        // require_once('./views/homeView.php');
-        // $page_content = ob_get_clean();
-        // require_once('./views/common/template.php');
     }
 
-    public function missions() {
+    /**
+    * Collect all the missions data 
+    * Send all the missions data to the missionsView
+    * 
+    */
+    public function missions() : void {
 
         $missions = $this->missionManager->getAll();
 
@@ -49,21 +81,14 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
-    public function oneMission() {
+    /**
+    * Collect one mission data 
+    * Send all the mission data to the oneMissionView
+    * 
+    */
+    public function oneMission(): void {
 
-        $query = $_SERVER;
-        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
-        //echo $url; 
-        //echo URL;
-        $l = parse_url($url);
-        parse_str($l['query'], $params);
-        //print_r($params['q']); 
-
-        $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
-        print_r($params['q']); 
-        $mission = $this->missionManager->get($mission->getCode_mission());
-
-        //var_dump($mission); 
+        $mission = $this->getMissionByCode(); 
 
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
@@ -77,8 +102,12 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
-
-    public function login() {
+    /**
+    * Collect the login data 
+    * Send all the login data to the loginView
+    * 
+    */
+    public function login() : void {
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",
@@ -88,8 +117,12 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
-
-    public function createMission() {
+    /**
+    * display the createMissionView 
+    * 
+    * 
+    */
+    public function createMission(): void {
         $data_page = [
             "page_description" => "Page de création d'une mission",
             "page_title" => "Création d'un mission",
@@ -99,26 +132,28 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
-    public function createMissionValidation() {
+    /**
+    * Collect the form data from the createMissionView
+    * Send the form data to the MissionManager 
+    * Redirecting user to the missionsView and display the new mission 
+    */
+    public function createMissionValidation(): void {
         if($_POST) {
             $newMission = new Mission($_POST);
             $this->missionManager->createMissionDb($newMission); 
         }
-        var_dump($newMission); 
+        //var_dump($newMission); 
         header('location:'.URL."missions");
     }
 
-
-    public function updateMission() {
-        $query = $_SERVER;
-        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
-        $l = parse_url($url);
-        parse_str($l['query'], $params);
-        //print_r($params['q']); 
-        // $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
-        $mission = $this->missionManager->get($params['q']);
-        $mission = $this->missionManager->get($mission->getCode_mission());
-        //var_dump($mission);
+    /**
+    * display the updateMissionView with the mission data
+    * 
+    * 
+    */
+    public function updateMission(): void {
+        $mission = $this->getMissionByCode(); 
+        // var_dump($mission);
 
         $data_page = [
             "page_description" => "Page de modification d'une mission",
@@ -130,7 +165,12 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
-    public function updateMissionValidation() {
+    /**
+    * Collect the form data from the updateMissionView
+    * Send the form data to the MissionManager 
+    * Redirecting user to the missionsView and display the updating mission 
+    */
+    public function updateMissionValidation(): void {
         if($_POST) {
             $mission = new Mission($_POST);
             $this->missionManager->updateMissionDb($mission); 
@@ -139,27 +179,24 @@ class MainController {
         header('location:'.URL."missions");
     }
 
-
-    public function deleteMission() {
-
-        $query = $_SERVER;
-        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
-        $l = parse_url($url);
-        parse_str($l['query'], $params);
-        print_r($params['q']); 
-
-        // $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
-        $mission = $this->missionManager->get($params['q']);
-        //print_r($params['q']); 
-        $mission = $this->missionManager->get($mission->getCode_mission());
-        var_dump($mission);
-        
+    /**
+    * Collect the mission data 
+    * Delete the data  
+    * 
+    */
+    public function deleteMission(): void {
+        $mission = $this->getMissionByCode();
+    
         $this->missionManager->deleteMissionDb($mission->getCode_mission());
         header('location:'.URL."missions");
     }
 
-  
-    public function errorPage($msg) {
+    /**
+    * Collect the data views 
+    * Send the data views to the errorView
+    * 
+    */
+    public function errorPage($msg) : void {
         $data_page = [
             "page_description" => "Page permettant de gérer les erreurs",
             "page_title" => "Page d'erreur",
@@ -169,7 +206,6 @@ class MainController {
         ];
         $this->generatePage($data_page); 
     }
-
 
 
 
