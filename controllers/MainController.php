@@ -130,16 +130,24 @@ class MainController {
     public function loginValidation(): void {
 
         //$admin = $this->adminManager->get(1);
-        
-        //session_start(); 
 
         if($_POST){
+
             $email_admin = htmlspecialchars($_POST['email_admin']); 
             $password_admin = htmlspecialchars($_POST['password_admin']); 
 
-            $this->adminManager->loginDb($email_admin, $password_admin); 
-            
+            if(!filter_var($email_admin, FILTER_VALIDATE_EMAIL)) {
+                header('location:'.URL."login"); 
+                exit(); 
+            } else {
+                //$this->adminManager->getAdminInformation($email_admin);
+                $this->adminManager->loginDb($email_admin, $password_admin); 
+            }
+        } else {
+            header('location:'.URL."login"); 
         }
+
+       
     }
 
     /**
@@ -213,6 +221,7 @@ class MainController {
         $mission = $this->getMissionByCode();
     
         $this->missionManager->deleteMissionDb($mission->getCode_mission());
+        unset($mission); 
         header('location:'.URL."missions");
     }
 
