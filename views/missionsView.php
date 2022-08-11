@@ -19,6 +19,12 @@ if(isset($_SESSION['connect'])) {
                 <button class="btn btn-light" type="submit">Ajouter</button>
             </form>
         <?php endif ?>
+        <?php if(isset($_SESSION['connect'])) :?>
+            <!-- Create a mission button -->
+            <form method="POST" action="<?= URL?>logout" class="d-flex justify-content-center m-3">
+                <button class="btn btn-light" type="submit">Se déconnecter</button>
+            </form>
+        <?php endif ?>
 
     </div>
 </div>

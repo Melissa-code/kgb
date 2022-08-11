@@ -31,6 +31,9 @@ try {
         case "loginValidation": 
             $mainController->loginValidation();
         break;
+        case "logout": 
+            $mainController->logout();
+        break;
 
         case "createMission": 
             $mainController->createMission();

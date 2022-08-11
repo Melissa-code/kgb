@@ -146,9 +146,24 @@ class MainController {
         } else {
             header('location:'.URL."login"); 
         }
-
-       
     }
+
+
+    /**
+    * Logout the Admin 
+    * 
+    * 
+    */
+    public function logout(): void {
+
+        session_start(); 
+        session_unset();
+        session_destroy(); 
+       echo  "admin déconnecté";
+        //header('location:'.URL."home"); 
+    }
+
+
 
     /**
     * display the createMissionView 
