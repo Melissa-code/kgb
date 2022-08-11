@@ -5,7 +5,7 @@
         <h1>Liste des missions</h1>
 
         <!-- Create a mission button -->
-        <form method="POST" action="<?= URL ?>createMission" class="d-flex justify-content-center m-3">
+        <form method="POST" action="<?= URL?>createMission" class="d-flex justify-content-center m-3">
             <button class="btn btn-light" type="submit">Ajouter</button>
         </form>
     </div>

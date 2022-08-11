@@ -1,4 +1,5 @@
 <?php
+
 require_once("models/Model.php");
 require_once("models/Mission.php");
 
@@ -8,7 +9,7 @@ class MissionManager extends Model {
     /**
     * Get all the missions
     *
-    * return array $missions
+    * @return array $missions
     */
     public function getAll() : array {
         $missions = []; 
@@ -29,7 +30,7 @@ class MissionManager extends Model {
     /**
     * Get one mission only
     *
-    * return Mission $mission
+    * @return Mission $mission
     */
     public function get($code_mission) : Mission {
         $pdo = $this->getDb();
@@ -49,7 +50,7 @@ class MissionManager extends Model {
     *
     * 
     */
-    public function createMissionDb($newMission): void {
+    public function createMissionDb(Mission $newMission): void {
         $pdo = $this->getDb();
         $req = $pdo->prepare("INSERT INTO Missions (code_mission, title_mission, description_mission, country_mission, id_duration, code_status, name_type) VALUES (:code_mission, :title_mission, :description_mission, :country_mission, :id_duration, :code_status, :name_type)");
         $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);

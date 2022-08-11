@@ -23,9 +23,14 @@ try {
         case "oneMission": 
             $mainController->oneMission();
         break;
+        
         case "login": 
             $mainController->login();
         break;
+        case "loginValidation": 
+            $mainController->loginValidation();
+        break;
+
         case "createMission": 
             $mainController->createMission();
         break;

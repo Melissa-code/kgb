@@ -31,40 +31,40 @@
                 <!-- id_agent --> 
                 <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
                     <label class="form-label me-3">Agent(s) : </label>
-                        <label class="btn btn-outline-secondary" for="btncheck1">Agent 1 </label>
-                        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="btncheck1" >Agent 1 </label>
+                        <input type="checkbox" class="btn-check" id="btncheck1" name="agent[]" value="agent1" autocomplete="off">
                         <label class="btn btn-outline-secondary" for="btncheck2">Agent 2 </label>
-                        <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                        <input type="checkbox" class="btn-check" id="btncheck2" name="agent[]" value="agent2"autocomplete="off">
                         <label class="btn btn-outline-secondary" for="btncheck3">Agent 3 </label>
-                        <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                        <input type="checkbox" class="btn-check" id="btncheck3" name="agent[]" value="agent3"autocomplete="off">
                         <label class="btn btn-outline-secondary" for="btncheck4">Agent 4 </label>
-                        <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+                        <input type="checkbox" class="btn-check" id="btncheck4" name="agent[]" value="agent4"autocomplete="off">
                 </div>
                 <!-- code_contact --> 
                 <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
                     <label class="form-label me-3">Contact(s) : </label>
 
                     <label class="btn btn-outline-secondary" for="btncheck1">Contact 1 </label>
-                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                    <input type="checkbox" class="btn-check" id="btncheck1" name="contact[]" value="contact1" autocomplete="off">
                     <label class="btn btn-outline-secondary" for="btncheck2">Contact 2 </label>
-                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                    <input type="checkbox" class="btn-check" id="btncheck2" name="contact[]" value="contact2" autocomplete="off">
                     <label class="btn btn-outline-secondary" for="btncheck3">Contact 3 </label>
-                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                    <input type="checkbox" class="btn-check" id="btncheck3" name="contact[]" value="contact3" autocomplete="off">
                     <label class="btn btn-outline-secondary" for="btncheck4">Contact 4 </label>
-                    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+                    <input type="checkbox" class="btn-check" id="btncheck4" name="contact[]" value="contact4" autocomplete="off">
                 </div>
                 <!-- code_cible --> 
                 <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
                     <label class="form-label me-3">Cible(s) : </label>
 
                     <label class="btn btn-outline-secondary" for="btncheck1">Cible 1 </label>
-                    <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                    <input type="checkbox" class="btn-check" id="btncheck1" name="cible[]" value="cible1" autocomplete="off">
                     <label class="btn btn-outline-secondary" for="btncheck2">Cible 2 </label>
-                    <input type="checkbox" class="btn-check" id="btncheck2" autocomplete="off">
+                    <input type="checkbox" class="btn-check" id="btncheck2" name="cible[]" value="cible2" autocomplete="off">
                     <label class="btn btn-outline-secondary" for="btncheck3">Cible 3 </label>
-                    <input type="checkbox" class="btn-check" id="btncheck3" autocomplete="off">
+                    <input type="checkbox" class="btn-check" id="btncheck3" name="cible[]" value="cible3" autocomplete="off">
                     <label class="btn btn-outline-secondary" for="btncheck4">Cible 4 </label>
-                    <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off">
+                    <input type="checkbox" class="btn-check" id="btncheck4" name="cible[]" value="cible4"autocomplete="off">
                 </div>
 
                 <!-- id_duration --> 
@@ -94,15 +94,15 @@
                 <!-- id_hideout --> 
                 <label class="form-label me-3">Planque(s) : </label>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="id_hideout1" id="id_hideout1" value="option1">
+                    <input class="form-check-input" type="radio" name="id_hideout[]" id="id_hideout1" value="option1">
                     <label class="form-check-label" for="id_hideout1">planque n°1</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="id_hideout2" id="id_hideout2" value="option2">
+                    <input class="form-check-input" type="radio" name="id_hideout[]" id="id_hideout2" value="option2">
                     <label class="form-check-label" for="id_hideout2">planque n°2</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="id_hideout3" id="id_hideout3" value="option3">
+                    <input class="form-check-input" type="radio" name="id_hideout[]" id="id_hideout3" value="option3">
                     <label class="form-check-label" for="id_hideout3">planque n° 3</label>
                 </div>
 

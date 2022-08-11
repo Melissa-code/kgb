@@ -1,21 +1,24 @@
 <?php
 require_once("models/MissionManager.php"); 
+require_once("models/AdminManager.php"); 
 
 
 class MainController {
 
     private MissionManager $missionManager;
+    private AdminManager $adminManager; 
 
 
     public function __construct() {
 
         $this->missionManager = new MissionManager(); 
+        $this->adminManager = new AdminManager(); 
     }
 
     /**
     * Collect the mission by code 
     * 
-    * Return the mission by code
+    * @return code_mission 
     */
     public function getMissionByCode() : Mission  {
 
@@ -108,6 +111,7 @@ class MainController {
     * 
     */
     public function login() : void {
+
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",
@@ -115,6 +119,27 @@ class MainController {
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
+     
+    }
+
+    /**
+    * Collect the login data from loginView
+    * Connect the Admin 
+    * 
+    */
+    public function loginValidation(): void {
+
+        //$admin = $this->adminManager->get(1);
+        
+        //session_start(); 
+
+        if($_POST){
+            $email_admin = htmlspecialchars($_POST['email_admin']); 
+            $password_admin = htmlspecialchars($_POST['password_admin']); 
+
+            $this->adminManager->loginDb($email_admin, $password_admin); 
+            
+        }
     }
 
     /**
