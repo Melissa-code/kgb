@@ -128,11 +128,9 @@ class MainController {
     * 
     */
     public function loginValidation(): void {
-
-        //$admin = $this->adminManager->get(1);
+        session_start(); 
 
         if($_POST){
-
             $email_admin = htmlspecialchars($_POST['email_admin']); 
             $password_admin = htmlspecialchars($_POST['password_admin']); 
 
@@ -140,9 +138,9 @@ class MainController {
                 header('location:'.URL."login"); 
                 exit(); 
             } else {
-                //$this->adminManager->getAdminInformation($email_admin);
                 $this->adminManager->loginDb($email_admin, $password_admin); 
             }
+            
         } else {
             header('location:'.URL."login"); 
         }
@@ -159,8 +157,9 @@ class MainController {
         session_start(); 
         session_unset();
         session_destroy(); 
-       echo  "admin déconnecté";
-        //header('location:'.URL."home"); 
+        echo  "admin déconnecté";
+        //setcookie('auth', '', time() -1, '/', null, false, true); 
+        header('location:'.URL."home"); 
     }
 
 

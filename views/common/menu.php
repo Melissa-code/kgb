@@ -1,4 +1,5 @@
-<!--------------- Navigation ----------------->
+
+<!--------------- Navigation bar ----------------->
 
 <nav id="menu" class="navbar navbar-expand-lg navbar-light px-5">
 
@@ -17,15 +18,24 @@
     
         <!-- Target of the button -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav col-12 col-lg-auto mx-md-auto mb-2 justify-content-center mb-md-0">
+
+            <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
+                <!-- Home link -->
                 <li><a aria-current="page" href="home" class="nav-link px-2 text-dark">Accueil</a></li>
+                <!-- Missions link -->
                 <li><a href="missions" class="nav-link px-2 text-dark">Missions</a></li>
             </ul>
 
-            <div class="text-end me-5">
-                <!-- <a class="btn btn-dark" href="login" role="button">Connexion</a> -->
-                <a href="login"><img src="<?= URL ?>public/assets/images/login.svg" width="30" /></a>
-            </div>
+            <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+                <!-- Login link -->
+                <?php if(!isset($_SESSION['connect'])) :?>
+                    <li><a href="login"><img src="<?= URL ?>public/assets/images/connection.svg" width="60" class="nav-link px-2" /></a></li>
+                    <?php endif ?>
+                    <!-- Logout link -->
+                <?php if(isset($_SESSION['connect'])) :?>
+                    <li><a href="logout"><img src="<?= URL ?>public/assets/images/disconnection.svg"  width="60" class="nav-link px-2" /></a></li>
+                <?php endif ?>
+            </ul>
         </div>
 
     </div>
