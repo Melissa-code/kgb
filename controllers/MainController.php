@@ -1,18 +1,42 @@
 <?php
 require_once("models/MissionManager.php"); 
 require_once("models/AdminManager.php"); 
+require_once("models/StatusManager.php"); 
+require_once("models/TypeManager.php"); 
+require_once("models/DurationManager.php"); 
+require_once("models/AgentManager.php"); 
+require_once("models/ContactManager.php"); 
+require_once("models/TargetManager.php"); 
+require_once("models/HideoutManager.php"); 
+require_once("models/SpecialityManager.php"); 
 
 
 class MainController {
 
     private MissionManager $missionManager;
     private AdminManager $adminManager; 
+    private AgentManager $agentManager; 
+    private StatusManager $statusManager; 
+    private TypeManager $typeManager; 
+    private DurationManager $durationManager; 
+    private ContactManager $contactManager; 
+    private TargetManager $targetManager; 
+    private HideoutManager $hideoutManager; 
+    private SpecialityManager $specialityManager; 
+
 
 
     public function __construct() {
-
         $this->missionManager = new MissionManager(); 
         $this->adminManager = new AdminManager(); 
+        $this->statusManager = new StatusManager(); 
+        $this->typeManager = new TypeManager(); 
+        $this->durationManager = new DurationManager(); 
+        $this->agentManager = new AgentManager(); 
+        $this->contactManager = new ContactManager(); 
+        $this->targetManager = new TargetManager(); 
+        $this->hideoutManager = new HideoutManager(); 
+        $this->specialityManager = new SpecialityManager(); 
     }
 
     /**
@@ -146,10 +170,8 @@ class MainController {
         }
     }
 
-
     /**
     * Logout the Admin 
-    * 
     * 
     */
     public function logout(): void {
@@ -163,17 +185,34 @@ class MainController {
     }
 
 
-
     /**
     * display the createMissionView 
     * 
-    * 
     */
     public function createMission(): void {
+
+        $agents = $this->agentManager->getAll();
+        $status = $this->statusManager->getAll();
+        $types = $this->typeManager->getAll();
+        $durations = $this->durationManager->getAll();
+        $contacts = $this->contactManager->getAll();
+        $targets = $this->targetManager->getAll();
+        $hideouts = $this->hideoutManager->getAll();
+        $specialities = $this->specialityManager->getAll();
+
+        
         $data_page = [
             "page_description" => "Page de création d'une mission",
             "page_title" => "Création d'un mission",
             "view" => "views/createMissionView.php",
+            "agents" => $agents,
+            "contacts" => $contacts,
+            "targets" => $targets,
+            "status" => $status,
+            "types" => $types,
+            "hideouts" => $hideouts,
+            "specialities" => $specialities,
+            "durations" => $durations,
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -189,13 +228,13 @@ class MainController {
             $newMission = new Mission($_POST);
             $this->missionManager->createMissionDb($newMission); 
         }
+        
         //var_dump($newMission); 
-        header('location:'.URL."missions");
+        //header('location:'.URL."missions");
     }
 
     /**
     * display the updateMissionView with the mission data
-    * 
     * 
     */
     public function updateMission(): void {

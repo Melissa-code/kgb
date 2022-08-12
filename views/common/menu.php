@@ -29,11 +29,11 @@
             <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                 <!-- Login link -->
                 <?php if(!isset($_SESSION['connect'])) :?>
-                    <li><a href="login"><img src="<?= URL ?>public/assets/images/connection.svg" width="60" class="nav-link px-2" /></a></li>
+                    <li><a href="login"><img src="<?= URL ?>public/assets/images/connection.svg" width="50" class="nav-link px-2" /></a></li>
                     <?php endif ?>
                     <!-- Logout link -->
                 <?php if(isset($_SESSION['connect'])) :?>
-                    <li><a href="logout"><img src="<?= URL ?>public/assets/images/disconnection.svg"  width="60" class="nav-link px-2" /></a></li>
+                    <li><a href="logout"><img src="<?= URL ?>public/assets/images/disconnection.svg"  width="50" class="nav-link px-2" /></a></li>
                 <?php endif ?>
             </ul>
         </div>

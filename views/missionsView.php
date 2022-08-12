@@ -1,5 +1,4 @@
 <?php 
-
 session_start(); 
 
 if(isset($_SESSION['connect'])) {
@@ -9,7 +8,6 @@ if(isset($_SESSION['connect'])) {
 }
 
 ?>
-
 
 <div class="row m-3">
     <div class="col-12">

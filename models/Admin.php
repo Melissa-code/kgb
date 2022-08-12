@@ -9,7 +9,7 @@ class Admin {
     private string $password_admin; 
     private string $creation_admin;
     private string $secret_admin;
-    //private bool $isAdmin;
+
 
 
     public function __construct(array $data) {
