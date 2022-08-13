@@ -28,7 +28,7 @@ h1 {
     font-family: 'Montserrat', sans-serif; 
     text-align: center;
     padding-top: 5vh;
-
+    color: #F7F5F3;
 }
 
 h2 {
@@ -56,3 +56,15 @@ a:hover {
     color: #0D0B07;
 }
 
+#login-body {
+	max-width: 450px;
+	margin: auto;
+	background-color: #0D0B07;
+	border-radius: 5px;
+	padding: 50px;
+	margin: 70px auto 30px auto;
+    color:#F7F5F3;
+    font-size: 1em;
+    font-size: 18px;
+    opacity: 0.9;
+} 

@@ -81,8 +81,9 @@ class MainController {
 
         $data_page = [
             "page_description" => "Page d'accuel du site du KGB",
-            "page_css" => "home.css",
             "page_title" => "Page d'accuel du site du KGB",
+            // "page_css" => "home.css",
+            "page_javascript" => ["home.js"],
             "view" => "views/homeView.php",
             "template" => "views/common/template.php"
         ];
@@ -139,6 +140,7 @@ class MainController {
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",
+            // "page_css" => "login.css",
             "view" => "views/loginView.php",
             "template" => "views/common/template.php"
         ];

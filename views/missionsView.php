@@ -6,32 +6,32 @@ if(isset($_SESSION['connect'])) {
 } else {
     echo "pas de connection";
 }
-
 ?>
 
-<div class="row m-3">
-    <div class="col-12">
+<!------------- Main --------------->
 
-        <h1>Liste des missions</h1>
-
-        <?php if(isset($_SESSION['connect'])) :?>
-            <!-- Create a mission button -->
-            <form method="POST" action="<?= URL?>createMission" class="d-flex justify-content-center m-3">
-                <button class="btn btn-light" type="submit">Ajouter</button>
-            </form>
-        <?php endif ?>
+<section class="mb-4">
+    <h1>Liste des missions</h1>
+</section>
 
 
-    </div>
-</div>
+<section class="row m-3">
 
-    <div class="row m-3">
-        <div class="col-12 d-flex">
+    <!-- Display the create button if the admin is logged in -->
+    <?php if(isset($_SESSION['connect'])) :?>
+        <!-- Create a mission button -->
+        <form method="POST" action="<?= URL?>createMission" class="d-flex justify-content-center m-3">
+            <button class="btn btn-light" type="submit">Ajouter</button>
+        </form>
+    <?php endif ?>
+</section>
 
-        <?php 
-        foreach($missions as $mission) :?>
 
-            <!-- Card of a mission -->
+<section class="row m-3">
+    <article class="col-12 d-flex">
+
+        <!-- Card of a mission -->
+        <?php foreach($missions as $mission) :?>
             <div class="card mx-2" style="width: 18rem;">
                 <div class="card-body">
                     <a href="<?= URL ?>oneMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="card-link"><h3 id="title" class="card-title mb-4 text-center text-danger fw-bold">Mission <?= $mission->getCode_mission()  ; ?> </h3></a>
@@ -39,7 +39,7 @@ if(isset($_SESSION['connect'])) {
                     <p class="card-text text-muted"><?= $mission->getDescription_mission() ?></p>
                 </div>
 
-
+                <!-- Display the update & delete buttons if the admin is logged in -->
                 <?php if(isset($_SESSION['connect'])) :?>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex mx-auto my-2"> 
@@ -55,10 +55,10 @@ if(isset($_SESSION['connect'])) {
                     </ul>
                 <?php endif ?>
             </div>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
 
-    </div>
-</div>
+    </article>
+</section>
 
 
 

@@ -1,14 +1,18 @@
+
 <!------------- Main --------------->
-<div class="row ">
-    <div class="col-12 mb-5">
 
-        <h1>Détail d'une mission</h1>
+<section class="mb-4">
+    <h1>Détail d'une mission</h1>
+</section>
 
+
+<section class="row ">
+    <article class="col-12 mb-5">
 
         <!-- Card with the detail of a mission --> 
         <div class="card mx-auto mt-5" style="width: 30rem;">
             <div class="card-body">
-                <h5 class="card-title text-center text-danger fw-bold mb-3">Mission <?= $mission->getCode_mission() ?></h5>
+                <h3 class="card-title text-center text-danger fw-bold mb-3">Mission <?= $mission->getCode_mission() ?></h3>
                 <p class="card-text text-dark"><?= $mission->getTitle_mission() ?></p>
                 <p class="card-text text-dark"><?= $mission->getDescription_mission() ?></p>
             </div>
@@ -22,12 +26,11 @@
                 <li class="list-group-item">Spécialité:</li>
                 <li class="list-group-item">Date de début:</li>
                 <li class="list-group-item">Date de fin: </li>
-                
             </ul>
         </div>
 
-    </div>
-</div>
+    </article>
+</section>
 
 
 <?php 
