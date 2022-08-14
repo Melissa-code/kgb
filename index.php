@@ -4,7 +4,10 @@
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS'])? "https" : "http"). "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
 
 require_once("controllers/MainController.php"); 
+require_once("controllers/StatusController.php"); 
+
 $mainController = new MainController(); // to use the functions from the MainController
+$statusController = new StatusController(); 
 
 try {
     if(empty($_GET['page'])){
@@ -52,6 +55,12 @@ try {
             $mainController->deleteMission();
         break;
 
+        case "createStatus": 
+            $statusController->createStatus(); 
+        break;
+            case "createStatusValidation": 
+                $statusController->createStatusValidation();
+        break;
         default: 
             throw new Exception("La page n'existe pas"); 
     }

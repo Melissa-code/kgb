@@ -1,7 +1,6 @@
 <?php
 require_once("models/MissionManager.php"); 
 require_once("models/AdminManager.php"); 
-require_once("models/StatusManager.php"); 
 require_once("models/TypeManager.php"); 
 require_once("models/DurationManager.php"); 
 require_once("models/AgentManager.php"); 
@@ -9,6 +8,8 @@ require_once("models/ContactManager.php");
 require_once("models/TargetManager.php"); 
 require_once("models/HideoutManager.php"); 
 require_once("models/SpecialityManager.php"); 
+require_once("models/StatusManager.php"); 
+
 
 
 class MainController {
@@ -16,20 +17,18 @@ class MainController {
     private MissionManager $missionManager;
     private AdminManager $adminManager; 
     private AgentManager $agentManager; 
-    private StatusManager $statusManager; 
     private TypeManager $typeManager; 
     private DurationManager $durationManager; 
     private ContactManager $contactManager; 
     private TargetManager $targetManager; 
     private HideoutManager $hideoutManager; 
     private SpecialityManager $specialityManager; 
-
-
+    private StatusManager $statusManager; 
+    
 
     public function __construct() {
         $this->missionManager = new MissionManager(); 
         $this->adminManager = new AdminManager(); 
-        $this->statusManager = new StatusManager(); 
         $this->typeManager = new TypeManager(); 
         $this->durationManager = new DurationManager(); 
         $this->agentManager = new AgentManager(); 
@@ -37,6 +36,7 @@ class MainController {
         $this->targetManager = new TargetManager(); 
         $this->hideoutManager = new HideoutManager(); 
         $this->specialityManager = new SpecialityManager(); 
+        $this->statusManager = new StatusManager();
     }
 
     /**
