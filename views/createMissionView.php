@@ -74,12 +74,17 @@
             </select>
 
             <!-- code_status --> 
-            <select class="form-select mb-3" aria-label="Default select example" id="code_status" name="code_status">
-                <option selected> -- Statut -- </option>
-                <?php foreach($status as $oneStatus) :?>
-                <option value="<?= $oneStatus->getCode_status(); ?>"><?= $oneStatus->getCode_status(); ?></option>
-                <?php endforeach; ?>
-            </select>
+            <div class="mb-3 d-flex justify-content-center">
+                <select class="form-select " aria-label="Default select example" id="code_status" name="code_status">
+                    <option selected> -- Statut -- </option>
+                    <?php foreach($status as $oneStatus) :?>
+                    <option value="<?= $oneStatus->getCode_status(); ?>"><?= $oneStatus->getCode_status(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- Link add a status --> 
+                <button type="button" class="btn btn-light ms-2"><a href="createStatus" class="text-dark">Créer</a></button>
+               
+            </div>
 
             <!-- name_type --> 
             <select class="form-select mb-3" aria-label="Default select example" name="name_type">
