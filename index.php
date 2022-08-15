@@ -4,11 +4,13 @@ require_once("controllers/MainController.php");
 require_once("controllers/StatusController.php"); 
 require_once("controllers/TypeController.php"); 
 require_once("controllers/DurationController.php"); 
+require_once("controllers/SpecialityController.php"); 
 
 $mainController = new MainController(); // to use the functions from the MainController
 $statusController = new StatusController(); 
 $typeController = new TypeController(); 
 $durationController = new DurationController(); 
+$specialityController = new SpecialityController(); 
 
 
 
@@ -110,6 +112,23 @@ try {
         break;
         case "deleteStatus": 
             //$typeController->deleteType();
+        break;
+
+
+        case "createSpeciality": 
+            $specialityController->createSpeciality(); 
+        break;
+        case "createSpecialityValidation": 
+            $specialityController->createSpecialityValidation();
+        break;
+        case "updateSpeciality": 
+            //$specialityController->updateSpeciality();
+        break;
+        case "updateSpecialityValidation": 
+            //$specialityController->updateSpecialityValidation();
+        break;
+        case "deleteSpeciality": 
+            //$specialityController->deleteSpeciality();
         break;
 
 

@@ -66,12 +66,18 @@
             </div>
 
             <!-- id_duration --> 
-            <select class="form-select mb-3" aria-label="Default select example" name="id_duration">
-                <option selected> -- Durée -- </option>
-                <?php foreach($durations as $duration) :?>
-                <option value="<?= $duration->getId_duration(); ?>"><?= $duration->getId_duration(); ?></option>
-                <?php endforeach; ?>
-            </select>
+            <div class="mb-3 d-flex">
+                <select class="form-select" aria-label="Default select example" name="id_duration">
+                    <option selected> -- Durée -- </option>
+                    <?php foreach($durations as $duration) :?>
+                    <option value="<?= $duration->getId_duration(); ?>"><?= $duration->getId_duration(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- Links add update & delete a duration --> 
+                <button type="button" class="btn btn-light ms-2"><a href="createDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une durée" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-warning ms-2"><a href="updateDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une durée" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-danger ms-2"><a href="deleteDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une durée" style="width: 1.5rem;"></a></button>
+            </div>
 
             <!-- code_status --> 
             <div class="mb-3 d-flex">
@@ -111,12 +117,18 @@
             <?php endforeach; ?>
 
             <!-- name_speciality --> 
-            <select class="form-select mb-3" aria-label="Default select example">
-                <option selected> -- Spécialité -- </option>
-                <?php foreach($specialities as $speciality) :?>
-                <option value="<?= $speciality->getName_speciality(); ?>"><?= $speciality->getName_speciality(); ?></option>
-                <?php endforeach; ?>
-            </select>
+            <div class="mb-3 d-flex">
+                <select class="form-select" aria-label="Default select example">
+                    <option selected> -- Spécialité -- </option>
+                    <?php foreach($specialities as $speciality) :?>
+                    <option value="<?= $speciality->getName_speciality(); ?>"><?= $speciality->getName_speciality(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- Links add update & delete a speciality --> 
+                <button type="button" class="btn btn-light ms-2"><a href="createSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-warning ms-2"><a href="updateSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une spécialité" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-danger ms-2"><a href="deleteSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une spécialité" style="width: 1.5rem;"></a></button>
+            </div>
 
             <!-- button --> 
             <button type="submit" class="btn btn-danger d-block mx-auto m-3">Ajouter</button>

@@ -1,5 +1,8 @@
 <?php 
 
+require_once("models/Agent.php");
+require_once("models/Mission.php");
+
 class Speciality {
 
 
@@ -8,13 +11,14 @@ class Speciality {
     private string $code_mission;
 
 
+
     /* ************* Constructor ************ */ 
 
     public function __construct(array $data) {
         $this->hydrate($data); 
     }
 
-     /* ************* Hydrate ************ */ 
+    /* ************* Hydrate ************ */ 
 
     public function hydrate($data): void {
         foreach($data as $key=>$value) {
@@ -35,6 +39,7 @@ class Speciality {
 
     public function getCode_mission() {return $this->code_mission; }
     public function setCode_mission($code_mission) {$this->code_mission = $code_mission; return $this;}
+
 
 
 }
