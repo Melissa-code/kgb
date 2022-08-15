@@ -40,8 +40,7 @@ class MainController {
     }
 
     /**
-    * Collect the mission by code 
-    * 
+    * Get the mission by code 
     * @return code_mission 
     */
     public function getMissionByCode() : Mission  {
@@ -59,9 +58,7 @@ class MainController {
     }
 
     /**
-    * Collect the data views 
-    * 
-    * 
+    * Generate a page
     */
     private function generatePage(array $data) : void {
 

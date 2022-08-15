@@ -74,25 +74,32 @@
             </select>
 
             <!-- code_status --> 
-            <div class="mb-3 d-flex justify-content-center">
+            <div class="mb-3 d-flex">
                 <select class="form-select " aria-label="Default select example" id="code_status" name="code_status">
                     <option selected> -- Statut -- </option>
                     <?php foreach($status as $oneStatus) :?>
                     <option value="<?= $oneStatus->getCode_status(); ?>"><?= $oneStatus->getCode_status(); ?></option>
                     <?php endforeach; ?>
                 </select>
-                <!-- Link add a status --> 
-                <button type="button" class="btn btn-light ms-2"><a href="createStatus" class="text-dark">Créer</a></button>
-               
+                <!-- Links add update & delete a status --> 
+                <button type="button" class="btn btn-light ms-2"><a href="createStatus" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un status" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-warning ms-2"><a href="updateStatus" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un status" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-danger ms-2"><a href="deleteStatus" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un status" style="width: 1.5rem;"></a></button>
             </div>
 
             <!-- name_type --> 
-            <select class="form-select mb-3" aria-label="Default select example" name="name_type">
-                <option selected> -- Type de mission -- </option>
-                <?php foreach($types as $type) :?>
-                <option value="<?= $type->getName_type(); ?>"><?= $type->getName_type(); ?></option>
-                <?php endforeach; ?>
-            </select>
+            <div class="mb-3 d-flex">
+                <select class="form-select " aria-label="Default select example" name="name_type">
+                    <option selected> -- Type -- </option>
+                    <?php foreach($types as $type) :?>
+                    <option value="<?= $type->getName_type(); ?>"><?= $type->getName_type(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- Links add update & delete a type --> 
+                <button type="button" class="btn btn-light ms-2"><a href="createType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un type" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-warning ms-2"><a href="updateType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un type" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-danger ms-2"><a href="deleteType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un type" style="width: 1.5rem;"></a></button>
+            </div>
 
             <!-- id_hideout --> 
             <label class="form-label me-3">Planque(s) : </label>

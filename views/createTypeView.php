@@ -1,4 +1,3 @@
-
 <?php session_start(); ?>
 
 
@@ -6,19 +5,19 @@
 
 <section class="mb-4">
     <button type="button" class="btn btn-light m-4"><a href="createMission">Retour</a></button>
-    <h1>Ajouter un statut</h1>
+    <h1>Ajouter un type</h1>
 </section>
 
 
 <section class="row">
     <article class="col-12 d-flex justify-content-center" >
 
-        <!-- create a status form -->
-        <form action="<?= URL ?>createStatusValidation" method="POST" >
-            <!-- code_mission --> 
+        <!-- create a type form -->
+        <form action="<?= URL ?>createTypeValidation" method="POST" >
+            <!-- name_type --> 
             <div class="mb-3">
-                <label for="code_status" class="form-label">Statut : </label>
-                <input type="text" class="form-control" id="code_status" name="code_status">
+                <label for="name_type" class="form-label">Type: </label>
+                <input type="text" class="form-control" id="name_type" name="name_type">
             </div>
         <!-- button --> 
         <button type="submit" class="btn btn-danger d-block mx-auto m-3">Ajouter</button>

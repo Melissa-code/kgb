@@ -27,6 +27,22 @@ class StatusManager extends Model {
 
 
     /**
+    * Get one status only
+    * @return Status $status
+    */
+    public function get($code_status) : Status {
+        $pdo = $this->getDb();
+        $req = $pdo->prepare("SELECT * FROM Status WHERE code_status = :code_status");
+        $req->bindValue(':code_status', $code_status, PDO::PARAM_STR);
+        $req->execute();
+        $data = $req->fetch(); 
+        $status = new Status($data); 
+        $req->closeCursor();
+        return $status;
+    }
+
+
+    /**
     * Create a status
     */
     public function createStatusDb(Status $newStatus): void {
@@ -38,8 +54,28 @@ class StatusManager extends Model {
     }
 
 
+    /**
+    * Update a status
+    */
+    public function updateStatusDb(Status $status): void {
+        $pdo = $this->getDb();
+        $req =$pdo->prepare('UPDATE Status SET code_status = :code_status');
+        $req->bindValue(':code_status', $status->getCode_status(), PDO::PARAM_STR);
+        $req->execute();
+        $req->closeCursor();
+    }
 
 
+    /**
+    * Delete a status
+    */
+    public function deleteStatusDb(string $code_status): void {
+        $pdo = $this->getDb();
+        $req = $pdo->prepare('DELETE FROM Status WHERE code_status = :code_status');
+        $req->bindValue(':code_status', $code_status, PDO::PARAM_STR);
+        $req->execute();
+        $req->closeCursor();
+    }
 
 
 

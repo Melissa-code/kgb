@@ -5,9 +5,11 @@ define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS'])? "https" : 
 
 require_once("controllers/MainController.php"); 
 require_once("controllers/StatusController.php"); 
+require_once("controllers/TypeController.php"); 
 
 $mainController = new MainController(); // to use the functions from the MainController
 $statusController = new StatusController(); 
+$typeController = new TypeController(); 
 
 try {
     if(empty($_GET['page'])){
@@ -49,18 +51,45 @@ try {
         break;
         case "updateMissionValidation": 
             $mainController->updateMissionValidation();
-            //echo "mission modifiée"; 
         break;
         case "deleteMission": 
             $mainController->deleteMission();
         break;
 
+
         case "createStatus": 
             $statusController->createStatus(); 
         break;
-            case "createStatusValidation": 
-                $statusController->createStatusValidation();
+        case "createStatusValidation": 
+            $statusController->createStatusValidation();
         break;
+        case "updateStatus": 
+            $statusController->updateStatus();
+        break;
+        case "updateStatusValidation": 
+            //$mainController->updateStatusValidation();
+        break;
+        case "deleteStatus": 
+            $statusController->deleteStatus();
+        break;
+
+        case "createType": 
+            $typeController->createType(); 
+        break;
+        case "createTypeValidation": 
+            $typeController->createTypeValidation();
+        break;
+        // case "updateStatus": 
+        //     $statusController->updateType();
+        // break;
+        // case "updateStatusValidation": 
+        //     //$mainController->updateStatusValidation();
+        // break;
+        // case "deleteStatus": 
+        //     $statusController->deleteType();
+        // break;
+
+        
         default: 
             throw new Exception("La page n'existe pas"); 
     }

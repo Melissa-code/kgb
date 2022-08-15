@@ -1,8 +1,10 @@
 <?php 
+
 require_once("models/Model.php");
 require_once("models/Type.php");
 
-class TypeManager extends Model{
+
+class TypeManager extends Model {
 
 
     /**
@@ -25,6 +27,58 @@ class TypeManager extends Model{
         return $types;
     }
 
+
+    /**
+    * Get one type only
+    *
+    * @return Type $type
+    */
+    public function get($name_type) : Type {
+        $pdo = $this->getDb();
+        $req = $pdo->prepare("SELECT * FROM Types WHERE name_type = :name_type");
+        $req->bindValue(':name_type', $name_type, PDO::PARAM_STR);
+        $req->execute();
+        $data = $req->fetch(); 
+        $type = new Type($data); 
+        $req->closeCursor();
+        return $type;
+    }
+
+
+    /**
+    * Create a type
+    */
+    public function createTypeDb(Type $newType): void {
+        $pdo = $this->getDb();
+        $req = $pdo->prepare("INSERT INTO Types (name_type) VALUES (:name_type)");
+        $req->bindValue(":name_type", $newType->getName_type(), PDO::PARAM_STR);
+        $req->execute();
+        $req->closeCursor();
+    }
+
+
+    /**
+    * Update a type
+    */
+    public function updateTypeDb(Type $type): void {
+        $pdo = $this->getDb();
+        $req =$pdo->prepare('UPDATE Types SET name_type = :name_type');
+        $req->bindValue(':name_type', $type->getName_type(), PDO::PARAM_STR);
+        $req->execute();
+        $req->closeCursor();
+    }
+
+
+    /**
+    * Delete a type
+    */
+    public function deleteTypeDb(string $name_type): void {
+        $pdo = $this->getDb();
+        $req = $pdo->prepare('DELETE FROM Types WHERE name_type = :name_type');
+        $req->bindValue(':name_type', $name_type, PDO::PARAM_STR);
+        $req->execute();
+        $req->closeCursor();
+    }
 
 
 
