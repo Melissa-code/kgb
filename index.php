@@ -1,15 +1,20 @@
 <?php
 
-// pour avoir le chemin depuis la racine du site
-define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS'])? "https" : "http"). "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
-
 require_once("controllers/MainController.php"); 
 require_once("controllers/StatusController.php"); 
 require_once("controllers/TypeController.php"); 
+require_once("controllers/DurationController.php"); 
 
 $mainController = new MainController(); // to use the functions from the MainController
 $statusController = new StatusController(); 
 $typeController = new TypeController(); 
+$durationController = new DurationController(); 
+
+
+
+// pour avoir le chemin depuis la racine du site
+define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS'])? "https" : "http"). "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
+
 
 try {
     if(empty($_GET['page'])){
@@ -57,6 +62,23 @@ try {
         break;
 
 
+        case "createDuration": 
+            $durationController->createDuration(); 
+        break;
+        case "createDurationValidation": 
+            $durationController->createDurationValidation();
+        break;
+        case "updateDuration": 
+            //$durationController->updateDuration();
+        break;
+        case "updateDurationValidation": 
+            //$durationController->updateDurationValidation();
+        break;
+        case "deleteDuration": 
+            //$durationController->deleteDuration();
+        break;
+
+
         case "createStatus": 
             $statusController->createStatus(); 
         break;
@@ -67,11 +89,12 @@ try {
             $statusController->updateStatus();
         break;
         case "updateStatusValidation": 
-            //$mainController->updateStatusValidation();
+            //$statusController->updateStatusValidation();
         break;
         case "deleteStatus": 
             $statusController->deleteStatus();
         break;
+
 
         case "createType": 
             $typeController->createType(); 
@@ -79,15 +102,17 @@ try {
         case "createTypeValidation": 
             $typeController->createTypeValidation();
         break;
-        // case "updateStatus": 
-        //     $statusController->updateType();
-        // break;
-        // case "updateStatusValidation": 
-        //     //$mainController->updateStatusValidation();
-        // break;
-        // case "deleteStatus": 
-        //     $statusController->deleteType();
-        // break;
+        case "updateType": 
+            //$typeController->updateType();
+        break;
+        case "updateTypeValidation": 
+            //$typeController->updateTypeValidation();
+        break;
+        case "deleteStatus": 
+            //$typeController->deleteType();
+        break;
+
+
 
         
         default: 

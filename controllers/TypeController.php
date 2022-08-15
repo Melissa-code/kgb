@@ -39,7 +39,6 @@ class TypeController {
     * Create a type
     */
     public function createType() : void {
-        //$status = $this->statusManager->getAll();
 
         $data_page = [
             "page_description" => "Page de création du type d'une mission",

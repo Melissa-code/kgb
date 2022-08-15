@@ -39,7 +39,6 @@ class StatusController {
     * Create a status
     */
     public function createStatus() : void {
-        $status = $this->statusManager->getAll();
 
         $data_page = [
             "page_description" => "Page de création du statut d'une mission",
