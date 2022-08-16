@@ -1,12 +1,14 @@
 <?php
 
 require_once("controllers/MainController.php"); 
+require_once("controllers/AgentController.php"); 
 require_once("controllers/StatusController.php"); 
 require_once("controllers/TypeController.php"); 
 require_once("controllers/DurationController.php"); 
 require_once("controllers/SpecialityController.php"); 
 
 $mainController = new MainController(); // to use the functions from the MainController
+$agentController = new AgentController(); 
 $statusController = new StatusController(); 
 $typeController = new TypeController(); 
 $durationController = new DurationController(); 
@@ -61,6 +63,23 @@ try {
         break;
         case "deleteMission": 
             $mainController->deleteMission();
+        break;
+
+
+        case "createAgent": 
+            $agentController->createAgent(); 
+        break;
+        case "createAgentValidation": 
+            $agentController->createAgentValidation();
+        break;
+        case "updateDuration": 
+            //$agentController->updateDuration();
+        break;
+        case "updateDurationValidation": 
+            //$agentController->updateDurationValidation();
+        break;
+        case "deleteDuration": 
+            //$agentController->deleteDuration();
         break;
 
 
@@ -130,8 +149,6 @@ try {
         case "deleteSpeciality": 
             //$specialityController->deleteSpeciality();
         break;
-
-
 
         
         default: 

@@ -42,9 +42,13 @@
             <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
                 <label class="form-label me-3">Agent(s) : </label>
                     <?php foreach($agents as $agent) :?>
-                    <label class="btn btn-outline-secondary" for="id_agent" value="<?= $agent->getId_agent(); ?>"><?= $agent->getFirstname_agent()." ".$agent->getName_agent(); ?></label>
-                    <input type="checkbox" class="btn-check" id="id_agent" name="agent[]" value="<?= $agent->getId_agent(); ?>" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="id_agent" value="<?= $agent->getId_agent(); ?>"><?= $agent->getFirstname_agent()." ".$agent->getName_agent(); ?></label>
+                        <input type="checkbox" class="btn-check" id="id_agent" name="agent[]" value="<?= $agent->getId_agent(); ?>" autocomplete="off">
                     <?php endforeach; ?>
+                <!-- Links add update & delete a type --> 
+                <button type="button" class="btn btn-light ms-1 rounded-2"><a href="createAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-warning ms-1 rounded-2"><a href="updateAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-danger ms-1 rounded-2"><a href="deleteAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un agent" style="width: 1.5rem;"></a></button>
             </div>
 
             <!-- code_contact --> 

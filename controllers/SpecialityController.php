@@ -11,7 +11,7 @@ class SpecialityController {
     private AgentManager $agentManager;
     private MissionManager $missionManager;
 
-    
+
     public function __construct() {
         $this->specialityManager = new SpecialityManager(); 
         $this->agentManager= new AgentManager (); 
@@ -67,8 +67,8 @@ class SpecialityController {
             $newSpeciality = new Speciality($_POST);
             $this->specialityManager->createSpecialityDb($newSpeciality); 
         }
-        var_dump($newSpeciality); 
-       // header('location:'.URL."createMission");
+        header('location:'.URL."createMission");
+        exit();
     }
 
     /**

@@ -55,7 +55,7 @@ class SpecialityManager extends Model {
         $req->execute();
        
         while($name_verification = $req->fetch()){
-            // Check if the name is already in the DB
+            // Check if the name_speciality is already in the DB
             if($name_verification['numberName'] >= 1){
                 header('location:'.URL."createSpeciality"); 
                 exit();
