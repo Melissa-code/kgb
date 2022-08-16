@@ -54,10 +54,14 @@
             <!-- code_contact --> 
             <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
                 <label class="form-label me-3">Contact(s) : </label>
-                <?php foreach($contacts as $contact) :?>
-                <label class="btn btn-outline-secondary" for="code_contact" value="<?= $contact->getCode_contact(); ?>"><?= $contact->getFirstname_contact()." ".$contact->getName_contact(); ?></label>
-                <input type="checkbox" class="btn-check" id="code_contact" name="contact[]" value="<?= $contact->getCode_contact(); ?>" >
-                <?php endforeach; ?>
+                    <?php foreach($contacts as $contact) :?>
+                        <label class="btn btn-outline-secondary" for="code_contact" value="<?= $contact->getCode_contact(); ?>"><?= $contact->getFirstname_contact()." ".$contact->getName_contact(); ?></label>
+                        <input type="checkbox" class="btn-check" id="code_contact" name="contact[]" value="<?= $contact->getCode_contact(); ?>" >
+                    <?php endforeach; ?>
+                <!-- Links add update & delete a type --> 
+                <button type="button" class="btn btn-light ms-1 rounded-2"><a href="createContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un contact" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-warning ms-1 rounded-2"><a href="updateContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un contact" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-danger ms-1 rounded-2"><a href="deleteContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un contact" style="width: 1.5rem;"></a></button>
             </div>
 
             <!-- code_cible --> 
