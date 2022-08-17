@@ -2,18 +2,24 @@
 
 require_once("controllers/MainController.php"); 
 require_once("controllers/AgentController.php"); 
+require_once("controllers/ContactController.php"); 
+require_once("controllers/TargetController.php"); 
 require_once("controllers/StatusController.php"); 
 require_once("controllers/TypeController.php"); 
 require_once("controllers/DurationController.php"); 
+require_once("controllers/HideoutController.php"); 
 require_once("controllers/SpecialityController.php"); 
+
 
 $mainController = new MainController(); // to use the functions from the MainController
 $agentController = new AgentController(); 
+$contactController = new ContactController(); 
+$targetController = new TargetController(); 
 $statusController = new StatusController(); 
 $typeController = new TypeController(); 
 $durationController = new DurationController(); 
+$hideoutController = new HideoutController(); 
 $specialityController = new SpecialityController(); 
-
 
 
 // pour avoir le chemin depuis la racine du site
@@ -72,14 +78,47 @@ try {
         case "createAgentValidation": 
             $agentController->createAgentValidation();
         break;
-        case "updateDuration": 
-            //$agentController->updateDuration();
+        case "updateAgent": 
+            //$agentController->updateAgent();
         break;
-        case "updateDurationValidation": 
-            //$agentController->updateDurationValidation();
+        case "updateAgentValidation": 
+            //$agentController->updateAgentValidation();
         break;
-        case "deleteDuration": 
-            //$agentController->deleteDuration();
+        case "deleteAgent": 
+            //$agentController->deleteAgent();
+        break;
+
+        case "createContact": 
+            $contactController->createContact(); 
+        break;
+        case "createContactValidation": 
+            $contactController->createContactValidation();
+        break;
+        case "updateContact": 
+            //$contactController->updateContact();
+        break;
+        case "updateContactValidation": 
+            //$contactController->updateContactValidation();
+        break;
+        case "deleteContact": 
+            //$contactController->deleteContact();
+        break;
+
+
+        case "createTarget": 
+            $targetController->createTarget(); 
+        break;
+        case "createTargetValidation": 
+            $targetController->createTargetValidation();
+        break;
+        case "updateTarget": 
+            //$targetController->updateTarget();
+        break;
+        case "updateTargetValidation": 
+            //$targetController->updateTargetValidation();
+        break;
+        case "deleteTarget": 
+            //$targetController->deleteTarget();
         break;
 
 
@@ -133,6 +172,21 @@ try {
             //$typeController->deleteType();
         break;
 
+        case "createHideout": 
+            $hideoutController->createHideout(); 
+        break;
+        case "createHideoutValidation": 
+            $hideoutController->createHideoutValidation();
+        break;
+        case "updateHideout": 
+            //$hideoutController->updateHideout();
+        break;
+        case "updateHideoutValidation": 
+            //$hideoutController->updateHideoutValidation();
+        break;
+        case "deleteHideout": 
+            //$hideoutController->deleteHideout();
+        break;
 
         case "createSpeciality": 
             $specialityController->createSpeciality(); 

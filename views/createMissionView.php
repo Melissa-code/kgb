@@ -120,13 +120,23 @@
             </div>
 
             <!-- id_hideout --> 
-            <label class="form-label me-3">Planque(s) : </label>
-            <?php foreach($hideouts as $hideout) :?>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="id_hideout[]" id="id_hideout" value="<?= $hideout->getId_hideout(); ?>">
-                <label class="form-check-label" for="id_hideout" value="<?= $hideout->getId_hideout(); ?>">N°<?= $hideout->getId_hideout() ?></label>
+            <div class="row d-flex align-items-center mb-3">
+                <div class="col-sm-9">
+                    <label class="form-label me-3">Planque(s) : </label>
+                    <?php foreach($hideouts as $hideout) :?>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="id_hideout[]" id="id_hideout" value="<?= $hideout->getId_hideout(); ?>">
+                        <label class="form-check-label" for="id_hideout" value="<?= $hideout->getId_hideout(); ?>">N°<?= $hideout->getId_hideout() ?></label>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <div class="col-sm-3 d-flex justify-content-end">
+                    <!-- Links add update & delete a hideout --> 
+                    <button type="button" class="btn btn-light ms-2"><a href="createHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cachette" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-warning ms-2"><a href="updateHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cachette" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-danger ms-2"><a href="deleteHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une cachette" style="width: 1.5rem;"></a></button>
+                </div>
             </div>
-            <?php endforeach; ?>
 
             <!-- name_speciality --> 
             <div class="mb-3 d-flex">
