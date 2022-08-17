@@ -39,11 +39,28 @@
             </div>
 
             <!-- id_agent --> 
+            <select class="form-select" multiple  name="id_agent[]" >
+                <option selected>-- Agent(s) --</option>
+                <?php foreach($agents as $agent) :?>
+                <option value="<?= $agent->getId_agent(); ?>"><?= $agent->getFirstname_agent()." ".$agent->getName_agent(); ?></option>
+                <?php endforeach; ?>
+            </select>
+
+            <!-- 
+                <div class="form-check d-inline-block">
+                <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent(); ?>" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                Checked checkbox
+            </label>
+            </div>
+                -->
+
+
             <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
-                <label class="form-label me-3">Agent(s) : </label>
+                <label class="form-label me-3">Agent(s): </label>
                     <?php foreach($agents as $agent) :?>
                         <label class="btn btn-outline-secondary" for="id_agent" value="<?= $agent->getId_agent(); ?>"><?= $agent->getFirstname_agent()." ".$agent->getName_agent(); ?></label>
-                        <input type="checkbox" class="btn-check" id="id_agent" name="agent[]" value="<?= $agent->getId_agent(); ?>" autocomplete="off">
+                        <input type="checkbox" class="btn-check" id="id_agent" name="agent[]" multiple value="<?= $agent->getId_agent(); ?>" autocomplete="off">
                     <?php endforeach; ?>
                 <!-- Links add update & delete a agent --> 
                 <button type="button" class="btn btn-light ms-1 my-1 rounded-2"><a href="createAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"></a></button>

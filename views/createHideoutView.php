@@ -5,7 +5,7 @@
 
 <section class="mb-4">
     <button type="button" class="btn btn-light m-4"><a href="createMission">Retour</a></button>
-    <h1>Ajouter une cachette</h1>
+    <h1>Ajouter une planque</h1>
 </section>
 
 
