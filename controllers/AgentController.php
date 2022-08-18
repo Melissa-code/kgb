@@ -53,7 +53,6 @@ class AgentController {
             $newAgent = new Agent($_POST);
             $this->agentManager->createAgentDb($newAgent); 
         }
-       var_dump($newAgent); 
        header('location:'.URL."createMission");
        exit();
     }

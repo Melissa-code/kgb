@@ -48,12 +48,6 @@ class TargetManager extends Model {
     */
     public function createTargetDb(Target $newTarget): void {
 
-        $code_target = $_POST['code_target']; 
-        $name_target = $_POST['name_target']; 
-        $firstname_target = $_POST['firstname_target']; 
-        $datebirthday_target = $_POST['datebirthday_target']; 
-        $nationality_target = $_POST['nationality_target']; 
-
         $pdo = $this->getDb();
         $req = $pdo->prepare(
             'SELECT
@@ -63,27 +57,25 @@ class TargetManager extends Model {
                 (SELECT count(*) as numberDatebirthday FROM Targets WHERE datebirthday_target = :datebirthday_target),
                 (SELECT count(*) as numberNationality FROM Targets WHERE nationality_target = :nationality_target)
             '); 
-        $req->bindValue(':code_target', $code_target, PDO::PARAM_STR); 
-        $req->bindValue(':name_target', $name_target, PDO::PARAM_STR);
-        $req->bindValue(':firstname_target', $firstname_target, PDO::PARAM_STR);
-        $req->bindValue(":datebirthday_target", $datebirthday_target, PDO::PARAM_STR);
-        $req->bindValue(":nationality_target", $nationality_target, PDO::PARAM_STR);
+        $req->bindValue(':code_target', $newTarget->getCode_target(), PDO::PARAM_STR); 
+        $req->bindValue(':name_target', $newTarget->getName_target(), PDO::PARAM_STR);
+        $req->bindValue(':firstname_target', $newTarget->getFirstname_target(), PDO::PARAM_STR);
+        $req->bindValue(":datebirthday_target", $newTarget->getDatebirthday_target(), PDO::PARAM_STR);
+        $req->bindValue(":nationality_target", $newTarget->getNationality_target(), PDO::PARAM_STR);
         $req->execute();
  
         while($verification = $req->fetch()){
-            if($verification[0] >= 1 || $verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 && $verification[4] >= 1){
-                //echo "cette cible existe déjà"; 
-                header('location:'.URL."createContact"); 
+            if($verification[0] >= 1 || ($verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 && $verification[4] >= 1)) {
+                header('location:'.URL."createTarget"); 
                 exit();
             }
-            else {
-                // echo "Création d'une nouvelle cible ";      
+            else {    
                 $req = $pdo->prepare("INSERT INTO Targets (code_target, name_target, firstname_target, datebirthday_target, nationality_target) VALUES (:code_target, :name_target, :firstname_target, :datebirthday_target, :nationality_target)");
-                $req->bindValue(":code_target",$code_target, PDO::PARAM_STR);
-                $req->bindValue(":name_target",$name_target, PDO::PARAM_STR);
-                $req->bindValue(":firstname_target", $firstname_target, PDO::PARAM_STR);
-                $req->bindValue(":datebirthday_target", $datebirthday_target, PDO::PARAM_STR);
-                $req->bindValue(":nationality_target", $nationality_target, PDO::PARAM_STR);
+                $req->bindValue(":code_target", $newTarget->getCode_target(), PDO::PARAM_STR);
+                $req->bindValue(":name_target", $newTarget->getName_target(), PDO::PARAM_STR);
+                $req->bindValue(":firstname_target", $newTarget->getFirstname_target(), PDO::PARAM_STR);
+                $req->bindValue(":datebirthday_target", $newTarget->getDatebirthday_target(), PDO::PARAM_STR);
+                $req->bindValue(":nationality_target", $newTarget->getNationality_target(), PDO::PARAM_STR);
                 $req->execute();
                 $req->closeCursor();
             }

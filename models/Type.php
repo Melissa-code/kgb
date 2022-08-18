@@ -5,10 +5,13 @@ class Type {
     private string $name_type;
 
 
+    /* ************* Constructor ************ */ 
+
     public function __construct(array $data) {
         $this->hydrate($data); 
     }
 
+    /* ************* Hydrate ************ */ 
 
     public function hydrate($data): void {
         foreach($data as $key=>$value) {
@@ -20,21 +23,9 @@ class Type {
     }
 
 
-    /**
-     * Get the value of name_type
-     */ 
-    public function getName_type() {
-        return $this->name_type;
-    }
+    /* ************* Getters & Setters ************ */ 
 
-    /**
-     * Set the value of name_type
-     *
-     * @return  self
-     */ 
-    public function setName_type($name_type){
-        $this->name_type = $name_type;
-        return $this;
-    }
+    public function getName_type() { return $this->name_type; }
+    public function setName_type($name_type){ $this->name_type = $name_type; return $this; }
     
 }

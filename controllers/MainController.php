@@ -9,7 +9,7 @@ require_once("models/TargetManager.php");
 require_once("models/HideoutManager.php"); 
 require_once("models/SpecialityManager.php"); 
 require_once("models/StatusManager.php"); 
-
+require_once("models/Agent_missionManager.php"); 
 
 
 class MainController {
@@ -24,6 +24,7 @@ class MainController {
     private HideoutManager $hideoutManager; 
     private SpecialityManager $specialityManager; 
     private StatusManager $statusManager; 
+    private Agent_missionManager $agent_missionManager; 
     
 
     public function __construct() {
@@ -37,7 +38,9 @@ class MainController {
         $this->hideoutManager = new HideoutManager(); 
         $this->specialityManager = new SpecialityManager(); 
         $this->statusManager = new StatusManager();
+        $this->agent_missionManager = new Agent_missionManager();
     }
+
 
     /**
     * Get the mission by code 
@@ -56,6 +59,8 @@ class MainController {
         //var_dump($mission);
         return $mission; 
     }
+
+
 
     /**
     * Generate a page
@@ -115,16 +120,20 @@ class MainController {
 
         $mission = $this->getMissionByCode(); 
 
+        $agents_missions = $this->agent_missionManager->getAll();
+        // foreach($agents_missions as $agent_mission){
+        //     echo "<pre>"; var_dump($agent_mission); echo"</pre>"; }
+
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
             "page_title" => "Détail d'une mission",
             "mission" => $mission,
+            "agents_missions" => $agents_missions,
             "view" => "views/oneMissionView.php",
             "template" => "views/common/template.php"
         ];
-        
-        // var_dump($data_page);
         $this->generatePage($data_page); 
+        
     }
 
     /**
@@ -215,6 +224,7 @@ class MainController {
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
+     
     }
 
     /**
@@ -225,10 +235,11 @@ class MainController {
     public function createMissionValidation(): void {
         if($_POST) {
             $newMission = new Mission($_POST);
+            //print_r($_POST['id_agent']);
             $this->missionManager->createMissionDb($newMission); 
+
         }
-        
-        //var_dump($newMission); 
+        var_dump($newMission->getId_agent()); 
         //header('location:'.URL."missions");
     }
 

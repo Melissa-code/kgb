@@ -5,10 +5,13 @@ class Status {
     private string $code_status; 
 
 
+    /* ************* Constructor ************ */ 
+
     public function __construct(array $data) {
         $this->hydrate($data); 
     }
 
+    /* ************* Hydrate ************ */ 
 
     public function hydrate($data): void {
         foreach($data as $key=>$value) {
@@ -19,23 +22,10 @@ class Status {
         }
     }
 
+    /* ************* Getters & setters ************ */ 
 
-    /**
-     * Get the value of code_status
-     */ 
-    public function getCode_status() {
-        return $this->code_status;
-    }
-
-    /**
-     * Set the value of code_status
-     *
-     * @return  self
-     */ 
-    public function setCode_status($code_status) {
-        $this->code_status = $code_status;
-        return $this;
-    }
+    public function getCode_status() { return $this->code_status; }
+    public function setCode_status($code_status) { $this->code_status = $code_status; return $this; }
 
 
 }

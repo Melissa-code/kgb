@@ -16,7 +16,6 @@ class MissionManager extends Model {
         $pdo = $this->getDb();
         $req = $pdo->prepare("SELECT * FROM Missions");
         $req->execute();
-        //$missions = $req->fetchAll(PDO::FETCH_ASSOC); 
         $data = $req->fetchAll(PDO::FETCH_ASSOC); // pour éviter d'avoir 2 fois les datas retournées
         
         foreach($data as $mission) {
@@ -61,6 +60,20 @@ class MissionManager extends Model {
         $req->bindValue(':code_status', $newMission->getCode_status(), PDO::PARAM_STR);
         $req->bindValue(':name_type', $newMission->getName_type(), PDO::PARAM_STR);
         $req->execute();
+
+        $id_agent = $newMission->getId_agent();
+        //print_r('id de l agent: ' .$id_agent);
+        foreach($id_agent as $agent){
+            $req2 = $pdo->prepare("INSERT INTO Agents_missions (id_agent, code_mission) VALUES (:id_agent, :code_mission)");
+            $req2->bindValue(':id_agent', (int)$agent, PDO::PARAM_INT);
+            $req2->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
+            $req2->execute();
+
+            // print_r($id_agent);echo "<br>";
+            // print_r($agent); echo "<br>";
+            // print_r(gettype($agent)); 
+        }
+        
         $req->closeCursor();
     }
 

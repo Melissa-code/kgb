@@ -49,11 +49,24 @@ class TypeManager extends Model {
     * Create a type
     */
     public function createTypeDb(Type $newType): void {
+        
         $pdo = $this->getDb();
-        $req = $pdo->prepare("INSERT INTO Types (name_type) VALUES (:name_type)");
-        $req->bindValue(":name_type", $newType->getName_type(), PDO::PARAM_STR);
+        $req = $pdo->prepare('SELECT count(*) as numberType FROM Types WHERE name_type = :name_type'); 
+        $req->bindValue(':name_type', $newType->getName_type(), PDO::PARAM_STR);
         $req->execute();
-        $req->closeCursor();
+
+        while($name_verification = $req->fetch()){
+            if($name_verification['numberType'] >= 1){
+                header('location:'.URL."createType"); 
+                exit();
+            }
+            else {
+                $req = $pdo->prepare("INSERT INTO Types (name_type) VALUES (:name_type)");
+                $req->bindValue(":name_type", $newType->getName_type(), PDO::PARAM_STR);
+                $req->execute();
+                $req->closeCursor();
+            }
+        }
     }
 
 

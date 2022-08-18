@@ -45,9 +45,8 @@ class AdminManager extends Model {
     
 
     /**
-    * Login Admin
+    * Admin login
     *
-    * 
     */
     public function loginDb($email_admin, $password_admin): void {
 

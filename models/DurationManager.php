@@ -45,28 +45,34 @@ class DurationManager extends Model{
     * Create a duration
     */
     public function createDurationDb(Duration $newDuration): void {
-        $idDuration = (int)$_POST['id_duration']; 
 
         $pdo = $this->getDb();
-        $req = $pdo->prepare('SELECT count(*) as numberId FROM Durations WHERE id_duration = :id_duration'); 
-        $req->bindValue(':id_duration', $idDuration, PDO::PARAM_INT);
+        $req = $pdo->prepare(
+            'SELECT
+                (SELECT count(*) as numberId FROM Durations WHERE id_duration = :id_duration),
+                (SELECT count(*) as numberStart FROM Durations  WHERE start_duration = :start_duration),
+                (SELECT count(*) as numberEnd FROM Durations  WHERE end_duration = :end_duration)
+            '); 
+        $req->bindValue(':id_duration', $newDuration->getId_duration(), PDO::PARAM_INT);
+        $req->bindValue(':start_duration', $newDuration->getStart_duration(), PDO::PARAM_STR);
+        $req->bindValue(':end_duration', $newDuration->getEnd_duration(), PDO::PARAM_STR);
         $req->execute();
-       
-        while($id_verification = $req->fetch()){
-            // Check if the id is already in the DB
-            if($id_verification['numberId'] >= 1){
+
+        while($verification = $req->fetch()){
+            print_r($verification); 
+            if($verification[0] >= 1 || ($verification[1] >= 1 && $verification[2] >= 1)) {
                 header('location:'.URL."createDuration"); 
                 exit();
-            //echo "Cet identifiant existe déjà"; 
+            }
+            else {
+                $req = $pdo->prepare("INSERT INTO Durations (id_duration, start_duration, end_duration) VALUES (:id_duration, :start_duration, :end_duration)");
+                $req->bindValue(":id_duration", $newDuration->getId_duration(), PDO::PARAM_INT);
+                $req->bindValue(":start_duration", $newDuration->getStart_duration(), PDO::PARAM_STR);
+                $req->bindValue(":end_duration", $newDuration->getEnd_duration(), PDO::PARAM_STR);
+                $req->execute();
+                $req->closeCursor();
             }
         }
-      
-        $req = $pdo->prepare("INSERT INTO Durations (id_duration, start_duration, end_duration) VALUES (:id_duration, :start_duration, :end_duration)");
-        $req->bindValue(":id_duration", $newDuration->getId_duration(), PDO::PARAM_INT);
-        $req->bindValue(":start_duration", $newDuration->getStart_duration(), PDO::PARAM_STR);
-        $req->bindValue(":end_duration", $newDuration->getEnd_duration(), PDO::PARAM_STR);
-        $req->execute();
-        $req->closeCursor();
     }
 
 

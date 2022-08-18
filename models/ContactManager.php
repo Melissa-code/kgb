@@ -48,12 +48,6 @@ class ContactManager extends Model {
     */
     public function createContactDb(Contact $newContact): void {
 
-        $code_contact = $_POST['code_contact']; 
-        $name_contact = $_POST['name_contact']; 
-        $firstname_contact = $_POST['firstname_contact']; 
-        $datebirthday_contact = $_POST['datebirthday_contact']; 
-        $nationality_contact = $_POST['nationality_contact']; 
-
         $pdo = $this->getDb();
         $req = $pdo->prepare(
             'SELECT
@@ -63,27 +57,25 @@ class ContactManager extends Model {
                 (SELECT count(*) as numberDatebirthday FROM Contacts WHERE datebirthday_contact = :datebirthday_contact),
                 (SELECT count(*) as numberNationality FROM Contacts WHERE nationality_contact = :nationality_contact)
             '); 
-        $req->bindValue(':code_contact', $code_contact, PDO::PARAM_STR); 
-        $req->bindValue(':name_contact', $name_contact, PDO::PARAM_STR);
-        $req->bindValue(':firstname_contact', $firstname_contact, PDO::PARAM_STR);
-        $req->bindValue(":datebirthday_contact", $datebirthday_contact, PDO::PARAM_STR);
-        $req->bindValue(":nationality_contact", $nationality_contact, PDO::PARAM_STR);
+        $req->bindValue(':code_contact', $newContact->getCode_contact(), PDO::PARAM_STR); 
+        $req->bindValue(':name_contact', $newContact->getName_contact(), PDO::PARAM_STR);
+        $req->bindValue(':firstname_contact', $newContact->getFirstname_contact(), PDO::PARAM_STR);
+        $req->bindValue(":datebirthday_contact", $newContact->getDatebirthday_contact(), PDO::PARAM_STR);
+        $req->bindValue(":nationality_contact", $newContact->getNationality_contact(), PDO::PARAM_STR);
         $req->execute();
  
         while($verification = $req->fetch()){
-            if($verification[0] >= 1 || $verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 && $verification[4] >= 1){
-                //echo "ce contact existe déjà"; 
+            if($verification[0] >= 1 || ($verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 && $verification[4] >= 1)) {
                 header('location:'.URL."createContact"); 
                 exit();
             }
-            else {
-                //echo "Création d'un nouveau contact";      
+            else {     
                 $req = $pdo->prepare("INSERT INTO Contacts (code_contact, name_contact, firstname_contact, datebirthday_contact, nationality_contact) VALUES (:code_contact, :name_contact, :firstname_contact, :datebirthday_contact, :nationality_contact)");
-                $req->bindValue(":code_contact",$code_contact, PDO::PARAM_STR);
-                $req->bindValue(":name_contact",$name_contact, PDO::PARAM_STR);
-                $req->bindValue(":firstname_contact", $firstname_contact, PDO::PARAM_STR);
-                $req->bindValue(":datebirthday_contact", $datebirthday_contact, PDO::PARAM_STR);
-                $req->bindValue(":nationality_contact", $nationality_contact, PDO::PARAM_STR);
+                $req->bindValue(":code_contact", $newContact->getCode_contact(), PDO::PARAM_STR);
+                $req->bindValue(":name_contact", $newContact->getName_contact(), PDO::PARAM_STR);
+                $req->bindValue(":firstname_contact", $newContact->getFirstname_contact(), PDO::PARAM_STR);
+                $req->bindValue(":datebirthday_contact", $newContact->getDatebirthday_contact(), PDO::PARAM_STR);
+                $req->bindValue(":nationality_contact", $newContact->getNationality_contact(), PDO::PARAM_STR);
                 $req->execute();
                 $req->closeCursor();
             }

@@ -6,9 +6,13 @@ class Hideout_mission {
     private string $code_target; 
 
 
+    /* ************* Constructor ************ */ 
+
     public function __construct(array $data) {
         $this->hydrate($data); 
     }
+
+    /* ************* Hydrate ************ */ 
 
     public function hydrate($data): void {
         foreach($data as $key=>$value) {
@@ -21,41 +25,11 @@ class Hideout_mission {
 
     /* ************* Getters & Setters ************ */ 
 
+    public function getId_hideout() { return $this->id_hideout; }
+    public function setId_hideout($id_hideout) { $this->id_hideout = $id_hideout; return $this; }
 
-    /**
-     * Get the value of id_hideout
-     */ 
-    public function getId_hideout() {
-        return $this->id_hideout;
-    }
-
-    /**
-     * Set the value of id_hideout
-     *
-     * @return  self
-     */ 
-    public function setId_hideout($id_hideout) {
-        $this->id_hideout = $id_hideout;
-        return $this;
-    }
-
-
-    /**
-     * Get the value of code_target
-     */ 
-    public function getCode_target(){
-        return $this->code_target;
-    }
-
-    /**
-     * Set the value of code_target
-     *
-     * @return  self
-     */ 
-    public function setCode_target($code_target) {
-        $this->code_target = $code_target;
-        return $this;
-    }
+    public function getCode_target(){ return $this->code_target; }
+    public function setCode_target($code_target) { $this->code_target = $code_target;return $this;  }
 
     
 }

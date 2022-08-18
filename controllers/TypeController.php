@@ -56,6 +56,7 @@ class TypeController {
         }
         //var_dump($newType); 
         header('location:'.URL."createMission");
+        exit(); 
     }
 
     /**

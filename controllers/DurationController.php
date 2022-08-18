@@ -41,8 +41,8 @@ class DurationController {
     public function createDuration() : void {
 
         $data_page = [
-            "page_description" => "Page de création d'une durée de mission",
-            "page_title" => "Création d'une durée de mission",
+            "page_description" => "Page de création d'une durée",
+            "page_title" => "Création d'une durée",
             "view" => "views/createDurationView.php",
             "template" => "views/common/template.php"
         ];
@@ -56,6 +56,7 @@ class DurationController {
         }
         //var_dump($newDuration); 
         header('location:'.URL."createMission");
+        exit();
     }
 
     /**

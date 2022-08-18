@@ -7,9 +7,13 @@ class Duration {
     private string $end_duration;
 
 
+    /* ************* Constructor ************ */ 
+
     public function __construct(array $data) {
         $this->hydrate($data); 
     }
+
+    /* ************* Hydrate ************ */ 
 
     public function hydrate($data): void {
         foreach($data as $key=>$value) {
@@ -20,58 +24,15 @@ class Duration {
         }
     }
 
+    /* ************* Getters & Setters ************ */ 
 
-    /**
-     * Get the value of id_duration
-     */ 
-    public function getId_duration() {
-        return $this->id_duration;
-    }
+    public function getId_duration() {return $this->id_duration; }
+    public function setId_duration($id_duration) {$this->id_duration = $id_duration;return $this; }
 
-    /**
-     * Set the value of id_duration
-     *
-     * @return  self
-     */ 
-    public function setId_duration($id_duration) {
-        $this->id_duration = $id_duration;
-        return $this;
-    }
+    public function getStart_duration() {return $this->start_duration; }
+    public function setStart_duration($start_duration) { $this->start_duration = $start_duration;return $this; }
 
-    
-    /**
-     * Get the value of start_duration
-     */ 
-    public function getStart_duration() {
-        return $this->start_duration;
-    }
-
-    /**
-     * Set the value of start_duration
-     *
-     * @return  self
-     */ 
-    public function setStart_duration($start_duration) {
-        $this->start_duration = $start_duration;
-        return $this;
-    }
-
-
-    /**
-     * Get the value of end_duration
-     */ 
-    public function getEnd_duration() {
-        return $this->end_duration;
-    }
-
-    /**
-     * Set the value of end_duration
-     *
-     * @return  self
-     */ 
-    public function setEnd_duration($end_duration) {
-        $this->end_duration = $end_duration;
-        return $this;
-    }
+    public function getEnd_duration() {return $this->end_duration;}
+    public function setEnd_duration($end_duration) {$this->end_duration = $end_duration; return $this; }
     
 }

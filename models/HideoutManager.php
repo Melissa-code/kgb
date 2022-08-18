@@ -48,12 +48,6 @@ class HideoutManager extends Model {
     */
     public function createHideoutDb(Hideout $newHideout): void {
 
-        $id_hideout = $_POST['id_hideout']; 
-        $address_hideout = $_POST['address_hideout']; 
-        $country_hideout = $_POST['country_hideout']; 
-        $type_hideout = $_POST['type_hideout']; 
-        //echo $type_hideout; 
-
         $pdo = $this->getDb();
         $req = $pdo->prepare(
             'SELECT
@@ -62,28 +56,23 @@ class HideoutManager extends Model {
                 (SELECT count(*) as numberCountry FROM Hideouts WHERE country_hideout = :country_hideout),
                 (SELECT count(*) as numberType FROM Hideouts WHERE type_hideout = :type_hideout)
             '); 
-        $req->bindValue(':id_hideout', (int)$id_hideout, PDO::PARAM_INT);
-        $req->bindValue(':address_hideout', $address_hideout, PDO::PARAM_STR);
-        $req->bindValue(":country_hideout", $country_hideout, PDO::PARAM_STR);
-        $req->bindValue(":type_hideout", $type_hideout, PDO::PARAM_STR);
+        $req->bindValue(':id_hideout', $newHideout->getId_hideout(), PDO::PARAM_INT);
+        $req->bindValue(':address_hideout', $newHideout->getAddress_hideout(), PDO::PARAM_STR);
+        $req->bindValue(":country_hideout", $newHideout->getCountry_hideout(), PDO::PARAM_STR);
+        $req->bindValue(":type_hideout", $newHideout->getType_hideout(), PDO::PARAM_STR);
         $req->execute();
-
-        //echo $type_hideout; 
  
         while($verification = $req->fetch()) {
-            print_r($verification); 
-            if($verification[0] >= 1 || ($verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 )){
-                //echo "cette cachette existe déjà"; 
+            if($verification[0] >= 1 || ($verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 )) {
                 header('location:'.URL."createHideout"); 
                 exit();
             }
-            else {
-                //echo "Création d'une cachette ";      
+            else {     
                 $req = $pdo->prepare("INSERT INTO Hideouts (id_hideout, address_hideout, country_hideout, type_hideout) VALUES (:id_hideout, :address_hideout, :country_hideout, :type_hideout)");
-                $req->bindValue(":id_hideout", (int)$id_hideout, PDO::PARAM_INT);
-                $req->bindValue(":address_hideout", $address_hideout, PDO::PARAM_STR);
-                $req->bindValue(":country_hideout", $country_hideout, PDO::PARAM_STR);
-                $req->bindValue(":type_hideout", $type_hideout, PDO::PARAM_STR);
+                $req->bindValue(":id_hideout", $newHideout->getId_hideout(), PDO::PARAM_INT);
+                $req->bindValue(":address_hideout", $newHideout->getAddress_hideout(), PDO::PARAM_STR);
+                $req->bindValue(":country_hideout", $newHideout->getCountry_hideout(), PDO::PARAM_STR);
+                $req->bindValue(":type_hideout", $newHideout->getType_hideout(), PDO::PARAM_STR);
                 $req->execute();
                 $req->closeCursor();
              }
@@ -92,24 +81,24 @@ class HideoutManager extends Model {
 
     
     /**
-    * Update a agent
+    * Update a hideout 
     */
-    public function updateAgentsDb(Agent $agent): void {
+    public function updateHideoutsDb(Hideout $hideout): void {
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Agents SET id_agent = :id_agent');
-        $req->bindValue(':id_agent', (int)$agent->getId_agent(), PDO::PARAM_INT);
+        $req =$pdo->prepare('UPDATE Hideouts SET id_hideout = :id_hideout');
+        $req->bindValue(':id_hideout', (int)$hideout->getId_hideout(), PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
     }
 
 
     /**
-    * Delete a agent
+    * Delete a hideout 
     */
-    public function deleteAgentDb(int $id_agent): void {
+    public function deleteHideoutDb(int $id_hideout): void {
         $pdo = $this->getDb();
-        $req = $pdo->prepare('DELETE FROM Agents WHERE id_agent = :id_agent');
-        $req->bindValue(':id_agent', $id_agent, PDO::PARAM_INT);
+        $req = $pdo->prepare('DELETE FROM Hideouts WHERE id_hideout = :id_hideout');
+        $req->bindValue(':id_hideout', $id_hideout, PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
     }

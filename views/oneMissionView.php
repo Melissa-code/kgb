@@ -1,3 +1,4 @@
+<?php session_start()?>
 
 <!------------- Main --------------->
 
@@ -18,7 +19,16 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Pays: <?= $mission->getCountry_mission() ?></li>
-                <li class="list-group-item">Agent(s): </li>
+               <?php
+                    foreach($agents_missions as $agent_mission):?>
+                        <?php if($mission->getCode_mission() == $agent_mission->getCode_mission())
+                    :?>
+                        <li class="list-group-item">Agent(s) n° <?= $agent_mission->getId_agent() ?> </li>
+                    <?php endif ?>
+                        <?php endforeach ?>
+               
+             
+                
                 <li class="list-group-item">Contact(s): </li>
                 <li class="list-group-item">Cible(s):</li>
                 <li class="list-group-item">Type: <?= $mission->getName_type() ?></li>

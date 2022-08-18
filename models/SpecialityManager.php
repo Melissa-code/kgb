@@ -48,14 +48,13 @@ class SpecialityManager extends Model {
     * Create a speciality
     */
     public function createSpecialityDb(Speciality $newSpeciality): void {
-        $nameSpeciality = $_POST['name_speciality']; 
+
         $pdo = $this->getDb();
         $req = $pdo->prepare('SELECT count(*) as numberName FROM Specialities WHERE name_speciality = :name_speciality'); 
-        $req->bindValue(':name_speciality', $nameSpeciality, PDO::PARAM_STR);
+        $req->bindValue(':name_speciality', $newSpeciality->getName_speciality(), PDO::PARAM_STR);
         $req->execute();
        
         while($name_verification = $req->fetch()){
-            // Check if the name_speciality is already in the DB
             if($name_verification['numberName'] >= 1){
                 header('location:'.URL."createSpeciality"); 
                 exit();

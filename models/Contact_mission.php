@@ -6,11 +6,14 @@ class Contact_mission {
     private string $code_mission; 
 
 
+    /* ************* Constructor ************ */ 
 
     public function __construct(array $data) {
         $this->hydrate($data); 
     }
 
+    
+    /* ************* Hydrate ************ */ 
 
     public function hydrate($data): void {
         foreach($data as $key=>$value) {
@@ -23,41 +26,10 @@ class Contact_mission {
 
     /* ************* Getters & Setters ************ */ 
 
-    
+    public function getCode_contact() {return $this->code_contact; }
+    public function setCode_contact($code_contact){$this->code_contact = $code_contact;return $this; }
 
-    /**
-     * Get the value of code_contact
-     */ 
-    public function getCode_contact() {
-        return $this->code_contact;
-    }
+    public function getCode_mission() { return $this->code_mission; }
+    public function setCode_mission($code_mission) { $this->code_mission = $code_mission; return $this; }
 
-    /**
-     * Set the value of code_contact
-     *
-     * @return  self
-     */ 
-    public function setCode_contact($code_contact){
-        $this->code_contact = $code_contact;
-        return $this;
-    }
-
-    /**
-     * Get the value of code_mission
-     */ 
-    public function getCode_mission() {
-        return $this->code_mission;
-    }
-
-    /**
-     * Set the value of code_mission
-     *
-     * @return  self
-     */ 
-    public function setCode_mission($code_mission) {
-        $this->code_mission = $code_mission;
-        return $this;
-    }
-
-    
 }

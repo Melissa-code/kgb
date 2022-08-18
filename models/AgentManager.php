@@ -48,11 +48,6 @@ class AgentManager extends Model {
     */
     public function createAgentDb(Agent $newAgent): void {
 
-        $name_agent = $_POST['name_agent']; 
-        $firstname_agent = $_POST['firstname_agent']; 
-        $datebirthday_agent = $_POST['datebirthday_agent']; 
-        $nationality_agent = $_POST['nationality_agent']; 
-
         $pdo = $this->getDb();
         $req = $pdo->prepare(
             'SELECT
@@ -61,26 +56,23 @@ class AgentManager extends Model {
                 (SELECT count(*) as numberDatebirthday FROM Agents WHERE datebirthday_agent = :datebirthday_agent),
                 (SELECT count(*) as numberNationality FROM Agents WHERE nationality_agent = :nationality_agent)
             '); 
-        $req->bindValue(':name_agent', $name_agent, PDO::PARAM_STR);
-        $req->bindValue(':firstname_agent', $firstname_agent, PDO::PARAM_STR);
-        $req->bindValue(":datebirthday_agent", $datebirthday_agent, PDO::PARAM_STR);
-        $req->bindValue(":nationality_agent", $nationality_agent, PDO::PARAM_STR);
+        $req->bindValue(':name_agent', $newAgent->getName_agent(), PDO::PARAM_STR);
+        $req->bindValue(':firstname_agent', $newAgent->getFirstname_agent(), PDO::PARAM_STR);
+        $req->bindValue(":datebirthday_agent", $newAgent->getDatebirthday_agent(), PDO::PARAM_STR);
+        $req->bindValue(":nationality_agent", $newAgent->getNationality_agent(), PDO::PARAM_STR);
         $req->execute();
  
         while($verification = $req->fetch()){
-            //print_r($verification); 
             if($verification[0] >= 1 && $verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 ){
-                //echo "cet agent existe déjà"; 
                 header('location:'.URL."createAgent"); 
                 exit();
             }
-            else {
-                //echo "Création d'un nouvel agent ";      
+            else {     
                 $req = $pdo->prepare("INSERT INTO Agents (name_agent, firstname_agent, datebirthday_agent, nationality_agent) VALUES (:name_agent, :firstname_agent, :datebirthday_agent, :nationality_agent)");
-                $req->bindValue(":name_agent",$name_agent, PDO::PARAM_STR);
-                $req->bindValue(":firstname_agent", $firstname_agent, PDO::PARAM_STR);
-                $req->bindValue(":datebirthday_agent", $datebirthday_agent, PDO::PARAM_STR);
-                $req->bindValue(":nationality_agent", $nationality_agent, PDO::PARAM_STR);
+                $req->bindValue(":name_agent", $newAgent->getName_agent(), PDO::PARAM_STR);
+                $req->bindValue(":firstname_agent", $newAgent->getFirstname_agent(), PDO::PARAM_STR);
+                $req->bindValue(":datebirthday_agent", $newAgent->getDatebirthday_agent(), PDO::PARAM_STR);
+                $req->bindValue(":nationality_agent", $newAgent->getNationality_agent(), PDO::PARAM_STR);
                 $req->execute();
                 $req->closeCursor();
             }

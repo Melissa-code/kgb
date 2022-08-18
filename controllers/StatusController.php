@@ -56,6 +56,7 @@ class StatusController {
         }
         // var_dump($newStatus); 
         header('location:'.URL."createMission");
+        exit();
     }
 
     /**

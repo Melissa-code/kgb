@@ -46,11 +46,24 @@ class StatusManager extends Model {
     * Create a status
     */
     public function createStatusDb(Status $newStatus): void {
+
         $pdo = $this->getDb();
-        $req = $pdo->prepare("INSERT INTO Status (code_status) VALUES (:code_status)");
-        $req->bindValue(":code_status", $newStatus->getCode_status(), PDO::PARAM_STR);
+        $req = $pdo->prepare('SELECT count(*) as numberCode FROM Status WHERE code_status = :code_status'); 
+        $req->bindValue(':code_status', $newStatus->getCode_status(), PDO::PARAM_STR);
         $req->execute();
-        $req->closeCursor();
+
+        while($code_verification = $req->fetch()){
+            if($code_verification['numberCode'] >= 1){
+                header('location:'.URL."createStatus"); 
+                exit();
+            }
+            else {
+                $req = $pdo->prepare("INSERT INTO Status (code_status) VALUES (:code_status)");
+                $req->bindValue(":code_status", $newStatus->getCode_status(), PDO::PARAM_STR);
+                $req->execute();
+                $req->closeCursor();
+            }
+        }
     }
 
 

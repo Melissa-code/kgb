@@ -40,8 +40,8 @@ class HideoutController {
     public function createHideout() : void {
 
         $data_page = [
-            "page_description" => "Page de création d'une cachette",
-            "page_title" => "Création d'un agent d'une cachette",
+            "page_description" => "Page de création d'une planque",
+            "page_title" => "Création d'un agent d'une planque",
             "view" => "views/createHideoutView.php",
             "template" => "views/common/template.php"
         ];
