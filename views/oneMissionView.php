@@ -19,17 +19,20 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Pays: <?= $mission->getCountry_mission() ?></li>
-               <?php
-                    foreach($agents_missions as $agent_mission):?>
-                        <?php if($mission->getCode_mission() == $agent_mission->getCode_mission())
-                    :?>
-                        <li class="list-group-item">Agent(s) n° <?= $agent_mission->getId_agent() ?> </li>
-                    <?php endif ?>
-                        <?php endforeach ?>
-               
-             
-                
-                <li class="list-group-item">Contact(s): </li>
+                <li class="list-group-item">Agent(s) n° 
+                    <?php foreach($agents_missions as $agent_mission):?>
+                        <?php if($mission->getCode_mission() === $agent_mission->getCode_mission()) :?>
+                            <?= $agent_mission->getId_agent() .", " ?> 
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </li>
+                <li class="list-group-item">Contact(s): 
+                    <?php foreach($contacts_missions as $contact_mission):?>
+                        <?php if($mission->getCode_mission() === $contact_mission->getCode_mission()) :?>
+                            <?= $contact_mission->getCode_contact().", " ?> 
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </li>
                 <li class="list-group-item">Cible(s):</li>
                 <li class="list-group-item">Type: <?= $mission->getName_type() ?></li>
                 <li class="list-group-item">Statut: <?= $mission->getCode_status() ?></li>

@@ -17,13 +17,13 @@
             <!-- code_mission --> 
             <div class="mb-3">
                 <label for="code_mission" class="form-label">Nom de code : </label>
-                <input type="text" class="form-control" id="code_mission" name="code_mission">
+                <input type="text" class="form-control" id="code_mission" name="code_mission" required>
             </div>
 
             <!-- title_mission --> 
             <div class="mb-3">
                 <label for="title_mission" class="form-label">Titre : </label>
-                <input type="text" class="form-control" id="title_mission" name="title_mission">
+                <input type="text" class="form-control" id="title_mission" name="title_mission" required>
             </div>
 
             <!-- description_mission --> 
@@ -35,7 +35,7 @@
             <!-- country_mission --> 
             <div class="mb-3">
                 <label for="country_mission" class="form-label">Pays : </label>
-                <input type="text" class="form-control " id="country_mission" name="country_mission">
+                <input type="text" class="form-control " id="country_mission" name="country_mission" required>
             </div>
 
             <!-- id_agent --> 
@@ -46,29 +46,49 @@
                 <?php endforeach; ?>
             </select>
 
-            <!-- 
-                <div class="form-check d-inline-block">
-                <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent(); ?>" id="flexCheckChecked" checked>
-                <label class="form-check-label" for="flexCheckChecked">
-                Checked checkbox
-            </label>
-            </div>
-                -->
-
-
-            <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
-                <label class="form-label me-3">Agent(s): </label>
-                    <?php foreach($agents as $agent) :?>
-                        <label class="btn btn-outline-secondary" for="id_agent" value="<?= $agent->getId_agent(); ?>"><?= $agent->getFirstname_agent()." ".$agent->getName_agent(); ?></label>
-                        <input type="checkbox" class="btn-check" id="id_agent" name="agent[]" multiple value="<?= $agent->getId_agent(); ?>" autocomplete="off">
-                    <?php endforeach; ?>
                 <!-- Links add update & delete a agent --> 
                 <button type="button" class="btn btn-light ms-1 my-1 rounded-2"><a href="createAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"></a></button>
                 <button type="button" class="btn btn-warning ms-1 my-1 rounded-2"><a href="updateAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"></a></button>
                 <button type="button" class="btn btn-danger ms-1 my-1 rounded-2"><a href="deleteAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un agent" style="width: 1.5rem;"></a></button>
-            </div>
+     
+
+            <!-- 
+                <div class="form-check d-inline-block">
+                    <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent(); ?>" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Checked checkbox
+                    </label>
+                </div>
+                -->
+
 
             <!-- code_contact --> 
+            <div class="row d-flex align-items-center my-3">
+                <div class="col-12">
+                    <label class="form-label me-3">Contact(s) : </label>
+                    
+                    <?php foreach($contacts as $contact) :?>
+                    <div class="form-check d-inline-block" >
+                        <input class="form-check-input" type="checkbox" value="<?= $contact->getCode_contact(); ?>" id="code_contact" multiple name="code_contact[]">
+                        <label class="form-check-label me-3" for="code_contact" value="<?= $contact->getCode_contact(); ?>">
+                            <?= $contact->getFirstname_contact()." ".$contact->getName_contact(); ?>
+                        </label>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <!-- Links add update & delete a contact --> 
+                <div class="col-12 d-flex justify-content-start">
+                    <button type="button" class="btn btn-light  my-1 rounded-2"><a href="createContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un contact" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un contact" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un contact" style="width: 1.5rem;"></a></button>
+                </div>
+            </div>
+
+
+
+  
+
+
                 <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
                     <label class="form-label me-3">Contact(s) : </label>
                         <?php foreach($contacts as $contact) :?>

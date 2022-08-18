@@ -17,18 +17,14 @@ class Agent_missionManager extends Model {
         $req = $pdo->prepare("SELECT * FROM Agents_missions");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC); 
-        echo "<pre>";
-        //var_dump($data);
-        echo"</pre>";
+        //echo "<pre>"; var_dump($data);echo"</pre>";
 
         foreach($data as $agent_mission) {
             $agents_missions[] = new Agent_mission($agent_mission);
         }
         
         $req->closeCursor();
-        // echo "<pre>";
-        // var_dump($agents_missions); 
-        // echo"</pre>";
+        //echo "<pre>"; var_dump($agents_missions); echo"</pre>";
         return $agents_missions;
     }
 

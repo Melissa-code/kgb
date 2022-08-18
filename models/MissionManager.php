@@ -73,6 +73,14 @@ class MissionManager extends Model {
             // print_r($agent); echo "<br>";
             // print_r(gettype($agent)); 
         }
+
+        $code_contact = $newMission->getCode_contact(); 
+        foreach($code_contact as $contact) {
+            $req3 = $pdo->prepare("INSERT INTO Contacts_missions (code_contact, code_mission) VALUES (:code_contact, :code_mission)");
+            $req3->bindValue(':code_contact', $contact, PDO::PARAM_STR);
+            $req3->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
+            $req3->execute();
+        }
         
         $req->closeCursor();
     }

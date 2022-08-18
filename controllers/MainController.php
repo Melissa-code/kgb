@@ -10,6 +10,7 @@ require_once("models/HideoutManager.php");
 require_once("models/SpecialityManager.php"); 
 require_once("models/StatusManager.php"); 
 require_once("models/Agent_missionManager.php"); 
+require_once("models/Contact_missionManager.php"); 
 
 
 class MainController {
@@ -25,6 +26,7 @@ class MainController {
     private SpecialityManager $specialityManager; 
     private StatusManager $statusManager; 
     private Agent_missionManager $agent_missionManager; 
+    private Contact_missionManager $contact_missionManager; 
     
 
     public function __construct() {
@@ -39,6 +41,7 @@ class MainController {
         $this->specialityManager = new SpecialityManager(); 
         $this->statusManager = new StatusManager();
         $this->agent_missionManager = new Agent_missionManager();
+        $this->contact_missionManager = new Contact_missionManager();
     }
 
 
@@ -119,16 +122,15 @@ class MainController {
     public function oneMission(): void {
 
         $mission = $this->getMissionByCode(); 
-
         $agents_missions = $this->agent_missionManager->getAll();
-        // foreach($agents_missions as $agent_mission){
-        //     echo "<pre>"; var_dump($agent_mission); echo"</pre>"; }
+        $contacts_missions = $this->contact_missionManager->getAll();
 
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
             "page_title" => "Détail d'une mission",
             "mission" => $mission,
             "agents_missions" => $agents_missions,
+            "contacts_missions" => $contacts_missions,
             "view" => "views/oneMissionView.php",
             "template" => "views/common/template.php"
         ];
@@ -200,10 +202,10 @@ class MainController {
     public function createMission(): void {
 
         $agents = $this->agentManager->getAll();
+        $contacts = $this->contactManager->getAll();
         $status = $this->statusManager->getAll();
         $types = $this->typeManager->getAll();
         $durations = $this->durationManager->getAll();
-        $contacts = $this->contactManager->getAll();
         $targets = $this->targetManager->getAll();
         $hideouts = $this->hideoutManager->getAll();
         $specialities = $this->specialityManager->getAll();
