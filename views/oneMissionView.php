@@ -19,12 +19,16 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Pays: <?= $mission->getCountry_mission() ?></li>
-                <li class="list-group-item">Agent(s) n° 
+                <li class="list-group-item">Agent(s):  
                     <?php foreach($agents_missions as $agent_mission):?>
-                        <?php if($mission->getCode_mission() === $agent_mission->getCode_mission()) :?>
-                            <?= $agent_mission->getId_agent() .", " ?> 
-                        <?php endif ?>
-                    <?php endforeach ?>
+                        <?php foreach($agents as $agent):?>
+                            <?php if($mission->getCode_mission() === $agent_mission->getCode_mission()) :?>
+                                <?php if($agent->getId_agent() === $agent_mission->getId_agent()) :?>
+                                    <?= $agent->getFirstname_agent()." ".$agent->getName_agent().", " ?>                        
+                                <?php endif ?>
+                            <?php endif ?>
+                        <?php endforeach ?> 
+                    <?php endforeach ?> 
                 </li>
                 <li class="list-group-item">Contact(s): 
                     <?php foreach($contacts_missions as $contact_mission):?>

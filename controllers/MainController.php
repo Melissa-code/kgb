@@ -128,6 +128,23 @@ class MainController {
         $agents_missions = $this->agent_missionManager->getAll();
         $contacts_missions = $this->contact_missionManager->getAll();
         $targets_missions = $this->target_missionManager->getAll();
+        $agents = $this->agentManager->getAll();
+
+
+        foreach($agents_missions as $agent_mission){
+            foreach($agents as $agent){
+                if($mission->getCode_mission() === $agent_mission->getCode_mission()){
+                    if($agent->getId_agent() === $agent_mission->getId_agent()){
+                        $agent_mission->getId_agent();
+                        $agent->getName_agent();
+                        echo "id agent: ".$agent_mission->getId_agent()." et ";
+                        echo "nom agent : ".$agent->getName_agent()." ;         ";
+                    }
+                }
+            }
+        }
+
+            
 
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
@@ -136,6 +153,7 @@ class MainController {
             "agents_missions" => $agents_missions,
             "contacts_missions" => $contacts_missions,
             "targets_missions" => $targets_missions,
+            "agents" => $agents, 
             "view" => "views/oneMissionView.php",
             "template" => "views/common/template.php"
         ];

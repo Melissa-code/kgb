@@ -28,5 +28,21 @@ class Agent_missionManager extends Model {
         return $agents_missions;
     }
 
+    /**
+    * Get one agent_mission only
+    * @return Agent_mission $agent
+    */
+    public function get($code_mission) : Agent_mission {
+        $pdo = $this->getDb();
+        $req = $pdo->prepare("SELECT * FROM Agents_missions WHERE code_mission = :code_mission");
+        $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
+        $req->execute();
+        $data = $req->fetch(); 
+        $agent_mission = new Agent_mission($data); 
+        $req->closeCursor();
+        echo "<pre>"; var_dump($agent_mission) ; echo "</pre>";
+        return $agent_mission;
+    }
+
 
 }
