@@ -11,6 +11,7 @@ require_once("models/SpecialityManager.php");
 require_once("models/StatusManager.php"); 
 require_once("models/Agent_missionManager.php"); 
 require_once("models/Contact_missionManager.php"); 
+require_once("models/Target_missionManager.php"); 
 
 
 class MainController {
@@ -27,6 +28,7 @@ class MainController {
     private StatusManager $statusManager; 
     private Agent_missionManager $agent_missionManager; 
     private Contact_missionManager $contact_missionManager; 
+    private Target_missionManager $target_missionManager; 
     
 
     public function __construct() {
@@ -42,6 +44,7 @@ class MainController {
         $this->statusManager = new StatusManager();
         $this->agent_missionManager = new Agent_missionManager();
         $this->contact_missionManager = new Contact_missionManager();
+        $this->target_missionManager = new Target_missionManager();
     }
 
 
@@ -124,6 +127,7 @@ class MainController {
         $mission = $this->getMissionByCode(); 
         $agents_missions = $this->agent_missionManager->getAll();
         $contacts_missions = $this->contact_missionManager->getAll();
+        $targets_missions = $this->target_missionManager->getAll();
 
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
@@ -131,6 +135,7 @@ class MainController {
             "mission" => $mission,
             "agents_missions" => $agents_missions,
             "contacts_missions" => $contacts_missions,
+            "targets_missions" => $targets_missions,
             "view" => "views/oneMissionView.php",
             "template" => "views/common/template.php"
         ];
@@ -241,8 +246,8 @@ class MainController {
             $this->missionManager->createMissionDb($newMission); 
 
         }
-        var_dump($newMission->getId_agent()); 
-        //header('location:'.URL."missions");
+        //var_dump($newMission->getId_agent()); 
+        header('location:'.URL."missions");
     }
 
     /**

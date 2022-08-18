@@ -33,7 +33,13 @@
                         <?php endif ?>
                     <?php endforeach ?>
                 </li>
-                <li class="list-group-item">Cible(s):</li>
+                <li class="list-group-item">Cible(s):
+                    <?php foreach($targets_missions as $target_mission):?>
+                        <?php if($mission->getCode_mission() === $target_mission->getCode_mission()) :?>
+                            <?= $target_mission->getCode_target().", " ?> 
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </li>
                 <li class="list-group-item">Type: <?= $mission->getName_type() ?></li>
                 <li class="list-group-item">Statut: <?= $mission->getCode_status() ?></li>
                 <li class="list-group-item">Spécialité:</li>
