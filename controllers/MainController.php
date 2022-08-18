@@ -131,6 +131,8 @@ class MainController {
         $agents = $this->agentManager->getAll();
         $contacts = $this->contactManager->getAll();
         $targets = $this->targetManager->getAll();
+        $durations = $this->durationManager->getAll();
+
 
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
@@ -142,6 +144,7 @@ class MainController {
             "agents" => $agents, 
             "contacts" => $contacts, 
             "targets" => $targets, 
+            "durations" => $durations,
             "view" => "views/oneMissionView.php",
             "template" => "views/common/template.php"
         ];

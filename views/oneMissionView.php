@@ -49,8 +49,26 @@
                 <li class="list-group-item">Type: <?= $mission->getName_type() ?></li>
                 <li class="list-group-item">Statut: <?= $mission->getCode_status() ?></li>
                 <li class="list-group-item">Spécialité:</li>
-                <li class="list-group-item">Date de début:</li>
-                <li class="list-group-item">Date de fin: </li>
+                <li class="list-group-item">Date de début: 
+                    <?php foreach($durations as $duration):?>
+                        <?php if($duration->getId_duration() === $mission->getId_duration()) :?>
+                            <?php  
+                                $dateFormatStart = new DateTime($duration->getStart_duration());
+                                echo $dateFormatStart->format('d/m/Y');
+                            ?>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </li>
+                <li class="list-group-item">Date de fin: 
+                    <?php foreach($durations as $duration):?>
+                        <?php if($duration->getId_duration() === $mission->getId_duration()) :?>
+                            <?php
+                                $dateFormatEnd = new DateTime($duration->getEnd_duration()); 
+                                echo $dateFormatEnd->format('d/m/Y');
+                            ?>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </li>
             </ul>
         </div>
 
