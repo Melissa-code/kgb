@@ -27,7 +27,7 @@ if(isset($_SESSION['connect'])) {
 </section>
 
 
-<section class="row m-3">
+<section class="row m-3 d-flex">
     <article class="col-12 d-flex">
 
         <!-- Card of a mission -->

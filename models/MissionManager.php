@@ -81,6 +81,14 @@ class MissionManager extends Model {
             $req3->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
             $req3->execute();
         }
+
+        $code_target = $newMission->getCode_target(); 
+        foreach($code_target as $target) {
+            $req4 = $pdo->prepare("INSERT INTO Targets_missions (code_target, code_mission) VALUES (:code_target, :code_mission)");
+            $req4->bindValue(':code_target', $target, PDO::PARAM_STR);
+            $req4->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
+            $req4->execute();
+        }
         
         $req->closeCursor();
     }

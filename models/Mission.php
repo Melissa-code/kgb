@@ -14,6 +14,7 @@ class Mission {
 
     private array $id_agent;
     private array $code_contact;
+    private array $code_target; 
 
 
     /* ************* Constructor ************ */ 
@@ -82,10 +83,14 @@ class Mission {
 
     public function getId_agent(){return $this->id_agent; }
     public function setId_agent($id_agent){$this->id_agent = $id_agent;return $this; }
-    
+
 
     public function getCode_contact() { return $this->code_contact; }
     public function setCode_contact($code_contact) { $this->code_contact = $code_contact; return $this; }
+
+
+    public function getCode_target() { return $this->code_target; }
+    public function setCode_target($code_target) { $this->code_target = $code_target; return $this; }
 
 
 }

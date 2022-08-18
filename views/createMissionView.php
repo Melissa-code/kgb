@@ -66,7 +66,7 @@
             <div class="row d-flex align-items-center my-3">
                 <div class="col-12">
                     <label class="form-label me-3">Contact(s) : </label>
-                    
+
                     <?php foreach($contacts as $contact) :?>
                     <div class="form-check d-inline-block" >
                         <input class="form-check-input" type="checkbox" value="<?= $contact->getCode_contact(); ?>" id="code_contact" multiple name="code_contact[]">
@@ -83,36 +83,29 @@
                     <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un contact" style="width: 1.5rem;"></a></button>
                 </div>
             </div>
-
-
-
-  
-
-
-                <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
-                    <label class="form-label me-3">Contact(s) : </label>
-                        <?php foreach($contacts as $contact) :?>
-                            <label class="btn btn-outline-secondary" for="code_contact" value="<?= $contact->getCode_contact(); ?>"><?= $contact->getFirstname_contact()." ".$contact->getName_contact(); ?></label>
-                            <input type="checkbox" class="btn-check" id="code_contact" name="contact[]" value="<?= $contact->getCode_contact(); ?>" >
-                        <?php endforeach; ?>
-                    <!-- Links add update & delete a contact --> 
-                    <button type="button" class="btn btn-light ms-1 my-1 rounded-2"><a href="createContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un contact" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-1 my-1 rounded-2"><a href="updateContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un contact" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-1 my-1 rounded-2"><a href="deleteContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un contact" style="width: 1.5rem;"></a></button>
-                </div>
               
             <!-- code_target --> 
-                <div class="btn-group d-block mb-3" role="group" aria-label="Basic checkbox toggle button group">
+            <div class="row d-flex align-items-center my-3">
+                <div class="col-12">
                     <label class="form-label me-3">Cible(s) : </label>
-                        <?php foreach($targets as $target) :?>
-                            <label class="btn btn-outline-secondary" for="code_cible" value="<?= $target->getCode_target(); ?>"><?= $target->getFirstname_target()." ".$target->getName_target(); ?></label>
-                            <input type="checkbox" class="btn-check" id="code_cible" name="cible[]" value="<?= $contact->getCode_contact(); ?>" autocomplete="off">
-                        <?php endforeach; ?>
-                    <!-- Links add update & delete a target --> 
-                    <button type="button" class="btn btn-light ms-2 rounded-2"><a href="createTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-1 rounded-2"><a href="updateTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cible" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-1 rounded-2"><a href="deleteTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une cible" style="width: 1.5rem;"></a></button>
+                    
+                    <?php foreach($targets as $target) :?>
+                    <div class="form-check d-inline-block" >
+                        <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target(); ?>" id="code_target" multiple name="code_target[]">
+                        <label class="form-check-label me-3" for="code_target" value="<?= $contact->getCode_contact(); ?>">
+                            <?= $target->getFirstname_target()." ".$target->getName_target(); ?>
+                        </label>
+                    </div>
+                    <?php endforeach; ?>
                 </div>
+                <!-- Links add update & delete a target --> 
+                <div class="col-12 d-flex justify-content-start">
+                    <button type="button" class="btn btn-light my-1 rounded-2"><a href="createTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cible" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une cible" style="width: 1.5rem;"></a></button>
+                </div>
+            </div>
+
 
             <!-- id_duration --> 
             <div class="mb-3 d-flex">
