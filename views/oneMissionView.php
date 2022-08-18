@@ -22,26 +22,28 @@
                 <li class="list-group-item">Agent(s):  
                     <?php foreach($agents_missions as $agent_mission):?>
                         <?php foreach($agents as $agent):?>
-                            <?php if($mission->getCode_mission() === $agent_mission->getCode_mission()) :?>
-                                <?php if($agent->getId_agent() === $agent_mission->getId_agent()) :?>
-                                    <?= $agent->getFirstname_agent()." ".$agent->getName_agent().", " ?>                        
-                                <?php endif ?>
+                            <?php if($mission->getCode_mission() === $agent_mission->getCode_mission() && $agent->getId_agent() === $agent_mission->getId_agent()) :?>
+                                <?= $agent->getFirstname_agent()." ".$agent->getName_agent().", " ?>                        
                             <?php endif ?>
                         <?php endforeach ?> 
                     <?php endforeach ?> 
                 </li>
                 <li class="list-group-item">Contact(s): 
                     <?php foreach($contacts_missions as $contact_mission):?>
-                        <?php if($mission->getCode_mission() === $contact_mission->getCode_mission()) :?>
-                            <?= $contact_mission->getCode_contact().", " ?> 
-                        <?php endif ?>
+                        <?php foreach($contacts as $contact):?>
+                            <?php if($mission->getCode_mission() === $contact_mission->getCode_mission() && $contact->getCode_contact() === $contact_mission->getCode_contact()) :?>
+                                <?= $contact->getFirstname_contact()." ".$contact->getName_contact().", " ?> 
+                            <?php endif ?>
+                        <?php endforeach ?> 
                     <?php endforeach ?>
                 </li>
                 <li class="list-group-item">Cible(s):
                     <?php foreach($targets_missions as $target_mission):?>
-                        <?php if($mission->getCode_mission() === $target_mission->getCode_mission()) :?>
-                            <?= $target_mission->getCode_target().", " ?> 
-                        <?php endif ?>
+                        <?php foreach($targets as $target):?>
+                            <?php if($mission->getCode_mission() === $target_mission->getCode_mission() && $target->getCode_target() === $target_mission->getCode_target()) :?>
+                                <?= $target->getFirstname_target()." ".$target->getName_target().", " ?> 
+                            <?php endif ?>
+                        <?php endforeach ?> 
                     <?php endforeach ?>
                 </li>
                 <li class="list-group-item">Type: <?= $mission->getName_type() ?></li>
