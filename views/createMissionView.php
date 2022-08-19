@@ -39,27 +39,33 @@
             </div>
 
             <!-- id_agent --> 
-            <select class="form-select" multiple  name="id_agent[]" >
-                <option selected>-- Agent(s) --</option>
-                <?php foreach($agents as $agent) :?>
-                <option value="<?= $agent->getId_agent(); ?>"><?= $agent->getFirstname_agent()." ".$agent->getName_agent(); ?></option>
-                <?php endforeach; ?>
-            </select>
+            <div class="row d-flex align-items-center my-3">
+                <div class="col-12">
+                    <label class="form-label me-3">Agent(s) : </label>
 
-                <!-- Links add update & delete a agent --> 
-                <button type="button" class="btn btn-light ms-1 my-1 rounded-2"><a href="createAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-warning ms-1 my-1 rounded-2"><a href="updateAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-danger ms-1 my-1 rounded-2"><a href="deleteAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un agent" style="width: 1.5rem;"></a></button>
-     
+                    
+                        <?php foreach($agents as $agent) :?>
+                            <?php foreach($specialities_agents as $speciality_agent):?>
+                            <?php if($speciality_agent->getId_agent() == $agent->getId_agent()):?>
+                            <div class="form-check d-inline-block" >
+                            <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent(); ?>" id="id_agent" multiple name="id_agent[]">
+                            <label class="form-check-label me-3" for="id_agent" value="<?= $agent->getId_agent(); ?>">
+                                <?= $agent->getFirstname_agent()." ".$agent->getName_agent()."(spécialités: " ?>
 
-            <!-- 
-                <div class="form-check d-inline-block">
-                    <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent(); ?>" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
-                        Checked checkbox
-                    </label>
+                                <?= $speciality_agent->getName_speciality().")" ?>
+                            </label>
+                        </div>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </div>
-                -->
+                <!-- Links add update & delete a agent --> 
+                <div class="col-12 d-flex justify-content-start">
+                    <button type="button" class="btn btn-light my-1 rounded-2"><a href="createAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-warning ms-1 my-1 rounded-2"><a href="updateAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-danger ms-1 my-1 rounded-2"><a href="deleteAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un agent" style="width: 1.5rem;"></a></button>
+                </div>
+            </div>
 
 
             <!-- code_contact --> 
@@ -162,9 +168,9 @@
                 </div>
                 <div class="col-sm-3 d-flex justify-content-end">
                     <!-- Links add update & delete a hideout --> 
-                    <button type="button" class="btn btn-light ms-2"><a href="createHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cachette" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-2"><a href="updateHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cachette" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-2"><a href="deleteHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une cachette" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-light ms-2"><a href="createHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une planque" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-warning ms-2"><a href="updateHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une planque" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-danger ms-2"><a href="deleteHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une planque" style="width: 1.5rem;"></a></button>
                 </div>
             </div>
 
@@ -172,9 +178,13 @@
             <div class="mb-3 d-flex">
                 <select class="form-select" aria-label="Default select example">
                     <option selected> -- Spécialité -- </option>
-                    
-                    <option value="a faire"></option>
-                   
+                    <?php foreach($specialities_agents as $speciality_agent):?>
+                        <?php foreach($specialities as $speciality) :?>
+                            <?php if($agent->getId_agent() === $speciality_agent->getId_agent() && $speciality->getName_speciality() === $speciality_agent->getName_speciality()) :?>
+                                <option value="<?= $speciality->getName_speciality() ?>"><?= $speciality->getName_speciality()." ".$agent->getName_agent(); ?></option>
+                            <?php endif ?>
+                        <?php endforeach ?> 
+                    <?php endforeach ?>
                 </select>
                 <!-- Links add update & delete a speciality --> 
                 <button type="button" class="btn btn-light ms-2"><a href="createSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"></a></button>

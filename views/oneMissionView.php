@@ -61,9 +61,7 @@
                 <!-- Speciality --> 
                 <li class="list-group-item">Spécialité:
                         <?php foreach($specialities as $speciality):?>
-                            <?php if($mission->getCode_mission() == $speciality->getCode_mission()):?>
-                                <?= $speciality->getCode_mission() ?>
-                            <?php endif ?>
+                            <?= $speciality->getName_speciality() ?>
                         <?php endforeach ?> 
                 </li>
 
