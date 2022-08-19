@@ -1,14 +1,17 @@
 <?php
 require_once("models/AgentManager.php"); 
+require_once("models/SpecialityManager.php"); 
 
 
 class AgentController {
 
     private AgentManager $agentManager;
+    private SpecialityManager $specialityManager; 
 
 
     public function __construct() {
         $this->agentManager = new AgentManager(); 
+        $this->specialityManager = new SpecialityManager(); 
     }
 
 
@@ -39,9 +42,12 @@ class AgentController {
     */
     public function createAgent() : void {
 
+        $specialities = $this->specialityManager->getAll();
+
         $data_page = [
-            "page_description" => "Page de création d'un agent d'une mission",
-            "page_title" => "Création d'un agent d'une mission",
+            "page_description" => "Page de création d'un agent",
+            "page_title" => "Création d'un agent",
+            "specialities" => $specialities,
             "view" => "views/createAgentView.php",
             "template" => "views/common/template.php"
         ];

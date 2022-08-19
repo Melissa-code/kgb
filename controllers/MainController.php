@@ -132,7 +132,16 @@ class MainController {
         $contacts = $this->contactManager->getAll();
         $targets = $this->targetManager->getAll();
         $durations = $this->durationManager->getAll();
+        $specialities = $this->specialityManager->getAll(); 
 
+
+        foreach($specialities as $speciality){
+            
+                //echo $speciality->getCode_mission()."<br>";
+                echo $mission->getCode_mission()."<br>";
+         
+        }
+          
 
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
@@ -144,6 +153,7 @@ class MainController {
             "agents" => $agents, 
             "contacts" => $contacts, 
             "targets" => $targets, 
+            "specialities" => $specialities,
             "durations" => $durations,
             "view" => "views/oneMissionView.php",
             "template" => "views/common/template.php"

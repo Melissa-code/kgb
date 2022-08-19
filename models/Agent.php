@@ -8,6 +8,8 @@ class Agent {
     private string $datebirthday_agent;
     private string $nationality_agent; 
 
+    private array $name_speciality; 
+
 
     /* ************* Constructor  ************ */ 
     
@@ -44,4 +46,8 @@ class Agent {
     public function getNationality_agent(){return $this->nationality_agent; }
     public function setNationality_agent($nationality_agent){$this->nationality_agent = $nationality_agent; return $this; }
 
+    public function getName_speciality() { return $this->name_speciality;}
+    public function setName_speciality($name_speciality) { $this->name_speciality = $name_speciality; return $this;  }
+
+    
 }

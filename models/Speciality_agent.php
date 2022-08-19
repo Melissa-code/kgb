@@ -1,8 +1,9 @@
 <?php
 
-class Speciality {
+class Speciality_agent {
 
     private string $name_speciality; 
+    private int $id_agent; 
 
 
     /* ************* Constructor ************ */ 
@@ -22,11 +23,15 @@ class Speciality {
         }
     }
 
-
+    
     /* ************* Getters & Setters ************ */ 
 
-    public function getName_speciality() { return $this->name_speciality;}
-    public function setName_speciality($name_speciality) { $this->name_speciality = $name_speciality; return $this;}
+    public function getName_speciality(){return $this->name_speciality;}
+    public function setName_speciality($name_speciality) {$this->name_speciality = $name_speciality; return $this;}
+
+    public function getId_agent(){return $this->id_agent; }
+    public function setId_agent($id_agent){$this->id_agent = $id_agent; return $this; }
+
 
 
 }

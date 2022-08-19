@@ -18,8 +18,8 @@ class SpecialityManager extends Model {
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC); 
         
-        foreach($data as $specialitie) {
-            $specialities[] = new Speciality($specialitie);
+        foreach($data as $speciality) {
+            $specialities[] = new Speciality($speciality);
         }
         
         $req->closeCursor();
@@ -60,10 +60,8 @@ class SpecialityManager extends Model {
                 exit();
             }
             else {
-                $req = $pdo->prepare("INSERT INTO Specialities (name_speciality, id_agent, code_mission) VALUES (:name_speciality, :id_agent, :code_mission)");
+                $req = $pdo->prepare("INSERT INTO Speciality (name_speciality) VALUES (:name_speciality)");
                 $req->bindValue(":name_speciality", $newSpeciality->getName_speciality(), PDO::PARAM_STR);
-                $req->bindValue(":id_agent", (int)$newSpeciality->getId_agent(), PDO::PARAM_INT);
-                $req->bindValue(":code_mission", $newSpeciality->getCode_mission(), PDO::PARAM_STR);
                 $req->execute();
                 $req->closeCursor();
             }

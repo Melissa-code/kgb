@@ -74,10 +74,22 @@ class AgentManager extends Model {
                 $req->bindValue(":datebirthday_agent", $newAgent->getDatebirthday_agent(), PDO::PARAM_STR);
                 $req->bindValue(":nationality_agent", $newAgent->getNationality_agent(), PDO::PARAM_STR);
                 $req->execute();
+
+
+                $id_agent = $pdo->lastInsertId();
+                $name_speciality = $newAgent->getName_speciality(); 
+
+                foreach($name_speciality as $speciality) {
+                    $req2 = $pdo->prepare("INSERT INTO Specialities_agents (name_speciality, id_agent) VALUES (:name_speciality, :id_agent)");
+                    $req2->bindValue(':name_speciality', $speciality, PDO::PARAM_STR);
+                    $req2->bindValue(':id_agent', $id_agent, PDO::PARAM_INT);
+                    $req2->execute();
+                }
+                
                 $req->closeCursor();
             }
-        }
-    }
+       }
+   }
 
     
     /**
@@ -102,8 +114,6 @@ class AgentManager extends Model {
         $req->execute();
         $req->closeCursor();
     }
-
-
 
 
 

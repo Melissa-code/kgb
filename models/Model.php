@@ -7,7 +7,7 @@ abstract class Model {
 
     // Recupérer connexion à DB - connexion va etre placée dans $pdo
     private static function setDb() {
-    self::$pdo = new PDO("mysql:host=localhost;dbname=kgb;charset=utf8", "root", "root");
+    self::$pdo = new PDO("mysql:host=localhost;dbname=app_kgb;charset=utf8", "root", "root");
     self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); //rapport erreurs  
     }
 

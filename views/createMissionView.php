@@ -172,9 +172,9 @@
             <div class="mb-3 d-flex">
                 <select class="form-select" aria-label="Default select example">
                     <option selected> -- Spécialité -- </option>
-                    <?php foreach($specialities as $speciality) :?>
-                    <option value="<?= $speciality->getName_speciality(); ?>"><?= $speciality->getName_speciality(); ?></option>
-                    <?php endforeach; ?>
+                    
+                    <option value="a faire"></option>
+                   
                 </select>
                 <!-- Links add update & delete a speciality --> 
                 <button type="button" class="btn btn-light ms-2"><a href="createSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"></a></button>

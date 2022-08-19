@@ -1,21 +1,15 @@
 <?php
 
 require_once("models/SpecialityManager.php"); 
-require_once("models/AgentManager.php"); 
-require_once("models/MissionManager.php"); 
 
 
 class SpecialityController {
 
     private SpecialityManager $specialityManager;
-    private AgentManager $agentManager;
-    private MissionManager $missionManager;
-
+  
 
     public function __construct() {
-        $this->specialityManager = new SpecialityManager(); 
-        $this->agentManager= new AgentManager (); 
-        $this->missionManager = new MissionManager(); 
+        $this->specialityManager = new SpecialityManager();
     }
 
 
@@ -47,15 +41,11 @@ class SpecialityController {
     public function createSpeciality() : void {
 
         $specialities = $this->specialityManager->getAll();
-        $agents = $this->agentManager->getAll();
-        $missions = $this->missionManager->getAll();
 
         $data_page = [
             "page_description" => "Page de création d'une spécialité d'une mission",
             "page_title" => "Création d'une spécialité d'une mission",
             "specialities" => $specialities, 
-            "agents" => $agents, 
-            "missions" => $missions, 
             "view" => "views/createSpecialityView.php",
             "template" => "views/common/template.php"
         ];

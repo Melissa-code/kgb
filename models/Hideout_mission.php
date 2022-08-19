@@ -3,7 +3,7 @@
 class Hideout_mission {
 
     private int $id_hideout;
-    private string $code_target; 
+    private string $code_mission; 
 
 
     /* ************* Constructor ************ */ 
@@ -28,8 +28,8 @@ class Hideout_mission {
     public function getId_hideout() { return $this->id_hideout; }
     public function setId_hideout($id_hideout) { $this->id_hideout = $id_hideout; return $this; }
 
-    public function getCode_target(){ return $this->code_target; }
-    public function setCode_target($code_target) { $this->code_target = $code_target;return $this;  }
+    public function getCode_mission(){ return $this->code_mission; }
+    public function setCode_mission($code_mission) { $this->code_mission = $code_mission; return $this;  }
 
     
 }
