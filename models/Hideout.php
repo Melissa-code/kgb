@@ -28,7 +28,7 @@ class Hideout {
     /* ************** Getter & Setter **************** */ 
 
     public function getId_hideout(){return $this->id_hideout; }
-    public function setId_hideout($id_hideout) {$this->id_hideout = $id_hideout;return $this; }
+    public function setId_hideout($id_hideout) { $this->id_hideout = $id_hideout;return $this; }
 
     public function getAddress_hideout() {return $this->address_hideout; }
     public function setAddress_hideout($address_hideout){$this->address_hideout = $address_hideout;return $this; }

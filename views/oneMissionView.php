@@ -57,12 +57,34 @@
                 <li class="list-group-item">Type: <?= $mission->getName_type() ?></li>
                 <!-- Status --> 
                 <li class="list-group-item">Statut: <?= $mission->getCode_status() ?></li>
+                <!-- Hideouts --> 
+                <li class="list-group-item">Planque(s):
+                    <?php foreach($hideouts_missions as $hideout_mission):?>
+                        <?php foreach($hideouts as $hideout):?>
+                            <?php if($mission->getCode_mission() === $hideout_mission->getCode_mission() && $hideout->getId_hideout() === $hideout_mission->getId_hideout()) :?>
+                                <?= $hideout->getAddress_hideout()." ".$hideout->getCountry_hideout().", " ?> 
+                            <?php endif ?>
+                        <?php endforeach ?> 
+                    <?php endforeach ?>
+                </li>
 
                 <!-- Speciality --> 
                 <li class="list-group-item">Spécialité:
-                        <?php foreach($specialities as $speciality):?>
-                            <?= $speciality->getName_speciality() ?>
+                    <?php $specialities = []; ?>
+                    <?php foreach($specialities_agents as $speciality_agent) :?>
+                        <?php foreach($agents_missions as $agent_mission) :?>
+                            <?php if($agent_mission->getId_agent() === $speciality_agent->getId_agent()) :?>
+                                <?php if($mission->getCode_mission() === $agent_mission->getCode_mission()) :?>
+                                    <?php
+                                       $specialityAgent = $speciality_agent->getName_speciality();
+                                       $specialities[] = $specialityAgent;
+                                    ?>
+                                <?php endif ?>
+                            <?php endif ?> 
                         <?php endforeach ?> 
+                    <?php endforeach ?> 
+                    <?php $missionSpeciality = array_shift($specialities); 
+                    echo $missionSpeciality;?>
                 </li>
 
                 <!-- Start date --> 

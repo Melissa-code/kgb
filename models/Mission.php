@@ -15,6 +15,7 @@ class Mission {
     private array $id_agent;
     private array $code_contact;
     private array $code_target; 
+    private array $id_hideout = []; 
 
 
     /* ************* Constructor ************ */ 
@@ -91,6 +92,11 @@ class Mission {
 
     public function getCode_target() { return $this->code_target; }
     public function setCode_target($code_target) { $this->code_target = $code_target; return $this; }
+
+
+    public function getId_hideout() { return $this->id_hideout; }
+    public function setId_hideout($id_hideout) {  $this->id_hideout = $id_hideout; return $this; }
+
 
 
 }

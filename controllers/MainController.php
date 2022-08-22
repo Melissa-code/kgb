@@ -7,12 +7,14 @@ require_once("models/AgentManager.php");
 require_once("models/ContactManager.php"); 
 require_once("models/TargetManager.php"); 
 require_once("models/HideoutManager.php"); 
+require_once("models/Hideout_missionManager.php"); 
 require_once("models/SpecialityManager.php"); 
 require_once("models/StatusManager.php"); 
 require_once("models/Agent_missionManager.php"); 
 require_once("models/Contact_missionManager.php"); 
 require_once("models/Target_missionManager.php"); 
 require_once("models/Speciality_agentManager.php"); 
+
 
 
 class MainController {
@@ -25,6 +27,7 @@ class MainController {
     private ContactManager $contactManager; 
     private TargetManager $targetManager; 
     private HideoutManager $hideoutManager; 
+    private Hideout_missionManager $hideout_missionManager; 
     private SpecialityManager $specialityManager; 
     private StatusManager $statusManager; 
     private Agent_missionManager $agent_missionManager; 
@@ -42,6 +45,7 @@ class MainController {
         $this->contactManager = new ContactManager(); 
         $this->targetManager = new TargetManager(); 
         $this->hideoutManager = new HideoutManager(); 
+        $this->hideout_missionManager = new Hideout_missionManager(); 
         $this->specialityManager = new SpecialityManager(); 
         $this->statusManager = new StatusManager();
         $this->agent_missionManager = new Agent_missionManager();
@@ -136,6 +140,9 @@ class MainController {
         $targets = $this->targetManager->getAll();
         $durations = $this->durationManager->getAll();
         $specialities = $this->specialityManager->getAll(); 
+        $specialities_agents = $this->speciality_agentManager->getAll();
+        $hideouts = $this->hideoutManager->getAll(); 
+        $hideouts_missions = $this->hideout_missionManager->getAll(); 
 
 
         $data_page = [
@@ -148,7 +155,10 @@ class MainController {
             "agents" => $agents, 
             "contacts" => $contacts, 
             "targets" => $targets, 
+            "hideouts" => $hideouts,
+            "hideouts_missions" => $hideouts_missions,
             "specialities" => $specialities,
+            "specialities_agents" => $specialities_agents,
             "durations" => $durations,
             "view" => "views/oneMissionView.php",
             "template" => "views/common/template.php"
@@ -258,11 +268,9 @@ class MainController {
     * Redirecting user to the missionsView and display the new mission 
     */
     public function createMissionValidation(): void {
-        if($_POST) {
+        if($_POST){
             $newMission = new Mission($_POST);
-            //print_r($_POST['id_agent']);
             $this->missionManager->createMissionDb($newMission); 
-
         }
         //var_dump($newMission->getId_agent()); 
         header('location:'.URL."missions");

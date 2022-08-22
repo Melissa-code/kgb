@@ -42,20 +42,17 @@
             <div class="row d-flex align-items-center my-3">
                 <div class="col-12">
                     <label class="form-label me-3">Agent(s) : </label>
-
-                    
                         <?php foreach($agents as $agent) :?>
                             <?php foreach($specialities_agents as $speciality_agent):?>
-                            <?php if($speciality_agent->getId_agent() == $agent->getId_agent()):?>
-                            <div class="form-check d-inline-block" >
-                            <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent(); ?>" id="id_agent" multiple name="id_agent[]">
-                            <label class="form-check-label me-3" for="id_agent" value="<?= $agent->getId_agent(); ?>">
-                                <?= $agent->getFirstname_agent()." ".$agent->getName_agent()."(spécialités: " ?>
-
-                                <?= $speciality_agent->getName_speciality().")" ?>
-                            </label>
-                        </div>
-                        <?php endif; ?>
+                                <?php if($speciality_agent->getId_agent() == $agent->getId_agent()):?>
+                                <div class="form-check d-inline-block" >
+                                    <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent(); ?>" id="id_agent" multiple name="id_agent[]">
+                                    <label class="form-check-label me-3" for="id_agent" value="<?= $agent->getId_agent(); ?>">
+                                        <?= $agent->getFirstname_agent()." ".$agent->getName_agent()." (spécialité : " ?>
+                                        <?= $speciality_agent->getName_speciality().")" ?>
+                                    </label>
+                                </div>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                 </div>
@@ -157,12 +154,12 @@
 
             <!-- id_hideout --> 
             <div class="row d-flex align-items-center mb-3">
-                <div class="col-sm-9">
+                <div class="col-12">
                     <label class="form-label me-3">Planque(s) : </label>
                     <?php foreach($hideouts as $hideout) :?>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="id_hideout[]" id="id_hideout" value="<?= $hideout->getId_hideout(); ?>">
-                        <label class="form-check-label" for="id_hideout" value="<?= $hideout->getId_hideout(); ?>">N°<?= $hideout->getId_hideout() ?></label>
+                    <div class="form-check d-inline-block">
+                        <input class="form-check-input" type="checkbox" multiple name="id_hideout[]" id="id_hideout" value="<?= $hideout->getId_hideout(); ?>">
+                        <label class="form-check-label me-3" for="id_hideout" value="<?= $hideout->getId_hideout(); ?>">N°<?= $hideout->getId_hideout().": ".$hideout->getAddress_hideout().", ".$hideout->getCountry_hideout(); ?></label>
                     </div>
                     <?php endforeach; ?>
                 </div>
@@ -173,24 +170,14 @@
                     <button type="button" class="btn btn-danger ms-2"><a href="deleteHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une planque" style="width: 1.5rem;"></a></button>
                 </div>
             </div>
+ 
 
             <!-- name_speciality --> 
-            <div class="mb-3 d-flex">
+            <!-- <div class="mb-3 d-flex">
                 <select class="form-select" aria-label="Default select example">
                     <option selected> -- Spécialité -- </option>
-                    <?php foreach($specialities_agents as $speciality_agent):?>
-                        <?php foreach($specialities as $speciality) :?>
-                            <?php if($agent->getId_agent() === $speciality_agent->getId_agent() && $speciality->getName_speciality() === $speciality_agent->getName_speciality()) :?>
-                                <option value="<?= $speciality->getName_speciality() ?>"><?= $speciality->getName_speciality()." ".$agent->getName_agent(); ?></option>
-                            <?php endif ?>
-                        <?php endforeach ?> 
-                    <?php endforeach ?>
                 </select>
-                <!-- Links add update & delete a speciality --> 
-                <button type="button" class="btn btn-light ms-2"><a href="createSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-warning ms-2"><a href="updateSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une spécialité" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-danger ms-2"><a href="deleteSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une spécialité" style="width: 1.5rem;"></a></button>
-            </div>
+            </div> -->
 
             <!-- button --> 
             <button type="submit" class="btn btn-danger d-block mx-auto m-3">Ajouter</button>

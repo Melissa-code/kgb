@@ -89,6 +89,15 @@ class MissionManager extends Model {
             $req4->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
             $req4->execute();
         }
+
+        $id_hideout = $newMission->getId_hideout(); 
+        foreach($id_hideout as $hideout) {
+            $req5 = $pdo->prepare("INSERT INTO Hideouts_missions (id_hideout, code_mission) VALUES (:id_hideout, :code_mission)");
+            $req5->bindValue(':id_hideout', $hideout, PDO::PARAM_INT);
+            $req5->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
+            $req5->execute();
+        }
+        
         
         $req->closeCursor();
     }
