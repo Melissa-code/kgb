@@ -8,7 +8,7 @@
 </section>
 
 
-<section class="row">
+<section class="row d-flex m-5">
     <article class="col-12 d-flex justify-content-center" >
 
         <!-- create a mission form -->
@@ -39,9 +39,9 @@
             </div>
 
             <!-- id_agent --> 
-            <div class="row d-flex align-items-center my-3">
+            <label class="form-label ">Agent(s) : </label>
+            <div class="row d-flex align-items-center mb-3">
                 <div class="col-12">
-                    <label class="form-label me-3">Agent(s) : </label>
                         <?php foreach($agents as $agent) :?>
                             <?php foreach($specialities_agents as $speciality_agent):?>
                                 <?php if($speciality_agent->getId_agent() == $agent->getId_agent()):?>
@@ -59,17 +59,15 @@
                 <!-- Links add update & delete a agent --> 
                 <div class="col-12 d-flex justify-content-start">
                     <button type="button" class="btn btn-light my-1 rounded-2"><a href="createAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-1 my-1 rounded-2"><a href="updateAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-1 my-1 rounded-2"><a href="deleteAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un agent" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un agent" style="width: 1.5rem;"></a></button>
                 </div>
             </div>
 
-
             <!-- code_contact --> 
-            <div class="row d-flex align-items-center my-3">
+            <label class="form-label">Contact(s) : </label>
+            <div class="row d-flex align-items-center mb-3">
                 <div class="col-12">
-                    <label class="form-label me-3">Contact(s) : </label>
-
                     <?php foreach($contacts as $contact) :?>
                     <div class="form-check d-inline-block" >
                         <input class="form-check-input" type="checkbox" value="<?= $contact->getCode_contact(); ?>" id="code_contact" multiple name="code_contact[]">
@@ -88,17 +86,18 @@
             </div>
               
             <!-- code_target --> 
-            <div class="row d-flex align-items-center my-3">
-                <div class="col-12">
-                    <label class="form-label me-3">Cible(s) : </label>
-                    
+            <label class="form-label ">Cible(s) : </label>
+            <div class="row d-flex align-items-center mb-3">
+                <div class="col-12">  
                     <?php foreach($targets as $target) :?>
-                    <div class="form-check d-inline-block" >
-                        <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target(); ?>" id="code_target" multiple name="code_target[]">
-                        <label class="form-check-label me-3" for="code_target" value="<?= $contact->getCode_contact(); ?>">
-                            <?= $target->getFirstname_target()." ".$target->getName_target(); ?>
-                        </label>
-                    </div>
+                        <?php if($target->getNationality_target() != $agent->getNationality_agent() ) :?>
+                            <div class="form-check d-inline-block" >
+                                <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target(); ?>" id="code_target" multiple name="code_target[]">
+                                <label class="form-check-label me-3" for="code_target" value="<?= $contact->getCode_contact(); ?>">
+                                    <?= $target->getFirstname_target()." ".$target->getName_target(); ?>
+                                </label>
+                            </div>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
                 <!-- Links add update & delete a target --> 
@@ -108,7 +107,6 @@
                     <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une cible" style="width: 1.5rem;"></a></button>
                 </div>
             </div>
-
 
             <!-- id_duration --> 
             <div class="mb-3 d-flex">
@@ -153,9 +151,9 @@
             </div>
 
             <!-- id_hideout --> 
+            <label class="form-label ">Planque(s) : </label>
             <div class="row d-flex align-items-center mb-3">
                 <div class="col-12">
-                    <label class="form-label me-3">Planque(s) : </label>
                     <?php foreach($hideouts as $hideout) :?>
                     <div class="form-check d-inline-block">
                         <input class="form-check-input" type="checkbox" multiple name="id_hideout[]" id="id_hideout" value="<?= $hideout->getId_hideout(); ?>">
@@ -163,11 +161,11 @@
                     </div>
                     <?php endforeach; ?>
                 </div>
-                <div class="col-sm-3 d-flex justify-content-end">
+                <div class="col-12">
                     <!-- Links add update & delete a hideout --> 
-                    <button type="button" class="btn btn-light ms-2"><a href="createHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une planque" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-2"><a href="updateHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une planque" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-2"><a href="deleteHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une planque" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-light my-1"><a href="createHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une planque" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-warning ms-1 my-1"><a href="updateHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une planque" style="width: 1.5rem;"></a></button>
+                    <button type="button" class="btn btn-danger ms-1 my-1"><a href="deleteHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une planque" style="width: 1.5rem;"></a></button>
                 </div>
             </div>
  

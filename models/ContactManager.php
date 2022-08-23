@@ -27,6 +27,7 @@ class ContactManager extends Model {
     }
 
 
+
     /**
     * Get one contact only
     * @return Contact $contact

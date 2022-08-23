@@ -242,6 +242,7 @@ class MainController {
 
         //echo "<pre>";var_dump($specialities_agents); echo" </pre>";
 
+
         
         $data_page = [
             "page_description" => "Page de création d'une mission",
@@ -272,8 +273,8 @@ class MainController {
             $newMission = new Mission($_POST);
             $this->missionManager->createMissionDb($newMission); 
         }
-        //var_dump($newMission->getId_agent()); 
-        header('location:'.URL."missions");
+        var_dump($newMission); 
+        //header('location:'.URL."missions");
     }
 
     /**

@@ -25,6 +25,7 @@ class TargetManager extends Model {
         $req->closeCursor();
         return $targets;
     }
+    
 
 
     /**

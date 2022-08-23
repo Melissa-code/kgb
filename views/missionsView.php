@@ -27,13 +27,13 @@ if(isset($_SESSION['connect'])) {
 </section>
 
 
-<section class="row m-3 d-flex">
-    <article class="col-12 d-flex">
+<section class="row m-3 justify-content-around">
+    <article class="d-flex col-12 justify-content-center ">
 
         <!-- Card of a mission -->
-        <?php foreach($missions as $mission) :?>
-            <div class="card mx-2" style="width: 18rem;">
-                <div class="card-body">
+            <?php foreach($missions as $mission) :?>
+                <div class="card mx-2" style="width: 18rem;">
+                    <div class="card-body ">
                     <a href="<?= URL ?>oneMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="card-link"><h3 id="title" class="card-title mb-4 text-center text-danger fw-bold">Mission <?= $mission->getCode_mission()  ; ?> </h3></a>
                     <h4 class="card-subtitle mb-2 text-center text-muted"><?= $mission->getTitle_mission() ; ?></h4>
                     <p class="card-text text-muted"><?= $mission->getDescription_mission() ?></p>
