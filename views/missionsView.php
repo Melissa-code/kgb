@@ -4,7 +4,7 @@ session_start();
 if(isset($_SESSION['connect'])) {
     echo "admin connecté";
 } else {
-    echo "pas de connection";
+    echo "pas de connexion";
 }
 ?>
 

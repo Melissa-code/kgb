@@ -20,11 +20,11 @@
     <?php endif; ?>
 </head>
 
+
 <body>
-   
     <?php require_once("views/common/header.php"); ?>
     
-    <main class="container-fluid " >
+    <main class="container" >
         <?php echo $page_content; ?>
     </main>
     

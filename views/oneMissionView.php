@@ -70,22 +70,11 @@
 
                 <!-- Speciality --> 
                 <li class="list-group-item">Spécialité:
-                    <?php $specialities = []; ?>
-                    <?php foreach($specialities_agents as $speciality_agent) :?>
-                        <?php foreach($agents_missions as $agent_mission) :?>
-                            <?php if($agent_mission->getId_agent() === $speciality_agent->getId_agent()) :?>
-                                <?php if($mission->getCode_mission() === $agent_mission->getCode_mission()) :?>
-                                    <?php
-                                       $specialityAgent = $speciality_agent->getName_speciality();
-                                       $specialities[] = $specialityAgent;
-                                    ?>
-                                <?php endif ?>
-                            <?php endif ?> 
-                        <?php endforeach ?> 
-                    <?php endforeach ?> 
-                    <?php $missionSpeciality = array_shift($specialities); 
-                    echo $missionSpeciality;?>
-                </li>
+                <?php foreach($specialities as $speciality): ?>
+                        <?php if($speciality->getName_speciality() === $mission->getName_speciality()) :?>
+                            <?= $mission->getName_speciality() ?></li>
+                        <?php endif ?>
+                <?php endforeach ?>
 
                 <!-- Start date --> 
                 <li class="list-group-item">Date de début: 

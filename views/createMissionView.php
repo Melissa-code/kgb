@@ -7,6 +7,12 @@
     <h1>Ajouter une mission</h1>
 </section>
 
+<?php if(isset($_SESSION['alert'])) :?>
+    <div class="alert alert-danger mx-5" role="alert">
+    <?= $_SESSION['alert']['msgTargets'] ?>
+    </div>
+    <?php unset($_SESSION['alert']) ?>
+<?php endif ?>
 
 <section class="row d-flex m-5">
     <article class="col-12 d-flex justify-content-center" >
@@ -38,13 +44,27 @@
                 <input type="text" class="form-control " id="country_mission" name="country_mission" required>
             </div>
 
+            <!-- name_speciality --> 
+            <div class="mb-3 d-flex">
+                <select class="form-select " aria-label="Default select example" id="name_speciality" name="name_speciality">
+                    <option selected> -- Spécialité -- </option>
+                    <?php foreach($specialities as $speciality) :?>
+                    <option value="<?= $speciality->getName_speciality(); ?>"><?= $speciality->getName_speciality(); ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <!-- Links add update & delete a status --> 
+                <button type="button" class="btn btn-light ms-2"><a href="createSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-warning ms-2"><a href="updateSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une spécialité" style="width: 1.5rem;"></a></button>
+                <button type="button" class="btn btn-danger ms-2"><a href="deleteSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une spécialité" style="width: 1.5rem;"></a></button>
+            </div>
+
             <!-- id_agent --> 
             <label class="form-label ">Agent(s) : </label>
             <div class="row d-flex align-items-center mb-3">
                 <div class="col-12">
                         <?php foreach($agents as $agent) :?>
                             <?php foreach($specialities_agents as $speciality_agent):?>
-                                <?php if($speciality_agent->getId_agent() == $agent->getId_agent()):?>
+                                <?php if($speciality_agent->getId_agent() === $agent->getId_agent()):?>
                                 <div class="form-check d-inline-block" >
                                     <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent(); ?>" id="id_agent" multiple name="id_agent[]">
                                     <label class="form-check-label me-3" for="id_agent" value="<?= $agent->getId_agent(); ?>">
@@ -90,14 +110,12 @@
             <div class="row d-flex align-items-center mb-3">
                 <div class="col-12">  
                     <?php foreach($targets as $target) :?>
-                        <?php if($target->getNationality_target() != $agent->getNationality_agent() ) :?>
-                            <div class="form-check d-inline-block" >
-                                <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target(); ?>" id="code_target" multiple name="code_target[]">
-                                <label class="form-check-label me-3" for="code_target" value="<?= $contact->getCode_contact(); ?>">
-                                    <?= $target->getFirstname_target()." ".$target->getName_target(); ?>
-                                </label>
-                            </div>
-                        <?php endif; ?>
+                        <div class="form-check d-inline-block" >
+                            <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target(); ?>" id="code_target" multiple name="code_target[]">
+                            <label class="form-check-label me-3" for="code_target" value="<?= $contact->getCode_contact(); ?>">
+                                <?= $target->getFirstname_target()." ".$target->getName_target(); ?>
+                            </label>
+                        </div>
                     <?php endforeach; ?>
                 </div>
                 <!-- Links add update & delete a target --> 
@@ -169,13 +187,6 @@
                 </div>
             </div>
  
-
-            <!-- name_speciality --> 
-            <!-- <div class="mb-3 d-flex">
-                <select class="form-select" aria-label="Default select example">
-                    <option selected> -- Spécialité -- </option>
-                </select>
-            </div> -->
 
             <!-- button --> 
             <button type="submit" class="btn btn-danger d-block mx-auto m-3">Ajouter</button>

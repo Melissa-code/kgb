@@ -242,8 +242,6 @@ class MainController {
 
         //echo "<pre>";var_dump($specialities_agents); echo" </pre>";
 
-
-        
         $data_page = [
             "page_description" => "Page de création d'une mission",
             "page_title" => "Création d'un mission",
@@ -263,18 +261,38 @@ class MainController {
      
     }
 
+
+
     /**
     * Collect the form data from the createMissionView
     * Send the form data to the MissionManager 
     * Redirecting user to the missionsView and display the new mission 
     */
     public function createMissionValidation(): void {
+
+        session_start();
+
         if($_POST){
             $newMission = new Mission($_POST);
-            $this->missionManager->createMissionDb($newMission); 
+
+            $checkNationality = $this->missionManager->checkNationalityTargetDb($newMission); 
+            
+            if($checkNationality) {
+                $_SESSION['alert'] = [
+                    "type" => "error",
+                    "msgTargets" => "Erreur. Les cibles ne doivent pas avoir la même nationalité que les agents."
+                ];
+                header('location:'.URL."createMission");
+                exit();
+                
+            } else {
+                //$this->missionManager->createMissionDb($newMission); 
+                header('location:'.URL."missions");
+                exit();
+            }
+           
         }
-        var_dump($newMission); 
-        //header('location:'.URL."missions");
+   
     }
 
     /**

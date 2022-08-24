@@ -11,6 +11,7 @@ class Mission {
     private $id_duration; 
     private $code_status; 
     private $name_type; 
+    private $name_speciality; 
 
     private array $id_agent;
     private array $code_contact;
@@ -81,6 +82,10 @@ class Mission {
     public function getName_type(){return $this->name_type; }
     public function setName_type($name_type){ $this->name_type = $name_type; return $this; }
 
+    
+    public function getName_speciality() { return $this->name_speciality;}
+    public function setName_speciality($name_speciality) {$this->name_speciality = $name_speciality;return $this; }
+
 
     public function getId_agent(){return $this->id_agent; }
     public function setId_agent($id_agent){$this->id_agent = $id_agent;return $this; }
@@ -96,6 +101,7 @@ class Mission {
 
     public function getId_hideout() { return $this->id_hideout; }
     public function setId_hideout($id_hideout) {  $this->id_hideout = $id_hideout; return $this; }
+
 
 
 

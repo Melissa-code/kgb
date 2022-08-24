@@ -74,7 +74,8 @@ class AdminManager extends Model {
             if($password_admin === $admin['password_admin']){
 
                 $_SESSION['connect'] = 1; //pour l'utiliser partout dans le site
-                $_SESSION['email_admin'] = $admin['email_admin'];  
+                $_SESSION['email_admin'] = $admin['email_admin']; 
+
                 
                 if(isset($_POST['rememberMe'])) {
                     setcookie('auth', $admin['secret'], time() + 364*24*3600, '/', null, false, true); 
