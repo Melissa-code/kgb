@@ -273,26 +273,35 @@ class MainController {
         session_start();
 
         if($_POST){
+
             $newMission = new Mission($_POST);
 
-            $checkNationality = $this->missionManager->checkNationalityTargetDb($newMission); 
+            $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
+            $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
             
-            if($checkNationality) {
-                $_SESSION['alert'] = [
+            if($checkNationalityTarget) {
+                $_SESSION['alert1'] = [
                     "type" => "error",
-                    "msgTargets" => "Erreur. Les cibles ne doivent pas avoir la même nationalité que les agents."
+                    "msg" => "Erreur. Les cibles ne doivent pas avoir la même nationalité que les agents."
                 ];
                 header('location:'.URL."createMission");
                 exit();
                 
-            } else {
-                //$this->missionManager->createMissionDb($newMission); 
-                header('location:'.URL."missions");
+            } elseif($checkNationalityContact) {
+                $_SESSION['alert2'] = [
+                    "type" => "error",
+                    "msg" => "Erreur. Les contacts doivent être de la nationalité du pays de la mission."
+                ];
+                header('location:'.URL."createMission");
                 exit();
+    
+                //$this->missionManager->createMissionDb($newMission); 
+                // header('location:'.URL."missions");
+                // exit();
+                
+                
             }
-           
         }
-   
     }
 
     /**

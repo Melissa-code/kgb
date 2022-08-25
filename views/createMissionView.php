@@ -7,11 +7,18 @@
     <h1>Ajouter une mission</h1>
 </section>
 
-<?php if(isset($_SESSION['alert'])) :?>
+<?php if(isset($_SESSION['alert1'])) :?>
     <div class="alert alert-danger mx-5" role="alert">
-    <?= $_SESSION['alert']['msgTargets'] ?>
+    <?= $_SESSION['alert1']['msg']  ?>
     </div>
-    <?php unset($_SESSION['alert']) ?>
+    <?php unset($_SESSION['alert1']) ?>
+<?php endif ?>
+
+<?php if(isset($_SESSION['alert2'])) :?>
+    <div class="alert alert-danger mx-5" role="alert">
+    <?= $_SESSION['alert2']['msg']  ?>
+    </div>
+    <?php unset($_SESSION['alert2']) ?>
 <?php endif ?>
 
 <section class="row d-flex m-5">

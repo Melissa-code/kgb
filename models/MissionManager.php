@@ -45,9 +45,8 @@ class MissionManager extends Model {
     }
 
 
-
     /**
-    * Check the rules
+    * Check the rule the targets can't have the same nationality as the agents
     * id_agents(array)
     * code_targets(array)
     */
@@ -80,6 +79,36 @@ class MissionManager extends Model {
                 if($data1['nationality_target'] === $data2['nationality_agent']){
                     return true;
                 }
+            }
+        }
+        
+    }
+
+    /**
+    * Check the rule the contacts must have the same nationality as the country of a mission 
+    * code_contacts(array)
+    * code_mission
+    */
+    public function checkNationalityContactDb(Mission $newMission) {
+
+        $code_contacts = $newMission->getCode_contact();
+        $country_mission = $newMission->getCountry_mission();
+
+        $pdo = $this->getDb();
+        foreach($code_contacts as $code_contact){
+            $req1 = $pdo->prepare('SELECT nationality_contact FROM Contacts WHERE code_contact = :code_contact');
+            $req1->bindValue(':code_contact', $code_contact, PDO::PARAM_STR);
+            $req1->execute();
+
+            $data1 = $req1->fetch();
+   
+            // echo '<pre>'; 
+            // print_r("nationality contact : ".$data1['nationality_contact']);
+            // echo '</pre>';
+            // echo $country_mission;
+        
+            if($data1['nationality_contact'] != $country_mission){
+                return true;
             }
         }
     }
