@@ -278,11 +278,12 @@ class MainController {
 
             $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
             $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
+            $checkCountryHideout = $this->missionManager->checkCountryHideoutDb($newMission); 
             
             if($checkNationalityTarget) {
                 $_SESSION['alert1'] = [
                     "type" => "error",
-                    "msg" => "Erreur. Les cibles ne doivent pas avoir la même nationalité que les agents."
+                    "msg" => "Erreur: les cibles ne doivent pas avoir la même nationalité que les agents."
                 ];
                 header('location:'.URL."createMission");
                 exit();
@@ -290,15 +291,22 @@ class MainController {
             } elseif($checkNationalityContact) {
                 $_SESSION['alert2'] = [
                     "type" => "error",
-                    "msg" => "Erreur. Les contacts doivent être de la nationalité du pays de la mission."
+                    "msg" => "Erreur: les contacts doivent être de la nationalité du pays de la mission."
+                ];
+                header('location:'.URL."createMission");
+                exit();
+
+            } elseif($checkCountryHideout) {
+                $_SESSION['alert3'] = [
+                    "type" => "error",
+                    "msg" => "Erreur: les planques doivent être dans le même pays que la mission."
                 ];
                 header('location:'.URL."createMission");
                 exit();
     
-                //$this->missionManager->createMissionDb($newMission); 
+                // $this->missionManager->createMissionDb($newMission); 
                 // header('location:'.URL."missions");
                 // exit();
-                
                 
             }
         }

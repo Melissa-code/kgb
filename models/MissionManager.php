@@ -50,7 +50,7 @@ class MissionManager extends Model {
     * id_agents(array)
     * code_targets(array)
     */
-    public function checkNationalityTargetDb(Mission $newMission) {
+    public function checkNationalityTargetDb(Mission $newMission) : bool {
 
         $code_targets = $newMission->getCode_target();
         $id_agents = $newMission->getId_agent();
@@ -79,17 +79,19 @@ class MissionManager extends Model {
                 if($data1['nationality_target'] === $data2['nationality_agent']){
                     return true;
                 }
+                $req1->closeCursor();
+                $req2->closeCursor();
             }
         }
-        
+        return false;
     }
 
     /**
-    * Check the rule the contacts must have the same nationality as the country of a mission 
+    * Check the rule the nationality of the contacts must be the same as the country of a mission 
     * code_contacts(array)
-    * code_mission
+    * code_mission (string)
     */
-    public function checkNationalityContactDb(Mission $newMission) {
+    public function checkNationalityContactDb(Mission $newMission): bool {
 
         $code_contacts = $newMission->getCode_contact();
         $country_mission = $newMission->getCountry_mission();
@@ -99,18 +101,40 @@ class MissionManager extends Model {
             $req1 = $pdo->prepare('SELECT nationality_contact FROM Contacts WHERE code_contact = :code_contact');
             $req1->bindValue(':code_contact', $code_contact, PDO::PARAM_STR);
             $req1->execute();
-
             $data1 = $req1->fetch();
-   
-            // echo '<pre>'; 
-            // print_r("nationality contact : ".$data1['nationality_contact']);
-            // echo '</pre>';
-            // echo $country_mission;
-        
+    
             if($data1['nationality_contact'] != $country_mission){
                 return true;
             }
+            $req1->closeCursor();
         }
+        return false; 
+    }
+
+
+    /**
+    * Check the rule : the country of a hideout must be the same as the country of a mission 
+    * id_hideout (array)
+    * code_mission (string)
+    */
+    public function checkCountryHideoutDb(Mission $newMission) : bool {
+
+        $id_hideouts = $newMission->getId_hideout();
+        $country_mission = $newMission->getCountry_mission();
+
+        $pdo = $this->getDb();
+        foreach($id_hideouts as $id_hideout){
+            $req1 = $pdo->prepare('SELECT country_hideout FROM Hideouts WHERE id_hideout = :id_hideout');
+            $req1->bindValue(':id_hideout', $id_hideout, PDO::PARAM_INT);
+            $req1->execute();
+            $data1 = $req1->fetch();
+        
+            if($data1['country_hideout'] != $country_mission) {
+                return true;
+            }
+            $req1->closeCursor();
+        }
+        return false; 
     }
 
 

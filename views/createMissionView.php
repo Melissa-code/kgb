@@ -9,16 +9,23 @@
 
 <?php if(isset($_SESSION['alert1'])) :?>
     <div class="alert alert-danger mx-5" role="alert">
-    <?= $_SESSION['alert1']['msg']  ?>
+    <?= $_SESSION['alert1']['msg'] ?>
     </div>
     <?php unset($_SESSION['alert1']) ?>
 <?php endif ?>
 
 <?php if(isset($_SESSION['alert2'])) :?>
     <div class="alert alert-danger mx-5" role="alert">
-    <?= $_SESSION['alert2']['msg']  ?>
+    <?= $_SESSION['alert2']['msg'] ?>
     </div>
-    <?php unset($_SESSION['alert2']) ?>
+    <?php unset($_SESSION['alert2'])?>
+<?php endif ?>
+
+<?php if(isset($_SESSION['alert3'])) :?>
+    <div class="alert alert-danger ?> mx-5" role="alert">
+    <?= $_SESSION['alert3']['msg'] ?>
+    </div>
+    <?php unset($_SESSION['alert3']) ?>
 <?php endif ?>
 
 <section class="row d-flex m-5">
