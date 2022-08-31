@@ -46,7 +46,7 @@ class MissionManager extends Model {
 
 
     /**
-    * Check the rule the targets can't have the same nationality as the agents
+    * Check the rule : the targets can't have the same nationality as the agents
     * id_agents(array)
     * code_targets(array)
     */
@@ -69,25 +69,19 @@ class MissionManager extends Model {
 
                 $data1 = $req1->fetch();
                 $data2 = $req2->fetch(); 
-                // echo '<pre>'; 
-                // print_r("nationality cible : ".$data1['nationality_target']);
-                // echo '</pre>';
-                // echo '<pre>';
-                // print_r("nationality agent : ".$data2['nationality_agent']);
-                // echo '</pre>';
 
                 if($data1['nationality_target'] === $data2['nationality_agent']){
                     return true;
                 }
-                $req1->closeCursor();
-                $req2->closeCursor();
             }
         }
+        $req1->closeCursor();
+        $req2->closeCursor();
         return false;
     }
 
     /**
-    * Check the rule the nationality of the contacts must be the same as the country of a mission 
+    * Check the rule : the nationality of the contacts must be the same as the country of a mission 
     * code_contacts(array)
     * code_mission (string)
     */
@@ -98,16 +92,16 @@ class MissionManager extends Model {
 
         $pdo = $this->getDb();
         foreach($code_contacts as $code_contact){
-            $req1 = $pdo->prepare('SELECT nationality_contact FROM Contacts WHERE code_contact = :code_contact');
-            $req1->bindValue(':code_contact', $code_contact, PDO::PARAM_STR);
-            $req1->execute();
-            $data1 = $req1->fetch();
+            $req = $pdo->prepare('SELECT nationality_contact FROM Contacts WHERE code_contact = :code_contact');
+            $req->bindValue(':code_contact', $code_contact, PDO::PARAM_STR);
+            $req->execute();
+            $data = $req->fetch();
     
-            if($data1['nationality_contact'] != $country_mission){
+            if($data['nationality_contact'] != $country_mission){
                 return true;
             }
-            $req1->closeCursor();
         }
+        $req->closeCursor();
         return false; 
     }
 
@@ -124,19 +118,19 @@ class MissionManager extends Model {
 
         $pdo = $this->getDb();
         foreach($id_hideouts as $id_hideout){
-            $req1 = $pdo->prepare('SELECT country_hideout FROM Hideouts WHERE id_hideout = :id_hideout');
-            $req1->bindValue(':id_hideout', $id_hideout, PDO::PARAM_INT);
-            $req1->execute();
-            $data1 = $req1->fetch();
+            $req = $pdo->prepare('SELECT country_hideout FROM Hideouts WHERE id_hideout = :id_hideout');
+            $req->bindValue(':id_hideout', $id_hideout, PDO::PARAM_INT);
+            $req->execute();
+            $data = $req->fetch();
         
-            if($data1['country_hideout'] != $country_mission) {
+            if($data['country_hideout'] != $country_mission) {
                 return true;
             }
-            $req1->closeCursor();
         }
+        $req->closeCursor();
         return false; 
     }
-
+ 
 
     /**
     * Create a mission

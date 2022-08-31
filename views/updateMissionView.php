@@ -7,7 +7,7 @@
 
 
 <section class="row">
-    <article class="col-12 mb-3  d-flex justify-content-center">   
+    <article class="col-12 mb-3 d-flex justify-content-center">   
         
         <!-- Update form  --> 
         <form action="<?= URL?>updateMissionValidation" method="POST" >

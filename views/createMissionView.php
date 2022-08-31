@@ -7,32 +7,31 @@
     <h1>Ajouter une mission</h1>
 </section>
 
+
+<!-- Alert messages if one input is no correct --> 
 <?php if(isset($_SESSION['alert1'])) :?>
     <div class="alert alert-danger mx-5" role="alert">
     <?= $_SESSION['alert1']['msg'] ?>
     </div>
     <?php unset($_SESSION['alert1']) ?>
-<?php endif ?>
-
-<?php if(isset($_SESSION['alert2'])) :?>
-    <div class="alert alert-danger mx-5" role="alert">
+<?php elseif(isset($_SESSION['alert2'])) :?>
+    <div class="alert alert-<?php $_SESSION['alert2']['type'] ?> text-danger  mx-5" role="alert">
     <?= $_SESSION['alert2']['msg'] ?>
     </div>
     <?php unset($_SESSION['alert2'])?>
-<?php endif ?>
-
-<?php if(isset($_SESSION['alert3'])) :?>
+<?php elseif(isset($_SESSION['alert3'])) :?>
     <div class="alert alert-danger ?> mx-5" role="alert">
     <?= $_SESSION['alert3']['msg'] ?>
     </div>
     <?php unset($_SESSION['alert3']) ?>
 <?php endif ?>
 
-<section class="row d-flex m-5">
-    <article class="col-12 d-flex justify-content-center" >
+
+<!-- <section class="row m-5">
+    <article class="col-12 d-flex justify-content-center" > -->
 
         <!-- create a mission form -->
-        <form action="<?= URL?>createMissionValidation" method="POST" >
+        <form action="<?= URL ?>createMissionValidation" method="POST">
         
             <!-- code_mission --> 
             <div class="mb-3">
@@ -59,8 +58,8 @@
             </div>
 
             <!-- name_speciality --> 
-            <div class="mb-3 d-flex">
-                <select class="form-select " aria-label="Default select example" id="name_speciality" name="name_speciality">
+            <div class="mb-3 ">
+                <select class="form-select" aria-label="Default select example" id="name_speciality" name="name_speciality">
                     <option selected> -- Spécialité -- </option>
                     <?php foreach($specialities as $speciality) :?>
                     <option value="<?= $speciality->getName_speciality(); ?>"><?= $speciality->getName_speciality(); ?></option>
@@ -74,8 +73,8 @@
 
             <!-- id_agent --> 
             <label class="form-label ">Agent(s) : </label>
-            <div class="row d-flex align-items-center mb-3">
-                <div class="col-12">
+            <!-- <div class="row d-flex align-items-center mb-3">
+                <div class="col-12"> -->
                         <?php foreach($agents as $agent) :?>
                             <?php foreach($specialities_agents as $speciality_agent):?>
                                 <?php if($speciality_agent->getId_agent() === $agent->getId_agent()):?>
@@ -89,19 +88,19 @@
                             <?php endif; ?>
                         <?php endforeach; ?>
                     <?php endforeach; ?>
-                </div>
+                <!-- </div> -->
                 <!-- Links add update & delete a agent --> 
                 <div class="col-12 d-flex justify-content-start">
                     <button type="button" class="btn btn-light my-1 rounded-2"><a href="createAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"></a></button>
                     <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"></a></button>
                     <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un agent" style="width: 1.5rem;"></a></button>
                 </div>
-            </div>
+            <!-- </div> -->
 
             <!-- code_contact --> 
             <label class="form-label">Contact(s) : </label>
-            <div class="row d-flex align-items-center mb-3">
-                <div class="col-12">
+            <!-- <div class="row d-flex align-items-center mb-3">
+                <div class="col-12"> -->
                     <?php foreach($contacts as $contact) :?>
                     <div class="form-check d-inline-block" >
                         <input class="form-check-input" type="checkbox" value="<?= $contact->getCode_contact(); ?>" id="code_contact" multiple name="code_contact[]">
@@ -110,19 +109,19 @@
                         </label>
                     </div>
                     <?php endforeach; ?>
-                </div>
+                <!-- </div> -->
                 <!-- Links add update & delete a contact --> 
                 <div class="col-12 d-flex justify-content-start">
                     <button type="button" class="btn btn-light  my-1 rounded-2"><a href="createContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un contact" style="width: 1.5rem;"></a></button>
                     <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un contact" style="width: 1.5rem;"></a></button>
                     <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un contact" style="width: 1.5rem;"></a></button>
                 </div>
-            </div>
+            <!-- </div> -->
               
             <!-- code_target --> 
             <label class="form-label ">Cible(s) : </label>
-            <div class="row d-flex align-items-center mb-3">
-                <div class="col-12">  
+            <!-- <div class="row d-flex align-items-center mb-3">
+                <div class="col-12">   -->
                     <?php foreach($targets as $target) :?>
                         <div class="form-check d-inline-block" >
                             <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target(); ?>" id="code_target" multiple name="code_target[]">
@@ -131,17 +130,17 @@
                             </label>
                         </div>
                     <?php endforeach; ?>
-                </div>
+                <!-- </div> -->
                 <!-- Links add update & delete a target --> 
                 <div class="col-12 d-flex justify-content-start">
                     <button type="button" class="btn btn-light my-1 rounded-2"><a href="createTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"></a></button>
                     <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cible" style="width: 1.5rem;"></a></button>
                     <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une cible" style="width: 1.5rem;"></a></button>
                 </div>
-            </div>
+            <!-- </div> -->
 
             <!-- id_duration --> 
-            <div class="mb-3 d-flex">
+            <div class="mb-3">
                 <select class="form-select" aria-label="Default select example" name="id_duration">
                     <option selected> -- Durée -- </option>
                     <?php foreach($durations as $duration) :?>
@@ -154,32 +153,46 @@
                 <button type="button" class="btn btn-danger ms-2"><a href="deleteDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une durée" style="width: 1.5rem;"></a></button>
             </div>
 
+
             <!-- code_status --> 
-            <div class="mb-3 d-flex">
+            <div class="mb-3">
                 <select class="form-select " aria-label="Default select example" id="code_status" name="code_status">
                     <option selected> -- Statut -- </option>
                     <?php foreach($status as $oneStatus) :?>
                     <option value="<?= $oneStatus->getCode_status(); ?>"><?= $oneStatus->getCode_status(); ?></option>
                     <?php endforeach; ?>
                 </select>
+
                 <!-- Links add update & delete a status --> 
                 <button type="button" class="btn btn-light ms-2"><a href="createStatus" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un status" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-warning ms-2"><a href="updateStatus" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un status" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-danger ms-2"><a href="deleteStatus" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un status" style="width: 1.5rem;"></a></button>
+                
+                <button type="button" class="btn btn-light ms-2"><a href="statusList" class="text-dark">Voir la liste des Statuts</a></button>
+                
+                <form method="POST" action="<?= URL ?>updateStatus?q=<?= $oneStatus->getCode_status() ?>"> 
+                    <button type="submit" class="btn btn-warning ms-2"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un status" style="width: 1.5rem;"></button>
+                </form>
+               
+                <form method="POST" action="<?= URL ?>deleteStatus?q=<?= $oneStatus->getCode_status() ?>"> 
+                    <button type="submit" class="btn btn-danger ms-2"><img src="<?= URL?>/public/assets/images/icon-remove.svg" alt="supprimer un status" style="width: 1.5rem;"></button>
+                </form>
+      
+       
             </div>
 
             <!-- name_type --> 
-            <div class="mb-3 d-flex">
-                <select class="form-select " aria-label="Default select example" name="name_type">
+            <div class="mb-3 ">
+                <select class="form-select" aria-label="Default select example" name="name_type">
                     <option selected> -- Type -- </option>
                     <?php foreach($types as $type) :?>
                     <option value="<?= $type->getName_type(); ?>"><?= $type->getName_type(); ?></option>
                     <?php endforeach; ?>
                 </select>
                 <!-- Links add update & delete a type --> 
+                <div>
                 <button type="button" class="btn btn-light ms-2"><a href="createType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un type" style="width: 1.5rem;"></a></button>
                 <button type="button" class="btn btn-warning ms-2"><a href="updateType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un type" style="width: 1.5rem;"></a></button>
                 <button type="button" class="btn btn-danger ms-2"><a href="deleteType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un type" style="width: 1.5rem;"></a></button>
+                </div>
             </div>
 
             <!-- id_hideout --> 
@@ -206,5 +219,5 @@
             <button type="submit" class="btn btn-danger d-block mx-auto m-3">Ajouter</button>
 
         </form>
-    </article>
-</section>
+    <!-- </article>
+</section> -->

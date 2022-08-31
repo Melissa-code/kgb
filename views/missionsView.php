@@ -28,11 +28,11 @@ if(isset($_SESSION['connect'])) {
 
 
 <section class="row m-3 justify-content-around">
-    <article class="d-flex col-12 justify-content-center ">
+    <article class="d-flex col-12 flex-wrap">
 
         <!-- Card of a mission -->
             <?php foreach($missions as $mission) :?>
-                <div class="card mx-2" style="width: 18rem;">
+                <div class="card m-2" style="width: 18rem;">
                     <div class="card-body ">
                     <a href="<?= URL ?>oneMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="card-link"><h3 id="title" class="card-title mb-4 text-center text-danger fw-bold">Mission <?= $mission->getCode_mission()  ; ?> </h3></a>
                     <h4 class="card-subtitle mb-2 text-center text-muted"><?= $mission->getTitle_mission() ; ?></h4>

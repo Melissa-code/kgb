@@ -65,7 +65,6 @@ class MainController {
         $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
         $l = parse_url($url);
         parse_str($l['query'], $params);
-        //print_r($params['q']); 
         $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
         //$mission = $this->missionManager->get($params['q']);
         $mission = $this->missionManager->get($mission->getCode_mission());
@@ -262,7 +261,6 @@ class MainController {
     }
 
 
-
     /**
     * Collect the form data from the createMissionView
     * Send the form data to the MissionManager 
@@ -273,41 +271,36 @@ class MainController {
         session_start();
 
         if($_POST){
-
             $newMission = new Mission($_POST);
-
             $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
             $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
             $checkCountryHideout = $this->missionManager->checkCountryHideoutDb($newMission); 
-            
+ 
             if($checkNationalityTarget) {
                 $_SESSION['alert1'] = [
                     "type" => "error",
-                    "msg" => "Erreur: les cibles ne doivent pas avoir la même nationalité que les agents."
+                    "msg" => "ERREUR : les cibles ne doivent pas avoir la même nationalité que les agents."
                 ];
                 header('location:'.URL."createMission");
                 exit();
-                
             } elseif($checkNationalityContact) {
                 $_SESSION['alert2'] = [
                     "type" => "error",
-                    "msg" => "Erreur: les contacts doivent être de la nationalité du pays de la mission."
+                    "msg" => "ERREUR : les contacts doivent être de la nationalité du pays de la mission."
                 ];
                 header('location:'.URL."createMission");
                 exit();
-
             } elseif($checkCountryHideout) {
                 $_SESSION['alert3'] = [
                     "type" => "error",
-                    "msg" => "Erreur: les planques doivent être dans le même pays que la mission."
+                    "msg" => "ERREUR: les planques doivent être dans le même pays que la mission."
                 ];
                 header('location:'.URL."createMission");
                 exit();
-    
-                // $this->missionManager->createMissionDb($newMission); 
-                // header('location:'.URL."missions");
-                // exit();
-                
+            } else {    
+                //$this->missionManager->createMissionDb($newMission); 
+                header('location:'.URL."missions");
+                exit();
             }
         }
     }
@@ -318,7 +311,6 @@ class MainController {
     */
     public function updateMission(): void {
         $mission = $this->getMissionByCode(); 
-        // var_dump($mission);
 
         $data_page = [
             "page_description" => "Page de modification d'une mission",

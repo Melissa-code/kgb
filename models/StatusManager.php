@@ -71,9 +71,12 @@ class StatusManager extends Model {
     * Update a status
     */
     public function updateStatusDb(Status $status): void {
+        //var_dump($status->getCode_status());
+        $status = $_POST['code_status'];
+
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Status SET code_status = :code_status');
-        $req->bindValue(':code_status', $status->getCode_status(), PDO::PARAM_STR);
+        $req = $pdo->prepare('UPDATE Status SET code_status = :code_status WHERE code_status = :code_status');
+        $req->bindValue(':code_status', $status, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
@@ -84,7 +87,7 @@ class StatusManager extends Model {
     */
     public function deleteStatusDb(string $code_status): void {
         $pdo = $this->getDb();
-        $req = $pdo->prepare('DELETE FROM Status WHERE code_status = :code_status');
+        $req = $pdo->prepare("DELETE FROM Status WHERE code_status = :code_status");
         $req->bindValue(':code_status', $code_status, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();

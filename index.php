@@ -145,11 +145,15 @@ try {
         case "createStatusValidation": 
             $statusController->createStatusValidation();
         break;
+        case "statusList": 
+            $statusController->statusList();
+        break;
         case "updateStatus": 
             $statusController->updateStatus();
+            //echo $url[0];
         break;
         case "updateStatusValidation": 
-            //$statusController->updateStatusValidation();
+            $statusController->updateStatusValidation();
         break;
         case "deleteStatus": 
             $statusController->deleteStatus();

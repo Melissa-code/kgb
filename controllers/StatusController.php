@@ -1,5 +1,6 @@
 <?php
 require_once("models/StatusManager.php"); 
+require_once("models/MissionManager.php"); 
 
 
 class StatusController {
@@ -10,6 +11,7 @@ class StatusController {
     public function __construct() {
 
         $this->statusManager = new StatusManager(); 
+        $this->missionManager = new MissionManager(); 
     }
 
 
@@ -25,14 +27,39 @@ class StatusController {
     }
 
 
-    /**
-    * Get a status by code 
+     /**
+    * Get the status by code 
     * @return code_status
     */
-    // public function getStatusByCode() : Status {
+    public function getStatusByCode() : Status {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        // $status = $this->statusManager->get(base64_decode(urldecode($params['q'])));
+        $status = $this->statusManager->get($params['q']);
+        $status = $this->statusManager->get($status->getCode_status());
+        return $status; 
+    }
 
-    //     return $status; 
-    // }
+     /**
+    * Collect all the status data 
+    * Send all the missions data to the missionsView
+    * 
+    */
+    public function statusList() : void {
+
+        $status = $this->statusManager->getAll();
+
+        $data_page = [
+            "page_description" => "Page listant les statuts",
+            "page_title" => "Statuts",
+            "status" => $status,
+            "view" => "views/statusView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
 
 
     /**
@@ -54,7 +81,6 @@ class StatusController {
             $newStatus = new Status($_POST);
             $this->statusManager->createStatusDb($newStatus); 
         }
-        // var_dump($newStatus); 
         header('location:'.URL."createMission");
         exit();
     }
@@ -64,13 +90,13 @@ class StatusController {
     */
     public function updateStatus(){
 
-        // $status = $this->getStatusByCode(); 
+        $status = $this->getStatusByCode();
         // var_dump($status);
 
         $data_page = [
-            "page_description" => "Page de modification du statut d'une mission",
-            "page_title" => "Modification du statut d'une mission",
-            //"statut" => $status,
+            "page_description" => "Page de modification du statut",
+            "page_title" => "Modification du statut",
+            "status" => $status,
             "view" => "views/updateStatusView.php",
             "template" => "views/common/template.php"
         ];
@@ -78,11 +104,18 @@ class StatusController {
     }
 
     public function updateStatusValidation(): void {
+
+        $status = $this->statusManager->get($_POST['identifiant']);
+        var_dump($status); 
+
         if($_POST) {
-            $status = new Status($_POST);
+            // $status = new Status($_POST);
+            // print_r($status);
+            // $this->statusManager->updateStatusDb($status); 
+            $status->hydrate($_POST);
+            print_r($status);
             $this->statusManager->updateStatusDb($status); 
         }
-        // var_dump($status); 
         //header('location:'.URL."createMission");
     }
 
@@ -91,12 +124,13 @@ class StatusController {
     * Delete a status
     */
     public function deleteStatus(): void {
-        //$status = $this->getStatusByCode();
-        //$status = $this->statusManager->get("test");
-    
-        //$this->statusManager->deletestatusDb($status->getCode_status());
-        //$this->statusManager->deletestatusDb("test");
-        //unset($status); 
+
+        $status = $this->getStatusByCode();
+        
+        print_r($status);
+
+        $this->statusManager->deleteStatusDb($status->getCode_status());
+        unset($status); 
         //header('location:'.URL."createMission");
     }
 
