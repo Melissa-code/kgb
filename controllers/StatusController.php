@@ -108,14 +108,15 @@ class StatusController {
         $status = $this->statusManager->get($_POST['identifiant']);
         var_dump($status); 
 
-        if($_POST) {
-            // $status = new Status($_POST);
-            // print_r($status);
-            // $this->statusManager->updateStatusDb($status); 
-            $status->hydrate($_POST);
-            print_r($status);
-            $this->statusManager->updateStatusDb($status); 
-        }
+        // if($_POST) {
+        //     // $status = new Status($_POST);
+        //     // print_r($status);
+        //     // $this->statusManager->updateStatusDb($status); 
+        //     $status->hydrate($_POST);
+        //     print_r($status);
+        //     $this->statusManager->updateStatusDb($status); 
+        // }
+        $this->statusManager->updateStatusDb($_POST['identifiant']); 
         //header('location:'.URL."createMission");
     }
 
@@ -126,7 +127,6 @@ class StatusController {
     public function deleteStatus(): void {
 
         $status = $this->getStatusByCode();
-        
         print_r($status);
 
         $this->statusManager->deleteStatusDb($status->getCode_status());
