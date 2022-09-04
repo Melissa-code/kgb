@@ -68,44 +68,43 @@ class StatusManager extends Model {
 
 
     /**
-    * Update a status
+    * Update a status in the database 
     */
-    //public function updateStatusDb(Status $status): void {
-        //var_dump($status->getCode_status());
-        //$status = $_POST['code_status'];
+    public function updateStatusDb(Status $status): void {
+        //$status
+        //var_dump($status);
 
-    public function updateStatusDb($identifiant): void {
         $pdo = $this->getDb();
-        $req = $pdo->prepare(
-            'UPDATE Status 
-            SET code_status = :code_status 
-            WHERE code_status = :code_status');
-        $req->bindValue(':code_status', $identifiant, PDO::PARAM_STR);
-        $res = $req->execute();
-        $data = $req->fetch(); 
-        var_dump($data);
+        $req = $pdo->prepare('UPDATE Status SET code_status = :code_status WHERE code_status = :oldcode_status');
+        $req->bindValue(':code_status', $status->getCode_status(), PDO::PARAM_STR);
+        $req->bindValue(':oldcode_status', $status->getOldcode_status(), PDO::PARAM_STR);
+        $req->execute();
         $req->closeCursor();
+    }
+
+
+    // public function updateStatusDb($codeStatus): void {
+    //     $pdo = $this->getDb();
+    //     $req = $pdo->prepare('UPDATE Status SET code_status = :code_status WHERE code_status = :code_status');
+    //     $req->bindValue(':code_status', $codeStatus, PDO::PARAM_STR);
+    //     $req->execute();
+    //     $req->closeCursor();
 
         // if($res > 0) {
         //     $this->get($identifiant)->setCode_status($identifiant);
         // }
-    }
+   // }
 
 
     /**
-    * Delete a status
+    * Delete a status in the database 
     */
     public function deleteStatusDb(string $code_status): void {
         $pdo = $this->getDb();
-
-        $req = $pdo->prepare('DELETE 
-        FROM Status
-        WHERE code_status = :code_status');
-
+        $req = $pdo->prepare('DELETE FROM Status WHERE code_status = :code_status');
         $req->bindValue(':code_status', $code_status, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
-   
     }
 
 

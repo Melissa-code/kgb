@@ -105,18 +105,22 @@ class StatusController {
 
     public function updateStatusValidation(): void {
 
-        $status = $this->statusManager->get($_POST['identifiant']);
-        var_dump($status); 
+        // $codeStatus = $this->statusManager->get($_POST['code_status']);
+        //var_dump($codeStatus); 
+        
 
-        // if($_POST) {
-        //     // $status = new Status($_POST);
-        //     // print_r($status);
-        //     // $this->statusManager->updateStatusDb($status); 
+        if($_POST) {
+            $status = new Status($_POST);
+            //var_dump($_POST);
+            $this->statusManager->updateStatusDb($status); 
+            header('location:'.URL."createMission");
+        }
+       
         //     $status->hydrate($_POST);
         //     print_r($status);
         //     $this->statusManager->updateStatusDb($status); 
         // }
-        $this->statusManager->updateStatusDb($_POST['identifiant']); 
+        //$this->statusManager->updateStatusDb($codeStatus); 
         //header('location:'.URL."createMission");
     }
 
@@ -125,13 +129,10 @@ class StatusController {
     * Delete a status
     */
     public function deleteStatus(): void {
-
         $status = $this->getStatusByCode();
-        print_r($status);
-
         $this->statusManager->deleteStatusDb($status->getCode_status());
         unset($status); 
-        //header('location:'.URL."createMission");
+        header('location:'.URL."createMission");
     }
 
 

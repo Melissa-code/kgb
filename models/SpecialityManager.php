@@ -60,7 +60,7 @@ class SpecialityManager extends Model {
                 exit();
             }
             else {
-                $req = $pdo->prepare("INSERT INTO Speciality (name_speciality) VALUES (:name_speciality)");
+                $req = $pdo->prepare("INSERT INTO Specialities (name_speciality) VALUES (:name_speciality)");
                 $req->bindValue(":name_speciality", $newSpeciality->getName_speciality(), PDO::PARAM_STR);
                 $req->execute();
                 $req->closeCursor();

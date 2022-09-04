@@ -11,20 +11,18 @@ if(isset($_SESSION['connect'])) {
 <!------------- Main --------------->
 
 <section class="mb-4">
+    <button class="btn btn-light" type="button"><a href="<?= URL?>createMission">Retour</a></button>
     <h1>Liste des statuts</h1>
 </section>
 
 
-<section class="row m-3">
-
-    <!-- Display the create button if the admin is logged in -->
-    <?php if(isset($_SESSION['connect'])) :?>
-        <!-- Create a status button -->
-        <form method="POST" action="<?= URL?>createStatus" class="d-flex justify-content-center m-3">
-            <button class="btn btn-light" type="submit">Ajouter</button>
-        </form>
-    <?php endif ?>
+<section class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <!-- button add a status -->
+        <button class="btn btn-light font-weight-bold" type="button"><a href="<?= URL?>createStatus">Ajouter</a></button>
+    </div>
 </section>
+
 
 
 <section class="row m-3 justify-content-around">
@@ -39,10 +37,10 @@ if(isset($_SESSION['connect'])) {
 
                 <!-- update & delete buttons -->
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex mx-auto my-2"> 
+                    <li class="list-group-item d-flex mx-auto "> 
                         <!-- Udpate status button -->
                         <form method="POST" action="<?= URL ?>updateStatus?q=<?= $oneStatus->getCode_status() ?>">
-                            <button class="btn btn-warning" type="submit">Modifier</button>
+                            <button class="btn btn-warning me-2" type="submit">Modifier</button>
                         </form>
                         <!-- Delete status button -->
                         <form method="POST" action="<?= URL ?>deleteStatus?q=<?= $oneStatus->getCode_status() ?>">

@@ -18,8 +18,11 @@
             <div class="mb-3">
                 <input type="text" class="form-control" id="code_status" name="code_status" value="<?= $status->getCode_status() ?>" placeholder="code status">
             </div>
+            <div class="mb-3">
+                <input type="hidden" class="form-control" id="oldcode_status" name="oldcode_status" value="<?= $status->getCode_status() ?>" placeholder="code status">
+            </div>
 
-            <input type="hidden" name="identifiant"value="<?= $status->getCode_status() ?>">
+        
             <!-- button --> 
             <button type="submit" class="btn btn-danger d-block mx-auto m-3">Modifier</button>
         </form>
