@@ -26,13 +26,39 @@ class SpecialityController {
 
 
     /**
-    * Get a speciality by name
+    * Get the speciality by name 
+    *
     * @return name_speciality
     */
-    // public function getSpecialityByName() : Speciality {
+    public function getSpecialityByName() : Speciality {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        // $status = $this->statusManager->get(base64_decode(urldecode($params['q'])));
+        $speciality = $this->specialityManager->get($params['q']);
+        $speciality = $this->specialityManager->get($speciality ->getName_speciality());
+        return $speciality; 
+    }
 
-    //     return $speciality; 
-    // }
+    /**
+    * Collect all the speciality data 
+    * Send all the speciality data to the specialitiesView
+    * 
+    */
+    public function specialitiesList() : void {
+
+        $specialities = $this->specialityManager->getAll();
+
+        $data_page = [
+            "page_description" => "Page listant les spécialités des missions",
+            "page_title" => "Liste des spécialités des missions",
+            "specialities" => $specialities,
+            "view" => "views/specialitiesView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
 
 
     /**
@@ -62,43 +88,47 @@ class SpecialityController {
     }
 
     /**
-    * Update a speciality
+    * Update a speciality 
+    *
     */
     public function updateSpeciality(){
 
-        // $speciality = $this->getSpecialityByName(); 
-        // var_dump($speciality);
+        $speciality = $this->getSpecialityByName(); 
 
         $data_page = [
             "page_description" => "Page de modification d'une spécialité d'une mission",
             "page_title" => "Modification d'une spécialité d'une mission",
-            //"speciality" => $speciality,
+            "speciality" => $speciality,
             "view" => "views/updateSpecialityView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
     }
 
+
+    /**
+    * Update a speciality validation
+    *
+    */
     public function updateSpecialityValidation(): void {
-        // if($_POST) {
-        //     $speciality = new Speciality($_POST);
-        //     $this->specialityManager->updateSpecialityDb($speciality); 
-        // }
-        // var_dump($speciality); 
-        //header('location:'.URL."createMission");
+
+        if($_POST) {
+            $speciality = new Speciality($_POST);
+            $this->specialityManager->updateSpecialityDb($speciality); 
+        }
+        header('location:'.URL."createMission");
     }
 
 
     /**
     * Delete a speciality
+    *
     */
     public function deleteSpeciality(): void {
-        //$speciality = $this->getSpecialityByName();
-        //$speciality = $this->specialityManager->get("");
-        //$this->specialityManager->deletespecialityDb($status->getCode_status());
-        //$this->specialityManager->deletespecialityDb("test");
-        //unset($speciality); 
-        //header('location:'.URL."createMission");
+        $speciality = $this->getSpecialityByName();
+        $this->specialityManager->deletespecialityDb($speciality->getName_speciality());
+        unset($speciality); 
+        header('location:'.URL."createMission");
     }
 
 

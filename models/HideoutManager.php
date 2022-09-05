@@ -44,7 +44,8 @@ class HideoutManager extends Model {
 
 
     /**
-    * Create a hideout
+    * Create a hideout in the database 
+    *
     */
     public function createHideoutDb(Hideout $newHideout): void {
 
@@ -82,6 +83,7 @@ class HideoutManager extends Model {
     
     /**
     * Update a hideout in the database
+    *
     */
     public function updateHideoutDb(Hideout $hideout): void {
 
@@ -102,6 +104,7 @@ class HideoutManager extends Model {
     *
     */
     public function deleteHideoutDb(int $id_hideout): void {
+
         $pdo = $this->getDb();
         $req = $pdo->prepare('DELETE FROM Hideouts WHERE id_hideout = :id_hideout');
         $req->bindValue(':id_hideout', $id_hideout, PDO::PARAM_INT);

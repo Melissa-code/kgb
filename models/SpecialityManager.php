@@ -70,28 +70,30 @@ class SpecialityManager extends Model {
 
 
     /**
-    * Update a speciality
+    * Update a speciality in the database 
+    *
     */
     public function updateSpecialityDb(Speciality $speciality): void {
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Speciality SET name_speciality = :name_speciality');
+        $req =$pdo->prepare('UPDATE Specialities SET name_speciality = :name_speciality WHERE name_speciality = :oldname_speciality');
         $req->bindValue(':name_speciality', $speciality->getName_speciality(), PDO::PARAM_STR);
+        $req->bindValue(':oldname_speciality', $speciality->getOldname_speciality(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
 
 
     /**
-    * Delete a speciality
+    * Delete a speciality in the database 
+    *
     */
     public function deleteSpecialityDb(string $name_speciality): void {
+
         $pdo = $this->getDb();
         $req = $pdo->prepare('DELETE FROM Specialities WHERE name_speciality = :name_speciality');
         $req->bindValue(':name_speciality', $name_speciality, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
-
-
 
 }

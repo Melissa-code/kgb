@@ -65,6 +65,10 @@
                     <option value="<?= $speciality->getName_speciality(); ?>"><?= $speciality->getName_speciality(); ?></option>
                     <?php endforeach; ?>
                 </select>
+
+                <!-- Link to see the list of the hideouts --> 
+                <a href="specialitiesList" class="text-white">Voir la liste des spécialités -></a>
+
                 <!-- Links add update & delete a status --> 
                 <button type="button" class="btn btn-light ms-2"><a href="createSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"></a></button>
                 <button type="button" class="btn btn-warning ms-2"><a href="updateSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une spécialité" style="width: 1.5rem;"></a></button>
@@ -195,11 +199,6 @@
                 <div class="col-12">
                 <!-- Link to see the list of the hideouts --> 
                 <a href="hideoutsList" class="text-white">Voir la liste des planques -></a>
-
-                    <!-- Links add update & delete a hideout --> 
-                    <button type="button" class="btn btn-light my-1"><a href="createHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une planque" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-1 my-1"><a href="updateHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une planque" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-1 my-1"><a href="deleteHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une planque" style="width: 1.5rem;"></a></button>
                 </div>
             </div>
  

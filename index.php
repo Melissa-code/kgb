@@ -78,14 +78,17 @@ try {
         case "createSpecialityValidation": 
             $specialityController->createSpecialityValidation();
         break;
+        case "specialitiesList": 
+            $specialityController->specialitiesList();
+        break;
         case "updateSpeciality": 
-            //$specialityController->updateSpeciality();
+            $specialityController->updateSpeciality();
         break;
         case "updateSpecialityValidation": 
-            //$specialityController->updateSpecialityValidation();
+            $specialityController->updateSpecialityValidation();
         break;
         case "deleteSpeciality": 
-            //$specialityController->deleteSpeciality();
+            $specialityController->deleteSpeciality();
         break;
 
 
