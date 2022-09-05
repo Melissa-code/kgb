@@ -29,10 +29,36 @@ class DurationController {
     * Get a duration by id 
     * @return id_duration
     */
-    // public function getDurationById() : Duration {
+    public function getDurationById() : Duration {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        //$duration = $this->durationManager->get(base64_decode(urldecode($params['q'])));
+        $duration = $this->durationManager->get($params['q']);
+        $duration = $this->durationManager->get($duration->getId_duration());
+        return $duration; 
+    }
 
-    //     return $duration; 
-    // }
+
+    /**
+    * Collect all the duration data 
+    * Send all the duration data to the durationView
+    * 
+    */
+    public function durationsList() : void {
+
+        $durations = $this->durationManager->getAll();
+
+        $data_page = [
+            "page_description" => "Page listant les statuts",
+            "page_title" => "Statuts",
+            "durations" => $durations,
+            "view" => "views/durationsView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
 
 
     /**
@@ -54,7 +80,6 @@ class DurationController {
             $newDuration = new Duration($_POST);
             $this->durationManager->createDurationDb($newDuration); 
         }
-        //var_dump($newDuration); 
         header('location:'.URL."createMission");
         exit();
     }
@@ -91,13 +116,12 @@ class DurationController {
     * Delete a duration
     */
     public function deleteDuration(): void {
-        //$duration = $this->getDurationById();
-        //$duration = $this->durationManager->get("");
-    
-        //$this->durationManager->deleteDurationDb($duration->getId_duration());
-        //$this->durationManager->deletedurationDb("test");
-        //unset($duration); 
-        //header('location:'.URL."createMission");
+        $duration = $this->getDurationById();
+        var_dump($duration); 
+ 
+        $this->durationManager->deleteDurationDb($duration->getId_duration());
+        unset($duration); 
+        header('location:'.URL."createMission");
     }
 
 

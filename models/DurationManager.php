@@ -89,7 +89,7 @@ class DurationManager extends Model{
 
 
     /**
-    * Delete a duration
+    * Delete a duration in the database
     */
     public function deleteDurationDb(string $id_duration): void {
         $pdo = $this->getDb();

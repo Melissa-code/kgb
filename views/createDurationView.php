@@ -5,7 +5,7 @@
 <!------------- Main --------------->
 
 <section class="mb-4">
-    <button type="button" class="btn btn-light m-4"><a href="createMission">Retour</a></button>
+    <button type="button" class="btn btn-light m-4"><a href="durationsList">Retour</a></button>
     <h1>Ajouter une durée</h1>
 </section>
 

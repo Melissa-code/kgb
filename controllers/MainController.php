@@ -271,11 +271,14 @@ class MainController {
         session_start();
 
         if($_POST){
+
             $newMission = new Mission($_POST);
+            //var_dump($newMission->getDescription_mission());
             $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
             $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
             $checkCountryHideout = $this->missionManager->checkCountryHideoutDb($newMission); 
  
+            //var_dump($newMission->getDescription_mission());
             if($checkNationalityTarget) {
                 $_SESSION['alert1'] = [
                     "type" => "error",
@@ -298,7 +301,8 @@ class MainController {
                 header('location:'.URL."createMission");
                 exit();
             } else {    
-                //$this->missionManager->createMissionDb($newMission); 
+                //var_dump($newMission->getDescription_mission());
+                $this->missionManager->createMissionDb($newMission); 
                 header('location:'.URL."missions");
                 exit();
             }

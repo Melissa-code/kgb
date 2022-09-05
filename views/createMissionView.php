@@ -151,6 +151,8 @@
                 <button type="button" class="btn btn-light ms-2"><a href="createDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une durée" style="width: 1.5rem;"></a></button>
                 <button type="button" class="btn btn-warning ms-2"><a href="updateDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une durée" style="width: 1.5rem;"></a></button>
                 <button type="button" class="btn btn-danger ms-2"><a href="deleteDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une durée" style="width: 1.5rem;"></a></button>
+                <!-- Link to see the list of the durations --> 
+                <a href="durationsList" class="text-white">Voir la liste des durées -></a>
             </div>
 
 
@@ -163,20 +165,8 @@
                     <?php endforeach; ?>
                 </select>
 
-                <!-- Links add update & delete a status --> 
-                <button type="button" class="btn btn-light ms-2"><a href="createStatus" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un status" style="width: 1.5rem;"></a></button>
-                
-                <button type="button" class="btn btn-light ms-2"><a href="statusList" class="text-dark">Voir la liste des Statuts</a></button>
-                
-                <form method="POST" action="<?= URL ?>updateStatus?q=<?= $oneStatus->getCode_status() ?>"> 
-                    <button type="submit" class="btn btn-warning ms-2"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un status" style="width: 1.5rem;"></button>
-                </form>
-               
-                <form method="POST" action="<?= URL ?>deleteStatus?q=<?= $oneStatus->getCode_status() ?>"> 
-                    <button type="submit" class="btn btn-danger ms-2"><img src="<?= URL?>/public/assets/images/icon-remove.svg" alt="supprimer un status" style="width: 1.5rem;"></button>
-                </form>
-      
-       
+                <!-- Link to see the list of the status --> 
+                <a href="statusList" class="text-white">Voir la liste des Statuts -></a>
             </div>
 
             <!-- name_type --> 

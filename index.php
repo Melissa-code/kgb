@@ -128,6 +128,9 @@ try {
         case "createDurationValidation": 
             $durationController->createDurationValidation();
         break;
+        case "durationsList": 
+            $durationController->durationsList();
+        break;
         case "updateDuration": 
             //$durationController->updateDuration();
         break;
@@ -135,7 +138,7 @@ try {
             //$durationController->updateDurationValidation();
         break;
         case "deleteDuration": 
-            //$durationController->deleteDuration();
+            $durationController->deleteDuration();
         break;
 
 

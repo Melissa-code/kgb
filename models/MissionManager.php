@@ -70,14 +70,14 @@ class MissionManager extends Model {
                 $data1 = $req1->fetch();
                 $data2 = $req2->fetch(); 
 
-                if($data1['nationality_target'] === $data2['nationality_agent']){
-                    return true;
+                if($data1['nationality_target'] != $data2['nationality_agent']){
+                    return false;
                 }
             }
         }
         $req1->closeCursor();
         $req2->closeCursor();
-        return false;
+        return true;
     }
 
     /**
@@ -139,6 +139,10 @@ class MissionManager extends Model {
     */
     public function createMissionDb(Mission $newMission): void {
 
+        $test = "test";
+        echo $test;
+        var_dump($newMission->getDescription_mission());
+
         $pdo = $this->getDb();
         $req = $pdo->prepare('SELECT count(*) as numberCode FROM Missions WHERE code_mission = :code_mission'); 
         $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
@@ -152,7 +156,8 @@ class MissionManager extends Model {
             
             }
             else {
-           // echo "mission créée";
+           echo "mission créée";
+   
             $req = $pdo->prepare("INSERT INTO Missions (code_mission, title_mission, description_mission, country_mission, id_duration, code_status, name_type, name_speciality) VALUES (:code_mission, :title_mission, :description_mission, :country_mission, :id_duration, :code_status, :name_type, :name_speciality)");
             $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
             $req->bindValue(':title_mission', $newMission->getTitle_mission(), PDO::PARAM_STR);
@@ -165,17 +170,17 @@ class MissionManager extends Model {
             $req->execute();
 
             $id_agent = $newMission->getId_agent();
-            //print_r('id de l agent: ' .$id_agent);
+            print_r('id de l agent: ' .$id_agent);
             foreach($id_agent as $agent){
                 $req2 = $pdo->prepare("INSERT INTO Agents_missions (id_agent, code_mission) VALUES (:id_agent, :code_mission)");
                 $req2->bindValue(':id_agent', (int)$agent, PDO::PARAM_INT);
                 $req2->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
                 $req2->execute();
 
-            //     // print_r($id_agent);echo "<br>";
-            //     // print_r($agent); echo "<br>";
-            //     // print_r(gettype($agent)); 
-            // }
+                // print_r($id_agent);echo "<br>";
+                // print_r($agent); echo "<br>";
+                // print_r(gettype($agent)); 
+            }
 
             $code_contact = $newMission->getCode_contact(); 
             foreach($code_contact as $contact) {
@@ -202,9 +207,9 @@ class MissionManager extends Model {
             }
             
             $req->closeCursor();
-        }
-        }
-        }
+         }
+         }
+        //}
     }
 
     /**

@@ -6,7 +6,7 @@ class Mission {
 
     private $code_mission; 
     private $title_mission; 
-    private $description_mission; 
+    private ?string $description_mission = null; 
     private $country_mission; 
     private $id_duration; 
     private $code_status; 
@@ -60,7 +60,7 @@ class Mission {
     
     public function getDescription_mission(){ return $this->description_mission;}
 
-    public function setDescription_mission(string $description_mission){
+    public function setDescription_mission(?string $description_mission){
         if(strlen($description_mission) >= 3 && strlen($description_mission) <= 180){
             $this->description_mission= $description_mission;
             return $this;
