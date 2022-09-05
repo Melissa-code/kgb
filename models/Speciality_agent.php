@@ -29,7 +29,7 @@ class Speciality_agent {
     public function getName_speciality(){return $this->name_speciality;}
     public function setName_speciality($name_speciality) {$this->name_speciality = $name_speciality; return $this;}
 
-    public function getId_agent(){return $this->id_agent; }
+    public function getId_agent() {return $this->id_agent; }
     public function setId_agent($id_agent){$this->id_agent = $id_agent; return $this; }
 
 

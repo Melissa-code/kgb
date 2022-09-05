@@ -35,16 +35,12 @@ try {
     }
 
     switch($page) {
+        // home
         case "home": 
             $mainController->home();
         break;
-        case "missions": 
-            $mainController->missions();
-        break;
-        case "oneMission": 
-            $mainController->oneMission();
-        break;
-        
+
+        // login admin 
         case "login": 
             $mainController->login();
         break;
@@ -55,6 +51,13 @@ try {
             $mainController->logout();
         break;
 
+        // mission
+        case "missions": 
+            $mainController->missions();
+        break;
+        case "oneMission": 
+            $mainController->oneMission();
+        break;
         case "createMission": 
             $mainController->createMission();
         break;
@@ -71,7 +74,7 @@ try {
             $mainController->deleteMission();
         break;
 
-
+        // Speciality
         case "createSpeciality": 
             $specialityController->createSpeciality(); 
         break;
@@ -91,7 +94,7 @@ try {
             $specialityController->deleteSpeciality();
         break;
 
-
+        // agent
         case "createAgent": 
             $agentController->createAgent(); 
         break;
@@ -111,24 +114,27 @@ try {
             $agentController->deleteAgent();
         break;
 
-        
+        // contact 
         case "createContact": 
             $contactController->createContact(); 
         break;
         case "createContactValidation": 
             $contactController->createContactValidation();
         break;
+        case "contactsList": 
+            $contactController->contactsList();
+        break;
         case "updateContact": 
-            //$contactController->updateContact();
+            $contactController->updateContact();
         break;
         case "updateContactValidation": 
-            //$contactController->updateContactValidation();
+            $contactController->updateContactValidation();
         break;
         case "deleteContact": 
-            //$contactController->deleteContact();
+            $contactController->deleteContact();
         break;
 
-
+        // target
         case "createTarget": 
             $targetController->createTarget(); 
         break;
@@ -145,7 +151,7 @@ try {
             //$targetController->deleteTarget();
         break;
 
-
+        // duration
         case "createDuration": 
             $durationController->createDuration(); 
         break;
@@ -165,7 +171,7 @@ try {
             $durationController->deleteDuration();
         break;
 
-
+        // status
         case "createStatus": 
             $statusController->createStatus(); 
         break;
@@ -185,7 +191,7 @@ try {
             $statusController->deleteStatus();
         break;
 
-
+        // type
         case "createType": 
             $typeController->createType(); 
         break;
@@ -205,7 +211,7 @@ try {
             $typeController->deleteType();
         break;
 
-        
+        // hideout 
         case "createHideout": 
             $hideoutController->createHideout(); 
         break;
@@ -225,7 +231,6 @@ try {
             $hideoutController->deleteHideout();
         break;
 
-        
         default: 
             throw new Exception("La page n'existe pas"); 
     }

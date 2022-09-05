@@ -93,21 +93,29 @@ class AgentManager extends Model {
 
     
     /**
-    * Update a agent in the database
+    * Update an agent in the database
     *
     */
     public function updateAgentDb(Agent $agent): void {
 
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Agents SET id_agent = :id_agent');
-        $req->bindValue(':id_agent', $agent->getId_agent(), PDO::PARAM_INT);
+        $id_agent = $pdo->lastInsertId();
+        
+        $req =$pdo->prepare('UPDATE Agents SET id_agent = :id_agent, name_agent = :name_agent, firstname_agent = :firstname_agent, datebirthday_agent = :datebirthday_agent, nationality_agent = :nationality_agent WHERE id_agent = :oldid_agent');
+        $req->bindValue(':id_agent', $id_agent, PDO::PARAM_INT);
+        $req->bindValue(':oldid_agent', $agent->getOldid_agent(), PDO::PARAM_INT);
+        $req->bindValue(':name_agent', $agent->getName_agent(), PDO::PARAM_STR);
+        $req->bindValue(':firstname_agent', $agent->getFirstname_agent(), PDO::PARAM_STR);
+        $req->bindValue(':datebirthday_agent', $agent->getDatebirthday_agent(), PDO::PARAM_STR);
+        $req->bindValue(':nationality_agent', $agent->getNationality_agent(), PDO::PARAM_STR);
+        $req->bindValue(':speciality_agent', $agent->getName_speciality(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
 
 
     /**
-    * Delete a agent in the database
+    * Delete an agent in the database
     *
     */
     public function deleteAgentDb(int $id_agent): void {

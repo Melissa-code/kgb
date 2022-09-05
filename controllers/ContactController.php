@@ -1,7 +1,6 @@
 <?php
 require_once("models/ContactManager.php"); 
 
-
 class ContactController {
 
     private ContactManager $contactManager;
@@ -14,9 +13,10 @@ class ContactController {
 
     /**
     * Generate a page
+    *
     */
     private function generatePage(array $data) : void {
-        extract($data); //function to create variables from the array $data_page (indice of the array becomes variable)
+        extract($data); 
         ob_start(); 
         require_once($view);
         $page_content = ob_get_clean();
@@ -25,17 +25,44 @@ class ContactController {
 
 
     /**
-    * Get a contact by code
-    * @return id_contact
+    * Get the contact by code 
+    *
+    * @return code_contact
     */
-    // public function getContactByCode() : Contact {
+    public function getContactByCode() : Contact {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        // $contact = $this->contactManager->get(base64_decode(urldecode($params['q'])));
+        $contact = $this->contactManager->get($params['q']);
+        $contact = $this->contactManager->get($contact->getCode_contact());
+        return $contact ;
+    }
 
-    //     return $contact; 
-    // }
+    /**
+    * Get all the contacts (array)
+    * Send them to the contactsView
+    * 
+    */
+    public function contactsList() : void {
+
+        $contacts  = $this->contactManager->getAll();
+
+        $data_page = [
+            "page_description" => "Page listant les statuts",
+            "page_title" => "Statuts",
+            "contacts" => $contacts,
+            "view" => "views/contactsView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
 
 
     /**
-    * Create a contact
+    * Create a contact (page)
+    *
     */
     public function createContact() : void {
 
@@ -48,18 +75,24 @@ class ContactController {
         $this->generatePage($data_page); 
     }
 
+
+    /**
+    * Create a contact (validation)
+    *
+    */
     public function createContactValidation(): void {
         if($_POST) {
             $newContact = new Contact($_POST);
             $this->contactManager->createContactDb($newContact); 
         }
-       //var_dump($newContact); 
        header('location:'.URL."createMission");
        exit();
     }
 
+
     /**
-    * Update a contact
+    * Update a contact (page)
+    *
     */
     public function updateContact(){
 
@@ -88,15 +121,14 @@ class ContactController {
 
     /**
     * Delete a contact
+    *
     */
     public function deleteContact(): void {
-        //$contact = $this->getContactByCode();
-        //$this->contactManager->deleteContactDb($contact->getCode_contact());
-        //unset($contact); 
-        //header('location:'.URL."createMission");
+        $contact = $this->getContactByCode();
+        $this->contactManager->deleteContactDb($contact->getCode_contact());
+        unset($contact); 
+        header('location:'.URL."createMission");
     }
-
-
 
 }
 

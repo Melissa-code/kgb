@@ -1,5 +1,4 @@
 <?php 
-
 require_once("models/Model.php");
 require_once("models/Contact.php");
 
@@ -27,9 +26,9 @@ class ContactManager extends Model {
     }
 
 
-
     /**
     * Get one contact only
+    *
     * @return Contact $contact
     */
     public function get($code_contact) : Contact {
@@ -45,7 +44,8 @@ class ContactManager extends Model {
 
 
     /**
-    * Create a contact
+    * Create a contact in the database
+    *
     */
     public function createContactDb(Contact $newContact): void {
 
@@ -85,7 +85,8 @@ class ContactManager extends Model {
 
     
     /**
-    * Update a contact
+    * Update a contact in the database
+    *
     */
     public function updateContactDb(Contact $contact): void {
         $pdo = $this->getDb();
@@ -97,9 +98,10 @@ class ContactManager extends Model {
 
 
     /**
-    * Delete a contact
+    * Delete a contact in the database
+    *
     */
-    public function deleteContactDb(int $code_contact): void {
+    public function deleteContactDb(string $code_contact): void {
         $pdo = $this->getDb();
         $req = $pdo->prepare('DELETE FROM Contacts WHERE code_contact = :code_contact');
         $req->bindValue(':code_contact', $code_contact, PDO::PARAM_STR);

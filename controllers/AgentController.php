@@ -1,17 +1,20 @@
 <?php
 require_once("models/AgentManager.php"); 
 require_once("models/SpecialityManager.php"); 
+require_once("models/Speciality_agentManager.php"); 
 
 
 class AgentController {
 
     private AgentManager $agentManager;
     private SpecialityManager $specialityManager; 
+    private Speciality_agentManager $speciality_agentManager; 
 
 
     public function __construct() {
         $this->agentManager = new AgentManager(); 
         $this->specialityManager = new SpecialityManager(); 
+        $this->speciality_agentManager = new Speciality_agentManager(); 
     }
 
 
@@ -20,7 +23,7 @@ class AgentController {
     *
     */
     private function generatePage(array $data) : void {
-        extract($data); //function to create variables from the array $data_page (indice of the array becomes variable)
+        extract($data); 
         ob_start(); 
         require_once($view);
         $page_content = ob_get_clean();
@@ -100,25 +103,31 @@ class AgentController {
 
 
     /**
-    * Update a agent (page)
+    * Update an agent (page)
     *
     */
     public function updateAgent(){
 
         $agent = $this->getAgentById(); 
+        $specialities = $this->specialityManager->getAll();
+        $specialities_agents = $this->speciality_agentManager->getAll();
+       //var_dump($specialities_agents);
 
         $data_page = [
-            "page_description" => "Page de modification d'un agent d'une mission",
-            "page_title" => "Modification d'un agent d'une mission",
+            "page_description" => "Page de modification d'un agent",
+            "page_title" => "Modification d'un agent",
             "agent" => $agent,
+            "specialities" => $specialities,
+            "specialities_agents" => $specialities_agents,
             "view" => "views/updateAgentView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
     }
+    
 
     /**
-    * Update a agent (validation)
+    * Update an agent (validation)
     *
     */
     public function updateAgentValidation(): void {
@@ -126,13 +135,13 @@ class AgentController {
             $agent = new Agent($_POST);
             $this->agentManager->updateAgentDb($agent); 
         }
-        // var_dump($agent); 
         header('location:'.URL."createMission");
     }
 
 
     /**
-    * Delete a agent
+    * Delete an agent
+    *
     */
     public function deleteAgent(): void {
         $agent = $this->getAgentById();
