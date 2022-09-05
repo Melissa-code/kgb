@@ -8,6 +8,8 @@ class Contact {
     private string $datebirthday_contact;
     private string $nationality_contact;
 
+    private string $oldCode_contact;
+
 
     /* ************* Constructor ************ */ 
 
@@ -44,4 +46,7 @@ class Contact {
     public function getNationality_contact() { return $this->nationality_contact; }
     public function setNationality_contact($nationality_contact) { $this->nationality_contact = $nationality_contact; return $this; }
 
+    public function getOldCode_contact() { return $this->oldCode_contact; }
+    public function setOldCode_contact($oldCode_contact) { $this->oldCode_contact = $oldCode_contact; return $this; }
+    
 }

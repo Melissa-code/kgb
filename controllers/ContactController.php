@@ -96,26 +96,24 @@ class ContactController {
     */
     public function updateContact(){
 
-        // $contact = $this->getContactById(); 
-        // var_dump($contact);
+        $contact = $this->getContactByCode(); 
 
-        // $data_page = [
-        //     "page_description" => "Page de modification d'un contact",
-        //     "page_title" => "Modification d'un contact",
-        //     //"contact" => $contact,
-        //     "view" => "views/updateContactView.php",
-        //     "template" => "views/common/template.php"
-        // ];
-        // $this->generatePage($data_page); 
+        $data_page = [
+            "page_description" => "Page de modification d'un contact",
+            "page_title" => "Modification d'un contact",
+            "contact" => $contact,
+            "view" => "views/updateContactView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
     }
 
     public function updateContactValidation(): void {
-        // if($_POST) {
-        //     $contact = new Contact($_POST);
-        //     $this->contactManager->updateContactDb($agent); 
-        // }
-        // var_dump($contact); 
-        //header('location:'.URL."createMission");
+        if($_POST) {
+            $contact = new Contact($_POST);
+            $this->contactManager->updateContactDb($contact); 
+        }
+        header('location:'.URL."createMission");
     }
 
 

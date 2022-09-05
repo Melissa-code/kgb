@@ -90,8 +90,13 @@ class ContactManager extends Model {
     */
     public function updateContactDb(Contact $contact): void {
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Contacts SET code_contact = :code_contact');
+        $req =$pdo->prepare('UPDATE Contacts SET code_contact = :code_contact, name_contact = :name_contact, firstname_contact = :firstname_contact, datebirthday_contact = :datebirthday_contact, nationality_contact = :nationality_contact WHERE code_contact = :oldcode_contact');
         $req->bindValue(':code_contact', $contact->getCode_contact(), PDO::PARAM_STR);
+        $req->bindValue(':oldcode_contact', $contact->getOldcode_contact(), PDO::PARAM_STR);
+        $req->bindValue(':name_contact', $contact->getName_contact(), PDO::PARAM_STR);
+        $req->bindValue(':firstname_contact', $contact->getFirstname_contact(), PDO::PARAM_STR);
+        $req->bindValue(':datebirthday_contact', $contact->getDatebirthday_contact(), PDO::PARAM_STR);
+        $req->bindValue(':nationality_contact', $contact->getNationality_contact(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
