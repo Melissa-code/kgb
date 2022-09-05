@@ -153,7 +153,6 @@ try {
         break;
         case "updateStatus": 
             $statusController->updateStatus();
-            //echo $url[0];
         break;
         case "updateStatusValidation": 
             $statusController->updateStatusValidation();
@@ -169,15 +168,19 @@ try {
         case "createTypeValidation": 
             $typeController->createTypeValidation();
         break;
+        case "typesList": 
+            $typeController->typesList();
+        break;
         case "updateType": 
             //$typeController->updateType();
         break;
         case "updateTypeValidation": 
             //$typeController->updateTypeValidation();
         break;
-        case "deleteStatus": 
-            //$typeController->deleteType();
+        case "deleteType": 
+            $typeController->deleteType();
         break;
+
 
         case "createHideout": 
             $hideoutController->createHideout(); 

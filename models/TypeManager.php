@@ -83,7 +83,8 @@ class TypeManager extends Model {
 
 
     /**
-    * Delete a type
+    * Delete a type in the database 
+    *
     */
     public function deleteTypeDb(string $name_type): void {
         $pdo = $this->getDb();

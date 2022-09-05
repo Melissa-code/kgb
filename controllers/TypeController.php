@@ -6,15 +6,15 @@ class TypeController {
 
     private TypeManager $typeManager;
 
-
+    /* Constructor */ 
     public function __construct() {
-
         $this->typeManager = new TypeManager(); 
     }
 
 
     /**
     * Generate a page
+    *
     */
     private function generatePage(array $data) : void {
         extract($data); 
@@ -25,14 +25,40 @@ class TypeController {
     }
 
 
-    /**
-    * Get a type by name
-    * @return type_name
+     /**
+    * Get the type by name 
+    *
+    * @return name_type
     */
-    // public function getTypeByName() : Status {
+    public function getTypeByName() : Type {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        // $type = $this->typeManager->get(base64_decode(urldecode($params['q'])));
+        $type = $this->typeManager->get($params['q']);
+        $type = $this->typeManager->get($type->getName_type());
+        return $type; 
+    }
 
-    //     return $type; 
-    // }
+     /**
+    * Collect all the type data 
+    * Send all the type data to the typesView
+    * 
+    */
+    public function typesList() : void {
+
+        $types = $this->typeManager->getAll();
+
+        $data_page = [
+            "page_description" => "Page listant les types de missions",
+            "page_title" => "Liste des types",
+            "types" => $types,
+            "view" => "views/typesView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
 
 
     /**
@@ -62,7 +88,7 @@ class TypeController {
     /**
     * Update a type
     */
-    public function updateType(){
+    public function updateType() :void {
 
         // $type = $this->getTypeByName(); 
         // var_dump($type);
@@ -89,15 +115,14 @@ class TypeController {
 
     /**
     * Delete a type
+    *
     */
     public function deleteType(): void {
-        //$type = $this->getTypeByName();
-        //$type = $this->typeManager->get("");
-    
-        //$this->typeManager->deleteTypeDb($type->getName_type());
-        //$this->typeManager->deleteTypeDb("");
-        //unset($type); 
-        //header('location:'.URL."createMission");
+        $type = $this->getTypeByName();
+        $this->typeManager->deleteTypeDb($type->getName_type());
+        unset($type); 
+        header('location:'.URL."createMission");
+
     }
 
 

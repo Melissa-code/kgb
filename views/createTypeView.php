@@ -4,7 +4,7 @@
 <!------------- Main --------------->
 
 <section class="mb-4">
-    <button type="button" class="btn btn-light m-4"><a href="createMission">Retour</a></button>
+    <button type="button" class="btn btn-light m-4"><a href="typesList">Retour</a></button>
     <h1>Ajouter un type</h1>
 </section>
 

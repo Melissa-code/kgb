@@ -174,6 +174,10 @@
                     <option value="<?= $type->getName_type(); ?>"><?= $type->getName_type(); ?></option>
                     <?php endforeach; ?>
                 </select>
+
+                <!-- Link to see the list of the types --> 
+                <a href="typesList" class="text-white">Voir la liste des types -></a>
+
                 <!-- Links add update & delete a type --> 
                 <div>
                 <button type="button" class="btn btn-light ms-2"><a href="createType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un type" style="width: 1.5rem;"></a></button>

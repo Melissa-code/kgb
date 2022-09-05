@@ -8,8 +8,8 @@ class StatusController {
     private StatusManager $statusManager;
 
 
+    /* constructor */ 
     public function __construct() {
-
         $this->statusManager = new StatusManager(); 
         $this->missionManager = new MissionManager(); 
     }
