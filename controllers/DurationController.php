@@ -89,24 +89,27 @@ class DurationController {
     */
     public function updateDuration(){
 
-        // $duration = $this->getDurationById(); 
-        // var_dump($duration);
+        $duration = $this->getDurationById(); 
+        //var_dump($duration);
 
-        // $data_page = [
-        //     "page_description" => "Page de modification du statut d'une mission",
-        //     "page_title" => "Modification du statut d'une mission",
-        //     //"duration" => $duration,
-        //     "view" => "views/updateDurationView.php",
-        //     "template" => "views/common/template.php"
-        // ];
-        // $this->generatePage($data_page); 
+        $data_page = [
+            "page_description" => "Page de modification de la durée d'une mission",
+            "page_title" => "Modification d'une durée",
+            "duration" => $duration,
+            "view" => "views/updateDurationView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
     }
 
+
     public function updateDurationValidation(): void {
-        // if($_POST) {
-        //     $duration = new Duration($_POST);
-        //     $this->durationManager->updatedurationDb($duration); 
-        // }
+
+        if($_POST) {
+            $duration = new Duration($_POST);
+            //var_dump($_POST);
+            $this->durationManager->updatedurationDb($duration); 
+        }
         // var_dump($duration); 
         //header('location:'.URL."createMission");
     }
@@ -116,9 +119,8 @@ class DurationController {
     * Delete a duration
     */
     public function deleteDuration(): void {
+
         $duration = $this->getDurationById();
-        var_dump($duration); 
- 
         $this->durationManager->deleteDurationDb($duration->getId_duration());
         unset($duration); 
         header('location:'.URL."createMission");

@@ -147,10 +147,7 @@
                     <option value="<?= $duration->getId_duration(); ?>"><?= $duration->getId_duration(); ?></option>
                     <?php endforeach; ?>
                 </select>
-                <!-- Links add update & delete a duration --> 
-                <button type="button" class="btn btn-light ms-2"><a href="createDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une durée" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-warning ms-2"><a href="updateDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une durée" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-danger ms-2"><a href="deleteDuration" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une durée" style="width: 1.5rem;"></a></button>
+          
                 <!-- Link to see the list of the durations --> 
                 <a href="durationsList" class="text-white">Voir la liste des durées -></a>
             </div>

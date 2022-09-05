@@ -77,12 +77,19 @@ class DurationManager extends Model{
 
 
     /**
-    * Update a duration
+    * Update a duration in the database
+    *
     */
     public function updateDurationDb(Duration $duration): void {
+
+        //var_dump($_POST['oldid_duration']); 
+
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Durations SET id_duration = :id_duration');
-        $req->bindValue(':id_duration', $duration->getId_duration(), PDO::PARAM_STR);
+        $req =$pdo->prepare('UPDATE Durations SET id_duration = :id_duration, start_duration = :start_duration, end_duration = :end_duration WHERE id_duration = :oldid_duration');
+        $req->bindValue(':id_duration', $duration->getId_duration(), PDO::PARAM_INT);
+        $req->bindValue(':oldid_duration', $duration->getOldid_duration(), PDO::PARAM_INT);
+        $req->bindValue(':start_duration', $duration->getStart_duration(), PDO::PARAM_STR);
+        $req->bindValue(':end_duration', $duration->getEnd_duration(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
@@ -90,6 +97,7 @@ class DurationManager extends Model{
 
     /**
     * Delete a duration in the database
+    *
     */
     public function deleteDurationDb(string $id_duration): void {
         $pdo = $this->getDb();

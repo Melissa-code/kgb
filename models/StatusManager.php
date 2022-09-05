@@ -82,20 +82,7 @@ class StatusManager extends Model {
         $req->closeCursor();
     }
 
-
-    // public function updateStatusDb($codeStatus): void {
-    //     $pdo = $this->getDb();
-    //     $req = $pdo->prepare('UPDATE Status SET code_status = :code_status WHERE code_status = :code_status');
-    //     $req->bindValue(':code_status', $codeStatus, PDO::PARAM_STR);
-    //     $req->execute();
-    //     $req->closeCursor();
-
-        // if($res > 0) {
-        //     $this->get($identifiant)->setCode_status($identifiant);
-        // }
-   // }
-
-
+    
     /**
     * Delete a status in the database 
     */

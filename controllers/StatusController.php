@@ -105,10 +105,6 @@ class StatusController {
 
     public function updateStatusValidation(): void {
 
-        // $codeStatus = $this->statusManager->get($_POST['code_status']);
-        //var_dump($codeStatus); 
-        
-
         if($_POST) {
             $status = new Status($_POST);
             //var_dump($_POST);
@@ -116,12 +112,6 @@ class StatusController {
             header('location:'.URL."createMission");
         }
        
-        //     $status->hydrate($_POST);
-        //     print_r($status);
-        //     $this->statusManager->updateStatusDb($status); 
-        // }
-        //$this->statusManager->updateStatusDb($codeStatus); 
-        //header('location:'.URL."createMission");
     }
 
 
