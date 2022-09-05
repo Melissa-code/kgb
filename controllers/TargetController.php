@@ -6,7 +6,6 @@ class TargetController {
 
     private TargetManager $targetManager;
 
-
     public function __construct() {
         $this->targetManager = new TargetManager(); 
     }
@@ -25,17 +24,44 @@ class TargetController {
 
 
     /**
-    * Get a target by code
+    * Get the target by code 
+    *
     * @return code_target
     */
-    // public function getTargetByCode() : Target {
+    public function getTargetByCode() : Target {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        // $target = $this->targetManager->get(base64_decode(urldecode($params['q'])));
+        $target = $this->targetManager->get($params['q']);
+        $target = $this->targetManager->get($target->getCode_target());
+        return $target ;
+    }
 
-    //     return $target; 
-    // }
+    /**
+    * Get all the targets (array)
+    * Send them to the targetsView
+    * 
+    */
+    public function targetsList() : void {
+
+        $targets  = $this->targetManager->getAll();
+
+        $data_page = [
+            "page_description" => "Page listant les cibles",
+            "page_title" => "Liste des cibles",
+            "targets" => $targets,
+            "view" => "views/targetsView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
 
 
     /**
-    * Create a target
+    * Create a target (page)
+    *
     */
     public function createTarget() : void {
 
@@ -48,52 +74,57 @@ class TargetController {
         $this->generatePage($data_page); 
     }
 
+
+    /**
+    * Create a target (validation)
+    *
+    */
     public function createTargetValidation(): void {
         if($_POST) {
             $newTarget = new Target($_POST);
             $this->targetManager->createTargetDb($newTarget); 
         }
-       //var_dump($newTarget); 
        header('location:'.URL."createMission");
        exit();
     }
 
+
     /**
-    * Update a target
+    * Update a target (page)
+    *
     */
     public function updateTarget(){
 
-        // $target = $this->getTargetByCode(); 
-        // var_dump($target);
+        $target = $this->getTargetByCode(); 
 
-        // $data_page = [
-        //     "page_description" => "Page de modification d'une cible",
-        //     "page_title" => "Modification d'une cible",
-        //     //"target" => $target,
-        //     "view" => "views/updateTargetView.php",
-        //     "template" => "views/common/template.php"
-        // ];
-        // $this->generatePage($data_page); 
+        $data_page = [
+            "page_description" => "Page de modification d'une cible",
+            "page_title" => "Modification d'une cible",
+            "target" => $target,
+            "view" => "views/updateTargetView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
     }
 
     public function updateTargetValidation(): void {
-        // if($_POST) {
-        //     $target = new Target($_POST);
-        //     $this->contactTarget->updateTargetDb($target); 
-        // }
-        // var_dump($target); 
+        if($_POST) {
+            $target = new Target($_POST);
+            $this->targetManager->updateTargetDb($target); 
+        }
         //header('location:'.URL."createMission");
     }
 
 
     /**
     * Delete a target
+    *
     */
     public function deleteTarget(): void {
-        //$target = $this->getTargetByCode();
-        //$this->contactTarget->deleteTargetDb($target->getCode_target());
-        //unset($target); 
-        //header('location:'.URL."createMission");
+        $target = $this->getTargetByCode();
+        $this->targetManager->deleteTargetDb($target->getCode_target());
+        unset($target); 
+        header('location:'.URL."createMission");
     }
 
 

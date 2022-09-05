@@ -115,10 +115,6 @@
                 <div class="col-12 d-flex justify-content-start">
                     <!-- Link to see the list of the contacts --> 
                     <a href="contactsList" class="text-white">Voir les contacts >></a>
-
-                    <button type="button" class="btn btn-light  my-1 rounded-2"><a href="createContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un contact" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un contact" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteContact" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un contact" style="width: 1.5rem;"></a></button>
                 </div>
             <!-- </div> -->
               
@@ -137,9 +133,8 @@
                 <!-- </div> -->
                 <!-- Links add update & delete a target --> 
                 <div class="col-12 d-flex justify-content-start">
-                    <button type="button" class="btn btn-light my-1 rounded-2"><a href="createTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cible" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteTarget" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une cible" style="width: 1.5rem;"></a></button>
+                    <!-- Link to see the list of the targets --> 
+                    <a href="targetsList" class="text-white">Voir les cibles >></a>
                 </div>
             <!-- </div> -->
 

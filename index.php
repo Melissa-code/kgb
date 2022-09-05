@@ -141,14 +141,17 @@ try {
         case "createTargetValidation": 
             $targetController->createTargetValidation();
         break;
+        case "targetsList": 
+            $targetController->targetsList();
+        break;
         case "updateTarget": 
-            //$targetController->updateTarget();
+            $targetController->updateTarget();
         break;
         case "updateTargetValidation": 
-            //$targetController->updateTargetValidation();
+            $targetController->updateTargetValidation();
         break;
         case "deleteTarget": 
-            //$targetController->deleteTarget();
+            $targetController->deleteTarget();
         break;
 
         // duration

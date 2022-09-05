@@ -9,6 +9,9 @@ class Target {
     private string $nationality_target; 
 
 
+    private string $oldCode_target;
+
+
     /* ************* Constructor ************ */ 
 
     public function __construct(array $data) {
@@ -42,5 +45,9 @@ class Target {
 
     public function getNationality_target(){ return $this->nationality_target; }
     public function setNationality_target($nationality_target){ $this->nationality_target = $nationality_target;return $this;  }
+  
+    public function getOldCode_target(){ return $this->oldCode_target; }
+    public function setOldCode_target($oldCode_target) { $this->oldCode_target = $oldCode_target; return $this; }
+
     
 }

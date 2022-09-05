@@ -89,8 +89,13 @@ class TargetManager extends Model {
     */
     public function updateTargetDb(Target $target): void {
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Targets SET code_target = :code_target');
+        $req =$pdo->prepare('UPDATE Targets SET code_target = :code_target, name_target = :name_target, firstname_target = :firstname_target, datebirthday_target = :datebirthday_target, nationality_target = :nationality_target WHERE code_target = :oldcode_target');
         $req->bindValue(':code_target', $target->getCode_target(), PDO::PARAM_STR);
+        $req->bindValue(':oldcode_target', $target->getOldcode_target(), PDO::PARAM_STR);
+        $req->bindValue(':name_target', $target->getName_target(), PDO::PARAM_STR);
+        $req->bindValue(':firstname_target', $target->getFirstname_target(), PDO::PARAM_STR);
+        $req->bindValue(':datebirthday_target', $target->getDatebirthday_target(), PDO::PARAM_STR);
+        $req->bindValue(':nationality_target', $target->getNationality_target(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
@@ -99,7 +104,7 @@ class TargetManager extends Model {
     /**
     * Delete a target
     */
-    public function deleteTargetDb(int $code_target): void {
+    public function deleteTargetDb(string $code_target): void {
         $pdo = $this->getDb();
         $req = $pdo->prepare('DELETE FROM Targets WHERE code_target = :code_target');
         $req->bindValue(':code_target', $code_target, PDO::PARAM_STR);
