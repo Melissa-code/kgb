@@ -81,19 +81,25 @@ class HideoutManager extends Model {
 
     
     /**
-    * Update a hideout 
+    * Update a hideout in the database
     */
-    public function updateHideoutsDb(Hideout $hideout): void {
+    public function updateHideoutDb(Hideout $hideout): void {
+
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Hideouts SET id_hideout = :id_hideout');
-        $req->bindValue(':id_hideout', (int)$hideout->getId_hideout(), PDO::PARAM_INT);
+        $req =$pdo->prepare('UPDATE Hideouts SET id_hideout = :id_hideout, address_hideout = :address_hideout, country_hideout = :country_hideout, type_hideout = :type_hideout WHERE id_hideout = :oldid_hideout');
+        $req->bindValue(':id_hideout', $hideout->getId_hideout(), PDO::PARAM_INT);
+        $req->bindValue(':oldid_hideout', $hideout->getOldid_hideout(), PDO::PARAM_INT);
+        $req->bindValue(":address_hideout", $hideout->getAddress_hideout(), PDO::PARAM_STR);
+        $req->bindValue(":country_hideout", $hideout->getCountry_hideout(), PDO::PARAM_STR);
+        $req->bindValue(":type_hideout", $hideout->getType_hideout(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
 
 
     /**
-    * Delete a hideout 
+    * Delete a hideout in the database
+    *
     */
     public function deleteHideoutDb(int $id_hideout): void {
         $pdo = $this->getDb();

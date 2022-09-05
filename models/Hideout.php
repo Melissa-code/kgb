@@ -7,6 +7,8 @@ class Hideout {
     private string $country_hideout; 
     private string $type_hideout; 
 
+    private int $oldid_hideout; 
+
 
     /* ************* Constructor ************ */ 
 
@@ -39,4 +41,9 @@ class Hideout {
     public function getType_hideout() { return $this->type_hideout;}
     public function setType_hideout($type_hideout) {$this->type_hideout = $type_hideout; return $this; }
 
+
+    public function getOldid_hideout() { return $this->oldid_hideout; }
+    public function setOldid_hideout($oldid_hideout) { $this->oldid_hideout = $oldid_hideout; return $this; }
+
+    
 }

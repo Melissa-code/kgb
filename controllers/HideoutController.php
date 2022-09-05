@@ -14,6 +14,7 @@ class HideoutController {
 
     /**
     * Generate a page
+    *
     */
     private function generatePage(array $data) : void {
         extract($data); 
@@ -24,14 +25,40 @@ class HideoutController {
     }
 
 
-    /**
-    * Get a hideout by id
+     /**
+    * Get the hideout by id 
     * @return id_hideout
     */
-    // public function getHideoutById() : Hideout {
+    public function getHideoutById() : Hideout {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        // $hideout = $this->hideoutManager->get(base64_decode(urldecode($params['q'])));
+        $hideout = $this->hideoutManager->get($params['q']);
+        $hideout = $this->hideoutManager->get($hideout->getId_hideout());
+        return $hideout; 
+    }
 
-    //     return $hideout; 
-    // }
+
+     /**
+    * Collect all the hideouts data 
+    * Send all the hideout data to the hideoutsView
+    * 
+    */
+    public function hideoutsList() : void {
+
+        $hideouts = $this->hideoutManager->getAll();
+
+        $data_page = [
+            "page_description" => "Page listant les planques",
+            "page_title" => "Liste des Planques",
+            "hideouts" => $hideouts,
+            "view" => "views/hideoutsView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
 
 
     /**
@@ -62,37 +89,36 @@ class HideoutController {
     */
     public function updateHideout(){
 
-        // $hideout = $this->getHideoutById(); 
-        // var_dump($hideout);
+        $hideout = $this->getHideoutById(); 
 
-        // $data_page = [
-        //     "page_description" => "Page de modification d'une cachette",
-        //     "page_title" => "Modification d'une cachette",
-        //     "hideout" => $hideout,
-        //     "view" => "views/updateHideoutView.php",
-        //     "template" => "views/common/template.php"
-        // ];
-        // $this->generatePage($data_page); 
+        $data_page = [
+            "page_description" => "Page de modification d'une planque",
+            "page_title" => "Modification d'une planque",
+            "hideout" => $hideout,
+            "view" => "views/updateHideoutView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
     }
 
     public function updateHideoutValidation(): void {
-        // if($_POST) {
-        //     $hideout = new Hideout($_POST);
-        //     $this->agentHideout->updateHideoutDb($hideout); 
-        // }
-        // var_dump($hideout); 
-        //header('location:'.URL."createMission");
+        if($_POST) {
+            $hideout = new Hideout($_POST);
+            $this->hideoutManager->updateHideoutDb($hideout); 
+        }
+        header('location:'.URL."createMission");
     }
 
 
     /**
     * Delete a hideout
+    *
     */
     public function deleteHideout(): void {
-        //$hideout = $this->getHideoutById();
-        //$this->hideoutManager->deleteHideoutDb($hideout->getId_hideout());
-        //unset($hideout); 
-        //header('location:'.URL."createMission");
+        $hideout = $this->getHideoutById();
+        $this->hideoutManager->deleteHideoutDb($hideout->getId_hideout());
+        unset($hideout); 
+        header('location:'.URL."createMission");
     }
 
 

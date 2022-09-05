@@ -72,6 +72,23 @@ try {
         break;
 
 
+        case "createSpeciality": 
+            $specialityController->createSpeciality(); 
+        break;
+        case "createSpecialityValidation": 
+            $specialityController->createSpecialityValidation();
+        break;
+        case "updateSpeciality": 
+            //$specialityController->updateSpeciality();
+        break;
+        case "updateSpecialityValidation": 
+            //$specialityController->updateSpecialityValidation();
+        break;
+        case "deleteSpeciality": 
+            //$specialityController->deleteSpeciality();
+        break;
+
+
         case "createAgent": 
             $agentController->createAgent(); 
         break;
@@ -181,37 +198,24 @@ try {
             $typeController->deleteType();
         break;
 
-
+        
         case "createHideout": 
             $hideoutController->createHideout(); 
         break;
         case "createHideoutValidation": 
             $hideoutController->createHideoutValidation();
         break;
+        case "hideoutsList": 
+            $hideoutController->hideoutsList();
+        break;
         case "updateHideout": 
-            //$hideoutController->updateHideout();
+            $hideoutController->updateHideout();
         break;
         case "updateHideoutValidation": 
-            //$hideoutController->updateHideoutValidation();
+            $hideoutController->updateHideoutValidation();
         break;
         case "deleteHideout": 
-            //$hideoutController->deleteHideout();
-        break;
-
-        case "createSpeciality": 
-            $specialityController->createSpeciality(); 
-        break;
-        case "createSpecialityValidation": 
-            $specialityController->createSpecialityValidation();
-        break;
-        case "updateSpeciality": 
-            //$specialityController->updateSpeciality();
-        break;
-        case "updateSpecialityValidation": 
-            //$specialityController->updateSpecialityValidation();
-        break;
-        case "deleteSpeciality": 
-            //$specialityController->deleteSpeciality();
+            $hideoutController->deleteHideout();
         break;
 
         

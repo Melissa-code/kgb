@@ -178,12 +178,6 @@
                 <!-- Link to see the list of the types --> 
                 <a href="typesList" class="text-white">Voir la liste des types -></a>
 
-                <!-- Links add update & delete a type --> 
-                <div>
-                <button type="button" class="btn btn-light ms-2"><a href="createType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un type" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-warning ms-2"><a href="updateType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un type" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-danger ms-2"><a href="deleteType" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un type" style="width: 1.5rem;"></a></button>
-                </div>
             </div>
 
             <!-- id_hideout --> 
@@ -197,7 +191,11 @@
                     </div>
                     <?php endforeach; ?>
                 </div>
+
                 <div class="col-12">
+                <!-- Link to see the list of the hideouts --> 
+                <a href="hideoutsList" class="text-white">Voir la liste des planques -></a>
+
                     <!-- Links add update & delete a hideout --> 
                     <button type="button" class="btn btn-light my-1"><a href="createHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une planque" style="width: 1.5rem;"></a></button>
                     <button type="button" class="btn btn-warning ms-1 my-1"><a href="updateHideout" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une planque" style="width: 1.5rem;"></a></button>
