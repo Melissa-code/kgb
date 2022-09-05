@@ -63,6 +63,7 @@ class SpecialityController {
 
     /**
     * Create a speciality
+    *
     */
     public function createSpeciality() : void {
 
@@ -86,6 +87,7 @@ class SpecialityController {
         header('location:'.URL."createMission");
         exit();
     }
+
 
     /**
     * Update a speciality 

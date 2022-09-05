@@ -17,6 +17,7 @@ class AgentController {
 
     /**
     * Generate a page
+    *
     */
     private function generatePage(array $data) : void {
         extract($data); //function to create variables from the array $data_page (indice of the array becomes variable)
@@ -28,17 +29,45 @@ class AgentController {
 
 
     /**
-    * Get a agent by id
+    * Get the agent by id
+    *
     * @return id_agent
     */
-    // public function getStatusByCode() : Status {
-
-    //     return $agent; 
-    // }
+    public function getAgentById() : Agent {
+        $query = $_SERVER;
+        $url = $query['SERVER_NAME'].":".$query['SERVER_PORT'].$query['REQUEST_URI'];
+        $l = parse_url($url);
+        parse_str($l['query'], $params);
+        // $agent = $this->agentManager->get(base64_decode(urldecode($params['q'])));
+        $agent = $this->agentManager->get($params['q']);
+        $agent  = $this->agentManager->get($agent->getId_agent());
+        return $agent ; 
+    }
 
 
     /**
-    * Create a agent
+    * Collect all the agent data 
+    * Send all the agent data to the agentsView
+    * 
+    */
+    public function agentsList() : void {
+
+        $agents = $this->agentManager->getAll();
+
+        $data_page = [
+            "page_description" => "Page listant les agents",
+            "page_title" => "Liste des agents",
+            "agents" => $agents,
+            "view" => "views/agentsView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
+    }
+
+
+    /**
+    * Create an agent (page)
+    *
     */
     public function createAgent() : void {
 
@@ -54,7 +83,13 @@ class AgentController {
         $this->generatePage($data_page); 
     }
 
+
+    /**
+    * Create an agent (validation)
+    *
+    */
     public function createAgentValidation(): void {
+
         if($_POST) {
             $newAgent = new Agent($_POST);
             $this->agentManager->createAgentDb($newAgent); 
@@ -63,31 +98,36 @@ class AgentController {
        exit();
     }
 
+
     /**
-    * Update a agent
+    * Update a agent (page)
+    *
     */
     public function updateAgent(){
 
-        // $agent = $this->getAgentById(); 
-        // var_dump($agent);
+        $agent = $this->getAgentById(); 
 
-        // $data_page = [
-        //     "page_description" => "Page de modification d'un agent d'une mission",
-        //     "page_title" => "Modification d'un agent d'une mission",
-        //     //"agent" => $agent,
-        //     "view" => "views/updateAgentView.php",
-        //     "template" => "views/common/template.php"
-        // ];
-        // $this->generatePage($data_page); 
+        $data_page = [
+            "page_description" => "Page de modification d'un agent d'une mission",
+            "page_title" => "Modification d'un agent d'une mission",
+            "agent" => $agent,
+            "view" => "views/updateAgentView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
     }
 
+    /**
+    * Update a agent (validation)
+    *
+    */
     public function updateAgentValidation(): void {
-        // if($_POST) {
-        //     $agent = new Agent($_POST);
-        //     $this->agentManager->updateAgentDb($agent); 
-        // }
+        if($_POST) {
+            $agent = new Agent($_POST);
+            $this->agentManager->updateAgentDb($agent); 
+        }
         // var_dump($agent); 
-        //header('location:'.URL."createMission");
+        header('location:'.URL."createMission");
     }
 
 
@@ -95,10 +135,10 @@ class AgentController {
     * Delete a agent
     */
     public function deleteAgent(): void {
-        //$agent = $this->getAgentById();
-        //$this->agentManager->deleteAgentDb($status->getCode_status());
-        //unset($agent); 
-        //header('location:'.URL."createMission");
+        $agent = $this->getAgentById();
+        $this->agentManager->deleteAgentDb($agent->getId_agent());
+        unset($agent); 
+        header('location:'.URL."createMission");
     }
 
 

@@ -68,11 +68,6 @@
 
                 <!-- Link to see the list of the hideouts --> 
                 <a href="specialitiesList" class="text-white">Voir la liste des spécialités -></a>
-
-                <!-- Links add update & delete a status --> 
-                <button type="button" class="btn btn-light ms-2"><a href="createSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-warning ms-2"><a href="updateSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une spécialité" style="width: 1.5rem;"></a></button>
-                <button type="button" class="btn btn-danger ms-2"><a href="deleteSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une spécialité" style="width: 1.5rem;"></a></button>
             </div>
 
             <!-- id_agent --> 
@@ -93,11 +88,13 @@
                         <?php endforeach; ?>
                     <?php endforeach; ?>
                 <!-- </div> -->
+
+                <!-- Link to see the list of the agents --> 
+                <a href="agentsList" class="text-white">Voir la liste des agents-></a>
+
                 <!-- Links add update & delete a agent --> 
                 <div class="col-12 d-flex justify-content-start">
-                    <button type="button" class="btn btn-light my-1 rounded-2"><a href="createAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-2 my-1 rounded-2"><a href="updateAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-2 my-1 rounded-2"><a href="deleteAgent" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un agent" style="width: 1.5rem;"></a></button>
+           
                 </div>
             <!-- </div> -->
 

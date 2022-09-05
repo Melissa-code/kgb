@@ -98,16 +98,20 @@ try {
         case "createAgentValidation": 
             $agentController->createAgentValidation();
         break;
+        case "agentsList": 
+            $agentController->agentsList();
+        break;
         case "updateAgent": 
-            //$agentController->updateAgent();
+            $agentController->updateAgent();
         break;
         case "updateAgentValidation": 
-            //$agentController->updateAgentValidation();
+            $agentController->updateAgentValidation();
         break;
         case "deleteAgent": 
-            //$agentController->deleteAgent();
+            $agentController->deleteAgent();
         break;
 
+        
         case "createContact": 
             $contactController->createContact(); 
         break;

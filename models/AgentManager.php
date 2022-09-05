@@ -93,29 +93,30 @@ class AgentManager extends Model {
 
     
     /**
-    * Update a agent
+    * Update a agent in the database
+    *
     */
-    public function updateAgentsDb(Agent $agent): void {
+    public function updateAgentDb(Agent $agent): void {
+
         $pdo = $this->getDb();
         $req =$pdo->prepare('UPDATE Agents SET id_agent = :id_agent');
-        $req->bindValue(':id_agent', (int)$agent->getId_agent(), PDO::PARAM_INT);
+        $req->bindValue(':id_agent', $agent->getId_agent(), PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
     }
 
 
     /**
-    * Delete a agent
+    * Delete a agent in the database
+    *
     */
     public function deleteAgentDb(int $id_agent): void {
+
         $pdo = $this->getDb();
         $req = $pdo->prepare('DELETE FROM Agents WHERE id_agent = :id_agent');
         $req->bindValue(':id_agent', $id_agent, PDO::PARAM_INT);
         $req->execute();
         $req->closeCursor();
     }
-
-
-
 
 }

@@ -9,6 +9,7 @@ class Agent {
     private string $nationality_agent; 
 
     private array $name_speciality; 
+    private int $oldid_agent;
 
 
     /* ************* Constructor  ************ */ 
@@ -16,6 +17,7 @@ class Agent {
     public function __construct(array $data) {
         $this->hydrate($data); 
     }
+
 
     /* ************* hydrate ************ */ 
 
@@ -49,5 +51,8 @@ class Agent {
     public function getName_speciality() { return $this->name_speciality;}
     public function setName_speciality($name_speciality) { $this->name_speciality = $name_speciality; return $this;  }
 
-    
+    public function getOldid_agent() { return $this->oldid_agent; }
+    public function setOldid_agent($oldid_agent) {$this->oldid_agent = $oldid_agent;  return $this; }
+
+
 }
