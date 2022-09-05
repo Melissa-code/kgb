@@ -172,10 +172,10 @@ try {
             $typeController->typesList();
         break;
         case "updateType": 
-            //$typeController->updateType();
+            $typeController->updateType();
         break;
         case "updateTypeValidation": 
-            //$typeController->updateTypeValidation();
+            $typeController->updateTypeValidation();
         break;
         case "deleteType": 
             $typeController->deleteType();

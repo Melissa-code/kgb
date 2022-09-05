@@ -87,29 +87,28 @@ class TypeController {
 
     /**
     * Update a type
+    *
     */
     public function updateType() :void {
 
-        // $type = $this->getTypeByName(); 
-        // var_dump($type);
+        $type = $this->getTypeByName(); 
 
-        // $data_page = [
-        //     "page_description" => "Page de modification du type d'une mission",
-        //     "page_title" => "Modification du type d'une mission",
-        //     //"type" => $type,
-        //     "view" => "views/updateTypeView.php",
-        //     "template" => "views/common/template.php"
-        // ];
-        // $this->generatePage($data_page); 
+        $data_page = [
+            "page_description" => "Page de modification du type d'une mission",
+            "page_title" => "Modification du type d'une mission",
+            "type" => $type,
+            "view" => "views/updateTypeView.php",
+            "template" => "views/common/template.php"
+        ];
+        $this->generatePage($data_page); 
     }
 
     public function updateTypeValidation(): void {
-        // if($_POST) {
-        //     $type = new Type($_POST);
-        //     $this->typeManager->updateTypeDb($type); 
-        // }
-        // var_dump($type); 
-        //header('location:'.URL."createMission");
+        if($_POST) {
+            $type = new Type($_POST);
+            $this->typeManager->updateTypeDb($type); 
+        }
+        header('location:'.URL."createMission");
     }
 
 

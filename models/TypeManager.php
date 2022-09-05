@@ -71,12 +71,14 @@ class TypeManager extends Model {
 
 
     /**
-    * Update a type
+    * Update a type in the database 
+    *
     */
     public function updateTypeDb(Type $type): void {
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Types SET name_type = :name_type');
+        $req =$pdo->prepare('UPDATE Types SET name_type = :name_type WHERE name_type = :oldname_type');
         $req->bindValue(':name_type', $type->getName_type(), PDO::PARAM_STR);
+        $req->bindValue(':oldname_type', $type->getOldname_type(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
     }
