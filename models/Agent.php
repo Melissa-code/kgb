@@ -10,6 +10,7 @@ class Agent {
 
     private array $name_speciality; 
     private int $oldid_agent;
+    private array $oldname_speciality; 
 
 
     /* ************* Constructor  ************ */ 
@@ -54,5 +55,8 @@ class Agent {
     public function getOldid_agent() { return $this->oldid_agent; }
     public function setOldid_agent($oldid_agent) {$this->oldid_agent = $oldid_agent;  return $this; }
 
+    public function getOldname_speciality() { return $this->oldname_speciality; }
+    public function setOldname_speciality($oldname_speciality){ $this->oldname_speciality = $oldname_speciality; return $this; }
 
+    
 }

@@ -19,7 +19,7 @@ class AgentController {
 
 
     /**
-    * Generate a page
+    * Generate page
     *
     */
     private function generatePage(array $data) : void {
@@ -49,8 +49,7 @@ class AgentController {
 
 
     /**
-    * Collect all the agent data 
-    * Send all the agent data to the agentsView
+    * All the agents
     * 
     */
     public function agentsList() : void {
@@ -110,8 +109,7 @@ class AgentController {
 
         $agent = $this->getAgentById(); 
         $specialities = $this->specialityManager->getAll();
-        $specialities_agents = $this->speciality_agentManager->getAll();
-       //var_dump($specialities_agents);
+        $specialities_agents = $this->speciality_agentManager->getAll(); 
 
         $data_page = [
             "page_description" => "Page de modification d'un agent",
@@ -131,11 +129,12 @@ class AgentController {
     *
     */
     public function updateAgentValidation(): void {
+      
         if($_POST) {
             $agent = new Agent($_POST);
             $this->agentManager->updateAgentDb($agent); 
         }
-        header('location:'.URL."createMission");
+        //header('location:'.URL."createMission");
     }
 
 

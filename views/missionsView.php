@@ -15,7 +15,7 @@ if(isset($_SESSION['connect'])) {
 </section>
 
 
-<section class="row m-3">
+<section id="missions-list">
 
     <!-- Display the create button if the admin is logged in -->
     <?php if(isset($_SESSION['connect'])) :?>

@@ -18,6 +18,7 @@
     <?php if(!empty($page_css)) : ?>
         <link href="<?= URL ?>public/CSS/<?=$page_css?>" rel="stylesheet">
     <?php endif; ?>
+
 </head>
 
 

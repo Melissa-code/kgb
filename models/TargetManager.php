@@ -1,5 +1,4 @@
 <?php 
-
 require_once("models/Model.php");
 require_once("models/Target.php");
 
@@ -27,9 +26,9 @@ class TargetManager extends Model {
     }
     
 
-
     /**
     * Get one target only
+    *
     * @return Target $target
     */
     public function get($code_target) : Target {
@@ -45,7 +44,8 @@ class TargetManager extends Model {
 
 
     /**
-    * Create a target
+    * Create a target in the database 
+    *
     */
     public function createTargetDb(Target $newTarget): void {
 
@@ -85,7 +85,8 @@ class TargetManager extends Model {
 
     
     /**
-    * Update a target
+    * Update a target in the database 
+    *
     */
     public function updateTargetDb(Target $target): void {
         $pdo = $this->getDb();
@@ -102,7 +103,8 @@ class TargetManager extends Model {
 
 
     /**
-    * Delete a target
+    * Delete a target in the database 
+    *
     */
     public function deleteTargetDb(string $code_target): void {
         $pdo = $this->getDb();
@@ -111,6 +113,5 @@ class TargetManager extends Model {
         $req->execute();
         $req->closeCursor();
     }
-
 
 }

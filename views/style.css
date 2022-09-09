@@ -28,6 +28,7 @@ h1 {
     font-family: 'Montserrat', sans-serif; 
     text-align: center;
     padding-top: 5vh;
+    
 }
 
 h2 {
@@ -35,23 +36,18 @@ h2 {
 }
 
 a {
-    color:#0D0B07;
+    color: #0D0B07;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #F7F5F3;
     text-decoration: none;
 }
 
 footer {
     background-color: #AAA8A5;
     color: #0D0B07;
-}
-
-.footer-link {
-    color: #0D0B07;
-    text-decoration: none;
-}
-
-.footer-link:hover {
-    color: #F7F5F3;
-    text-decoration: none;
 }
 
 #menu {
@@ -72,8 +68,3 @@ footer {
     opacity: 0.9;
 } 
 
-
-
-.link-custom {
-    color:green!important;
-}

@@ -48,10 +48,8 @@
                         <?php endforeach; ?>
                 </div>
                 <!-- Links add update & delete a contact --> 
-                <div class="col-12 d-flex justify-content-start">
-                    <button type="button" class="btn btn-light"><a href="createSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-warning ms-2"><a href="updatespeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une spécialité" style="width: 1.5rem;"></a></button>
-                    <button type="button" class="btn btn-danger ms-2"><a href="deleteSpeciality" class="text-dark"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une spécialité" style="width: 1.5rem;"></a></button>
+                <div class="col-12 d-flex justify-content-start ">
+                    <a href="specialitiesList" class="text-white fst-italic text-decoration-none .text-reset ">Voir spécialités >></a>
                 </div>
             </div>
         <!-- button --> 
