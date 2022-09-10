@@ -310,15 +310,42 @@ class MainController {
     }
 
     /**
-    * display the updateMissionView with the mission data
+    * function update a mission
     * 
     */
     public function updateMission(): void {
+
         $mission = $this->getMissionByCode(); 
+        $agents = $this->agentManager->getAll();
+        $specialities_agents = $this->speciality_agentManager->getAll();
+        $agents_missions = $this->agent_missionManager->getAll();
+        $contacts = $this->contactManager->getAll();
+        $contacts_missions = $this->contact_missionManager->getAll();
+        $targets = $this->targetManager->getAll();
+        $targets_missions = $this->target_missionManager->getAll();
+        $durations = $this->durationManager->getAll();
+        $status = $this->statusManager->getAll(); 
+        $types = $this->typeManager->getAll();
+        $specialities = $this->specialityManager->getAll();
+        $hideouts = $this->hideoutManager->getAll();
+        $hideouts_missions = $this->hideout_missionManager->getAll();
 
         $data_page = [
             "page_description" => "Page de modification d'une mission",
             "page_title" => "Modification d'un mission",
+            "agents" => $agents,
+            "agents_missions" => $agents_missions,
+            "specialities_agents" => $specialities_agents,
+            "contacts" => $contacts,
+            "contacts_missions" => $contacts_missions,
+            "targets" => $targets,
+            "targets_missions" => $targets_missions,
+            "durations" => $durations,
+            "status" => $status,
+            "types" => $types,
+            "specialities" => $specialities,
+            "hideouts" => $hideouts,
+            "hideouts_missions" => $hideouts_missions,
             "mission" => $mission,
             "view" => "views/updateMissionView.php",
             "template" => "views/common/template.php"

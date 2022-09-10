@@ -100,7 +100,6 @@ class AgentManager extends Model {
 
         $oldname_specialities = $_POST['oldname_speciality'];
         $name_specialities = $_POST['name_speciality'];
-     
         $oldid_agent =$_POST['oldid_agent'];
 
         $pdo = $this->getDb();
@@ -116,32 +115,46 @@ class AgentManager extends Model {
         if(count($oldname_specialities) === count($name_specialities)) {
             foreach($name_specialities as $name_speciality) {
                 foreach($oldname_specialities as $oldname_speciality) {
-                   
-                    $req2 = $pdo->prepare('UPDATE Specialities_agents SET name_speciality = :name_speciality, id_agent = :id_agent WHERE id_agent = :oldid_agent');
-                    $req2->bindValue(':name_speciality', $name_speciality, PDO::PARAM_STR);
-                    $req2->bindValue(':id_agent', $agent->getOldid_agent(), PDO::PARAM_INT);
-                    $req2->bindValue(':oldid_agent', $agent->getOldid_agent(), PDO::PARAM_INT);
-                    $req2->execute();
-                   
+                    if($name_speciality != $oldname_speciality) {
+                        $req2 = $pdo->prepare('UPDATE Specialities_agents SET name_speciality = :name_speciality, id_agent = :id_agent WHERE id_agent = :oldid_agent AND name_speciality = :oldname_speciality');
+                        $req2->bindValue(':name_speciality',$name_speciality, PDO::PARAM_STR);
+                        $req2->bindValue(':oldname_speciality', $oldname_speciality, PDO::PARAM_STR);
+                        $req2->bindValue(':id_agent', $agent->getOldid_agent(), PDO::PARAM_INT);
+                        $req2->bindValue(':oldid_agent', $agent->getOldid_agent(), PDO::PARAM_INT);
+                        $req2->execute();
+                    }
                 }
             }
         }
-        // elseif(count($oldname_specialities) !== count($name_specialities) && count($name_specialities) > count($oldname_specialities)) {
-        //     foreach($name_specialities as $name_speciality) {
-        //         foreach($oldname_specialities as $oldname_speciality) {
-        //             if($name_speciality !== $oldname_speciality) {
-        //                 $req3 = $pdo->prepare("INSERT INTO Specialities_agents (name_speciality, id_agent) VALUES (:name_speciality, :id_agent)");
-        //                 $req3->bindValue(":name_speciality", $name_speciality, PDO::PARAM_STR);
-        //                 $req3->bindValue(":id_agent", $agent->getOldid_agent(), PDO::PARAM_INT);
-        //                 $req3->execute();
-        //             }
-        //         }
-        //     }
-        // } 
+        elseif(count($name_specialities) > count($oldname_specialities)) {
+            foreach($name_specialities as $name_speciality) {
+                foreach($oldname_specialities as $oldname_speciality) {
+                    if($name_speciality !== $oldname_speciality ) {
+                        $req3 = $pdo->prepare("INSERT INTO Specialities_agents (name_speciality, id_agent) VALUES (:name_speciality, :id_agent)");
+                        $req3->bindValue(":name_speciality", $name_speciality, PDO::PARAM_STR);
+                        $req3->bindValue(":id_agent", $agent->getOldid_agent(), PDO::PARAM_INT);
+                        $req3->execute();
+                    }
+                }
+            }
+        } 
+        elseif(count($name_specialities) < count($oldname_specialities)) {
+            foreach($name_specialities as $name_speciality) {
+                foreach($oldname_specialities as $oldname_speciality) {
+                    if($name_speciality !== $oldname_speciality) {
+                        $req4 = $pdo->prepare("DELETE FROM Specialities_agents WHERE id_agent = :id_agent)");
+                        $req4->bindValue(":name_speciality", $oldname_speciality, PDO::PARAM_STR);
+                        $req4->bindValue(":id_agent", $agent->getOldid_agent(), PDO::PARAM_INT);
+                        $req4->execute();
+                    }
+                }
+            }
+        } 
+
 
         
-        $req->closeCursor();
-        //$req2->closeCursor();
+        // $req->closeCursor();
+        // $req2->closeCursor();
         // $req3->closeCursor();
     }
 
