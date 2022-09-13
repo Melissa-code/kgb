@@ -1,7 +1,7 @@
 <?php 
 
-require_once("models/Model.php");
-require_once("models/Speciality.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Speciality.php");
 
 
 class SpecialityManager extends Model {

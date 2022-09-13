@@ -1,7 +1,7 @@
 <?php 
 
-require_once("models/Model.php");
-require_once("models/Contact_mission.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Contact_mission.php");
 
 
 class Contact_missionManager extends Model {

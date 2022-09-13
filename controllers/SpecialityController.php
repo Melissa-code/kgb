@@ -54,7 +54,7 @@ class SpecialityController {
             "page_description" => "Page listant les spécialités des missions",
             "page_title" => "Liste des spécialités des missions",
             "specialities" => $specialities,
-            "view" => "views/specialitiesView.php",
+            "view" => "views/read/specialitiesView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -73,7 +73,7 @@ class SpecialityController {
             "page_description" => "Page de création d'une spécialité d'une mission",
             "page_title" => "Création d'une spécialité d'une mission",
             "specialities" => $specialities, 
-            "view" => "views/createSpecialityView.php",
+            "view" => "views/create/createSpecialityView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -101,7 +101,7 @@ class SpecialityController {
             "page_description" => "Page de modification d'une spécialité d'une mission",
             "page_title" => "Modification d'une spécialité d'une mission",
             "speciality" => $speciality,
-            "view" => "views/updateSpecialityView.php",
+            "view" => "views/update/updateSpecialityView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 

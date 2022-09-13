@@ -1,6 +1,6 @@
 <?php 
-require_once("models/Model.php");
-require_once("models/Contact.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Contact.php");
 
 
 class ContactManager extends Model {

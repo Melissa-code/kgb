@@ -1,6 +1,6 @@
 <?php 
-require_once("models/Model.php");
-require_once("models/Duration.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Duration.php");
 
 class DurationManager extends Model{
 

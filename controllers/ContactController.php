@@ -53,7 +53,7 @@ class ContactController {
             "page_description" => "Page listant les statuts",
             "page_title" => "Statuts",
             "contacts" => $contacts,
-            "view" => "views/contactsView.php",
+            "view" => "views/read/contactsView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -69,7 +69,7 @@ class ContactController {
         $data_page = [
             "page_description" => "Page de création d'un contact",
             "page_title" => "Création d'un contact",
-            "view" => "views/createContactView.php",
+            "view" => "views/create/createContactView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -102,7 +102,7 @@ class ContactController {
             "page_description" => "Page de modification d'un contact",
             "page_title" => "Modification d'un contact",
             "contact" => $contact,
-            "view" => "views/updateContactView.php",
+            "view" => "views/update/updateContactView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 

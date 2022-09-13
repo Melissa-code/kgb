@@ -1,6 +1,6 @@
 <?php 
-require_once("models/Model.php");
-require_once("models/Target.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Target.php");
 
 
 class TargetManager extends Model {

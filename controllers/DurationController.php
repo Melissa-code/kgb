@@ -54,7 +54,7 @@ class DurationController {
             "page_description" => "Page listant les statuts",
             "page_title" => "Statuts",
             "durations" => $durations,
-            "view" => "views/durationsView.php",
+            "view" => "views/read/durationsView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -69,7 +69,7 @@ class DurationController {
         $data_page = [
             "page_description" => "Page de création d'une durée",
             "page_title" => "Création d'une durée",
-            "view" => "views/createDurationView.php",
+            "view" => "views/create/createDurationView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -96,7 +96,7 @@ class DurationController {
             "page_description" => "Page de modification de la durée d'une mission",
             "page_title" => "Modification d'une durée",
             "duration" => $duration,
-            "view" => "views/updateDurationView.php",
+            "view" => "views/update/updateDurationView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 

@@ -19,7 +19,7 @@ class AgentController {
 
 
     /**
-    * Generate page
+    * Generate a page
     *
     */
     private function generatePage(array $data) : void {
@@ -49,7 +49,7 @@ class AgentController {
 
 
     /**
-    * All the agents
+    * Get all the agents
     * 
     */
     public function agentsList() : void {
@@ -60,7 +60,7 @@ class AgentController {
             "page_description" => "Page listant les agents",
             "page_title" => "Liste des agents",
             "agents" => $agents,
-            "view" => "views/agentsView.php",
+            "view" => "views/read/agentsView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -79,7 +79,7 @@ class AgentController {
             "page_description" => "Page de création d'un agent",
             "page_title" => "Création d'un agent",
             "specialities" => $specialities,
-            "view" => "views/createAgentView.php",
+            "view" => "views/create/createAgentView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -117,7 +117,7 @@ class AgentController {
             "agent" => $agent,
             "specialities" => $specialities,
             "specialities_agents" => $specialities_agents,
-            "view" => "views/updateAgentView.php",
+            "view" => "views/update/updateAgentView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -132,6 +132,9 @@ class AgentController {
       
         if($_POST) {
             $agent = new Agent($_POST);
+            //var_dump($agent); 
+            //var_dump($_POST['oldname_speciality']);
+            //var_dump($_POST['name_speciality']);
             $this->agentManager->updateAgentDb($agent); 
         }
         //header('location:'.URL."createMission");
@@ -148,8 +151,6 @@ class AgentController {
         unset($agent); 
         header('location:'.URL."createMission");
     }
-
-
 
 }
 

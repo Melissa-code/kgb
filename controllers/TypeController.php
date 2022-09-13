@@ -54,7 +54,7 @@ class TypeController {
             "page_description" => "Page listant les types de missions",
             "page_title" => "Liste des types",
             "types" => $types,
-            "view" => "views/typesView.php",
+            "view" => "views/read/typesView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -69,7 +69,7 @@ class TypeController {
         $data_page = [
             "page_description" => "Page de création du type d'une mission",
             "page_title" => "Création du type d'une mission",
-            "view" => "views/createTypeView.php",
+            "view" => "views/create/createTypeView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -97,7 +97,7 @@ class TypeController {
             "page_description" => "Page de modification du type d'une mission",
             "page_title" => "Modification du type d'une mission",
             "type" => $type,
-            "view" => "views/updateTypeView.php",
+            "view" => "views/update/updateTypeView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 

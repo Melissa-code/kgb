@@ -117,7 +117,7 @@ class MainController {
             "page_description" => "Page listant l'ensemble des missions secrètes du KGB",
             "page_title" => "Missions du KGB",
             "missions" => $missions,
-            "view" => "views/missionsView.php",
+            "view" => "views/read/missionsView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -159,7 +159,7 @@ class MainController {
             "specialities" => $specialities,
             "specialities_agents" => $specialities_agents,
             "durations" => $durations,
-            "view" => "views/oneMissionView.php",
+            "view" => "views/read/oneMissionView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -244,7 +244,7 @@ class MainController {
         $data_page = [
             "page_description" => "Page de création d'une mission",
             "page_title" => "Création d'un mission",
-            "view" => "views/createMissionView.php",
+            "view" => "views/create/createMissionView.php",
             "agents" => $agents,
             "contacts" => $contacts,
             "targets" => $targets,
@@ -269,15 +269,51 @@ class MainController {
     public function createMissionValidation(): void {
 
         session_start();
+        
 
         if($_POST){
 
             $newMission = new Mission($_POST);
+            $id_agents = $newMission->getId_agent();
+            $speciality = $newMission->getName_speciality();
+           
+            $specialities_agents = $this->speciality_agentManager->getAll();
+            $one_agent = false;
+
+            foreach ($id_agents as $id_agent) {
+                foreach ($specialities_agents as $speciality_agent) {
+                    $speciality_name = $speciality_agent->getName_speciality();
+                    $speciality_agentId = $speciality_agent->getId_agent();
+
+                    if($speciality ==  $speciality_name  && $speciality_agentId == $id_agent){
+                        $one_agent = true;
+                        break;
+                    }
+                }
+            }
+            if($one_agent === false) {
+                $_SESSION['alert4'] = [
+                    "type" => "error",
+                    "msg" => "ERREUR: Au moins un agent doit avoir la même spécialité que la mission."
+                ];
+                header('location:'.URL."createMission");
+                exit();
+            }
+
+            var_dump($id_agents);
+            var_dump($speciality);
+           // var_dump($specialities_agents);
+            var_dump($one_agent);
+
+            // var_dump($newMission); 
+            //exit();
+
             //var_dump($newMission->getDescription_mission());
             $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
             $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
             $checkCountryHideout = $this->missionManager->checkCountryHideoutDb($newMission); 
  
+
             //var_dump($newMission->getDescription_mission());
             if($checkNationalityTarget) {
                 $_SESSION['alert1'] = [
@@ -347,7 +383,7 @@ class MainController {
             "hideouts" => $hideouts,
             "hideouts_missions" => $hideouts_missions,
             "mission" => $mission,
-            "view" => "views/updateMissionView.php",
+            "view" => "views/update/updateMissionView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 

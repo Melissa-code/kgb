@@ -1,7 +1,7 @@
 <?php
 
-require_once("models/Model.php");
-require_once("models/Mission.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Mission.php");
 
 
 class MissionManager extends Model {

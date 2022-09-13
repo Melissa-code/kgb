@@ -52,7 +52,7 @@ class TargetController {
             "page_description" => "Page listant les cibles",
             "page_title" => "Liste des cibles",
             "targets" => $targets,
-            "view" => "views/targetsView.php",
+            "view" => "views/read/targetsView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -68,7 +68,7 @@ class TargetController {
         $data_page = [
             "page_description" => "Page de création d'une cible",
             "page_title" => "Création d'une cible",
-            "view" => "views/createTargetView.php",
+            "view" => "views/create/createTargetView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -101,7 +101,7 @@ class TargetController {
             "page_description" => "Page de modification d'une cible",
             "page_title" => "Modification d'une cible",
             "target" => $target,
-            "view" => "views/updateTargetView.php",
+            "view" => "views/update/updateTargetView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 

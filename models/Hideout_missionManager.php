@@ -1,7 +1,7 @@
 <?php 
 
-require_once("models/Model.php");
-require_once("models/Hideout_mission.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Hideout_mission.php");
 
 
 class Hideout_missionManager extends Model {

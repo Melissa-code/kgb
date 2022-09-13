@@ -55,7 +55,7 @@ class StatusController {
             "page_description" => "Page listant les statuts",
             "page_title" => "Statuts",
             "status" => $status,
-            "view" => "views/statusView.php",
+            "view" => "views/read/statusView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -70,7 +70,7 @@ class StatusController {
         $data_page = [
             "page_description" => "Page de création du statut d'une mission",
             "page_title" => "Création du statut d'une mission",
-            "view" => "views/createStatusView.php",
+            "view" => "views/create/createStatusView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -97,7 +97,7 @@ class StatusController {
             "page_description" => "Page de modification du statut",
             "page_title" => "Modification du statut",
             "status" => $status,
-            "view" => "views/updateStatusView.php",
+            "view" => "views/update/updateStatusView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 

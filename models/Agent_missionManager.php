@@ -1,7 +1,7 @@
 <?php 
 
-require_once("models/Model.php");
-require_once("models/Agent_mission.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Agent_mission.php");
 
 
 class Agent_missionManager extends Model {

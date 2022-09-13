@@ -1,7 +1,7 @@
 <?php 
 
-require_once("models/Model.php");
-require_once("models/Type.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Type.php");
 
 
 class TypeManager extends Model {

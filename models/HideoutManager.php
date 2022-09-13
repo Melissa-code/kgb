@@ -1,7 +1,7 @@
 <?php 
 
-require_once("models/Model.php");
-require_once("models/Hideout.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Hideout.php");
 
 
 class HideoutManager extends Model {

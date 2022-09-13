@@ -1,7 +1,7 @@
 <?php 
 
-require_once("models/Model.php");
-require_once("models/Admin.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Admin.php");
 
 
 class AdminManager extends Model {

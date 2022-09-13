@@ -54,7 +54,7 @@ class HideoutController {
             "page_description" => "Page listant les planques",
             "page_title" => "Liste des Planques",
             "hideouts" => $hideouts,
-            "view" => "views/hideoutsView.php",
+            "view" => "views/read/hideoutsView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -69,7 +69,7 @@ class HideoutController {
         $data_page = [
             "page_description" => "Page de création d'une planque",
             "page_title" => "Création d'un agent d'une planque",
-            "view" => "views/createHideoutView.php",
+            "view" => "views/create/createHideoutView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
@@ -95,7 +95,7 @@ class HideoutController {
             "page_description" => "Page de modification d'une planque",
             "page_title" => "Modification d'une planque",
             "hideout" => $hideout,
-            "view" => "views/updateHideoutView.php",
+            "view" => "views/update/updateHideoutView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 

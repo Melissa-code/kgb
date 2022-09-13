@@ -1,7 +1,7 @@
 <?php 
 
-require_once("models/Model.php");
-require_once("models/Status.php");
+require_once("models/Class/Model.php");
+require_once("models/Class/Status.php");
 
 
 class StatusManager extends Model {
