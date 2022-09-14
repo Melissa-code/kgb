@@ -110,7 +110,7 @@
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     <?php endforeach; ?>
-                                    <!-- Change agents --> 
+                                    <!-- Update id_agent --> 
                                     <div>
                                         <label class="form-label mt-4">Changer d'agents : </label>
                                         <?php foreach($agents as $agent) :?>
@@ -132,7 +132,6 @@
                                             <a href="agentsList" class="text-white fst-italic">Voir les agents</a>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 <!-- code_contact --> 
@@ -152,7 +151,7 @@
                                             <?php endforeach; ?>
                                         <?php endforeach; ?>
                                     </div>
-                                    <!-- change code_contact --> 
+                                    <!-- update code_contact --> 
                                     <div>
                                     <label class="form-label">Changer de contacts : </label>
                                     <?php foreach($contacts as $contact) :?>

@@ -219,10 +219,18 @@ class MissionManager extends Model {
     */
     public function updateMissionDb(Mission $mission): void {
 
-        //$old_agents = $_POST['oldid_agent']; 
-        $id_agents = $_POST['id_agent'];
-        //print_r($old_agents); 
-        //print_r($id_agents); 
+        if(!empty($_POST['id_agent'])) {
+            $id_agents = $_POST['id_agent'];
+        } else {
+            $id_agents = $_POST['oldid_agent'];
+        }
+
+        if(!empty($_POST['code_contact'])) {
+            $code_contacts = $_POST['code_contact'];
+        } else {
+            $code_contacts = $_POST['oldcode_contact'];
+        }
+
 
         $pdo = $this->getDb();
         $req =$pdo->prepare('UPDATE Missions SET code_mission = :code_mission, title_mission = :title_mission, description_mission = :description_mission, country_mission = :country_mission, id_duration = :id_duration, code_status = :code_status, name_type = :name_type WHERE code_mission = :oldcode_mission');
@@ -236,6 +244,7 @@ class MissionManager extends Model {
         $req->bindValue(':name_type', $mission->getName_type(), PDO::PARAM_STR);
         $req->execute();
 
+        // update id_agent in the database
         if(count($id_agents) >= 1) {
             $req2 = $pdo->prepare("DELETE FROM Agents_missions WHERE code_mission = :oldcode_mission");
             $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -247,9 +256,29 @@ class MissionManager extends Model {
                 $req3->bindValue(":code_mission",  $mission->getOldcode_mission(), PDO::PARAM_STR);
                 $req3->execute();
             }
+        } 
+        $req2->closeCursor();
+        $req3->closeCursor();
+
+
+        // update code_contact in the database
+        if(count($code_contacts) >= 1) {
+            $req2 = $pdo->prepare("DELETE FROM Contacts_missions WHERE code_mission = :oldcode_mission");
+            $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
+            $req2->execute();
+
+            foreach($code_contacts as $code_contact) {
+                $req3 = $pdo->prepare("INSERT INTO Contacts_missions (code_contact, code_mission) VALUES (:code_contact, :code_mission)");
+                $req3->bindValue(":code_contact", $code_contact, PDO::PARAM_STR);
+                $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
+                $req3->execute();
+            }
        }
+    
+
            
         $req->closeCursor();
+
     }
 
 
