@@ -87,8 +87,8 @@ class MainController {
     }
 
     /**
-    * Collect the data views 
-    * Send the data views to the homeView
+    * Home page function
+    * 
     * 
     */
     public function home() : void {
@@ -105,8 +105,8 @@ class MainController {
     }
 
     /**
-    * Collect all the missions data 
-    * Send all the missions data to the missionsView
+    * Display all the missions function
+    *
     * 
     */
     public function missions() : void {
@@ -124,8 +124,8 @@ class MainController {
     }
 
     /**
-    * Collect one mission data 
-    * Send all the mission data to the oneMissionView
+    * Display all the data for one mission function
+    * 
     * 
     */
     public function oneMission(): void {
@@ -167,8 +167,8 @@ class MainController {
     }
 
     /**
-    * Collect the login data 
-    * Send all the login data to the loginView
+    * Login Admin (page) function
+    * 
     * 
     */
     public function login() : void {
@@ -185,8 +185,8 @@ class MainController {
     }
 
     /**
-    * Collect the login data from loginView
-    * Connect the Admin 
+    * Login Admin (validation) function 
+    * 
     * 
     */
     public function loginValidation(): void {
@@ -209,7 +209,7 @@ class MainController {
     }
 
     /**
-    * Logout the Admin 
+    * Logout Admin function
     * 
     */
     public function logout(): void {
@@ -224,7 +224,7 @@ class MainController {
 
 
     /**
-    * display the createMissionView 
+    * Create a mission (page) function
     * 
     */
     public function createMission(): void {
@@ -260,23 +260,20 @@ class MainController {
      
     }
 
-
     /**
-    * Collect the form data from the createMissionView
-    * Send the form data to the MissionManager 
-    * Redirecting user to the missionsView and display the new mission 
+    * Create a mission (validation) function
+    * 
+    * 
     */
     public function createMissionValidation(): void {
 
         session_start();
-        
 
         if($_POST){
 
             $newMission = new Mission($_POST);
             $id_agents = $newMission->getId_agent();
             $speciality = $newMission->getName_speciality();
-           
             $specialities_agents = $this->speciality_agentManager->getAll();
             $one_agent = false;
 
@@ -305,16 +302,10 @@ class MainController {
            // var_dump($specialities_agents);
             var_dump($one_agent);
 
-            // var_dump($newMission); 
-            //exit();
-
-            //var_dump($newMission->getDescription_mission());
             $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
             $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
             $checkCountryHideout = $this->missionManager->checkCountryHideoutDb($newMission); 
- 
 
-            //var_dump($newMission->getDescription_mission());
             if($checkNationalityTarget) {
                 $_SESSION['alert1'] = [
                     "type" => "error",
@@ -346,7 +337,7 @@ class MainController {
     }
 
     /**
-    * function update a mission
+    * Update a mission (page) function
     * 
     */
     public function updateMission(): void {
@@ -389,23 +380,23 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
+
     /**
-    * Collect the form data from the updateMissionView
-    * Send the form data to the MissionManager 
-    * Redirecting user to the missionsView and display the updating mission 
+    * Update a mission (validation) function
+    *
     */
     public function updateMissionValidation(): void {
         if($_POST) {
             $mission = new Mission($_POST);
             $this->missionManager->updateMissionDb($mission); 
         }
-        // var_dump($mission); 
-        header('location:'.URL."missions");
+        //header('location:'.URL."missions");
     }
 
+
     /**
-    * Collect the mission data 
-    * Delete the data  
+    * Delete a mission function
+    *   
     * 
     */
     public function deleteMission(): void {
@@ -416,9 +407,10 @@ class MainController {
         header('location:'.URL."missions");
     }
 
+
     /**
-    * Collect the data views 
-    * Send the data views to the errorView
+    * Error page function 
+    *
     * 
     */
     public function errorPage($msg) : void {
@@ -431,8 +423,6 @@ class MainController {
         ];
         $this->generatePage($data_page); 
     }
-
-
 
 
 }

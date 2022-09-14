@@ -110,7 +110,7 @@ class AgentManager extends Model {
         $req->bindValue(':nationality_agent', $agent->getNationality_agent(), PDO::PARAM_STR);
         $req->execute();
 
-        // if one new speciality is checked
+        // if a new speciality is checked
         if(count($name_specialities) >= 1) {
             $req2 = $pdo->prepare('DELETE FROM Specialities_agents WHERE id_agent = :oldid_agent');
             $req2->bindValue(':oldid_agent', $agent->getOldid_agent(), PDO::PARAM_INT);

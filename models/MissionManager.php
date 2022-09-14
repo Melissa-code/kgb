@@ -156,7 +156,7 @@ class MissionManager extends Model {
             
             }
             else {
-           echo "mission créée";
+            echo "mission créée";
    
             $req = $pdo->prepare("INSERT INTO Missions (code_mission, title_mission, description_mission, country_mission, id_duration, code_status, name_type, name_speciality) VALUES (:code_mission, :title_mission, :description_mission, :country_mission, :id_duration, :code_status, :name_type, :name_speciality)");
             $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
@@ -218,9 +218,16 @@ class MissionManager extends Model {
     * 
     */
     public function updateMissionDb(Mission $mission): void {
+
+        //$old_agents = $_POST['oldid_agent']; 
+        $id_agents = $_POST['id_agent'];
+        //print_r($old_agents); 
+        //print_r($id_agents); 
+
         $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Missions SET code_mission = :code_mission, title_mission = :title_mission, description_mission = :description_mission, country_mission = :country_mission, id_duration = :id_duration, code_status = :code_status, name_type = :name_type WHERE code_mission = :code_mission');
+        $req =$pdo->prepare('UPDATE Missions SET code_mission = :code_mission, title_mission = :title_mission, description_mission = :description_mission, country_mission = :country_mission, id_duration = :id_duration, code_status = :code_status, name_type = :name_type WHERE code_mission = :oldcode_mission');
         $req->bindValue(':code_mission', $mission->getCode_mission(), PDO::PARAM_STR);
+        $req->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
         $req->bindValue(':title_mission', $mission->getTitle_mission(), PDO::PARAM_STR);
         $req->bindValue(':description_mission', $mission->getDescription_mission(), PDO::PARAM_STR);
         $req->bindValue(':country_mission', $mission->getCountry_mission(), PDO::PARAM_STR);
@@ -228,8 +235,24 @@ class MissionManager extends Model {
         $req->bindValue(':code_status', $mission->getCode_status(), PDO::PARAM_STR);
         $req->bindValue(':name_type', $mission->getName_type(), PDO::PARAM_STR);
         $req->execute();
+
+        if(count($id_agents) >= 1) {
+            $req2 = $pdo->prepare("DELETE FROM Agents_missions WHERE code_mission = :oldcode_mission");
+            $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
+            $req2->execute();
+
+            foreach($id_agents as $id_agent) {
+                $req3 = $pdo->prepare("INSERT INTO Agents_missions (id_agent, code_mission) VALUES (:id_agent, :code_mission)");
+                $req3->bindValue(":id_agent", $id_agent, PDO::PARAM_INT);
+                $req3->bindValue(":code_mission",  $mission->getOldcode_mission(), PDO::PARAM_STR);
+                $req3->execute();
+            }
+       }
+           
         $req->closeCursor();
     }
+
+
 
     /**
     * Delete a mission
