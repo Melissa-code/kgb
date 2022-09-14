@@ -64,7 +64,7 @@
                                     </select>
                                     <!-- specialities list link --> 
                                     <div class="text-end">
-                                    <a href="<?= URL ?>specialitiesList" class="text-white fst-italic">Voir les types</a>
+                                    <a href="<?= URL ?>specialitiesList" class="text-white fst-italic">Voir les spécialités</a>
                                     </div>
                                 </div>
 
@@ -212,8 +212,8 @@
                                         <?php foreach($hideouts_missions as $hideout_mission) : ?>
                                             <?php if($hideout->getId_hideout() === $hideout_mission->getId_hideout() && $hideout_mission->getCode_mission() === $mission->getCode_mission()) :?>
                                                 <div class="form-check d-block" >
-                                                    <input class="form-check-input" type="checkbox" value="<?= $hideout->getId_hideout() ?>" checked id="code_target" multiple name="oldcode_target[]" >
-                                                    <label class="form-check-label me-3" for="code_target" value="<?= $hideout->getId_hideout() ?>">
+                                                    <input class="form-check-input" type="checkbox" value="<?= $hideout->getId_hideout() ?>" checked id="id_hideout" multiple name="oldid_hideout[]" >
+                                                    <label class="form-check-label me-3" for="id_hideout" value="<?= $hideout->getId_hideout() ?>">
                                                         <?= $hideout->getAddress_hideout()." ".$hideout->getCountry_hideout() ?>
                                                     </label>
                                                 </div>
@@ -224,7 +224,7 @@
                                 <!-- Change id_hideout --> 
                                 <div>
                                     <div>
-                                    <label class="form-label mt-4">Planques : </label>
+                                    <label class="form-label mt-4">Changer de planques : </label>
                                         <div class="row d-flex align-items-center mb-3">
                                             <div class="col-12">
                                                 <?php foreach($hideouts as $hideout) :?>
@@ -236,15 +236,10 @@
                                             </div>
                                            <!-- hideouts list link -->  
                                             <div class="text-end">
-                                                <a href="hideoutsList" class="text-white fst-italic">Voir les planques</a>
+                                                <a href="<?= URL ?>hideoutsList" class="text-white fst-italic">Voir les planques</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="text-end">
-                                        <a href="<?= URL ?>hideoutsList" class="text-white fst-italic">Voir les planques</a>
-                                    </div>
-                                    </div>
-
                                 </div>
 
                                 <!-- code_status --> 
