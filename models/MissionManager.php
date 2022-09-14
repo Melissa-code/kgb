@@ -237,6 +237,11 @@ class MissionManager extends Model {
             $code_targets = $_POST['oldcode_target'];
         }
 
+        if(!empty($_POST['id_hideout'])) {
+            $id_hideouts = $_POST['id_hideout'];
+        } else {
+            $id_hideouts = $_POST['oldid_hideout'];
+        }
 
         $pdo = $this->getDb();
         $req =$pdo->prepare('UPDATE Missions SET code_mission = :code_mission, title_mission = :title_mission, description_mission = :description_mission, country_mission = :country_mission, id_duration = :id_duration, code_status = :code_status, name_type = :name_type WHERE code_mission = :oldcode_mission');
@@ -250,7 +255,7 @@ class MissionManager extends Model {
         $req->bindValue(':name_type', $mission->getName_type(), PDO::PARAM_STR);
         $req->execute();
 
-        // update id_agent in the database
+        // if at least a new id_agent is checked update the id_agent in the database
         if(count($id_agents) >= 1) {
             $req2 = $pdo->prepare("DELETE FROM Agents_missions WHERE code_mission = :oldcode_mission");
             $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -266,8 +271,7 @@ class MissionManager extends Model {
         $req2->closeCursor();
         $req3->closeCursor();
 
-
-        // update code_contact in the database
+        // if at least a new code_contact is checked update the code_contact in the database
         if(count($code_contacts) >= 1) {
             $req2 = $pdo->prepare("DELETE FROM Contacts_missions WHERE code_mission = :oldcode_mission");
             $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -283,8 +287,7 @@ class MissionManager extends Model {
         $req2->closeCursor();
         $req3->closeCursor();
 
-
-        // update code_target in the database
+        // if at least a new code_target is checked update the code_target in the database
         if(count($code_targets) >= 1) {
             $req2 = $pdo->prepare("DELETE FROM Targets_missions WHERE code_mission = :oldcode_mission");
             $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -300,9 +303,23 @@ class MissionManager extends Model {
         $req2->closeCursor();
         $req3->closeCursor();
 
-           
-        $req->closeCursor();
+        // if at least a new id_hideout is checked update the id_hideout in the database
+        if(count($id_hideouts) >= 1) {
+            $req2 = $pdo->prepare("DELETE FROM Hideouts_missions WHERE code_mission = :oldcode_mission");
+            $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
+            $req2->execute();
 
+            foreach($id_hideouts as $id_hideout) {
+                $req3 = $pdo->prepare("INSERT INTO Hideouts_missions (id_hideout, code_mission) VALUES (:id_hideout, :code_mission)");
+                $req3->bindValue(":id_hideout", $id_hideout, PDO::PARAM_INT);
+                $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
+                $req3->execute();
+            }
+        }
+        $req2->closeCursor();
+        $req3->closeCursor();
+
+        $req->closeCursor();
     }
 
 

@@ -207,7 +207,7 @@
                                 <!-- id_hideout --> 
                                 <div class="col-12 col-md-6 mb-3">
                                     <div>
-                                    <label class="form-label me-3">Planque(s) : </label>
+                                    <label class="form-label">Planques : </label>
                                     <?php foreach($hideouts as $hideout) : ?>
                                         <?php foreach($hideouts_missions as $hideout_mission) : ?>
                                             <?php if($hideout->getId_hideout() === $hideout_mission->getId_hideout() && $hideout_mission->getCode_mission() === $mission->getCode_mission()) :?>
@@ -224,7 +224,7 @@
                                 <!-- Change id_hideout --> 
                                 <div>
                                     <div>
-                                    <label class="form-label ">Planques : </label>
+                                    <label class="form-label mt-4">Planques : </label>
                                         <div class="row d-flex align-items-center mb-3">
                                             <div class="col-12">
                                                 <?php foreach($hideouts as $hideout) :?>
