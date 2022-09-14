@@ -90,28 +90,29 @@
 
                                 <!-- id_agent --> 
                                 <div class="col-12 col-md-6 mb-3">
-                                    
-                                    <label class="form-label me-3">Agents : </label>
-                                    <?php foreach($agents_missions as $agent_mission) :?>
-                                        <?php foreach($agents as $agent) :?>
-                                            <?php if($agent->getId_agent() === $agent_mission->getId_agent() && $agent_mission->getCode_mission() === $mission->getCode_mission()) :?>
-                                                <div class="form-check d-block" >
-                                                    <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent() ?>" checked id="id_agent" multiple name="oldid_agent[]" >
-                                                    <label class="form-check-label me-3" for="id_agent" value="<?= $agent->getId_agent()  ?>">
-                                                        <?= $agent->getFirstname_agent()." ".$agent->getName_agent(). " (spécialités: " ?>
-                                                    </label>
-                                                    <?php foreach($specialities_agents as $speciality_agent) :?>
-                                                        <?php if($speciality_agent->getId_agent() === $agent->getId_agent()) :?>
-                                                            <?= $speciality_agent->getName_speciality() ?>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                    <?= ")" ?>
-                                                </div>
-                                            <?php endif; ?>
+                             
+                                        <label class="form-label me-3">Agents : </label>
+                                        <?php foreach($agents_missions as $agent_mission) :?>
+                                            <?php foreach($agents as $agent) :?>
+                                                <?php if($agent->getId_agent() === $agent_mission->getId_agent() && $agent_mission->getCode_mission() === $mission->getCode_mission()) :?>
+                                                    <div class="form-check d-block" >
+                                                        <input class="form-check-input" type="checkbox" value="<?= $agent->getId_agent() ?>" checked id="id_agent" multiple name="oldid_agent[]" >
+                                                        <label class="form-check-label me-3" for="id_agent" value="<?= $agent->getId_agent()  ?>">
+                                                            <?= $agent->getFirstname_agent()." ".$agent->getName_agent(). " (spécialités: " ?>
+                                                        </label>
+                                                        <?php foreach($specialities_agents as $speciality_agent) :?>
+                                                            <?php if($speciality_agent->getId_agent() === $agent->getId_agent()) :?>
+                                                                <?= $speciality_agent->getName_speciality() ?>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                        <?= ")" ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         <?php endforeach; ?>
-                                    <?php endforeach; ?>
+                                    
                                     <!-- Update id_agent --> 
-                                    <div>
+                                   
                                         <label class="form-label mt-4">Changer d'agents : </label>
                                         <?php foreach($agents as $agent) :?>
                                             <div class="form-check d-block" >
@@ -131,12 +132,12 @@
                                         <div class="text-end">
                                             <a href="agentsList" class="text-white fst-italic">Voir les agents</a>
                                         </div>
-                                    </div>
+                                  
                                 </div>
 
                                 <!-- code_contact --> 
                                 <div class="col-12 col-md-6 mb-3">
-                                    <div>
+                                    
                                         <label class="form-label me-3">Contacts : </label>
                                         <?php foreach($contacts_missions as $contact_mission) :?>
                                             <?php foreach($contacts as $contact) :?>
@@ -150,44 +151,45 @@
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
                                         <?php endforeach; ?>
-                                    </div>
+                           
                                     <!-- update code_contact --> 
-                                    <div>
-                                    <label class="form-label mt-4">Changer de contacts : </label>
-                                    <?php foreach($contacts as $contact) :?>
-                                        <div class="form-check d-block" >
-                                            <input class="form-check-input" type="checkbox" value="<?= $contact->getCode_contact(); ?>" id="code_contact" multiple name="code_contact[]">
-                                            <label class="form-check-label me-3" for="code_contact" value="<?= $contact->getCode_contact(); ?>">
-                                                <?= $contact->getFirstname_contact()." ".$contact->getName_contact(); ?>
-                                            </label>
+                                    
+                                        <label class="form-label mt-4">Changer de contacts : </label>
+                                        <?php foreach($contacts as $contact) :?>
+                                            <div class="form-check d-block" >
+                                                <input class="form-check-input" type="checkbox" value="<?= $contact->getCode_contact(); ?>" id="code_contact" multiple name="code_contact[]">
+                                                <label class="form-check-label me-3" for="code_contact" value="<?= $contact->getCode_contact(); ?>">
+                                                    <?= $contact->getFirstname_contact()." ".$contact->getName_contact(); ?>
+                                                </label>
+                                            </div>
+                                        <?php endforeach; ?>
+                                        <!-- Link to see the list of the contacts --> 
+                                        <div class="text-end">
+                                            <a href="contactsList" class="text-white fst-italic">Voir les contacts</a>
                                         </div>
-                                    <?php endforeach; ?>
-                                    <!-- Link to see the list of the contacts --> 
-                                    <div class="text-end">
-                                        <a href="contactsList" class="text-white fst-italic">Voir les contacts</a>
-                                    </div>
-                                    </div>
+                             
                                 </div>
             
+
                                 <!-- code_target --> 
                                 <div class="col-12 col-md-6 mb-3">
-                                    <div>
-                                    <label class="form-label me-3">Cibles : </label>
-                                    <?php foreach($targets_missions as $target_mission) :?>
-                                        <?php foreach($targets as $target) :?>
-                                            <?php if($target->getCode_target() === $target_mission->getCode_target() && $target_mission->getCode_mission() === $mission->getCode_mission()) :?>
-                                                <div class="form-check d-block" >
-                                                    <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target() ?>" checked id="code_target" multiple name="oldcode_target[]" >
-                                                    <label class="form-check-label me-3" for="code_target" value="<?= $target->getCode_target() ?>">
-                                                        <?= $target->getFirstname_target()." ".$target->getName_target() ?>
-                                                    </label>
-                                                </div>
-                                            <?php endif; ?>
+                              
+                                        <label class="form-label me-3">Cibles : </label>
+                                        <?php foreach($targets_missions as $target_mission) :?>
+                                            <?php foreach($targets as $target) :?>
+                                                <?php if($target->getCode_target() === $target_mission->getCode_target() && $target_mission->getCode_mission() === $mission->getCode_mission()) :?>
+                                                    <div class="form-check d-block" >
+                                                        <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target() ?>" checked id="code_target" multiple name="oldcode_target[]" >
+                                                        <label class="form-check-label me-3" for="code_target" value="<?= $target->getCode_target() ?>">
+                                                            <?= $target->getFirstname_target()." ".$target->getName_target() ?>
+                                                        </label>
+                                                    </div>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         <?php endforeach; ?>
-                                    <?php endforeach; ?>
-                                    </div>
+                             
                                     <!-- Change code_target --> 
-                                    <div>
+                                  
                                         <label class="form-label mt-4">Changer de cibles : </label>
                                         <?php foreach($targets as $target) :?>
                                             <div class="form-check d-block" >
@@ -201,30 +203,30 @@
                                         <div class="text-end">
                                             <a href="<?= URL ?>targetsList" class="text-white fst-italic">Voir les cibles</a>
                                         </div>
-                                    </div>
+                            
                                 </div>
 
                                 <!-- id_hideout --> 
                                 <div class="col-12 col-md-6 mb-3">
-                                    <div>
-                                    <label class="form-label">Planques : </label>
-                                    <?php foreach($hideouts as $hideout) : ?>
-                                        <?php foreach($hideouts_missions as $hideout_mission) : ?>
-                                            <?php if($hideout->getId_hideout() === $hideout_mission->getId_hideout() && $hideout_mission->getCode_mission() === $mission->getCode_mission()) :?>
-                                                <div class="form-check d-block" >
-                                                    <input class="form-check-input" type="checkbox" value="<?= $hideout->getId_hideout() ?>" checked id="id_hideout" multiple name="oldid_hideout[]" >
-                                                    <label class="form-check-label me-3" for="id_hideout" value="<?= $hideout->getId_hideout() ?>">
-                                                        <?= $hideout->getAddress_hideout()." ".$hideout->getCountry_hideout() ?>
-                                                    </label>
-                                                </div>
-                                            <?php endif; ?>
+                               
+                                        <label class="form-label">Planques : </label>
+                                        <?php foreach($hideouts as $hideout) : ?>
+                                            <?php foreach($hideouts_missions as $hideout_mission) : ?>
+                                                <?php if($hideout->getId_hideout() === $hideout_mission->getId_hideout() && $hideout_mission->getCode_mission() === $mission->getCode_mission()) :?>
+                                                    <div class="form-check d-block" >
+                                                        <input class="form-check-input" type="checkbox" value="<?= $hideout->getId_hideout() ?>" checked id="id_hideout" multiple name="oldid_hideout[]" >
+                                                        <label class="form-check-label me-3" for="id_hideout" value="<?= $hideout->getId_hideout() ?>">
+                                                            <?= $hideout->getAddress_hideout()." ".$hideout->getCountry_hideout() ?>
+                                                        </label>
+                                                    </div>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
                                         <?php endforeach; ?>
-                                    <?php endforeach; ?>
-                                    </div>
-                                <!-- Change id_hideout --> 
-                                <div>
-                                    <div>
-                                    <label class="form-label mt-4">Changer de planques : </label>
+                           
+                                        <!-- Change id_hideout --> 
+                       
+                                   
+                                        <label class="form-label mt-4">Changer de planques : </label>
                                         <div class="row d-flex align-items-center mb-3">
                                             <div class="col-12">
                                                 <?php foreach($hideouts as $hideout) :?>
@@ -234,51 +236,57 @@
                                                 </div>
                                                 <?php endforeach; ?>
                                             </div>
-                                           <!-- hideouts list link -->  
+                                        <!-- hideouts list link -->  
                                             <div class="text-end">
                                                 <a href="<?= URL ?>hideoutsList" class="text-white fst-italic">Voir les planques</a>
                                             </div>
                                         </div>
-                                    </div>
+                                
                                 </div>
+
 
                                 <!-- code_status --> 
                                 <div class="col-12 col-md-6 mb-3">
-                                    <label class="form-label me-3">Statut : </label>
-                                    <!-- oldcode_status --> 
-                                    <input type="hidden" class="form-control" id="oldcode_duration" name="oldcode_status" value="<?= $mission->getCode_status() ?>">
-                                    <select class="form-select " aria-label="Default select example" id="code_status" name="code_status">
-                                        <?php foreach($status as $oneStatus) : ?>
-                                            <?php if($oneStatus->getCode_status() === $mission->getCode_status()) :?>
-                                                <option value="<?= $oneStatus->getCode_status(); ?>" selected><?= $oneStatus->getCode_status(); ?></option>
-                                            <?php else : ?>
-                                                <option value="<?= $oneStatus->getCode_status(); ?>"><?= $oneStatus->getCode_status(); ?></option>
-                                            <?php endif ?>
-                                        <?php endforeach ?>
-                                    </select>
+                               
+                                        <label class="form-label me-3">Statut : </label>
+                                        <!-- oldcode_status --> 
+                                        <input type="hidden" class="form-control" id="oldcode_duration" name="oldcode_status" value="<?= $mission->getCode_status() ?>">
+                                        <select class="form-select " aria-label="Default select example" id="code_status" name="code_status">
+                                            <?php foreach($status as $oneStatus) : ?>
+                                                <?php if($oneStatus->getCode_status() === $mission->getCode_status()) :?>
+                                                    <option value="<?= $oneStatus->getCode_status(); ?>" selected><?= $oneStatus->getCode_status(); ?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= $oneStatus->getCode_status(); ?>"><?= $oneStatus->getCode_status(); ?></option>
+                                                <?php endif ?>
+                                            <?php endforeach ?>
+                                        </select>
+                              
                                     <!-- status list link --> 
                                     <div class="text-end">
-                                    <a href="<?= URL ?>statusList" class="text-white fst-italic">Voir les statuts</a>
+                                        <a href="<?= URL ?>statusList" class="text-white fst-italic">Voir les statuts</a>
                                     </div>
                                 </div>
 
+
                                 <!-- name_type --> 
                                 <div class="col-12 col-md-6 mb-3">
-                                    <label class="form-label me-3">Type : </label>
-                                    <!-- oldcode_status --> 
-                                    <input type="hidden" class="form-control" id="oldname_type" name="oldname_type" value="<?= $mission->getName_type() ?>">
-                                    <select class="form-select " aria-label="Default select example" id="name_type" name="name_type">
-                                        <?php foreach($types as $type) : ?>
-                                            <?php if($type->getName_type() === $mission->getName_type()) :?>
-                                                <option value="<?= $type->getName_type() ?>" selected><?= $type->getName_type()?></option>
-                                            <?php else : ?>
-                                                <option value="<?= $type->getName_type() ?>"><?= $type->getName_type() ?></option>
-                                            <?php endif ?>
-                                        <?php endforeach ?>
-                                    </select>
+                             
+                                        <label class="form-label me-3">Type : </label>
+                                        <!-- oldcode_status --> 
+                                        <input type="hidden" class="form-control" id="oldname_type" name="oldname_type" value="<?= $mission->getName_type() ?>">
+                                        <select class="form-select " aria-label="Default select example" id="name_type" name="name_type">
+                                            <?php foreach($types as $type) : ?>
+                                                <?php if($type->getName_type() === $mission->getName_type()) :?>
+                                                    <option value="<?= $type->getName_type() ?>" selected><?= $type->getName_type()?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= $type->getName_type() ?>"><?= $type->getName_type() ?></option>
+                                                <?php endif ?>
+                                            <?php endforeach ?>
+                                        </select>
+                              
                                     <!-- status list link --> 
                                     <div class="text-end">
-                                    <a href="<?= URL ?>typesList" class="text-white fst-italic">Voir les types</a>
+                                        <a href="<?= URL ?>typesList" class="text-white fst-italic">Voir les types</a>
                                     </div>
                                 </div>
 

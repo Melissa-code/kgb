@@ -1,5 +1,6 @@
 <?php
 
+require_once("controllers/MessagesClass.php"); 
 require_once("models/Class/Model.php");
 require_once("models/Class/Mission.php");
 
@@ -139,10 +140,6 @@ class MissionManager extends Model {
     */
     public function createMissionDb(Mission $newMission): void {
 
-        // $test = "test";
-        // echo $test;
-        // var_dump($newMission->getDescription_mission());
-
         $pdo = $this->getDb();
         $req = $pdo->prepare('SELECT count(*) as numberCode FROM Missions WHERE code_mission = :code_mission'); 
         $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
@@ -173,9 +170,6 @@ class MissionManager extends Model {
                     $req2->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
                     $req2->execute();
 
-                    // print_r($id_agent);echo "<br>";
-                    // print_r($agent); echo "<br>";
-                    // print_r(gettype($agent)); 
                 }
                 $req2->closeCursor();
 
@@ -212,7 +206,7 @@ class MissionManager extends Model {
     }
 
     /**
-    * Update a mission
+    * Update a mission in the database 
     *
     * 
     */
@@ -247,21 +241,19 @@ class MissionManager extends Model {
         }
 
 
-        // Check if the code_mission exists
+        // Check if the code_mission already exists
         $pdo = $this->getDb();
-        $req = $pdo->prepare('SELECT count(*) as numberCode FROM Missions WHERE code_mission = :code_mission'); 
+        $req = $pdo->prepare("SELECT count(*) as numberCode FROM Missions WHERE code_mission = :code_mission"); 
         $req->bindValue(':code_mission', $mission->getCode_mission(), PDO::PARAM_STR);
         $req->execute();
        
         while($code_verification = $req->fetch()){
             if($code_verification['numberCode'] >= 1){
-                // header('location:'.URL."updateMission"); 
-                // exit();
-                echo "doublon<br> ";
+                MessagesClass::addAlertMsg("Ce nom de code existe déjà", MessagesClass::RED_COLOR); 
+                header('location:'.URL."missions");
             }
             else {
                 // Update the mission in the database 
-                $pdo = $this->getDb();
                 $req =$pdo->prepare('UPDATE Missions SET code_mission = :code_mission, title_mission = :title_mission, description_mission = :description_mission, country_mission = :country_mission, id_duration = :id_duration, code_status = :code_status, name_type = :name_type WHERE code_mission = :oldcode_mission');
                 $req->bindValue(':code_mission', $mission->getCode_mission(), PDO::PARAM_STR);
                 $req->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -273,7 +265,8 @@ class MissionManager extends Model {
                 $req->bindValue(':name_type', $mission->getName_type(), PDO::PARAM_STR);
                 $req->execute();
 
-                // if a new id_agent is checked, update the id_agent in the database
+
+                // if a new id_agent is checked, update the id_agent in Agents_missions 
                 if(count($id_agents) >= 1) {
                     $req2 = $pdo->prepare("DELETE FROM Agents_missions WHERE code_mission = :oldcode_mission");
                     $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -285,11 +278,14 @@ class MissionManager extends Model {
                         $req3->bindValue(":code_mission",  $mission->getOldcode_mission(), PDO::PARAM_STR);
                         $req3->execute();
                     }
-                } 
+                } else {
+                    $id_agents = $_POST['oldid_agent'];
+                }
                 $req2->closeCursor();
                 $req3->closeCursor();
 
-                // if a new code_contact is checked, update the code_contact in the database
+
+                // if a new code_contact is checked, update the code_contact in Contacts_missions
                 if(count($code_contacts) >= 1) {
                     $req2 = $pdo->prepare("DELETE FROM Contacts_missions WHERE code_mission = :oldcode_mission");
                     $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -301,11 +297,14 @@ class MissionManager extends Model {
                         $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
                         $req3->execute();
                     }
+                } else {
+                    $code_contacts = $_POST['oldcode_contact'];
                 }
                 $req2->closeCursor();
                 $req3->closeCursor();
 
-                // if a new code_target is checked, update the code_target in the database
+
+                // if a new code_target is checked, update the code_target in Targets_missions
                 if(count($code_targets) >= 1) {
                     $req2 = $pdo->prepare("DELETE FROM Targets_missions WHERE code_mission = :oldcode_mission");
                     $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -317,11 +316,14 @@ class MissionManager extends Model {
                         $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
                         $req3->execute();
                     }
+                } else {
+                    $code_targets = $_POST['oldcode_target'];
                 }
                 $req2->closeCursor();
                 $req3->closeCursor();
 
-                // if a new id_hideout is checked, update the id_hideout in the database
+
+                // if a new id_hideout is checked, update the id_hideout in Hideouts_missions
                 if(count($id_hideouts) >= 1) {
                     $req2 = $pdo->prepare("DELETE FROM Hideouts_missions WHERE code_mission = :oldcode_mission");
                     $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
@@ -333,6 +335,8 @@ class MissionManager extends Model {
                         $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
                         $req3->execute();
                     }
+                } else {
+                    $id_hideouts = $_POST['oldid_agent'];
                 }
                 $req2->closeCursor();
                 $req3->closeCursor();
@@ -340,21 +344,48 @@ class MissionManager extends Model {
                 $req->closeCursor();
             }
         }
+        MessagesClass::addAlertMsg("Modification de la mission enregistrée", MessagesClass::GREEN_COLOR); 
     }
 
 
 
     /**
-    * Delete a mission
+    * Delete a mission in the database
     *
     * 
     */
     public function deleteMissionDb(string $code_mission): void {
+
         $pdo = $this->getDb();
         $req = $pdo->prepare('DELETE FROM Missions WHERE code_mission = :code_mission');
         $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req->execute();
+
+        // Delete the mission in Agents_missions
+        $req2 = $pdo->prepare('DELETE FROM Agents_missions WHERE code_mission = :code_mission');
+        $req2->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
+        $req2->execute();
+
+        // Delete the mission in Contacts_missions
+        $req3 = $pdo->prepare('DELETE FROM Contacts_missions WHERE code_mission = :code_mission');
+        $req3->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
+        $req3->execute();
+
+         // Delete the mission in Hideouts_missions
+        $req4 = $pdo->prepare('DELETE FROM Hideouts_missions WHERE code_mission = :code_mission');
+        $req4->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
+        $req4->execute();
+
+         // Delete the mission in Targets_missions
+        $req5 = $pdo->prepare('DELETE FROM Targets_missions WHERE code_mission = :code_mission');
+        $req5->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
+        $req5->execute();
+
         $req->closeCursor();
+        $req2->closeCursor();
+        $req3->closeCursor();
+        $req4->closeCursor();
+        $req5->closeCursor();
     }
 
 }

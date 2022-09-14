@@ -132,12 +132,9 @@ class AgentController {
       
         if($_POST) {
             $agent = new Agent($_POST);
-            //var_dump($agent); 
-            //var_dump($_POST['oldname_speciality']);
-            //var_dump($_POST['name_speciality']);
             $this->agentManager->updateAgentDb($agent); 
         }
-        //header('location:'.URL."createMission");
+        header('location:'.URL."createMission");
     }
 
 

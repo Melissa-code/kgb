@@ -21,12 +21,25 @@
 </head>
 
 <body>
+    <!-- header -->
     <?php require_once("views/common/header.php"); ?>
     
+    <!-- main -->
     <main class="container" >
+        <?php 
+            if(!empty($_SESSION['alert'])) {
+                foreach($_SESSION['alert'] as $alert){
+                    echo "<div class='alert ". $alert['type'] ."' role='alert'>
+                        ".$alert['message']."
+                    </div>";
+                }
+                unset($_SESSION['alert']);
+            }
+        ?>
         <?php echo $page_content; ?>
     </main>
     
+    <!-- footer -->
     <?php require_once("views/common/footer.php"); ?>
 
     <!-- JS Bootstrap 5.1 -->

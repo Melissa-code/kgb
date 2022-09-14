@@ -51,7 +51,7 @@ try {
             $mainController->logout();
         break;
 
-        // mission
+        // Mission
         case "missions": 
             $mainController->missions();
         break;

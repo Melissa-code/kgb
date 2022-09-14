@@ -1,4 +1,5 @@
 <?php
+require_once("controllers/MessagesClass.php"); 
 require_once("models/MissionManager.php"); 
 require_once("models/AdminManager.php"); 
 require_once("models/TypeManager.php"); 
@@ -213,7 +214,6 @@ class MainController {
     * 
     */
     public function logout(): void {
-
         session_start(); 
         session_unset();
         session_destroy(); 
@@ -238,8 +238,6 @@ class MainController {
         $hideouts = $this->hideoutManager->getAll();
         $specialities = $this->specialityManager->getAll();
         $specialities_agents = $this->speciality_agentManager->getAll();
-
-        //echo "<pre>";var_dump($specialities_agents); echo" </pre>";
 
         $data_page = [
             "page_description" => "Page de création d'une mission",
@@ -297,10 +295,10 @@ class MainController {
                 exit();
             }
 
-            var_dump($id_agents);
-            var_dump($speciality);
-           // var_dump($specialities_agents);
-            var_dump($one_agent);
+            //var_dump($id_agents);
+            //var_dump($speciality);
+            // var_dump($specialities_agents);
+            //var_dump($one_agent);
 
             $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
             $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
@@ -386,11 +384,12 @@ class MainController {
     *
     */
     public function updateMissionValidation(): void {
+
         if($_POST) {
             $mission = new Mission($_POST);
             $this->missionManager->updateMissionDb($mission); 
         }
-        //header('location:'.URL."missions");
+        header('location:'.URL."missions");
     }
 
 
@@ -401,8 +400,12 @@ class MainController {
     */
     public function deleteMission(): void {
         $mission = $this->getMissionByCode();
-    
+
         $this->missionManager->deleteMissionDb($mission->getCode_mission());
+        $_SESSION['alertDeleteMission'] = [
+            "type" => "success", 
+            "msg" => "Suppression de la mission bien réalisée"
+        ]; 
         unset($mission); 
         header('location:'.URL."missions");
     }

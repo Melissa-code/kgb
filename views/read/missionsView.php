@@ -8,6 +8,14 @@ if(isset($_SESSION['connect'])) {
 }
 ?>
 
+<?php if(isset($_SESSION['alertDeleteMission'])) :?>
+    <div class="alert alert-success mx-5" role="alert">
+    <?= $_SESSION['alertDeleteMission']['msg'] ?>
+    </div>
+    <?php unset($_SESSION['alertDeleteMission']) ?>
+<?php endif ?>
+
+
 <!------------- Main --------------->
 
 <section class="mb-4">
@@ -48,7 +56,7 @@ if(isset($_SESSION['connect'])) {
                                 <button class="btn btn-warning" type="submit">Modifier</button>
                             </form>
                             <!-- Delete mission button -->
-                            <form method="POST" action="<?= URL ?>deleteMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>">
+                            <form method="POST" action="<?= URL ?>deleteMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" onSubmit="return confirm('Etes-vous sûr de vouloir supprimer la mission ?');">
                                 <button class="btn btn-danger" type="submit">Supprimer</button>
                             </form>
                         </li>
