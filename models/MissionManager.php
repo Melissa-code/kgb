@@ -231,6 +231,12 @@ class MissionManager extends Model {
             $code_contacts = $_POST['oldcode_contact'];
         }
 
+        if(!empty($_POST['code_target'])) {
+            $code_targets = $_POST['code_target'];
+        } else {
+            $code_targets = $_POST['oldcode_target'];
+        }
+
 
         $pdo = $this->getDb();
         $req =$pdo->prepare('UPDATE Missions SET code_mission = :code_mission, title_mission = :title_mission, description_mission = :description_mission, country_mission = :country_mission, id_duration = :id_duration, code_status = :code_status, name_type = :name_type WHERE code_mission = :oldcode_mission');
@@ -273,8 +279,26 @@ class MissionManager extends Model {
                 $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
                 $req3->execute();
             }
-       }
-    
+        }
+        $req2->closeCursor();
+        $req3->closeCursor();
+
+
+        // update code_target in the database
+        if(count($code_targets) >= 1) {
+            $req2 = $pdo->prepare("DELETE FROM Targets_missions WHERE code_mission = :oldcode_mission");
+            $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
+            $req2->execute();
+
+            foreach($code_targets as $code_target) {
+                $req3 = $pdo->prepare("INSERT INTO Targets_missions (code_target, code_mission) VALUES (:code_target, :code_mission)");
+                $req3->bindValue(":code_target", $code_target, PDO::PARAM_STR);
+                $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
+                $req3->execute();
+            }
+        }
+        $req2->closeCursor();
+        $req3->closeCursor();
 
            
         $req->closeCursor();

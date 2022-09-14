@@ -153,7 +153,7 @@
                                     </div>
                                     <!-- update code_contact --> 
                                     <div>
-                                    <label class="form-label">Changer de contacts : </label>
+                                    <label class="form-label mt-4">Changer de contacts : </label>
                                     <?php foreach($contacts as $contact) :?>
                                         <div class="form-check d-block" >
                                             <input class="form-check-input" type="checkbox" value="<?= $contact->getCode_contact(); ?>" id="code_contact" multiple name="code_contact[]">
@@ -188,7 +188,7 @@
                                     </div>
                                     <!-- Change code_target --> 
                                     <div>
-                                        <label class="form-label ">Changer de cibles : </label>
+                                        <label class="form-label mt-4">Changer de cibles : </label>
                                         <?php foreach($targets as $target) :?>
                                             <div class="form-check d-block" >
                                                 <input class="form-check-input" type="checkbox" value="<?= $target->getCode_target(); ?>" id="code_target" multiple name="code_target[]">
