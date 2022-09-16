@@ -1,5 +1,5 @@
 <?php 
-session_start(); 
+//session_start(); 
 
 if(isset($_SESSION['connect'])) {
     echo "admin connecté";
@@ -8,11 +8,11 @@ if(isset($_SESSION['connect'])) {
 }
 ?>
 
-<?php if(isset($_SESSION['alertDeleteMission'])) :?>
+ <?php if(isset($_SESSION['alertUpdate'])) :?>
     <div class="alert alert-success mx-5" role="alert">
-    <?= $_SESSION['alertDeleteMission']['msg'] ?>
+    <?= $_SESSION['alertUpdate']['msg'] ?>
     </div>
-    <?php unset($_SESSION['alertDeleteMission']) ?>
+    <?php unset($_SESSION['alertUpdate']) ?>
 <?php endif ?>
 
 

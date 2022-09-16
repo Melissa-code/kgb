@@ -338,7 +338,7 @@ class MainController {
     * Update a mission (page) function
     * 
     */
-    public function updateMission(): void {
+    public function updateMission():void {
 
         $mission = $this->getMissionByCode(); 
         $agents = $this->agentManager->getAll();
@@ -384,6 +384,7 @@ class MainController {
     *
     */
     public function updateMissionValidation(): void {
+        //session_start(); 
 
         if($_POST) {
             $mission = new Mission($_POST);

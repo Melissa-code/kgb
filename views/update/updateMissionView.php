@@ -1,4 +1,9 @@
-
+<?php if(isset($_SESSION['alertDuplicate'])) :?>
+    <div class="alert alert-danger mx-5" role="alert">
+    <?= $_SESSION['alertDuplicate']['msg'] ?>
+    </div>
+    <?php unset($_SESSION['alertDuplicate']) ?>
+<?php endif ?>
 <!------------- Main --------------->
 
 <section class="mb-4">

@@ -1,6 +1,3 @@
-
-<?php session_start(); ?>
-
 <!------------- Main --------------->
 
 <!-- section title -->
@@ -18,17 +15,17 @@
             <div class="alert alert-danger mx-5" role="alert">
             <?= $_SESSION['alert1']['msg'] ?>
             </div>
-            <?php unset($_SESSION['alert1']) ?>
+            <?php unset($_SESSION['alert2']) ?>
         <?php elseif(isset($_SESSION['alert2'])) :?>
             <div class="alert alert-<?php $_SESSION['alert2']['type'] ?> text-danger  mx-5" role="alert">
             <?= $_SESSION['alert2']['msg'] ?>
             </div>
-            <?php unset($_SESSION['alert2'])?>
+            <?php unset($_SESSION['alert3'])?>
         <?php elseif(isset($_SESSION['alert3'])) :?>
             <div class="alert alert-danger ?> mx-5" role="alert">
             <?= $_SESSION['alert3']['msg'] ?>
             </div>
-            <?php unset($_SESSION['alert3']) ?>
+            <?php unset($_SESSION['alert4']) ?>
         <?php elseif(isset($_SESSION['alert4'])) :?>
             <div class="alert alert-danger ?> mx-5" role="alert">
             <?= $_SESSION['alert4']['msg'] ?>

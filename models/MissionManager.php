@@ -216,41 +216,46 @@ class MissionManager extends Model {
         if(!empty($_POST['id_agent'])) {
             $id_agents = $_POST['id_agent'];
         } else {
-            $id_agents = $_POST['oldid_agent'];
+            $id_agents = [];
         }
 
         // $code_contacts (array): if the admin checks another checkboxes to update the contacts
         if(!empty($_POST['code_contact'])) {
             $code_contacts = $_POST['code_contact'];
         } else {
-            $code_contacts = $_POST['oldcode_contact'];
+            $code_contacts = [];
         }
 
         // $code_targets (array): if the admin checks another checkboxes to update the targets
         if(!empty($_POST['code_target'])) {
             $code_targets = $_POST['code_target'];
         } else {
-            $code_targets = $_POST['oldcode_target'];
+            $code_targets = [];
         }
 
         // $id_hideouts (array): if the admin checks another checkboxes to update the hideouts
         if(!empty($_POST['id_hideout'])) {
             $id_hideouts = $_POST['id_hideout'];
         } else {
-            $id_hideouts = $_POST['oldid_hideout'];
+            $id_hideouts = [];
         }
 
-
+       
         // Check if the code_mission already exists
         $pdo = $this->getDb();
         $req = $pdo->prepare("SELECT count(*) as numberCode FROM Missions WHERE code_mission = :code_mission"); 
         $req->bindValue(':code_mission', $mission->getCode_mission(), PDO::PARAM_STR);
         $req->execute();
-       
+
         while($code_verification = $req->fetch()){
-            if($code_verification['numberCode'] >= 1){
-                MessagesClass::addAlertMsg("Ce nom de code existe déjà", MessagesClass::RED_COLOR); 
-                header('location:'.URL."missions");
+            if($code_verification['numberCode'] >= 1  && $mission->getOldcode_mission() !== $mission->getCode_mission()) {
+                // Display an error alerte message 
+                $_SESSION['alertDuplicate'] = [
+                    "type" => "error",
+                    "msg" => "ERREUR : Ce nom de code existe déjà."
+                ];
+                header('location:'.URL."updateMission?q=".urlencode(base64_encode($mission->getOldcode_mission())));
+                exit();
             }
             else {
                 // Update the mission in the database 
@@ -264,8 +269,7 @@ class MissionManager extends Model {
                 $req->bindValue(':code_status', $mission->getCode_status(), PDO::PARAM_STR);
                 $req->bindValue(':name_type', $mission->getName_type(), PDO::PARAM_STR);
                 $req->execute();
-
-
+              
                 // if a new id_agent is checked, update the id_agent in Agents_missions 
                 if(count($id_agents) >= 1) {
                     $req2 = $pdo->prepare("DELETE FROM Agents_missions WHERE code_mission = :oldcode_mission");
@@ -273,78 +277,189 @@ class MissionManager extends Model {
                     $req2->execute();
 
                     foreach($id_agents as $id_agent) {
-                        $req3 = $pdo->prepare("INSERT INTO Agents_missions (id_agent, code_mission) VALUES (:id_agent, :code_mission)");
-                        $req3->bindValue(":id_agent", $id_agent, PDO::PARAM_INT);
-                        $req3->bindValue(":code_mission",  $mission->getOldcode_mission(), PDO::PARAM_STR);
-                        $req3->execute();
+                        // if the code_mission is the same
+                        if($mission->getCode_mission() === $mission->getOldcode_mission()) {
+                            $req3 = $pdo->prepare("INSERT INTO Agents_missions (id_agent, code_mission) VALUES (:id_agent, :code_mission)");
+                            $req3->bindValue(":id_agent", $id_agent, PDO::PARAM_INT);
+                            $req3->bindValue(":code_mission",  $mission->getOldcode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor(); 
+                        }
+                        // if the code_mission is updated
+                        else {
+                            $req3 = $pdo->prepare("INSERT INTO Agents_missions (id_agent, code_mission) VALUES (:id_agent, :code_mission)");
+                            $req3->bindValue(":id_agent", $id_agent, PDO::PARAM_INT);
+                            $req3->bindValue(":code_mission",  $mission->getCode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor(); 
+                        }
                     }
+                    $req2->closeCursor(); 
+
+                // if no id_agent is checked 
                 } else {
                     $id_agents = $_POST['oldid_agent'];
-                }
-                $req2->closeCursor();
-                $req3->closeCursor();
+                  
+                    if($mission->getCode_mission() !== $mission->getOldcode_mission()) {
+                        $req2 = $pdo->prepare("DELETE FROM Agents_missions WHERE code_mission = :oldcode_mission");
+                        $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
+                        $req2->execute();
+                        $req2->closeCursor();
 
+                        foreach($id_agents as $id_agent) {
+                            $req3 = $pdo->prepare("INSERT INTO Agents_missions (id_agent, code_mission) VALUES (:id_agent, :code_mission)");
+                            $req3->bindValue(":id_agent", $id_agent, PDO::PARAM_INT);
+                            $req3->bindValue(":code_mission",  $mission->getCode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
+                    }
+                }
 
                 // if a new code_contact is checked, update the code_contact in Contacts_missions
                 if(count($code_contacts) >= 1) {
                     $req2 = $pdo->prepare("DELETE FROM Contacts_missions WHERE code_mission = :oldcode_mission");
                     $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
                     $req2->execute();
+                    $req2->closeCursor();
 
                     foreach($code_contacts as $code_contact) {
-                        $req3 = $pdo->prepare("INSERT INTO Contacts_missions (code_contact, code_mission) VALUES (:code_contact, :code_mission)");
-                        $req3->bindValue(":code_contact", $code_contact, PDO::PARAM_STR);
-                        $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
-                        $req3->execute();
+                        // if the code_mission is the same 
+                        if($mission->getCode_mission() === $mission->getOldcode_mission()) {
+                            $req3 = $pdo->prepare("INSERT INTO Contacts_missions (code_contact, code_mission) VALUES (:code_contact, :code_mission)");
+                            $req3->bindValue(":code_contact", $code_contact, PDO::PARAM_STR);
+                            $req3->bindValue(":code_mission",  $mission->getOldcode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
+                        // if the code_mission is updated
+                        else {
+                            $req3 = $pdo->prepare("INSERT INTO Contacts_missions (code_contact, code_mission) VALUES (:code_contact, :code_mission)");
+                            $req3->bindValue(":code_contact", $code_contact, PDO::PARAM_STR);
+                            $req3->bindValue(":code_mission",  $mission->getCode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
                     }
+                // if no code_contact is checked 
                 } else {
                     $code_contacts = $_POST['oldcode_contact'];
+                    
+                    if($mission->getCode_mission() !== $mission->getOldcode_mission()) {
+                        $req2 = $pdo->prepare("DELETE FROM Contacts_missions WHERE code_mission = :oldcode_mission");
+                        $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
+                        $req2->execute();
+                        $req2->closeCursor();
+
+                        foreach($code_contacts as $code_contact) {
+                            $req3 = $pdo->prepare("INSERT INTO Contacts_missions (code_contact, code_mission) VALUES (:code_contact, :code_mission)");
+                            $req3->bindValue(":code_contact", $code_contact, PDO::PARAM_STR);
+                            $req3->bindValue(":code_mission",  $mission->getCode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
+                    }
                 }
-                $req2->closeCursor();
-                $req3->closeCursor();
 
-
-                // if a new code_target is checked, update the code_target in Targets_missions
+                // if a new code_target is checked, update the code_target in the Targets_missions table too
                 if(count($code_targets) >= 1) {
                     $req2 = $pdo->prepare("DELETE FROM Targets_missions WHERE code_mission = :oldcode_mission");
                     $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
                     $req2->execute();
+                    $req2->closeCursor();
 
                     foreach($code_targets as $code_target) {
-                        $req3 = $pdo->prepare("INSERT INTO Targets_missions (code_target, code_mission) VALUES (:code_target, :code_mission)");
-                        $req3->bindValue(":code_target", $code_target, PDO::PARAM_STR);
-                        $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
-                        $req3->execute();
+                        // if the code_mission is the same 
+                        if($mission->getCode_mission() === $mission->getOldcode_mission()) {
+                            $req3 = $pdo->prepare("INSERT INTO Targets_missions (code_target, code_mission) VALUES (:code_target, :code_mission)");
+                            $req3->bindValue(":code_target", $code_target, PDO::PARAM_STR);
+                            $req3->bindValue(":code_mission",  $mission->getOldcode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
+                        // if the code_mission is updated
+                        else {
+                            $req3 = $pdo->prepare("INSERT INTO Targets_missions (code_target, code_mission) VALUES (:code_target, :code_mission)");
+                            $req3->bindValue(":code_target", $code_target, PDO::PARAM_STR);
+                            $req3->bindValue(":code_mission", $mission->getCode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
                     }
+                // if no code_target is checked 
                 } else {
                     $code_targets = $_POST['oldcode_target'];
-                }
-                $req2->closeCursor();
-                $req3->closeCursor();
+                    
+                    // but if the code_mission is updated
+                    if($mission->getCode_mission() !== $mission->getOldcode_mission()) {
+                        $req2 = $pdo->prepare("DELETE FROM Targets_missions WHERE code_mission = :oldcode_mission");
+                        $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
+                        $req2->execute();
+                        $req2->closeCursor();
 
+                        foreach($code_targets as $code_target) {
+                            $req3 = $pdo->prepare("INSERT INTO Targets_missions (code_target, code_mission) VALUES (:code_target, :code_mission)");
+                            $req3->bindValue(":code_target", $code_target, PDO::PARAM_STR);
+                            $req3->bindValue(":code_mission",  $mission->getCode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
+                    }
+                }
 
                 // if a new id_hideout is checked, update the id_hideout in Hideouts_missions
                 if(count($id_hideouts) >= 1) {
                     $req2 = $pdo->prepare("DELETE FROM Hideouts_missions WHERE code_mission = :oldcode_mission");
                     $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
                     $req2->execute();
+                    $req2->closeCursor();
 
                     foreach($id_hideouts as $id_hideout) {
-                        $req3 = $pdo->prepare("INSERT INTO Hideouts_missions (id_hideout, code_mission) VALUES (:id_hideout, :code_mission)");
-                        $req3->bindValue(":id_hideout", $id_hideout, PDO::PARAM_INT);
-                        $req3->bindValue(":code_mission", $mission->getOldcode_mission(), PDO::PARAM_STR);
-                        $req3->execute();
+                        // if the code_mission is the same 
+                        if($mission->getCode_mission() === $mission->getOldcode_mission()) {
+                            $req3 = $pdo->prepare("INSERT INTO Hideouts_missions (id_hideout, code_mission) VALUES (:id_hideout, :code_mission)");
+                            $req3->bindValue(":id_hideout", $id_hideout, PDO::PARAM_INT);
+                            $req3->bindValue(":code_mission",  $mission->getOldcode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
+                        // if the code_mission is updated
+                        else {
+                            $req3 = $pdo->prepare("INSERT INTO Hideouts_missions (id_hideout, code_mission) VALUES (:id_hideout, :code_mission)");
+                            $req3->bindValue(":id_hideout", $id_hideout, PDO::PARAM_INT);
+                            $req3->bindValue(":code_mission", $mission->getCode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
                     }
+                // if no id_hideout is checked 
                 } else {
-                    $id_hideouts = $_POST['oldid_agent'];
-                }
-                $req2->closeCursor();
-                $req3->closeCursor();
+                    $id_hideouts = $_POST['oldid_hideout'];
+                    
+                    // but if the code_mission is updated
+                    if($mission->getCode_mission() !== $mission->getOldcode_mission()) {
+                        $req2 = $pdo->prepare("DELETE FROM Hideouts_missions WHERE code_mission = :oldcode_mission");
+                        $req2->bindValue(':oldcode_mission', $mission->getOldcode_mission(), PDO::PARAM_STR);
+                        $req2->execute();
+                        $req2->closeCursor();
 
+                        foreach($id_hideouts as $id_hideout) {
+                            $req3 = $pdo->prepare("INSERT INTO Hideouts_missions (id_hideout, code_mission) VALUES (:id_hideout, :code_mission)");
+                            $req3->bindValue(":id_hideout", $id_hideout, PDO::PARAM_INT);
+                            $req3->bindValue(":code_mission",  $mission->getCode_mission(), PDO::PARAM_STR);
+                            $req3->execute();
+                            $req3->closeCursor();
+                        }
+                    }
+                }
                 $req->closeCursor();
             }
         }
-        MessagesClass::addAlertMsg("Modification de la mission enregistrée", MessagesClass::GREEN_COLOR); 
+        // Display a success alerte message 
+        $_SESSION['alertUpdate'] = [
+            "type" => "success",
+            "msg" => "La mission a bien été modifiée"
+        ];
     }
 
 

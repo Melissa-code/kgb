@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 
 require_once("controllers/MainController.php"); 
 require_once("controllers/AgentController.php"); 
