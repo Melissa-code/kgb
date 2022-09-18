@@ -476,31 +476,31 @@ class MissionManager extends Model {
         $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req->execute();
 
-        // Delete the mission in Agents_missions
+        // Delete the mission in the Agents_missions table
         $req2 = $pdo->prepare('DELETE FROM Agents_missions WHERE code_mission = :code_mission');
         $req2->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req2->execute();
 
-        // Delete the mission in Contacts_missions
+        // Delete the mission in the Contacts_missions table
         $req3 = $pdo->prepare('DELETE FROM Contacts_missions WHERE code_mission = :code_mission');
         $req3->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req3->execute();
 
-         // Delete the mission in Hideouts_missions
+         // Delete the mission in the Hideouts_missions table
         $req4 = $pdo->prepare('DELETE FROM Hideouts_missions WHERE code_mission = :code_mission');
         $req4->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req4->execute();
 
-         // Delete the mission in Targets_missions
+         // Delete the mission in the Targets_missions table
         $req5 = $pdo->prepare('DELETE FROM Targets_missions WHERE code_mission = :code_mission');
         $req5->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req5->execute();
 
-        $req->closeCursor();
-        $req2->closeCursor();
-        $req3->closeCursor();
-        $req4->closeCursor();
         $req5->closeCursor();
+        $req4->closeCursor();
+        $req3->closeCursor();
+        $req2->closeCursor();
+        $req->closeCursor();
     }
 
 }

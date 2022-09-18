@@ -118,6 +118,7 @@ class MainController {
             "page_description" => "Page listant l'ensemble des missions secrètes du KGB",
             "page_title" => "Missions du KGB",
             "missions" => $missions,
+            "page_javascript" => ["missions.js"],
             "view" => "views/read/missionsView.php",
             "template" => "views/common/template.php"
         ];
