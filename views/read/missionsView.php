@@ -42,12 +42,12 @@ if(isset($_SESSION['connect'])) {
 </section>
 
 
-<section class="row m-3 justify-content-around" id="missions-list">
-    <article class="d-flex col-12 flex-wrap list-wrapper" >
+<section class="row m-3 justify-content-around">
+    <article class="d-flex col-12 flex-wrap" id="missions-list">
 
         <!-- Card of a mission -->
             <?php foreach($missions as $mission) :?>
-                <div class="card m-2 list-item" style="width: 18rem;" >
+                <div class="card m-2 list-item" style="width: 18rem;">
                     <div class="card-body">
                     <a href="<?= URL ?>oneMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="card-link"><h3 id="title" class="card-title mb-4 text-center text-danger fw-bold">Mission <?= $mission->getCode_mission(); ?></h3></a>
                     <h4 class="card-subtitle mb-2 text-center text-muted"><?= $mission->getTitle_mission() ; ?></h4>
@@ -82,7 +82,8 @@ if(isset($_SESSION['connect'])) {
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" onclick="previous()" href="#">Previous</a></li>
                 <li class="page-item"><a class="page-link" onclick="firstPage()" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" onclick="lastPage()" href="#">2</a></li>
+                <li class="page-item"><a class="page-link"  href="#"><span id="pageInfo"></span></a></li>
+                <li class="page-item"><a class="page-link" onclick="lastPage()" href="#">3</a></li>
                 <li class="page-item"><a class="page-link" onclick="nextPage()" href="#">Next</a></li>
             </ul>
         </nav>
