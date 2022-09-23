@@ -80,11 +80,17 @@ if(isset($_SESSION['connect'])) {
         <!-- Pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" onclick="previous()" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" onclick="firstPage()" href="#">1</a></li>
-                <li class="page-item"><a class="page-link"  href="#"><span id="pageInfo"></span></a></li>
-                <li class="page-item"><a class="page-link" onclick="lastPage()" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" onclick="nextPage()" href="#">Next</a></li>
+                <!-- <li class="page-item"><a class="page-link text-dark" onclick="previousPage()" href="#">Précédente</a></li> 
+                <li class="page-item"><a class="page-link text-dark" onclick="firstPage()" href="#">1</a></li>
+                <li class="page-item"><span class="page-link text-dark" id="pageInfo">Page 1 / 3</span></li>
+                <li class="page-item"><a class="page-link text-dark" onclick="lastPage()" href="#">3</a></li>
+                <li class="page-item"><a class="page-link text-dark" onclick="nextPage()" href="#">Suivante</a></li> -->
+
+                <li class="page-item"><a class="page-link text-dark previousP" href="#">Précédente</a></li>
+                <li class="page-item"><a class="page-link text-dark firstP"  href="#">1</a></li>
+                <li class="page-item"><span class="page-link text-dark" id="pageInfo">Page 1 / 3</span></li>
+                <li class="page-item"><a class="page-link text-dark lastP"  href="#">3</a></li>
+                <li class="page-item"><a class="page-link text-dark nextP"  href="#">Suivante</a></li>
             </ul>
         </nav>
     </div>
