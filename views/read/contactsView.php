@@ -1,17 +1,7 @@
-<?php 
-session_start(); 
-
-if(isset($_SESSION['connect'])) {
-    echo "admin connecté";
-} else {
-    echo "pas de connexion";
-}
-?>
-
 <!------------- Main --------------->
 
-<section class="mb-4">
-    <button class="btn btn-light" type="button"><a href="<?= URL?>createMission">Retour</a></button>
+<section class="my-4">
+    <button class="btn btn-light" type="button"><a href="<?= URL?>createMission"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="height: 1.5rem; width: 1.5rem"></a></button>
     <h1>Liste des contacts</h1>
 </section>
 
@@ -31,8 +21,14 @@ if(isset($_SESSION['connect'])) {
             <?php foreach($contacts as $contact) :?>
                 <div class="card m-2" style="width: 18rem;">
                     <div class="card-body ">
-                    <h4 class="card-subtitle mb-2 text-center text-muted"><?= $contact->getCode_contact(); ?></h4>
+                    <h4 class="card-subtitle mb-2 text-center text-muted">Code: <?= $contact->getCode_contact(); ?></h4>
                     <p class="card-subtitle mb-2 text-center text-muted"><?= $contact->getFirstname_contact(); ?> <?= $contact->getName_contact(); ?></p>
+                    <?php 
+                    // Display the date of birth in the French format
+                    $dateBirthdayFormat = new DateTime($contact->getDatebirthday_contact());
+                    ?>
+                    <p class="card-subtitle mb-2 text-center text-muted"><?= 'Né le : '.$dateBirthdayFormat->format('d/m/Y'); ?></p> 
+                    <p class="card-subtitle mb-2 text-center text-muted"><?= 'Nationalité : '. $contact->getNationality_contact(); ?></p> 
                 </div>
 
                 <!-- update & delete buttons -->
@@ -43,7 +39,7 @@ if(isset($_SESSION['connect'])) {
                             <button class="btn btn-warning me-2" type="submit"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un contact" style="width: 1.5rem;"></button>
                         </form>
                         <!-- Delete contact button -->
-                        <form method="POST" action="<?= URL ?>deleteContact?q=<?= $contact->getCode_contact(); ?>">
+                        <form method="POST" action="<?= URL ?>deleteContact?q=<?= $contact->getCode_contact(); ?>" onSubmit="return confirm('Etes-vous sûr de vouloir supprimer ce contact ?');">
                             <button class="btn btn-danger" type="submit"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer un contact" style="width: 1.5rem;"></button>
                         </form>
                     </li>

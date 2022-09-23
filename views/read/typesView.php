@@ -1,25 +1,15 @@
-<?php 
-session_start(); 
-
-if(isset($_SESSION['connect'])) {
-    echo "admin connecté";
-} else {
-    echo "pas de connexion";
-}
-?>
-
 <!------------- Main --------------->
 
-<section class="mb-4">
-    <button class="btn btn-light" type="button"><a href="<?= URL?>createMission">Retour</a></button>
+<section class="my-4">
+    <button class="btn btn-light" type="button"><a href="<?= URL?>createMission"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="height: 1.5rem; width: 1.5rem"></a></button>
     <h1>Liste des types</h1>
 </section>
 
 
 <section class="row">
     <div class="col-12 d-flex justify-content-center">
-        <!-- button add a type -->
-        <button class="btn btn-light font-weight-bold" type="button"><a href="<?= URL?>createType">Ajouter</a></button>
+        <!-- Add a type button -->
+        <button class="btn btn-light font-weight-bold" type="button"><a href="<?= URL?>createType"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un statut" style="width: 1.5rem;"></a></button>
     </div>
 </section>
 
@@ -40,11 +30,11 @@ if(isset($_SESSION['connect'])) {
                     <li class="list-group-item d-flex mx-auto "> 
                         <!-- Udpate type button -->
                         <form method="POST" action="<?= URL ?>updateType?q=<?= $type->getName_type() ?>">
-                            <button class="btn btn-warning me-2" type="submit">Modifier</button>
+                            <button class="btn btn-warning me-2" type="submit"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une planque" style="width: 1.5rem;"></button>
                         </form>
                         <!-- Delete type button -->
-                        <form method="POST" action="<?= URL ?>deleteType?q=<?= $type->getName_type() ?>">
-                            <button class="btn btn-danger" type="submit">Supprimer</button>
+                        <form method="POST" action="<?= URL ?>deleteType?q=<?= $type->getName_type() ?>" onSubmit="return confirm('Etes-vous sûr de vouloir supprimer ce type ?');">
+                            <button class="btn btn-danger" type="submit"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une planque" style="width: 1.5rem;"></button>
                         </form>
                     </li>
                 </ul>

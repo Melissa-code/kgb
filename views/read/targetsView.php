@@ -1,17 +1,7 @@
-<?php 
-session_start(); 
-
-if(isset($_SESSION['connect'])) {
-    echo "admin connecté";
-} else {
-    echo "pas de connexion";
-}
-?>
-
 <!------------- Main --------------->
 
-<section class="mb-4">
-    <button class="btn btn-light" type="button"><a href="<?= URL?>createMission">Retour</a></button>
+<section class="my-4">
+    <button class="btn btn-light" type="button"><a href="<?= URL?>createMission"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="height: 1.5rem; width: 1.5rem"></a></button>
     <h1>Liste des cibles</h1>
 </section>
 
@@ -31,11 +21,17 @@ if(isset($_SESSION['connect'])) {
             <?php foreach($targets as $target) :?>
                 <div class="card m-2" style="width: 18rem;">
                     <div class="card-body ">
-                    <h4 class="card-subtitle mb-2 text-center text-muted"><?= $target->getCode_target(); ?></h4>
+                    <h4 class="card-subtitle mb-2 text-center text-muted">Code: <?= $target->getCode_target(); ?></h4>
                     <p class="card-subtitle mb-2 text-center text-muted"><?= $target->getFirstname_target(); ?> <?= $target->getName_target(); ?></p>
+                    <?php 
+                    // Display the date of birth in the French format
+                    $dateBirthdayFormat = new DateTime($target->getDatebirthday_target());
+                    ?>
+                    <p class="card-subtitle mb-2 text-center text-muted"><?= 'Né le : '.$dateBirthdayFormat->format('d/m/Y'); ?></p> 
+                    <p class="card-subtitle mb-2 text-center text-muted"><?= 'Nationalité : '. $target->getNationality_target(); ?></p> 
                 </div>
 
-                <!-- update & delete buttons -->
+                <!-- Update & delete buttons -->
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex mx-auto "> 
                         <!-- Udpate target button -->
@@ -43,7 +39,7 @@ if(isset($_SESSION['connect'])) {
                             <button class="btn btn-warning me-2" type="submit"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cible" style="width: 1.5rem;"></button>
                         </form>
                         <!-- Delete target button -->
-                        <form method="POST" action="<?= URL ?>deleteTarget?q=<?= $target->getCode_target() ?>">
+                        <form method="POST" action="<?= URL ?>deleteTarget?q=<?= $target->getCode_target() ?>" onSubmit="return confirm('Etes-vous sûr de vouloir supprimer cette cible ?');">
                             <button class="btn btn-danger" type="submit"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une cible" style="width: 1.5rem;"></button>
                         </form>
                     </li>

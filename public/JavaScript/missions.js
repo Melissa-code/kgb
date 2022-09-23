@@ -107,7 +107,7 @@ function getCards() {
         if(this.readyState === 4 && this.status === 200){
             //missionsList.innerHTML = this.response; 
             let data = xhr.response;
-            console.log(data);
+            //console.log(data);
             setCardsInPage();
             console.log(data);
         } 
@@ -128,13 +128,18 @@ function getCards() {
  */
 function setCardsInPage() {
 
+    /**
+     * Keyup event listener
+     */
     searchInput.addEventListener('keyup', (e) => {
         // e.target.value : letters in the searchInput
         const searchedLetters = e.target.value.toLowerCase();
-    
         filterElements(searchedLetters, cards);
     });
 
+    /**
+     * Click events listeners 
+     */
     document.querySelector('.nextP').addEventListener('click', (e)=> {
         e.preventDefault();
         nextPage();
@@ -154,6 +159,7 @@ function setCardsInPage() {
         e.preventDefault();
         lastPage();
     })
+    
 }
 
 
