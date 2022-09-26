@@ -113,12 +113,15 @@ class MainController {
     public function missions() : void {
 
         $missions = $this->missionManager->getAll();
+        $admins = $this->adminManager->getAll();
 
         $data_page = [
             "page_description" => "Page listant l'ensemble des missions secrètes du KGB",
             "page_title" => "Missions du KGB",
             "missions" => $missions,
-            "page_javascript" => ["missions.js"],
+            "admins" => $admins,
+            // "page_javascript" => ["missions.js"],
+             "page_javascript" => ["missions2.js"],
             "view" => "views/read/missionsView.php",
             "template" => "views/common/template.php"
         ];

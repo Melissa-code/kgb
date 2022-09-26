@@ -1,51 +1,67 @@
-<?php 
-//session_start(); 
+<!---------------------------------- Main --------------------------------------->
 
-if(isset($_SESSION['connect'])) {
-    echo "admin connecté";
-} else {
-    echo "pas de connexion";
-}
-?>
+<!-- Alert message if the Admin is logged-in --> 
+<section class="container mt-3">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <?php if(isset($_SESSION['connect'])) :?>
+                <?php foreach($admins as $admin) :?>
+                    <?php if($admin->getEmail_admin() === $_SESSION['email_admin']) :?>
+                        <div class="alert text-center text-white" role="alert">
+                            - Ravi de vous revoir <?= $admin->getFirstname_admin()." ".$admin->getName_admin()." -"; ?>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
 
- <?php if(isset($_SESSION['alertUpdate'])) :?>
-    <div class="alert alert-success mx-5" role="alert">
-    <?= $_SESSION['alertUpdate']['msg'] ?>
-    </div>
-    <?php unset($_SESSION['alertUpdate']) ?>
-<?php endif ?>
-
-
-<!------------- Main --------------->
-
-<section class="mb-4">
-    <h1>Liste des missions</h1>
-</section>
-
-
-<section>
-    <!-- Display the create button if the admin is logged in -->
-    <?php if(isset($_SESSION['connect'])) :?>
-        <!-- Create a mission button -->
-        <form method="POST" action="<?= URL?>createMission" class="d-flex justify-content-center m-3">
-            <button class="btn btn-light" type="submit">Ajouter</button>
-        </form>
-    <?php endif ?>
-</section>
-
-<!-- Search the name of a mission -->
-<section>
-    <div>
-        <input class="form-control me-2 input" type="text" placeholder="Nom de code de la mission" aria-label="Search" id="searchInput">
-        <div id="suggestions"></div>
+<!-- Alert message if the mission has been successfully udpated --> 
+<section class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10 text-center">
+            <?php if(isset($_SESSION['alertUpdate'])) :?>
+                <div class="alert alert-success mx-5" role="alert">
+                    <?= $_SESSION['alertUpdate']['msg'] ?>
+                </div>
+                <?php unset($_SESSION['alertUpdate']) ?>
+            <?php endif; ?>
+        </div>
     </div>
 </section>
 
+<!-- Page title & Add button & Searchbar --> 
+<section class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Liste des missions</h1>
+        </div>
+        <div class="col-8 my-3">
+            <div class="row d-flex justify-content-center">
+                <!-- Search a mission -->
+                <div class="col-9 offset-md-2 col-md-7">
+                    <div>
+                        <input class="form-control me-2 input" type="text" placeholder="Rechercher une mission" aria-label="Search" id="searchInput">
+                        <div id="suggestions"></div>
+                    </div>
+                </div>
+                <!-- Display Add mission button if the Admin is logged-in -->
+                <div class="col-3 col-md-3">
+                    <?php if(isset($_SESSION['connect'])) :?>
+                        <a href="<?= URL?>createMission" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une mission" style="width: 1.5rem; height:1.5rem;"></a>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<section class="row m-3 justify-content-around">
-    <article class="d-flex col-12 flex-wrap" id="missions-list">
-
-        <!-- Card of a mission -->
+<!-- Display all the missions --> 
+<section class="container">
+    <div class="row">
+        <!-- Missions cards -->
+        <article class="d-flex col-12 flex-wrap justify-content-center" id="missions-list">
             <?php foreach($missions as $mission) :?>
                 <div class="card m-2 list-item" style="width: 18rem;">
                     <div class="card-body">
@@ -54,38 +70,32 @@ if(isset($_SESSION['connect'])) {
                     <p class="card-text text-muted"><?= $mission->getDescription_mission() ?></p>
                 </div>
 
-                <!-- Display the update & delete buttons if the admin is logged in -->
+                <!-- Display the Update & Delete buttons if the Admin is logged-in -->
                 <?php if(isset($_SESSION['connect'])) :?>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex mx-auto my-2"> 
                             <!-- Udpate mission button -->
                             <form method="POST" action="<?= URL ?>updateMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="me-2">
-                                <button class="btn btn-warning" type="submit">Modifier</button>
+                                <button class="btn btn-warning" type="submit"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une planque" style="width: 1.5rem;"></button>
                             </form>
                             <!-- Delete mission button -->
                             <form method="POST" action="<?= URL ?>deleteMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" onSubmit="return confirm('Etes-vous sûr de vouloir supprimer la mission ?');">
-                                <button class="btn btn-danger" type="submit">Supprimer</button>
+                                <button class="btn btn-danger" type="submit"><img src="<?= URL ?>/public/assets/images/icon-remove.svg" alt="supprimer une planque" style="width: 1.5rem;"></button>
                             </form>
                         </li>
                     </ul>
                 <?php endif ?>
                 </div>
             <?php endforeach; ?>
-    </article>
+        </article>
+    </div>
 </section>
 
-
-<section class="row mt-4">
+<!-- Pagination -->
+<section class="row mt-5 mb-3">
     <div class="col-12 d-flex justify-content-center">
-        <!-- Pagination -->
         <nav aria-label="Page navigation">
             <ul class="pagination">
-                <!-- <li class="page-item"><a class="page-link text-dark" onclick="previousPage()" href="#">Précédente</a></li> 
-                <li class="page-item"><a class="page-link text-dark" onclick="firstPage()" href="#">1</a></li>
-                <li class="page-item"><span class="page-link text-dark" id="pageInfo">Page 1 / 3</span></li>
-                <li class="page-item"><a class="page-link text-dark" onclick="lastPage()" href="#">3</a></li>
-                <li class="page-item"><a class="page-link text-dark" onclick="nextPage()" href="#">Suivante</a></li> -->
-
                 <li class="page-item"><a class="page-link text-dark previousP" href="#">Précédente</a></li>
                 <li class="page-item"><a class="page-link text-dark firstP"  href="#">1</a></li>
                 <li class="page-item"><span class="page-link text-dark" id="pageInfo">Page 1 / 3</span></li>

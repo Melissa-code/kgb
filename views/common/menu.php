@@ -17,7 +17,7 @@
         </button>
     
         <!-- Target of the button -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
                 <!-- Home link -->
                 <li><a aria-current="page" href="home" class="nav-link px-2 text-dark">Accueil</a></li>
@@ -28,11 +28,11 @@
             <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                 <!-- Login link -->
                 <?php if(!isset($_SESSION['connect'])) :?>
-                    <li><a href="login"><img src="<?= URL ?>public/assets/images/connection.svg" width="50" class="nav-link px-2" /></a></li>
+                    <li><a href="login"><img src="<?= URL ?>public/assets/images/loginuser.svg" width="80" class="nav-link px-2" /></a></li>
                     <?php endif ?>
                 <!-- Logout link -->
                 <?php if(isset($_SESSION['connect'])) :?>
-                    <li><a href="logout"><img src="<?= URL ?>public/assets/images/disconnection.svg"  width="50" class="nav-link px-2" /></a></li>
+                    <li><a href="logout"><img src="<?= URL ?>public/assets/images/logoutuser.svg"  width="80" class="nav-link px-2" /></a></li>
                 <?php endif ?>
             </ul>
         </div>
