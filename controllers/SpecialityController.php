@@ -62,7 +62,7 @@ class SpecialityController {
 
 
     /**
-    * Create a speciality
+    * Create a speciality function 
     *
     */
     public function createSpeciality() : void {
@@ -84,13 +84,13 @@ class SpecialityController {
             $newSpeciality = new Speciality($_POST);
             $this->specialityManager->createSpecialityDb($newSpeciality); 
         }
-        header('location:'.URL."createMission");
+        header('location:'.URL.'specialitiesList');
         exit();
     }
 
 
     /**
-    * Update a speciality 
+    * Update a speciality (page) function 
     *
     */
     public function updateSpeciality(){
@@ -109,7 +109,7 @@ class SpecialityController {
 
 
     /**
-    * Update a speciality validation
+    * Update a speciality (validation) function 
     *
     */
     public function updateSpecialityValidation(): void {
@@ -118,22 +118,26 @@ class SpecialityController {
             $speciality = new Speciality($_POST);
             $this->specialityManager->updateSpecialityDb($speciality); 
         }
-        header('location:'.URL."createMission");
+        header('location:'.URL.'specialitiesList');
+        exit();
     }
 
 
     /**
-    * Delete a speciality
+    * Delete a speciality function 
     *
     */
     public function deleteSpeciality(): void {
         $speciality = $this->getSpecialityByName();
         $this->specialityManager->deletespecialityDb($speciality->getName_speciality());
+        $_SESSION['alertDeleteSpeciality'] = [
+            "type" => "success", 
+            "msg" => "Suppression de la spécialité bien réalisée."
+        ]; 
         unset($speciality); 
-        header('location:'.URL."createMission");
+        header('location:'.URL.'specialitiesList');
+        exit(); 
     }
-
-
 
 }
 

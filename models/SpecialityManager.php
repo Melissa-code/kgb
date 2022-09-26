@@ -56,6 +56,11 @@ class SpecialityManager extends Model {
        
         while($name_verification = $req->fetch()){
             if($name_verification['numberName'] >= 1){
+                // Display an error alert message 
+                $_SESSION['alertDuplicateSpeciality'] = [
+                    "type" => "error",
+                    "msg" => "ERREUR : ce nom existe déjà."
+                ];
                 header('location:'.URL."createSpeciality"); 
                 exit();
             }
@@ -66,7 +71,12 @@ class SpecialityManager extends Model {
                 $req->closeCursor();
             }
         }
-    }
+        // Display a success alert message 
+        $_SESSION['alertCreateSpeciality'] = [
+            "type" => "success",
+            "msg" => "La spécialité a bien été créée."
+        ];
+}
 
 
     /**
@@ -74,14 +84,39 @@ class SpecialityManager extends Model {
     *
     */
     public function updateSpecialityDb(Speciality $speciality): void {
-        $pdo = $this->getDb();
-        $req =$pdo->prepare('UPDATE Specialities SET name_speciality = :name_speciality WHERE name_speciality = :oldname_speciality');
-        $req->bindValue(':name_speciality', $speciality->getName_speciality(), PDO::PARAM_STR);
-        $req->bindValue(':oldname_speciality', $speciality->getOldname_speciality(), PDO::PARAM_STR);
-        $req->execute();
-        $req->closeCursor();
-    }
 
+        $pdo = $this->getDb();
+
+        // Check if the name_speciality already exists
+        $req = $pdo->prepare("SELECT count(*) as numberName FROM Specialities WHERE name_speciality = :name_speciality"); 
+        $req->bindValue(':name_speciality', $speciality->getName_speciality(), PDO::PARAM_STR);
+        $req->execute();
+
+        while($name_verification = $req->fetch()){
+            if($name_verification['numberName'] >= 1 ) {
+                // Display an error alert message 
+                $_SESSION['alertDuplicateSpeciality'] = [
+                    "type" => "error",
+                    "msg" => "ERREUR : ce nom existe déjà."
+                ];
+                header('location:'.URL."updateSpeciality?q=".$speciality->getOldname_speciality());
+                exit();
+            }
+            else {
+                // Update the speciality in the database 
+                $req = $pdo->prepare('UPDATE Specialities SET name_speciality = :name_speciality WHERE name_speciality = :oldname_speciality');
+                $req->bindValue(':name_speciality', $speciality->getName_speciality(), PDO::PARAM_STR);
+                $req->bindValue(':oldname_speciality', $speciality->getOldname_speciality(), PDO::PARAM_STR);
+                $req->execute();
+                $req->closeCursor();
+            }
+        }
+        // Display a success alert message 
+        $_SESSION['alertUpdateSpeciality'] = [
+            "type" => "success",
+            "msg" => "La spécialité a bien été modifiée."
+        ];
+    }
 
     /**
     * Delete a speciality in the database 

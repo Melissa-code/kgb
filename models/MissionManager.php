@@ -455,7 +455,7 @@ class MissionManager extends Model {
                 $req->closeCursor();
             }
         }
-        // Display a success alerte message 
+        // Display a success alert message 
         $_SESSION['alertUpdate'] = [
             "type" => "success",
             "msg" => "La mission a bien été modifiée"
