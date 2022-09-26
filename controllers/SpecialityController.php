@@ -130,10 +130,6 @@ class SpecialityController {
     public function deleteSpeciality(): void {
         $speciality = $this->getSpecialityByName();
         $this->specialityManager->deletespecialityDb($speciality->getName_speciality());
-        $_SESSION['alertDeleteSpeciality'] = [
-            "type" => "success", 
-            "msg" => "Suppression de la spécialité bien réalisée."
-        ]; 
         unset($speciality); 
         header('location:'.URL.'specialitiesList');
         exit(); 

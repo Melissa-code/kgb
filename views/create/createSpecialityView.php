@@ -1,4 +1,5 @@
 <!-- Alert error message if the speciality already exists --> 
+
 <section class="container mt-3">
     <div class="row d-flex justify-content-center">
         <div class="col-md-10 text-center">
@@ -12,7 +13,9 @@
     </div>
 </section>
 
+
 <!-- Page title & back button button --> 
+
 <section class="container mb-5">
     <div class="row d-flex justify-content-center">
         <div class="col-12">
@@ -25,6 +28,7 @@
 
 
 <!-- Create speciality form -->
+
 <section class="container my-5">
     <div class="row d-flex justify-content-center">
         <article class="col-7 col-md-6 col-lg-4 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
@@ -35,7 +39,7 @@
                     <label for="name_speciality" class="form-label">Nom de la spécialité : </label>
                     <input type="text" class="form-control" id="name_speciality" name="name_speciality">
                 </div>
-                <!-- button --> 
+                <!-- Add button --> 
                 <button type="submit" class="btn btn-light d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"> Ajouter</button>
             </form>
 

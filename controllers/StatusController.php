@@ -19,7 +19,7 @@ class StatusController {
     * Generate a page
     */
     private function generatePage(array $data) : void {
-        extract($data); //function to create variables from the array $data_page (indice of the array becomes variable)
+        extract($data); 
         ob_start(); 
         require_once($view);
         $page_content = ob_get_clean();
@@ -42,9 +42,10 @@ class StatusController {
         return $status; 
     }
 
-     /**
-    * Collect all the status data 
-    * Send all the missions data to the missionsView
+
+    /**
+    * Get all the status function 
+    * 
     * 
     */
     public function statusList() : void {
@@ -63,7 +64,8 @@ class StatusController {
 
 
     /**
-    * Create a status
+    * Create a status (page) function 
+    *
     */
     public function createStatus() : void {
 
@@ -75,23 +77,30 @@ class StatusController {
         ];
         $this->generatePage($data_page); 
     }
+    
 
+    /**
+    * Create a status (validation) function 
+    *
+    */
     public function createStatusValidation(): void {
+
         if($_POST) {
             $newStatus = new Status($_POST);
             $this->statusManager->createStatusDb($newStatus); 
         }
-        header('location:'.URL."createMission");
+        header("location:".URL."statusList");
         exit();
     }
 
+
     /**
-    * Update a status
+    * Update a status (page) function 
+    *
     */
     public function updateStatus(){
 
         $status = $this->getStatusByCode();
-        // var_dump($status);
 
         $data_page = [
             "page_description" => "Page de modification du statut",
@@ -103,29 +112,32 @@ class StatusController {
         $this->generatePage($data_page); 
     }
 
+
+    /** 
+     * Update a status (validation) function 
+     * 
+     */
     public function updateStatusValidation(): void {
 
         if($_POST) {
             $status = new Status($_POST);
-            //var_dump($_POST);
             $this->statusManager->updateStatusDb($status); 
-            header('location:'.URL."createMission");
+            header("location:".URL."statusList");
+            exit(); 
         }
-       
     }
 
 
     /**
-    * Delete a status
+    * Delete a status function 
     */
     public function deleteStatus(): void {
+
         $status = $this->getStatusByCode();
         $this->statusManager->deleteStatusDb($status->getCode_status());
         unset($status); 
-        header('location:'.URL."createMission");
+        header("location:".URL."statusList");
+        exit(); 
     }
-
-
-
 }
 

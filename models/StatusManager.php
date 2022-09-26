@@ -43,18 +43,26 @@ class StatusManager extends Model {
 
 
     /**
-    * Create a status
+    * Create a status in the database function 
+    *
     */
     public function createStatusDb(Status $newStatus): void {
 
         $pdo = $this->getDb();
+
+        // Check if the code_status already exists
         $req = $pdo->prepare('SELECT count(*) as numberCode FROM Status WHERE code_status = :code_status'); 
         $req->bindValue(':code_status', $newStatus->getCode_status(), PDO::PARAM_STR);
         $req->execute();
 
         while($code_verification = $req->fetch()){
             if($code_verification['numberCode'] >= 1){
-                header('location:'.URL."createStatus"); 
+                // Display an error alert message 
+                $_SESSION['alertDuplicateStatus'] = [
+                    "type" => "error",
+                    "msg" => "ERREUR : ce code existe déjà."
+                ];
+                header('location:'.URL.'createStatus'); 
                 exit();
             }
             else {
@@ -64,27 +72,57 @@ class StatusManager extends Model {
                 $req->closeCursor();
             }
         }
+        // Display a success alert message 
+        $_SESSION['alertUpdateStatus'] = [
+            "type" => "success",
+            "msg" => "Le statut a bien été créé."
+        ];
     }
 
 
     /**
     * Update a status in the database 
+    *
     */
     public function updateStatusDb(Status $status): void {
-        //$status
-        //var_dump($status);
-
+    
         $pdo = $this->getDb();
-        $req = $pdo->prepare('UPDATE Status SET code_status = :code_status WHERE code_status = :oldcode_status');
+
+        // Check if the code_status already exists
+        $req = $pdo->prepare("SELECT count(*) as numberCode FROM Status WHERE code_status = :code_status"); 
         $req->bindValue(':code_status', $status->getCode_status(), PDO::PARAM_STR);
-        $req->bindValue(':oldcode_status', $status->getOldcode_status(), PDO::PARAM_STR);
         $req->execute();
-        $req->closeCursor();
+
+        while($code_verification = $req->fetch()){
+            if($code_verification['numberCode'] >= 1 ) {
+                // Display an error alert message 
+                $_SESSION['alertDuplicateStatus'] = [
+                    "type" => "error",
+                    "msg" => "ERREUR : ce code existe déjà."
+                ];
+                header("location:".URL."updateStatus?q=".$status->getOldcode_status());
+                exit();
+            }
+            else {
+                // Update the status in the database 
+                $req = $pdo->prepare('UPDATE Status SET code_status = :code_status WHERE code_status = :oldcode_status');
+                $req->bindValue(':code_status', $status->getCode_status(), PDO::PARAM_STR);
+                $req->bindValue(':oldcode_status', $status->getOldcode_status(), PDO::PARAM_STR);
+                $req->execute();
+                $req->closeCursor();
+            }
+        }
+        // Display a success alert message 
+        $_SESSION['alertUpdateStatus'] = [
+            "type" => "success",
+            "msg" => "Le statut a bien été modifié."
+        ];
     }
 
     
     /**
     * Delete a status in the database 
+    *
     */
     public function deleteStatusDb(string $code_status): void {
         $pdo = $this->getDb();
@@ -92,8 +130,11 @@ class StatusManager extends Model {
         $req->bindValue(':code_status', $code_status, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
+        // Display a success alert message 
+        $_SESSION['alertDeleteStatus'] = [
+            "type" => "success", 
+            "msg" => "Suppression du statut bien réalisée."
+        ]; 
     }
-
-
 
 }

@@ -129,6 +129,9 @@ class SpecialityManager extends Model {
         $req->bindValue(':name_speciality', $name_speciality, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
+        $_SESSION['alertDeleteSpeciality'] = [
+            "type" => "success", 
+            "msg" => "Suppression de la spécialité bien réalisée."
+        ]; 
     }
-
 }

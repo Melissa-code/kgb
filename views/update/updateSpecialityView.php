@@ -21,7 +21,7 @@
         <div class="col-12">
             <h1>Modifier la spécialité <?= $speciality->getName_speciality() ?></h1>
         <div class="col-12 d-flex justify-content-center my-4">
-            <a href="specialitiesList" class="btn btn-light mt-3"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des spécialités" style="width: 1.5rem; height: 1.5rem;"></a>
+            <a href="specialitiesList" class="btn btn-light mt-3"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des spécialités" style="width: 1.5rem; height: 1.5rem;"> Revenir</a>
         </div>
     </div>
 </section>
