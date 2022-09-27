@@ -17,16 +17,13 @@ class Target_missionManager extends Model {
         $req = $pdo->prepare("SELECT * FROM Targets_missions");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC); 
-        //echo "<pre>"; var_dump($data);echo"</pre>";
 
         foreach($data as $target_mission) {
             $targets_missions[] = new Target_mission($target_mission);
         }
         
         $req->closeCursor();
-        //echo "<pre>"; var_dump($agents_missions); echo"</pre>";
         return $targets_missions;
     }
-
 
 }

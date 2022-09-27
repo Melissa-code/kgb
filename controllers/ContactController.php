@@ -42,7 +42,6 @@ class ContactController {
 
     /**
     * Get all the contacts (array)
-    * Send them to the contactsView
     * 
     */
     public function contactsList() : void {
@@ -50,8 +49,8 @@ class ContactController {
         $contacts  = $this->contactManager->getAll();
 
         $data_page = [
-            "page_description" => "Page listant les statuts",
-            "page_title" => "Statuts",
+            "page_description" => "Page listant les contacts",
+            "page_title" => "Liste des contacts",
             "contacts" => $contacts,
             "view" => "views/read/contactsView.php",
             "template" => "views/common/template.php"
@@ -85,7 +84,7 @@ class ContactController {
             $newContact = new Contact($_POST);
             $this->contactManager->createContactDb($newContact); 
         }
-       header('location:'.URL."createMission");
+       header("location:".URL."contactsList");
        exit();
     }
 
@@ -108,12 +107,18 @@ class ContactController {
         $this->generatePage($data_page); 
     }
 
+
+    /**
+    * Update a contact (validation)
+    *
+    */
     public function updateContactValidation(): void {
         if($_POST) {
             $contact = new Contact($_POST);
             $this->contactManager->updateContactDb($contact); 
         }
-        header('location:'.URL."createMission");
+        header("location:".URL."contactsList");
+        exit();
     }
 
 
@@ -125,7 +130,8 @@ class ContactController {
         $contact = $this->getContactByCode();
         $this->contactManager->deleteContactDb($contact->getCode_contact());
         unset($contact); 
-        header('location:'.URL."createMission");
+        header("location:".URL."contactsList");
+        exit();
     }
 
 }

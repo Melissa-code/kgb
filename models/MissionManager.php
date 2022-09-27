@@ -22,11 +22,11 @@ class MissionManager extends Model {
         foreach($data as $mission) {
             $missions[] = new Mission($mission);
         }
-        
         $req->closeCursor();
         return $missions;
     }
 
+    
     /**
     * Get one mission only
     *
@@ -461,7 +461,6 @@ class MissionManager extends Model {
             "msg" => "La mission a bien été modifiée"
         ];
     }
-
 
 
     /**

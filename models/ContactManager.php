@@ -20,7 +20,6 @@ class ContactManager extends Model {
         foreach($data as $contact) {
             $contacts[] = new Contact($contact);
         }
-        
         $req->closeCursor();
         return $contacts;
     }
@@ -50,6 +49,7 @@ class ContactManager extends Model {
     public function createContactDb(Contact $newContact): void {
 
         $pdo = $this->getDb();
+        // Count the duplicates contacts in the DB 
         $req = $pdo->prepare(
             'SELECT
                 (SELECT count(*) as numberCode FROM Contacts WHERE code_contact = :code_contact),
@@ -64,13 +64,16 @@ class ContactManager extends Model {
         $req->bindValue(":datebirthday_contact", $newContact->getDatebirthday_contact(), PDO::PARAM_STR);
         $req->bindValue(":nationality_contact", $newContact->getNationality_contact(), PDO::PARAM_STR);
         $req->execute();
- 
+
+        // Check if the contact already exists in the DB 
         while($verification = $req->fetch()){
             if($verification[0] >= 1 || ($verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 && $verification[4] >= 1)) {
-                header('location:'.URL."createContact"); 
+                MessagesClass::addAlertMsg("ERREUR : ce contact existe déjà.", MessagesClass::RED_COLOR); 
+                header("location:".URL."createContact"); 
                 exit();
             }
             else {     
+                // Create the contact in the DB 
                 $req = $pdo->prepare("INSERT INTO Contacts (code_contact, name_contact, firstname_contact, datebirthday_contact, nationality_contact) VALUES (:code_contact, :name_contact, :firstname_contact, :datebirthday_contact, :nationality_contact)");
                 $req->bindValue(":code_contact", $newContact->getCode_contact(), PDO::PARAM_STR);
                 $req->bindValue(":name_contact", $newContact->getName_contact(), PDO::PARAM_STR);
@@ -81,6 +84,7 @@ class ContactManager extends Model {
                 $req->closeCursor();
             }
         }
+        MessagesClass::addAlertMsg("Le contact a bien été créé.", MessagesClass::GREEN_COLOR); 
     }
 
     
@@ -99,6 +103,7 @@ class ContactManager extends Model {
         $req->bindValue(':nationality_contact', $contact->getNationality_contact(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
+        MessagesClass::addAlertMsg("Le contact a bien été modifié.", MessagesClass::GREEN_COLOR); 
     }
 
 
@@ -112,9 +117,7 @@ class ContactManager extends Model {
         $req->bindValue(':code_contact', $code_contact, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
+        MessagesClass::addAlertMsg("Le contact a bien été supprimé.", MessagesClass::GREEN_COLOR); 
     }
-
-
-
 
 }

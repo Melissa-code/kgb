@@ -17,14 +17,11 @@ class Contact_missionManager extends Model {
         $req = $pdo->prepare("SELECT * FROM Contacts_missions");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC); 
-        //echo "<pre>"; var_dump($data);echo"</pre>";
 
         foreach($data as $contact_mission) {
             $contacts_missions[] = new Contact_mission($contact_mission);
         }
-        
         $req->closeCursor();
-        //echo "<pre>"; var_dump($agents_missions); echo"</pre>";
         return $contacts_missions;
     }
 

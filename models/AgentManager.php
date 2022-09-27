@@ -1,5 +1,4 @@
 <?php 
-
 require_once("models/Class/Model.php");
 require_once("models/Class/Agent.php");
 
@@ -21,7 +20,6 @@ class AgentManager extends Model {
         foreach($data as $agent) {
             $agents[] = new Agent($agent);
         }
-        
         $req->closeCursor();
         return $agents;
     }
@@ -29,6 +27,7 @@ class AgentManager extends Model {
     
     /**
     * Get one agent only
+    *
     * @return Agent $agent
     */
     public function get($id_agent) : Agent {
@@ -49,6 +48,7 @@ class AgentManager extends Model {
     public function createAgentDb(Agent $newAgent): void {
 
         $pdo = $this->getDb();
+        // Count the duplicates agents in the DB 
         $req = $pdo->prepare(
             'SELECT
                 (SELECT count(*) as numberName FROM Agents WHERE name_agent = :name_agent),
@@ -62,20 +62,23 @@ class AgentManager extends Model {
         $req->bindValue(":nationality_agent", $newAgent->getNationality_agent(), PDO::PARAM_STR);
         $req->execute();
  
+        // Check if the agent already exists in the DB 
         while($verification = $req->fetch()){
             if($verification[0] >= 1 && $verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 ){
-                header('location:'.URL."createAgent"); 
+                MessagesClass::addAlertMsg("ERREUR : cet agent existe déjà.", MessagesClass::RED_COLOR); 
+                header("location:".URL."createAgent"); 
                 exit();
             }
             else {     
+                // Create the agent in the DB 
                 $req = $pdo->prepare("INSERT INTO Agents (name_agent, firstname_agent, datebirthday_agent, nationality_agent) VALUES (:name_agent, :firstname_agent, :datebirthday_agent, :nationality_agent)");
                 $req->bindValue(":name_agent", $newAgent->getName_agent(), PDO::PARAM_STR);
                 $req->bindValue(":firstname_agent", $newAgent->getFirstname_agent(), PDO::PARAM_STR);
                 $req->bindValue(":datebirthday_agent", $newAgent->getDatebirthday_agent(), PDO::PARAM_STR);
                 $req->bindValue(":nationality_agent", $newAgent->getNationality_agent(), PDO::PARAM_STR);
                 $req->execute();
-
-
+                
+                 // Create the agent in the Specialities_agents table too 
                 $id_agent = $pdo->lastInsertId();
                 $name_speciality = $newAgent->getName_speciality(); 
 
@@ -85,20 +88,25 @@ class AgentManager extends Model {
                     $req2->bindValue(':id_agent', $id_agent, PDO::PARAM_INT);
                     $req2->execute();
                 }
-                
+                $req2->closeCursor();
                 $req->closeCursor();
             }
-       }
+        }
+        MessagesClass::addAlertMsg("L'agent a bien été créé.", MessagesClass::GREEN_COLOR); 
    }
 
     
     /**
-    * Update an agent in the database
+    * Update an agent 
     *
     */
     public function updateAgentDb(Agent $agent): void {
 
-        $name_specialities = $_POST['name_speciality'];
+        if(!empty($_POST['name_speciality'])) {
+            $name_specialities = $_POST['name_speciality'];
+        } else {
+            $name_specialities = [];
+        }
 
         $pdo = $this->getDb();
         $req = $pdo->prepare('UPDATE Agents SET id_agent = :id_agent, name_agent = :name_agent, firstname_agent = :firstname_agent, datebirthday_agent = :datebirthday_agent, nationality_agent = :nationality_agent WHERE id_agent = :oldid_agent');
@@ -122,24 +130,33 @@ class AgentManager extends Model {
                 $req3->bindValue(":id_agent", $agent->getOldid_agent(), PDO::PARAM_INT);
                 $req3->execute();
             }
+            $req3->closeCursor();
+            $req2->closeCursor();
         }
         $req->closeCursor();
-        $req2->closeCursor();
-        $req3->closeCursor();
+        MessagesClass::addAlertMsg("L'agent a bien été modifié.", MessagesClass::GREEN_COLOR); 
     }
 
 
     /**
-    * Delete an agent in the database
+    * Delete an agent 
     *
     */
     public function deleteAgentDb(int $id_agent): void {
 
         $pdo = $this->getDb();
+        
         $req = $pdo->prepare('DELETE FROM Agents WHERE id_agent = :id_agent');
         $req->bindValue(':id_agent', $id_agent, PDO::PARAM_INT);
         $req->execute();
+
+        // Delete in the Specialities_agents table too 
+        $req = $pdo->prepare('DELETE FROM Specialities_agents WHERE id_agent = :id_agent');
+        $req->bindValue(':id_agent', $id_agent, PDO::PARAM_INT);
+        $req->execute();
+
         $req->closeCursor();
+        MessagesClass::addAlertMsg("L'agent a bien été supprimé.", MessagesClass::GREEN_COLOR); 
     }
 
 }

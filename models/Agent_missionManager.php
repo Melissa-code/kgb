@@ -7,7 +7,7 @@ require_once("models/Class/Agent_mission.php");
 class Agent_missionManager extends Model {
 
     /**
-    * Get all the Agents in all the missions
+    * Get all the agents in all the missions
     *
     * @return array $agents
     */
@@ -17,19 +17,18 @@ class Agent_missionManager extends Model {
         $req = $pdo->prepare("SELECT * FROM Agents_missions");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC); 
-        //echo "<pre>"; var_dump($data);echo"</pre>";
 
         foreach($data as $agent_mission) {
             $agents_missions[] = new Agent_mission($agent_mission);
         }
         
         $req->closeCursor();
-        //echo "<pre>"; var_dump($agents_missions); echo"</pre>";
         return $agents_missions;
     }
 
     /**
     * Get one agent_mission only
+    *
     * @return Agent_mission $agent
     */
     public function get($code_mission) : Agent_mission {
@@ -40,7 +39,7 @@ class Agent_missionManager extends Model {
         $data = $req->fetch(); 
         $agent_mission = new Agent_mission($data); 
         $req->closeCursor();
-        echo "<pre>"; var_dump($agent_mission) ; echo "</pre>";
+        //echo "<pre>"; var_dump($agent_mission) ; echo "</pre>";
         return $agent_mission;
     }
 

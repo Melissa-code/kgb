@@ -1,8 +1,7 @@
 <?php 
-
+require_once("controllers/MessagesClass.php");
 require_once("models/Class/Model.php");
 require_once("models/Class/Speciality.php");
-
 
 class SpecialityManager extends Model {
 
@@ -21,7 +20,6 @@ class SpecialityManager extends Model {
         foreach($data as $speciality) {
             $specialities[] = new Speciality($speciality);
         }
-        
         $req->closeCursor();
         return $specialities;
     }
@@ -56,11 +54,7 @@ class SpecialityManager extends Model {
        
         while($name_verification = $req->fetch()){
             if($name_verification['numberName'] >= 1){
-                // Display an error alert message 
-                $_SESSION['alertDuplicateSpeciality'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR : ce nom existe déjà."
-                ];
+                MessagesClass::addAlertMsg("ERREUR : cette spécialité existe déjà.", MessagesClass::RED_COLOR); 
                 header('location:'.URL."createSpeciality"); 
                 exit();
             }
@@ -71,11 +65,7 @@ class SpecialityManager extends Model {
                 $req->closeCursor();
             }
         }
-        // Display a success alert message 
-        $_SESSION['alertCreateSpeciality'] = [
-            "type" => "success",
-            "msg" => "La spécialité a bien été créée."
-        ];
+        MessagesClass::addAlertMsg("La spécialité a bien été créée.", MessagesClass::GREEN_COLOR); 
 }
 
 
@@ -95,10 +85,11 @@ class SpecialityManager extends Model {
         while($name_verification = $req->fetch()){
             if($name_verification['numberName'] >= 1 ) {
                 // Display an error alert message 
-                $_SESSION['alertDuplicateSpeciality'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR : ce nom existe déjà."
-                ];
+                // $_SESSION['alertDuplicateSpeciality'] = [
+                //     "type" => "error",
+                //     "msg" => "ERREUR : ce nom existe déjà."
+                // ];
+                MessagesClass::addAlertMsg("ERREUR : cette spécialité existe déjà.", MessagesClass::RED_COLOR); 
                 header('location:'.URL."updateSpeciality?q=".$speciality->getOldname_speciality());
                 exit();
             }
@@ -112,14 +103,11 @@ class SpecialityManager extends Model {
             }
         }
         // Display a success alert message 
-        $_SESSION['alertUpdateSpeciality'] = [
-            "type" => "success",
-            "msg" => "La spécialité a bien été modifiée."
-        ];
+        MessagesClass::addAlertMsg("La spécialité a bien été modifiée.", MessagesClass::GREEN_COLOR); 
     }
 
     /**
-    * Delete a speciality in the database 
+    * Delete a speciality in the database function
     *
     */
     public function deleteSpecialityDb(string $name_speciality): void {
@@ -129,9 +117,7 @@ class SpecialityManager extends Model {
         $req->bindValue(':name_speciality', $name_speciality, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
-        $_SESSION['alertDeleteSpeciality'] = [
-            "type" => "success", 
-            "msg" => "Suppression de la spécialité bien réalisée."
-        ]; 
+         // Display a success alert message 
+        MessagesClass::addAlertMsg("La spécialité a bien été supprimée.", MessagesClass::GREEN_COLOR); 
     }
 }

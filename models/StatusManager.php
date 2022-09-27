@@ -1,5 +1,5 @@
 <?php 
-
+require_once("controllers/MessagesClass.php");
 require_once("models/Class/Model.php");
 require_once("models/Class/Status.php");
 
@@ -8,6 +8,7 @@ class StatusManager extends Model {
 
     /**
     * Get all the status 
+    *
     * @return array $status
     */
     public function getAll() : array {
@@ -20,7 +21,6 @@ class StatusManager extends Model {
         foreach($data as $oneStatus) {
             $status[] = new Status($oneStatus);
         }
-        
         $req->closeCursor();
         return $status;
     }
@@ -28,6 +28,7 @@ class StatusManager extends Model {
 
     /**
     * Get one status only
+    *
     * @return Status $status
     */
     public function get($code_status) : Status {
@@ -58,10 +59,7 @@ class StatusManager extends Model {
         while($code_verification = $req->fetch()){
             if($code_verification['numberCode'] >= 1){
                 // Display an error alert message 
-                $_SESSION['alertDuplicateStatus'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR : ce code existe déjà."
-                ];
+                MessagesClass::addAlertMsg("ERREUR : ce statut existe déjà.", MessagesClass::RED_COLOR); 
                 header('location:'.URL.'createStatus'); 
                 exit();
             }
@@ -73,10 +71,7 @@ class StatusManager extends Model {
             }
         }
         // Display a success alert message 
-        $_SESSION['alertUpdateStatus'] = [
-            "type" => "success",
-            "msg" => "Le statut a bien été créé."
-        ];
+        MessagesClass::addAlertMsg("Le statut a bien été créé.", MessagesClass::GREEN_COLOR); 
     }
 
 
@@ -96,10 +91,7 @@ class StatusManager extends Model {
         while($code_verification = $req->fetch()){
             if($code_verification['numberCode'] >= 1 ) {
                 // Display an error alert message 
-                $_SESSION['alertDuplicateStatus'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR : ce code existe déjà."
-                ];
+                MessagesClass::addAlertMsg("ERREUR : ce statut existe déjà.", MessagesClass::RED_COLOR); 
                 header("location:".URL."updateStatus?q=".$status->getOldcode_status());
                 exit();
             }
@@ -113,10 +105,7 @@ class StatusManager extends Model {
             }
         }
         // Display a success alert message 
-        $_SESSION['alertUpdateStatus'] = [
-            "type" => "success",
-            "msg" => "Le statut a bien été modifié."
-        ];
+        MessagesClass::addAlertMsg("Le statut a bien été modifié.", MessagesClass::GREEN_COLOR); 
     }
 
     
@@ -131,10 +120,6 @@ class StatusManager extends Model {
         $req->execute();
         $req->closeCursor();
         // Display a success alert message 
-        $_SESSION['alertDeleteStatus'] = [
-            "type" => "success", 
-            "msg" => "Suppression du statut bien réalisée."
-        ]; 
+        MessagesClass::addAlertMsg("Le statut a bien été supprimé.", MessagesClass::GREEN_COLOR); 
     }
-
 }

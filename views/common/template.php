@@ -26,16 +26,28 @@
     
     <!-- main -->
     <main class="container" >
-        <?php 
-            if(!empty($_SESSION['alert'])) {
-                foreach($_SESSION['alert'] as $alert){
-                    echo "<div class='alert ". $alert['type'] ."' role='alert'>
-                        ".$alert['message']."
-                    </div>";
-                }
-                unset($_SESSION['alert']);
-            }
-        ?>
+
+        <!-- Alert success / error message  --> 
+        <section class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6 text-center mt-2">
+                    <?php 
+                        if(!empty($_SESSION['alert'])) {
+                            foreach($_SESSION['alert'] as $alert){
+                                echo "<div class='alert ". $alert['type'] ."' role='alert'>
+                                    ".$alert['message']." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                                </div>";
+                            }
+                            unset($_SESSION['alert']);
+                        }
+                    ?>
+
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Page content --> 
         <?php echo $page_content; ?>
     </main>
     

@@ -19,7 +19,7 @@ class AgentController {
 
 
     /**
-    * Generate a page
+    * Generate a page 
     *
     */
     private function generatePage(array $data) : void {
@@ -32,7 +32,7 @@ class AgentController {
 
 
     /**
-    * Get the agent by id
+    * Get the agent by id 
     *
     * @return id_agent
     */
@@ -49,7 +49,7 @@ class AgentController {
 
 
     /**
-    * Get all the agents
+    * Get all the agents 
     * 
     */
     public function agentsList() : void {
@@ -68,7 +68,7 @@ class AgentController {
 
 
     /**
-    * Create an agent (page)
+    * Create an agent (page) 
     *
     */
     public function createAgent() : void {
@@ -87,7 +87,7 @@ class AgentController {
 
 
     /**
-    * Create an agent (validation)
+    * Create an agent (validation) 
     *
     */
     public function createAgentValidation(): void {
@@ -96,13 +96,13 @@ class AgentController {
             $newAgent = new Agent($_POST);
             $this->agentManager->createAgentDb($newAgent); 
         }
-       header('location:'.URL."createMission");
+       header("location:".URL."agentsList");
        exit();
     }
 
 
     /**
-    * Update an agent (page)
+    * Update an agent (page) 
     *
     */
     public function updateAgent(){
@@ -125,7 +125,7 @@ class AgentController {
     
 
     /**
-    * Update an agent (validation)
+    * Update an agent (validation) 
     *
     */
     public function updateAgentValidation(): void {
@@ -134,19 +134,21 @@ class AgentController {
             $agent = new Agent($_POST);
             $this->agentManager->updateAgentDb($agent); 
         }
-        header('location:'.URL."createMission");
+        header("location:".URL."agentsList");
+        exit();
     }
 
 
     /**
-    * Delete an agent
+    * Delete an agent 
     *
     */
     public function deleteAgent(): void {
         $agent = $this->getAgentById();
         $this->agentManager->deleteAgentDb($agent->getId_agent());
         unset($agent); 
-        header('location:'.URL."createMission");
+        header("location:".URL."agentsList");
+        exit();
     }
 
 }

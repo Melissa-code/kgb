@@ -1,20 +1,4 @@
-<!-- Alert error message if the speciality already exists --> 
-
-<section class="container mt-3">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-10 text-center">
-            <?php if(isset($_SESSION['alertDuplicateSpeciality'])) :?>
-                <div class="alert alert-danger mx-5" role="alert">
-                    <?= $_SESSION['alertDuplicateSpeciality']['msg'] ?>
-                </div>
-                <?php unset($_SESSION['alertDuplicateSpeciality']) ?>
-            <?php endif ?>
-        </div>
-    </div>
-</section>
-
-
-<!-- Page title & back button button --> 
+<!-- Title & back button button --> 
 
 <section class="container mb-5">
     <div class="row d-flex justify-content-center">

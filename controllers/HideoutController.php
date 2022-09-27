@@ -6,7 +6,6 @@ class HideoutController {
 
     private HideoutManager $hideoutManager;
 
-
     public function __construct() {
         $this->hideoutManager = new HideoutManager(); 
     }
@@ -25,7 +24,7 @@ class HideoutController {
     }
 
 
-     /**
+    /**
     * Get the hideout by id 
     * @return id_hideout
     */
@@ -41,9 +40,8 @@ class HideoutController {
     }
 
 
-     /**
-    * Collect all the hideouts data 
-    * Send all the hideout data to the hideoutsView
+    /**
+    * Get all the hideouts
     * 
     */
     public function hideoutsList() : void {
@@ -62,7 +60,8 @@ class HideoutController {
 
 
     /**
-    * Create a hideout
+    * Create a hideout (page) 
+    *
     */
     public function createHideout() : void {
 
@@ -75,17 +74,23 @@ class HideoutController {
         $this->generatePage($data_page); 
     }
 
+    /**
+    * Create a hideout (validation) 
+    *
+    */
     public function createHideoutValidation(): void {
+
         if($_POST) {
             $newHideout = new Hideout($_POST);
             $this->hideoutManager->createHideoutDb($newHideout); 
         }
-       header('location:'.URL."createMission");
+       header("location:".URL."hideoutsList");
        exit();
     }
 
     /**
-    * Update a hideout
+    * Update a hideout (page)
+    *
     */
     public function updateHideout(){
 
@@ -101,12 +106,19 @@ class HideoutController {
         $this->generatePage($data_page); 
     }
 
+
+    /**
+    * Update a hideout (validation)
+    *
+    */
     public function updateHideoutValidation(): void {
+
         if($_POST) {
             $hideout = new Hideout($_POST);
             $this->hideoutManager->updateHideoutDb($hideout); 
         }
-        header('location:'.URL."createMission");
+        header("location:".URL."hideoutsList");
+        exit();
     }
 
 
@@ -115,13 +127,14 @@ class HideoutController {
     *
     */
     public function deleteHideout(): void {
+
         $hideout = $this->getHideoutById();
+
         $this->hideoutManager->deleteHideoutDb($hideout->getId_hideout());
         unset($hideout); 
-        header('location:'.URL."createMission");
+        header("location:".URL."hideoutsList");
+        exit();
     }
-
-
-
+    
 }
 

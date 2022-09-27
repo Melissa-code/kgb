@@ -1,35 +1,3 @@
-<!-- Alert message if the speciality has been successfully created / updated / deleted --> 
-
-<section class="container mt-3">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-10 text-center">
-
-            <!-- Alert successfully created --> 
-            <?php if(isset($_SESSION['alertCreateSpeciality'])) :?>
-                <div class="alert alert-success mx-5" role="alert">
-                    <?= $_SESSION['alertCreateSpeciality']['msg'] ?>
-                </div>
-                <?php unset($_SESSION['alertCreateSpeciality']) ?>
-
-            <!-- Alert successfully updated --> 
-            <?php elseif(isset($_SESSION['alertUpdateSpeciality'])) :?>
-            <div class="alert alert-success mx-5" role="alert">
-                <?= $_SESSION['alertUpdateSpeciality']['msg'] ?>
-            </div>
-            <?php unset($_SESSION['alertUpdateSpeciality']) ?>
-            
-            <!-- Alert successfully deleted --> 
-            <?php elseif(isset($_SESSION['alertDeleteSpeciality'])) :?>
-            <div class="alert alert-success mx-5" role="alert">
-                <?= $_SESSION['alertDeleteSpeciality']['msg'] ?>
-            </div>
-            <?php unset($_SESSION['alertDeleteSpeciality']) ?>
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
-
-
 <!-- Page title & Back button & Add button --> 
 
 <section class="container my-4">
@@ -60,7 +28,6 @@
                         <div class="card-body ">
                         <h4 class="card-subtitle mb-2 text-center text-muted"><?= $speciality->getName_speciality(); ?></h4>
                     </div>
-
                     <!-- update & delete buttons -->
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex mx-auto "> 

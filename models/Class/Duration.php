@@ -7,16 +7,14 @@ class Duration {
     private string $end_duration;
 
     private string $oldid_duration; 
-  
 
-
-    /* ************* Constructor ************ */ 
+    /* ************* Constructor ******* */ 
 
     public function __construct(array $data) {
         $this->hydrate($data); 
     }
 
-    /* ************* Hydrate ************ */ 
+    /* ************* Hydrate *********** */ 
 
     public function hydrate($data): void {
         foreach($data as $key=>$value) {
@@ -27,7 +25,7 @@ class Duration {
         }
     }
 
-    /* ************* Getters & Setters ************ */ 
+    /* ****** Getters & Setters ******* */ 
 
     public function getId_duration() {return $this->id_duration; }
     public function setId_duration($id_duration) { $this->id_duration = $id_duration;return $this; }
@@ -38,7 +36,7 @@ class Duration {
     public function getEnd_duration() {return $this->end_duration;}
     public function setEnd_duration($end_duration) { $this->end_duration = $end_duration; return $this; }
     
-    public function getOldid_duration(){return $this->oldid_duration;}
+    public function getOldid_duration() {return $this->oldid_duration;}
     public function setOldid_duration($oldid_duration){ $this->oldid_duration = $oldid_duration; return $this; }
 
 

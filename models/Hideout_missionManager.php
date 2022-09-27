@@ -17,17 +17,12 @@ class Hideout_missionManager extends Model {
         $req = $pdo->prepare("SELECT * FROM Hideouts_missions");
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_ASSOC); 
-        //echo "<pre>"; var_dump($data);echo"</pre>";
 
         foreach($data as $hideout_mission) {
             $hideouts_missions[] = new Hideout_mission($hideout_mission);
         }
-       
-        
         $req->closeCursor();
-        //echo "<pre>"; var_dump($agents_missions); echo"</pre>";
         return $hideouts_missions;
     }
-
 
 }

@@ -20,14 +20,13 @@ class AdminManager extends Model {
         foreach($data as $admin) {
             $admins[] = new Admin($admin);
         }
-        
         $req->closeCursor();
         return $admins;
     }
 
 
     /**
-    * Profil Admin
+    * Admin profil 
     *
     * @return array $adminProfil
     */
@@ -64,7 +63,7 @@ class AdminManager extends Model {
             }
         }
 
-        // Connexion 
+        // Connection 
         $req = $pdo->prepare('SELECT * FROM Admins WHERE email_admin = :email_admin');
         $req->bindValue(':email_admin', $email_admin, PDO::PARAM_STR);
         $req->execute();
@@ -72,7 +71,8 @@ class AdminManager extends Model {
         while($admin = $req->fetch(PDO::FETCH_ASSOC)) {
             if($password_admin === $admin['password_admin']){
 
-                $_SESSION['connect'] = 1; //pour l'utiliser partout dans le site
+                //To use the session connect anywhere in the website
+                $_SESSION['connect'] = 1; 
                 $_SESSION['email_admin'] = $admin['email_admin']; 
 
                 

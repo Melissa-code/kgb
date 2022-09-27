@@ -5,9 +5,7 @@ require_once("models/MissionManager.php");
 
 class StatusController {
 
-    
     private StatusManager $statusManager;
-
 
     public function __construct() {
         $this->statusManager = new StatusManager(); 

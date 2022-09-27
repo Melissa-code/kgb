@@ -14,10 +14,11 @@ class DurationController {
 
 
     /**
-    * Generate a page
+    * Generate a page function 
+    *
     */
     private function generatePage(array $data) : void {
-        extract($data); //function to create variables from the array $data_page (indice of the array becomes variable)
+        extract($data);
         ob_start(); 
         require_once($view);
         $page_content = ob_get_clean();
@@ -26,7 +27,8 @@ class DurationController {
 
 
     /**
-    * Get a duration by id 
+    * Get a duration by id function 
+    *
     * @return id_duration
     */
     public function getDurationById() : Duration {
@@ -42,8 +44,7 @@ class DurationController {
 
 
     /**
-    * Collect all the duration data 
-    * Send all the duration data to the durationView
+    * Get all the durations function 
     * 
     */
     public function durationsList() : void {
@@ -51,8 +52,8 @@ class DurationController {
         $durations = $this->durationManager->getAll();
 
         $data_page = [
-            "page_description" => "Page listant les statuts",
-            "page_title" => "Statuts",
+            "page_description" => "Page listant les durées",
+            "page_title" => "Liste des durées",
             "durations" => $durations,
             "view" => "views/read/durationsView.php",
             "template" => "views/common/template.php"
@@ -62,7 +63,8 @@ class DurationController {
 
 
     /**
-    * Create a duration
+    * Create a duration (page) function 
+    *
     */
     public function createDuration() : void {
 
@@ -75,22 +77,28 @@ class DurationController {
         $this->generatePage($data_page); 
     }
 
+
+    /**
+    * Create a duration (validation) function 
+    *
+    */
     public function createDurationValidation(): void {
         if($_POST) {
             $newDuration = new Duration($_POST);
             $this->durationManager->createDurationDb($newDuration); 
         }
-        header('location:'.URL."createMission");
+        header("location:".URL."durationsList");
         exit();
     }
 
+
     /**
-    * Update a duration
+    * Update a duration (page) function 
+    *
     */
     public function updateDuration(){
 
         $duration = $this->getDurationById(); 
-        //var_dump($duration);
 
         $data_page = [
             "page_description" => "Page de modification de la durée d'une mission",
@@ -103,30 +111,32 @@ class DurationController {
     }
 
 
+    /**
+    * Update a duration (validation) function 
+    *
+    */
     public function updateDurationValidation(): void {
 
         if($_POST) {
             $duration = new Duration($_POST);
-            //var_dump($_POST);
             $this->durationManager->updatedurationDb($duration); 
         }
-        // var_dump($duration); 
-        //header('location:'.URL."createMission");
+        header("location:".URL."durationsList");
+        exit();
     }
 
 
     /**
-    * Delete a duration
+    * Delete a duration function 
     */
     public function deleteDuration(): void {
 
         $duration = $this->getDurationById();
         $this->durationManager->deleteDurationDb($duration->getId_duration());
         unset($duration); 
-        header('location:'.URL."createMission");
+        header("location:".URL."durationsList");
+        exit();
     }
-
-
 
 }
 

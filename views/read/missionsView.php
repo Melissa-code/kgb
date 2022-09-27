@@ -37,19 +37,19 @@
         <div class="col-12 mb-3">
             <h1>Liste des missions</h1>
         </div>
-        <div class="col-8 my-3">
+        <div class="col-9 my-3">
             <div class="row d-flex justify-content-center">
                 <!-- Search a mission -->
-                <div class="col-9 offset-md-2 col-md-7">
+                <div class="col-6 offset-md-1 col-md-7">
                     <div>
                         <input class="form-control me-2 input" type="text" placeholder="Rechercher une mission" aria-label="Search" id="searchInput">
                         <div id="suggestions"></div>
                     </div>
                 </div>
                 <!-- Display Add mission button if the Admin is logged-in -->
-                <div class="col-3 col-md-3">
+                <div class="col-4 col-md-3">
                     <?php if(isset($_SESSION['connect'])) :?>
-                        <a href="<?= URL?>createMission" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une mission" style="width: 1.5rem; height:1.5rem;"></a>
+                        <a href="<?= URL?>createMission" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une mission" style="width: 1.5rem; height:1.5rem;"> Ajouter</a>
                     <?php endif ?>
                 </div>
             </div>

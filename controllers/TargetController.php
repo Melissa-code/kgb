@@ -84,8 +84,8 @@ class TargetController {
             $newTarget = new Target($_POST);
             $this->targetManager->createTargetDb($newTarget); 
         }
-       header('location:'.URL."createMission");
-       exit();
+        header("location:".URL."targetsList");
+        exit();
     }
 
 
@@ -112,7 +112,8 @@ class TargetController {
             $target = new Target($_POST);
             $this->targetManager->updateTargetDb($target); 
         }
-        //header('location:'.URL."createMission");
+        header("location:".URL."targetsList");
+        exit();
     }
 
 
@@ -124,10 +125,8 @@ class TargetController {
         $target = $this->getTargetByCode();
         $this->targetManager->deleteTargetDb($target->getCode_target());
         unset($target); 
-        header('location:'.URL."createMission");
+        header("location:".URL."targetsList");
+        exit();
     }
-
-
-
 }
 

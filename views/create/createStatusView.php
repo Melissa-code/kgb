@@ -1,19 +1,3 @@
-<!-- Alert error message if the status already exists --> 
-
-<section class="container mt-3">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-10 text-center">
-            <?php if(isset($_SESSION['alertDuplicateStatus'])) :?>
-                <div class="alert alert-danger mx-5" role="alert">
-                    <?= $_SESSION['alertDuplicateStatus']['msg'] ?>
-                </div>
-                <?php unset($_SESSION['alertDuplicateStatus']) ?>
-            <?php endif ?>
-        </div>
-    </div>
-</section>
-
-
 <!-- Page title & back button button --> 
 
 <section class="container mb-5">
@@ -25,7 +9,6 @@
         </div>
     </div>
 </section>
-
 
 
 <!-- Create status form -->

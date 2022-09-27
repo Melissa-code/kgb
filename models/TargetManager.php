@@ -20,7 +20,6 @@ class TargetManager extends Model {
         foreach($data as $target) {
             $targets[] = new Target($target);
         }
-        
         $req->closeCursor();
         return $targets;
     }
@@ -50,6 +49,7 @@ class TargetManager extends Model {
     public function createTargetDb(Target $newTarget): void {
 
         $pdo = $this->getDb();
+        // Count the duplicates targets in the DB 
         $req = $pdo->prepare(
             'SELECT
                 (SELECT count(*) as numberCode FROM Targets WHERE code_target = :code_target),
@@ -65,12 +65,15 @@ class TargetManager extends Model {
         $req->bindValue(":nationality_target", $newTarget->getNationality_target(), PDO::PARAM_STR);
         $req->execute();
  
+         // Check if the target already exists in the DB 
         while($verification = $req->fetch()){
             if($verification[0] >= 1 || ($verification[1] >= 1 && $verification[2] >= 1 && $verification[3] >= 1 && $verification[4] >= 1)) {
-                header('location:'.URL."createTarget"); 
+                MessagesClass::addAlertMsg("ERREUR : cette cible existe déjà.", MessagesClass::RED_COLOR); 
+                header("location:".URL."createTarget"); 
                 exit();
             }
-            else {    
+            else {  
+                // Create the target in the DB   
                 $req = $pdo->prepare("INSERT INTO Targets (code_target, name_target, firstname_target, datebirthday_target, nationality_target) VALUES (:code_target, :name_target, :firstname_target, :datebirthday_target, :nationality_target)");
                 $req->bindValue(":code_target", $newTarget->getCode_target(), PDO::PARAM_STR);
                 $req->bindValue(":name_target", $newTarget->getName_target(), PDO::PARAM_STR);
@@ -81,11 +84,12 @@ class TargetManager extends Model {
                 $req->closeCursor();
             }
         }
+        MessagesClass::addAlertMsg("La cible a bien été créée.", MessagesClass::GREEN_COLOR); 
     }
 
     
     /**
-    * Update a target in the database 
+    * Update a target  
     *
     */
     public function updateTargetDb(Target $target): void {
@@ -99,11 +103,12 @@ class TargetManager extends Model {
         $req->bindValue(':nationality_target', $target->getNationality_target(), PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
+        MessagesClass::addAlertMsg("La cible a bien été modifiée.", MessagesClass::GREEN_COLOR); 
     }
 
 
     /**
-    * Delete a target in the database 
+    * Delete a target 
     *
     */
     public function deleteTargetDb(string $code_target): void {
@@ -112,6 +117,6 @@ class TargetManager extends Model {
         $req->bindValue(':code_target', $code_target, PDO::PARAM_STR);
         $req->execute();
         $req->closeCursor();
+        MessagesClass::addAlertMsg("La cible a bien été supprimée.", MessagesClass::GREEN_COLOR); 
     }
-
 }

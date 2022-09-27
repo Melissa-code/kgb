@@ -1,34 +1,39 @@
-<!------------- Main --------------->
+<!-- Page title & Back button & Add button --> 
 
-<section class="my-4">
-    <button class="btn btn-light" type="button"><a href="<?= URL?>createMission"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="height: 1.5rem; width: 1.5rem"></a></button>
-    <h1>Liste des cibles</h1>
-</section>
-
-
-<section class="row">
-    <div class="col-12 d-flex justify-content-center">
-        <!-- button add a target -->
-        <button class="btn btn-light font-weight-bold" type="button"><a href="<?= URL?>createTarget"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"></a></button>
+<section class="container my-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 mb-3">
+            <h1>Liste des cibles</h1>
+        </div>
+        <div class="col-6 d-flex justify-content-end my-3">
+            <!-- Back to create mission button --> 
+            <a href="<?= URL?>createMission" class="btn btn-dark border border-light fw-bold"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1.5rem;"> Revenir</a>
+        </div>
+        <div class="col-6 d-flex justify-content-start my-3">
+            <!-- Add a target button --> 
+            <a href="<?= URL?>createTarget" class="btn btn-light font-weight-bold"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"> Ajouter</a>
+        </div>
     </div>
 </section>
 
 
-<section class="row m-3 justify-content-around">
-    <article class="d-flex col-12 flex-wrap">
+<!-- Display all the targets -->
 
-        <!-- Card of a target -->
+<section class="container my-5">
+    <div class="row">
+        <article class="d-flex col-12 flex-wrap justify-content-center">
+            <!-- target card -->
             <?php foreach($targets as $target) :?>
                 <div class="card m-2" style="width: 18rem;">
                     <div class="card-body ">
-                    <h4 class="card-subtitle mb-2 text-center text-muted">Code: <?= $target->getCode_target(); ?></h4>
-                    <p class="card-subtitle mb-2 text-center text-muted"><?= $target->getFirstname_target(); ?> <?= $target->getName_target(); ?></p>
+                        <h4 class="card-subtitle mb-2 text-center text-danger">Code: <?= $target->getCode_target(); ?></h4>
+                        <p class="card-subtitle mb-2 text-center text-danger"><?= $target->getFirstname_target(); ?> <?= $target->getName_target(); ?></p>
                     <?php 
                     // Display the date of birth in the French format
                     $dateBirthdayFormat = new DateTime($target->getDatebirthday_target());
                     ?>
-                    <p class="card-subtitle mb-2 text-center text-muted"><?= 'Né le : '.$dateBirthdayFormat->format('d/m/Y'); ?></p> 
-                    <p class="card-subtitle mb-2 text-center text-muted"><?= 'Nationalité : '. $target->getNationality_target(); ?></p> 
+                    <p class="card-subtitle mb-2 text-center text-dark"><?= 'Né le : '.$dateBirthdayFormat->format('d/m/Y'); ?></p> 
+                    <p class="card-subtitle mb-2 text-center text-dark"><?= 'Nationalité : '. $target->getNationality_target(); ?></p> 
                 </div>
 
                 <!-- Update & delete buttons -->
@@ -44,11 +49,11 @@
                         </form>
                     </li>
                 </ul>
-               
             </div>
         <?php endforeach; ?>
 
-    </article>
+        </article>
+    </div>
 </section>
 
 
