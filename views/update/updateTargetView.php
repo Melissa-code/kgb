@@ -1,14 +1,7 @@
 <!-- Page title & back button button --> 
 
 <section class="container">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12">
-            <h1>Modifier la cible <?= $target->getCode_target() ?></h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center mt-4">
-            <a href="targetsList" class="btn btn-dark border border-light"><img class="text-white" src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des cibles" style="width: 1.5rem; height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+    <h1 class="text-light">Modifier la cible <?= $target->getCode_target() ?></h1>
 </section>
 
 
@@ -16,7 +9,7 @@
 
 <section class="container my-5">
     <div class="row d-flex justify-content-center">
-        <article class="col-9 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
+        <article class="col-10 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
         
             <form action="updateTargetValidation" method="POST">
                 <!-- code_target --> 
@@ -49,9 +42,14 @@
                     <input type="text" class="form-control" id="nationality_target" name="nationality_target" value="<?= $target->getNationality_target(); ?>">
                 </div>
 
-                <!-- Update button --> 
-                <div class="">
-                    <button type="submit" class="btn btn-warning d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cible" style="width: 1.5rem;"> Modifier</button>
+                <!-- Update & back buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="targetsList" class="btn btn-dark text-light"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la liste des cibles" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-warning"><img src="<?= URL ?>/public/assets/images/edit-light.svg" alt="modifier une cible" style="width: 1rem;"> Modifier</button>
+                    </div>
                 </div>
             </form>
         </article>

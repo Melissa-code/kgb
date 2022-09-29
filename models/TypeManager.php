@@ -1,5 +1,4 @@
 <?php 
-require_once("controllers/MessagesClass.php");
 require_once("models/Class/Model.php");
 require_once("models/Class/Type.php");
 

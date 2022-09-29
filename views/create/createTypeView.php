@@ -1,17 +1,11 @@
 <!-- Page title & back button button --> 
 
 <section class="container mb-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12">
-            <h1>Ajouter un type</h1>
-        <div class="col-12 d-flex justify-content-center my-4">
-            <a href="typesList" class="btn btn-light mt-3"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des types" style="width: 1.5rem; height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+    <h1 class="text-light">Ajouter un type</h1>  
 </section>
 
 
-<!-- Create type form -->
+<!-- Create a type form -->
 
 <section class="container my-5">
     <div class="row d-flex justify-content-center">
@@ -22,8 +16,16 @@
                     <label for="name_type" class="form-label">Type: </label>
                     <input type="text" class="form-control" id="name_type" name="name_type">
                 </div>
-                <!-- Add button --> 
-                <button type="submit" class="btn btn-light d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un type" style="width: 1.5rem;"> Ajouter</button>
+
+                <!-- Back & Add buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="typesList" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la liste des types" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un type" style="width: 1.5rem;"> Ajouter</button>
+                    </div>
+                </div>
             </form>
         </article>
     </div>

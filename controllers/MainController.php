@@ -58,7 +58,8 @@ class MainController {
 
     /**
     * Get the mission by code 
-    * @return code_mission 
+    *
+    * @return Mission $mission
     */
     public function getMissionByCode() : Mission  {
 
@@ -72,7 +73,6 @@ class MainController {
         //var_dump($mission);
         return $mission; 
     }
-
 
 
     /**
@@ -121,7 +121,7 @@ class MainController {
             "missions" => $missions,
             "admins" => $admins,
             // "page_javascript" => ["missions.js"],
-             "page_javascript" => ["missions2.js"],
+            "page_javascript" => ["missions2.js"],
             "view" => "views/read/missionsView.php",
             "template" => "views/common/template.php"
         ];
@@ -181,12 +181,10 @@ class MainController {
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",
-            // "page_css" => "login.css",
             "view" => "views/loginView.php",
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
-     
     }
 
     /**
@@ -265,45 +263,49 @@ class MainController {
     /**
     * Create a mission (validation) function
     * 
-    * 
     */
     public function createMissionValidation(): void {
 
-        session_start();
+        //session_start();
 
         if($_POST){
-
             $newMission = new Mission($_POST);
+
+            /**
+             * Check the rule : one agent must have the same speciality as the mission 
+             */
             $id_agents = $newMission->getId_agent();
             $speciality = $newMission->getName_speciality();
-            $specialities_agents = $this->speciality_agentManager->getAll();
             $one_agent = false;
+            $specialities_agents = $this->speciality_agentManager->getAll();
 
             foreach ($id_agents as $id_agent) {
                 foreach ($specialities_agents as $speciality_agent) {
                     $speciality_name = $speciality_agent->getName_speciality();
                     $speciality_agentId = $speciality_agent->getId_agent();
 
-                    if($speciality ==  $speciality_name  && $speciality_agentId == $id_agent){
+                    if($speciality == $speciality_name && $speciality_agentId == $id_agent){
                         $one_agent = true;
                         break;
                     }
                 }
             }
+            
             if($one_agent === false) {
-                $_SESSION['alert4'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR: Au moins un agent doit avoir la même spécialité que la mission."
-                ];
-                header('location:'.URL."createMission");
+                // $_SESSION['alert4'] = [
+                //     "type" => "error",
+                //     "msg" => "ERREUR: Au moins un agent doit avoir la même spécialité que la mission."
+                // ];
+                MessagesClass::addAlertMsg("ERREUR: Au moins un agent doit avoir la même spécialité que la mission.", MessagesClass::RED_COLOR); 
+                header("location:".URL."createMission");
                 exit();
             }
 
-            //var_dump($id_agents);
-            //var_dump($speciality);
-            // var_dump($specialities_agents);
-            //var_dump($one_agent);
-
+            /**
+             * Check the rules : 
+             * 
+             * 
+             */
             $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
             $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
             $checkCountryHideout = $this->missionManager->checkCountryHideoutDb($newMission); 
@@ -384,11 +386,10 @@ class MainController {
 
 
     /**
-    * Update a mission (validation) function
+    * Update a mission (validation) 
     *
     */
     public function updateMissionValidation(): void {
-        //session_start(); 
 
         if($_POST) {
             $mission = new Mission($_POST);
@@ -399,7 +400,7 @@ class MainController {
 
 
     /**
-    * Delete a mission function
+    * Delete a mission 
     *   
     * 
     */

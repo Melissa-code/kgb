@@ -1,15 +1,15 @@
-<!-- Page title & Back button & Add button --> 
+<!-- Title & Back button & Add button --> 
 
-<section class="container my-4">
+<section class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-12 mb-3">
-            <h1>Liste des contacts</h1>
+            <h1 class="text-light">Liste des contacts</h1>
         </div>
-        <div class="col-6 d-flex justify-content-end my-3">
+        <div class="col-6 d-flex justify-content-end mt-3">
             <!-- Back to create mission button --> 
-            <a href="<?= URL?>createMission" class="btn btn-dark border border-light fw-bold"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1.5rem;"> Revenir</a>
+            <a href="<?= URL?>createMission" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1rem;"> Revenir</a>
         </div>
-        <div class="col-6 d-flex justify-content-start my-3">
+        <div class="col-6 d-flex justify-content-start mt-3">
             <!-- Add a contact button --> 
             <a href="<?= URL?>createContact" class="btn btn-light font-weight-bold"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un contact" style="width: 1.5rem;"> Ajouter</a>
         </div>
@@ -27,13 +27,13 @@
                 <div class="card m-2" style="width: 18rem;">
                     <div class="card-body ">
                         <h4 class="card-subtitle mb-2 text-center text-danger">Code : <?= $contact->getCode_contact(); ?></h4>
-                        <p class="card-subtitle mb-2 text-center text-danger"><?= $contact->getFirstname_contact(); ?> <?= $contact->getName_contact(); ?></p>
+                        <p class="card-subtitle mb-2 text-center text-danger fw-bold"><?= $contact->getFirstname_contact(); ?> <?= $contact->getName_contact(); ?></p>
                     <?php 
                     // Display the date of birth in the French format
                     $dateBirthdayFormat = new DateTime($contact->getDatebirthday_contact());
                     ?>
-                    <p class="card-subtitle mb-2 text-center text-muted"><?= 'Né le : '.$dateBirthdayFormat->format('d/m/Y'); ?></p> 
-                    <p class="card-subtitle mb-2 text-center text-muted"><?= 'Nationalité : '. $contact->getNationality_contact(); ?></p> 
+                    <p class="card-subtitle mb-2 text-center text-dark"><?= 'Né le : '.$dateBirthdayFormat->format('d/m/Y'); ?></p> 
+                    <p class="card-subtitle mb-2 text-center text-dark"><?= 'Nationalité : '. $contact->getNationality_contact(); ?></p> 
                 </div>
 
                 <!-- update & delete buttons -->

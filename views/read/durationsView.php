@@ -1,23 +1,23 @@
 <!-- Page title & Back button & Add button --> 
 
-<section class="container my-4">
+<section class="container mb-4">
     <div class="row d-flex justify-content-center">
         <div class="col-12 mb-3">
-            <h1>Liste des durées</h1>
+            <h1 class="text-light">Liste des durées</h1>
         </div>
-        <div class="col-6 d-flex justify-content-end my-3">
+        <div class="col-6 d-flex justify-content-end mt-3">
             <!-- Back to the create mission form button --> 
-            <a href="<?= URL?>createMission" class="btn btn-light fw-bold"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1.5rem;"> Revenir</a>
+            <a href="<?= URL?>createMission" class="btn btn-dark fw-bold"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1rem;"> Revenir</a>
         </div>
-        <div class="col-6 d-flex justify-content-start my-3">
-            <!-- Add a speciality button --> 
+        <div class="col-6 d-flex justify-content-start mt-3">
+            <!-- Add a duration button --> 
             <a href="<?= URL?>createDuration" class="btn btn-light font-weight-bold"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une durée" style="width: 1.5rem;"> Ajouter</a>
         </div>
     </div>
 </section>
 
 
-<!-- Display all the specialities -->
+<!-- Display all the durations -->
 
 <section class="container my-5">
     <div class="row">
@@ -27,15 +27,15 @@
             <?php foreach($durations as $duration) :?>
                 <div class="card m-2" style="width: 18rem;">
                     <div class="card-body ">
-                    <h4 class="card-subtitle mb-2 text-center text-muted">N° <?= $duration->getId_duration() ?></h4>
-                    <p class="card-subtitle mb-2 text-center text-muted">Début: 
+                    <h4 class="card-subtitle mb-2 text-center text-dark">N° <?= $duration->getId_duration() ?></h4>
+                    <p class="card-subtitle mb-2 text-center text-dark">Début: 
                         <?php  
                             // Display the date in the French format
                             $dateFormatStart = new DateTime($duration->getStart_duration());
                             echo $dateFormatStart->format('d/m/Y');
                         ?>
                     </p>
-                    <p class="card-subtitle mb-2 text-center text-muted">Fin: 
+                    <p class="card-subtitle mb-2 text-center text-dark">Fin: 
                         <?php  
                             $dateFormatEnd = new DateTime($duration->getEnd_duration());
                             echo $dateFormatEnd->format('d/m/Y');

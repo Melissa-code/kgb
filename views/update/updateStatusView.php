@@ -1,14 +1,7 @@
-<!-- Page title & back button button --> 
+<!-- Title --> 
 
 <section class="container mb-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12">
-            <h1>Modifier le statut <?= $status->getCode_status(); ?></h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center my-4">
-            <a href="statusList" class="btn btn-light mt-3"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des statuts" style="width: 1.5rem; height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+    <h1 class="text-light">Modifier le statut <?= $status->getCode_status(); ?></h1>
 </section>
 
 
@@ -24,9 +17,15 @@
                     <!-- oldcode_status -->
                     <input type="hidden" class="form-control" id="oldcode_status" name="oldcode_status" value="<?= $status->getCode_status() ?>" >
                 </div>
-                <!-- Update button --> 
-                <div class="mb-5">
-                    <button type="submit" class="btn btn-warning d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un statut" style="width: 1.5rem;"> Modifier</button>
+
+                <!-- Update & back buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="statusList" class="btn btn-dark text-light"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la liste des statuts" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-warning"><img src="<?= URL ?>/public/assets/images/edit-light.svg" alt="modifier un statut" style="width: 1rem;"> Modifier</button>
+                    </div>
                 </div>
             </form>
         </article>   

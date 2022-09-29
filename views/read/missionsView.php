@@ -1,12 +1,10 @@
-<!---------------------------------- Main --------------------------------------->
-
 <!-- Alert message if the Admin is logged-in --> 
-<section class="container mt-3">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-6">
-            <?php if(isset($_SESSION['connect'])) :?>
-                <?php foreach($admins as $admin) :?>
-                    <?php if($admin->getEmail_admin() === $_SESSION['email_admin']) :?>
+<?php if(isset($_SESSION['connect'])) :?>
+    <?php foreach($admins as $admin) :?>
+        <?php if($admin->getEmail_admin() === $_SESSION['email_admin']) :?>
+            <section class="container mt-2">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-6">
                         <div class="alert text-center text-white" role="alert">
                             - Ravi de vous revoir <?= $admin->getFirstname_admin()." ".$admin->getName_admin()." -"; ?>
                         </div>
@@ -31,43 +29,49 @@
     </div>
 </section>
 
-<!-- Page title & Add button & Searchbar --> 
-<section class="container">
+
+<!-- Title & Searchbar & Add button --> 
+<section >
     <div class="row d-flex justify-content-center">
-        <div class="col-12 mb-3">
-            <h1>Liste des missions</h1>
+        <div class="col-10 mb-2">
+            <h1 class="text-light">Liste des missions</h1>
         </div>
-        <div class="col-9 my-3">
+
+        <div class="col-12 mb-4">
             <div class="row d-flex justify-content-center">
+
                 <!-- Search a mission -->
-                <div class="col-6 offset-md-1 col-md-7">
+                <div class="col-10 col-md-7 col-lg-5 mt-3">
                     <div>
-                        <input class="form-control me-2 input" type="text" placeholder="Rechercher une mission" aria-label="Search" id="searchInput">
+                        <input class="form-control input" type="text" placeholder="Rechercher une mission" aria-label="Search" id="searchInput">
                         <div id="suggestions"></div>
                     </div>
                 </div>
+
                 <!-- Display Add mission button if the Admin is logged-in -->
-                <div class="col-4 col-md-3">
-                    <?php if(isset($_SESSION['connect'])) :?>
+                <?php if(isset($_SESSION['connect'])) :?>
+                    <div class="col-12 col-md-3 mt-3 d-flex justify-content-center">
                         <a href="<?= URL?>createMission" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une mission" style="width: 1.5rem; height:1.5rem;"> Ajouter</a>
-                    <?php endif ?>
-                </div>
+                    </div>
+                <?php endif ?>
             </div>
-        </div>
+        </div>    
     </div>
 </section>
 
+
 <!-- Display all the missions --> 
+
 <section class="container">
     <div class="row">
         <!-- Missions cards -->
-        <article class="d-flex col-12 flex-wrap justify-content-center" id="missions-list">
+        <article class="col-12 d-flex flex-wrap justify-content-center" id="missions-list">
             <?php foreach($missions as $mission) :?>
                 <div class="card m-2 list-item" style="width: 18rem;">
                     <div class="card-body">
                     <a href="<?= URL ?>oneMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="card-link"><h3 id="title" class="card-title mb-4 text-center text-danger fw-bold">Mission <?= $mission->getCode_mission(); ?></h3></a>
-                    <h4 class="card-subtitle mb-2 text-center text-muted"><?= $mission->getTitle_mission() ; ?></h4>
-                    <p class="card-text text-muted"><?= $mission->getDescription_mission() ?></p>
+                    <h4 class="card-subtitle mb-2 text-center text-danger"><?= $mission->getTitle_mission() ; ?></h4>
+                    <p class="card-text text-dark"><?= $mission->getDescription_mission() ?></p>
                 </div>
 
                 <!-- Display the Update & Delete buttons if the Admin is logged-in -->
@@ -91,7 +95,9 @@
     </div>
 </section>
 
+
 <!-- Pagination -->
+
 <section class="row mt-5 mb-3">
     <div class="col-12 d-flex justify-content-center">
         <nav aria-label="Page navigation">

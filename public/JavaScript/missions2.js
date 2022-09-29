@@ -57,16 +57,20 @@ function showList() {
 
     let missions = document.getElementById('missions-list');
     missions.innerHTML = "";
+  
 
-    let list = ""; 
+    //let list = ""; 
     for (let i = first; i <  first + numberOfItems; i++){
         if(i < cards.length) {
             // let carte = document.createElement('div'); 
             // carte.classList.add('card m-2 list-item');
             // carte.style.width = '18rem';
-            var dupNode = cards[i].cloneNode([true]);
+            let dupNode = cards[i].cloneNode([true]);
 
-            missions.appendChild(cards[i]); 
+            //missions.appendChild(cards[i]); 
+            missions.appendChild(dupNode); 
+            
+           
             // list += 
             //     `<div class="card m-2 list-item" style="width: 18rem;">${cards[i].innerHTML}</div>`;
         }

@@ -1,5 +1,4 @@
-
-<!--------------- Navigation bar ----------------->
+<!--------------- Navigation ----------------->
 
 <nav id="menu" class="navbar navbar-expand-lg navbar-light px-5">
     <div class="container-fluid">
@@ -11,12 +10,12 @@
             </a>
         </div>
 
-        <!-- Button for burger menu-->
+        <!-- Burger menu -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     
-        <!-- Target of the button -->
+        <!-- Target of burger menu -->
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
                 <!-- Home link -->
@@ -24,7 +23,6 @@
                 <!-- Missions link -->
                 <li><a href="missions" class="nav-link px-2 text-dark">Missions</a></li>
             </ul>
-
             <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
                 <!-- Login link -->
                 <?php if(!isset($_SESSION['connect'])) :?>

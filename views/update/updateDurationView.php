@@ -1,13 +1,7 @@
-<!-- Title & back button button --> 
+<!-- Title  --> 
 
 <section class="container mb-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12">
-            <h1>Modifier la durée n° <?= $duration->getId_duration() ?></h1>
-        <div class="col-12 d-flex justify-content-center my-4">
-            <a href="durationsList" class="btn btn-light mt-3"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des durées" style="width: 1.5rem; height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+    <h1 class="text-light">Modifier la durée n° <?= $duration->getId_duration() ?></h1>
 </section>
 
 
@@ -15,7 +9,7 @@
 
 <section class="container my-5">
     <div class="row d-flex justify-content-center">
-        <article class="col-7 col-md-4 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
+        <article class="col-10 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
 
             <form action="updateDurationValidation" method="POST">
                 <!-- id_duration modified --> 
@@ -36,9 +30,15 @@
                     <label for="end_duration" class="form-label">Date de fin : </label>
                     <input type="date" class="form-control" id="end_duration" name="end_duration" value="<?= $duration->getEnd_duration() ?>" placeholder="Fin de la durée">
                 </div>
-                <!-- Update button  --> 
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-warning d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une durée" style="width: 1.5rem;"> Modifier</button>
+
+                <!-- Update & back buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="durationsList" class="btn btn-dark text-light"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la liste des durées" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-warning"><img src="<?= URL ?>/public/assets/images/edit-light.svg" alt="modifier une durée" style="width: 1rem;"> Modifier</button>
+                    </div>
                 </div>
             </form>
         </article>   

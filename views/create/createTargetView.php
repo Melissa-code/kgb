@@ -1,15 +1,8 @@
 
-<!-- Page title & back button button --> 
+<!-- Title --> 
 
 <section class="container mb-3">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12"></div>
-            <h1>Ajouter une cible</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center mt-2">
-            <a href="targetsList" class="btn btn-dark border border-light"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des cibles" style=" height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+    <h1 class="text-light">Ajouter une cible</h1>
 </section>
 
 
@@ -17,7 +10,7 @@
 
 <section class="container my-5">
     <div class="row d-flex justify-content-center">
-        <article class="col-9 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
+        <article class="col-10 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
             <!-- create a target form -->
             <form action="<?= URL ?>createTargetValidation" method="POST">
                 <!-- code_target --> 
@@ -45,9 +38,15 @@
                     <label for="nationality_target" class="form-label">Nationalité : </label>
                     <input type="text" class="form-control" id="nationality_target" name="nationality_target">
                 </div>
-                <!-- Add button --> 
-                <div>
-                    <button type="submit" class="btn btn-light d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"> Ajouter</button>
+              
+                <!-- Back & Add buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="targetsList" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la liste des agents" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"> Ajouter</button>
+                    </div>
                 </div>
             </form>
         </article>

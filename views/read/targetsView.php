@@ -1,15 +1,15 @@
 <!-- Page title & Back button & Add button --> 
 
-<section class="container my-4">
+<section class="container">
     <div class="row d-flex justify-content-center">
         <div class="col-12 mb-3">
-            <h1>Liste des cibles</h1>
+            <h1 class="text-light">Liste des cibles</h1>
         </div>
-        <div class="col-6 d-flex justify-content-end my-3">
+        <div class="col-6 d-flex justify-content-end mt-3">
             <!-- Back to create mission button --> 
-            <a href="<?= URL?>createMission" class="btn btn-dark border border-light fw-bold"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1.5rem;"> Revenir</a>
+            <a href="<?= URL?>createMission" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1rem;"> Revenir</a>
         </div>
-        <div class="col-6 d-flex justify-content-start my-3">
+        <div class="col-6 d-flex justify-content-start mt-3">
             <!-- Add a target button --> 
             <a href="<?= URL?>createTarget" class="btn btn-light font-weight-bold"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une cible" style="width: 1.5rem;"> Ajouter</a>
         </div>
@@ -27,7 +27,7 @@
                 <div class="card m-2" style="width: 18rem;">
                     <div class="card-body ">
                         <h4 class="card-subtitle mb-2 text-center text-danger">Code: <?= $target->getCode_target(); ?></h4>
-                        <p class="card-subtitle mb-2 text-center text-danger"><?= $target->getFirstname_target(); ?> <?= $target->getName_target(); ?></p>
+                        <p class="card-subtitle mb-2 text-center text-danger fw-bold"><?= $target->getFirstname_target(); ?> <?= $target->getName_target(); ?></p>
                     <?php 
                     // Display the date of birth in the French format
                     $dateBirthdayFormat = new DateTime($target->getDatebirthday_target());

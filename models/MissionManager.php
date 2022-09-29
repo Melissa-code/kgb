@@ -1,5 +1,4 @@
 <?php
-
 require_once("controllers/MessagesClass.php"); 
 require_once("models/Class/Model.php");
 require_once("models/Class/Mission.php");
@@ -26,7 +25,7 @@ class MissionManager extends Model {
         return $missions;
     }
 
-    
+
     /**
     * Get one mission only
     *
@@ -109,6 +108,7 @@ class MissionManager extends Model {
 
     /**
     * Check the rule : the country of a hideout must be the same as the country of a mission 
+    *
     * id_hideout (array)
     * code_mission (string)
     */

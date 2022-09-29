@@ -2,13 +2,7 @@
 <!-- Title & back button button --> 
 
 <section class="container mb-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12">
-            <h1>Modifier le type <?= $type->getName_type() ?></h1>
-        <div class="col-12 d-flex justify-content-center my-4">
-            <a href="typesList" class="btn btn-light mt-3"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des types" style="width: 1.5rem; height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+    <h1 class="text-light">Modifier le type <?= $type->getName_type() ?></h1>  
 </section>
 
 
@@ -25,9 +19,15 @@
                 <div class="mb-3">
                     <input type="hidden" class="form-control" id="oldname_type" name="oldname_type" value="<?= $type->getName_type() ?>" >
                 </div>
-                <!-- Update button --> 
-                <div class="mb-5">
-                    <button type="submit" class="btn btn-warning d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un type" style="width: 1.5rem;"> Modifier</button>
+
+                <!-- Update & back buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="typesList" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la liste des types" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-warning"><img src="<?= URL ?>/public/assets/images/edit-light.svg" alt="modifier un type" style="width: 1rem;"> Modifier</button>
+                    </div>
                 </div>
             </form>
         </article>   

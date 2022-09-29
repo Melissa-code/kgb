@@ -1,14 +1,7 @@
 <!-- Page title & back button button --> 
 
-<section class="container mb-3">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12"></div>
-            <h1>Ajouter une planque</h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center mt-2">
-            <a href="agentsList" class="btn btn-dark border border-light"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des planques" style=" height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+<section class="container">
+    <h1 class="text-light">Ajouter une planque</h1>
 </section>
 
 
@@ -16,7 +9,7 @@
 
 <section class="container my-5">
     <div class="row d-flex justify-content-center">
-        <article class="col-9 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
+        <article class="col-10 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
             
             <!-- create a hideout form -->
             <form action="<?= URL ?>createHideoutValidation" method="POST" >
@@ -40,9 +33,16 @@
                     <label for="type_hideout" class="form-label">Type : </label>
                     <input type="text" class="form-control" id="type_hideout" name="type_hideout">
                 </div>
-                <!-- Add button --> 
-                <div>
-                    <button type="submit" class="btn btn-light d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une planque" style="width: 1.5rem;"> Ajouter</button>
+               
+
+                <!-- Back & Add buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="hideoutsList" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="revenir à la liste des planques" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une planque" style="width: 1.5rem;"> Ajouter</button>
+                    </div>
                 </div>
             </form>
         </article>

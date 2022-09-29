@@ -1,13 +1,7 @@
-<!-- Title & back button button --> 
+<!-- Title  --> 
 
-<section class="container mb-5">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12">
-            <h1>Ajouter une durée</h1>
-        <div class="col-12 d-flex justify-content-center my-4">
-            <a href="durationsList" class="btn btn-light mt-3"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des durées" style="width: 1.5rem; height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+<section class="container mb-4">
+    <h1 class="text-light">Ajouter une durée</h1>
 </section>
 
 
@@ -15,7 +9,7 @@
 
 <section class="container my-5">
     <div class="row d-flex justify-content-center">
-        <article class="col-7 col-md-6 col-lg-4 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
+        <article class="col-10 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
             <form action="<?= URL ?>createDurationValidation" method="POST" >
                 <!-- id_duration --> 
                 <div class="mb-3">
@@ -32,8 +26,17 @@
                     <label for="end_duration" class="form-label">Date de fin : </label>
                     <input type="date" class="form-control" id="end_duration" name="end_duration">
                 </div>
-                <!-- Add button --> 
-                <button type="submit" class="btn btn-light d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"> Ajouter</button>
+                
+                <!-- Back & Add buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="durationsList" class="btn btn-dark text-light"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la liste des durées" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                    <button type="submit" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une spécialité" style="width: 1.5rem;"> Ajouter</button>
+                    </div>
+                </div>
+            
             </form>
         </article>
     </div>

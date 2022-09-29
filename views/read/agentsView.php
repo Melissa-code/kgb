@@ -1,17 +1,17 @@
 <!-- Page title & Back button & Add button --> 
 
-<section class="container my-4">
+<section class="container ">
     <div class="row d-flex justify-content-center">
         <div class="col-12 mb-3">
-            <h1>Liste des agents</h1>
+            <h1 class="text-light">Liste des agents</h1>
         </div>
-        <div class="col-6 d-flex justify-content-end my-3">
+        <div class="col-6 d-flex justify-content-end mt-3">
             <!-- Back to create mission button --> 
-            <a href="<?= URL?>createMission" class="btn btn-dark border border-light fw-bold"><img src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1.5rem;"> Revenir</a>
+            <a href="<?= URL?>createMission" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1rem;"> Revenir</a>
         </div>
-        <div class="col-6 d-flex justify-content-start my-3">
+        <div class="col-6 d-flex justify-content-start mt-3">
             <!-- Add a agent button --> 
-            <a href="<?= URL?>createAgent" class="btn btn-light font-weight-bold"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"> Ajouter</a>
+            <a href="<?= URL?>createAgent" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"> Ajouter</a>
         </div>
     </div>
 </section>
@@ -28,7 +28,7 @@
                 <div class="card m-2" style="width: 18rem;">
                     <div class="card-body ">
                         <h4 class="card-subtitle mb-2 text-center text-danger">N° <?= $agent->getId_agent(); ?></h4>
-                        <p class="card-subtitle mb-2 text-center text-danger"><?= $agent->getFirstname_agent()." ".$agent->getName_agent(); ?></p>
+                        <p class="card-subtitle mb-2 text-center text-danger fw-bold"><?= $agent->getFirstname_agent()." ".$agent->getName_agent(); ?></p>
                         <?php 
                         // Display the date of birth in the French format
                         $dateBirthdayFormat = new DateTime($agent->getDatebirthday_agent());

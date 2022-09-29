@@ -1,14 +1,7 @@
-<!-- Page title & back button button --> 
+<!-- Title  --> 
 
 <section class="container">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12">
-            <h1>Modifier l'agent n° <?= $agent->getId_agent() ?></h1>
-        </div>
-        <div class="col-12 d-flex justify-content-center mt-4">
-            <a href="agentsList" class="btn btn-dark border border-light"><img class="text-white" src="<?= URL ?>/public/assets/images/back-left.svg" alt="retour à la liste des agents" style="width: 1.5rem; height: 1.5rem;"> Revenir</a>
-        </div>
-    </div>
+    <h1 class="text-light">Modifier l'agent n° <?= $agent->getId_agent() ?></h1>
 </section>
 
 
@@ -16,9 +9,7 @@
 
 <section class="container my-5">
     <div class="row d-flex justify-content-center">
-        <article class="col-9 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
-            
-        <!-- update a duration form -->
+        <article class="col-10 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
             <form action="updateAgentValidation" method="POST">
                 <!-- oldid_agent --> 
                 <div class="mb-3">
@@ -46,13 +37,13 @@
                 </div>
             
                 <!-- old name_speciality --> 
-                <div class="row d-flex align-items-center my-3">
+                <div class="row d-flex align-items-center my-3 p-2 border border-secondary rounded-3 mx-1">
                     <div class="col-12">
-                        <label class="form-label me-3">Spécialités de l'agent : </label>
+                        <p class="form-label me-3">Spécialités de l'agent : </p>
                         <?php foreach($specialities_agents as $speciality_agent) :?>
                             <?php if($speciality_agent->getId_agent() ===  $agent->getId_agent()) :?>
                                 <div class="form-check d-inline-block">
-                                    <input class="form-check-input" type="checkbox" value="<?= $speciality_agent->getName_speciality() ?>" checked id="name_speciality" multiple name="oldname_speciality[]" >
+                                    <input class="form-check-input bg-dark border" type="checkbox" value="<?= $speciality_agent->getName_speciality() ?>" checked id="name_speciality" multiple name="oldname_speciality[]" >
                                     <label class="form-check-label me-3" for="name_speciality" value="<?= $speciality_agent->getName_speciality() ?>">
                                         <?= $speciality_agent->getName_speciality() ?>
                                     </label>
@@ -63,12 +54,12 @@
                 </div>
 
                 <!-- name_speciality --> 
-                <div class="row d-flex align-items-center my-3">
+                <div class="row d-flex align-items-center my-3 p-2 border border-secondary rounded-3 mx-1">
                     <div class="col-12">
-                        <label class="form-label me-3">Changer ses spécialités : </label>
+                        <p class="form-label me-3">Changer ses spécialités : </p>
                         <?php foreach($specialities as $speciality) :?>
                             <div class="form-check d-inline-block">
-                                <input class="form-check-input" type="checkbox" value="<?= $speciality->getName_speciality() ?>" id="name_speciality" multiple name="name_speciality[]" >
+                                <input class="form-check-input bg-dark border" type="checkbox" value="<?= $speciality->getName_speciality() ?>" id="name_speciality" multiple name="name_speciality[]" >
                                 <label class="form-check-label me-3" for="name_speciality" value="<?= $speciality->getName_speciality() ?>">
                                     <?= $speciality->getName_speciality() ?>
                                 </label>
@@ -76,9 +67,15 @@
                         <?php endforeach; ?>
                     </div>
                 </div>
-                <!-- Update button --> 
-                <div class="">
-                    <button type="submit" class="btn btn-warning d-block mx-auto m-3"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier un agent" style="width: 1.5rem;"> Modifier</button>
+           
+                <!-- Update & back buttons --> 
+                <div class="row d-flex mt-4">
+                    <div class="col-6 d-flex justify-content-end">
+                        <a href="agentsList" class="btn btn-dark text-light"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la liste des agents" style="width: 1.5rem; height: 1rem;"> Revenir</a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-warning"><img src="<?= URL ?>/public/assets/images/edit-light.svg" alt="modifier un agent" style="width: 1rem;"> Modifier</button>
+                    </div>
                 </div>
             </form>
         </article>
