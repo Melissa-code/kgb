@@ -15,13 +15,13 @@ rouge foncé: #7F0B07
 }
 
 body {
-    height: 100vh; 
+    /* height: 100vh;  */
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     background-color: #0D0B07;
     color:  #F7F5F3;
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
 }
 
 h1 {
@@ -61,7 +61,7 @@ footer {
 
 
 /* login */ 
-
+/* 
 #login-body {
 	max-width: 450px;
 	margin: auto;
@@ -73,14 +73,9 @@ footer {
     font-size: 1em;
     font-size: 18px;
     opacity: 0.9;
-} 
+}  */
 
 
-/* create mission */ 
-
-.link-custom {
-    color:green!important;
-}
 
 
 /* update mission */ 

@@ -36,7 +36,6 @@ class AdminManager extends Model {
         $req->bindValue(':email_admin', $email_admin, PDO::PARAM_STR);
         $req->execute();
         $adminProfil = $req->fetch(PDO::FETCH_ASSOC);
-        //var_dump($adminProfil); 
         $req->closeCursor();
         return $adminProfil; 
     }
@@ -48,22 +47,22 @@ class AdminManager extends Model {
     */
     public function loginDb($email_admin, $password_admin): void {
 
-        // vérification de l'email_admin 
+        // Check if the email_admin exists 
         $pdo = $this->getDb();
         $req = $pdo->prepare('SELECT count(*) as numberEmail FROM Admins WHERE email_admin = :email_admin'); 
         $req->bindValue(':email_admin', $email_admin, PDO::PARAM_STR);
         $req->execute();
        
         while($email_verification = $req->fetch()){
-            // si l'email n'existe pas en DB 
+            // if the email doesn't exist in the DB 
             if($email_verification['numberEmail'] != 1){
+                MessagesClass::addAlertMsg("Impossible de vous identifier.", MessagesClass::RED_COLOR); 
                 header('location:'.URL."login"); 
                 exit();
-                //echo "Impossible de vous authentifier"; 
             }
         }
 
-        // Connection 
+        // Login 
         $req = $pdo->prepare('SELECT * FROM Admins WHERE email_admin = :email_admin');
         $req->bindValue(':email_admin', $email_admin, PDO::PARAM_STR);
         $req->execute();
@@ -74,63 +73,16 @@ class AdminManager extends Model {
                 //To use the session connect anywhere in the website
                 $_SESSION['connect'] = 1; 
                 $_SESSION['email_admin'] = $admin['email_admin']; 
-
-                
-                if(isset($_POST['rememberMe'])) {
-                    setcookie('auth', $admin['secret'], time() + 364*24*3600, '/', null, false, true); 
-                    //$this->getCookie();
-                }
-
-                // echo "connexion réussie";
-                header('location:'.URL."missions"); 
-              
+                header("location:".URL."missions"); 
+                exit();
             }
             else {
-                //echo "Impossible de vous authentifier"; 
-                header('location:'.URL."login"); 
+                MessagesClass::addAlertMsg("Impossible de vous identifier.", MessagesClass::RED_COLOR); 
+                header("location:".URL."login"); 
                 exit();
             }
         }
         $req->closeCursor();
     } 
-
-
-    /**
-    * Get cookie 
-    * 
-    * 
-    */
-    public function getCookie(): void {
-
-        if(isset($_COOKIE['auth']) && !isset($_SESSION['connect'])){
-
-            $secret_admin = htmlspecialchars($_COOKIE['auth']);
-        
-            $pdo = $this->getDb();
-            // vérifie si admin a un secret 
-            $req = $pdo->prepare('SELECT count(*) as numberAccount FROM Admins WHERE secret_admin = :secret_admin'); 
-            $req->bindValue(':secret_admin', $secret_admin, PDO::PARAM_STR);
-            //echo $secret_admin; 
-            $req->execute();
-    
-            while($admin = $req->fetch()){
-
-                // si un compte possède cette clé secrète 
-                if((int)$admin['numberAccount'] === 1){
-                    $reqAdmin = $pdo->prepare('SELECT * FROM Admins WHERE secret_admin = :secret_admin'); 
-                    $reqAdmin->execute();
-                 
-                    while($adminAccount = $reqAdmin->fetch()){
-                        $_SESSION['connect'] = 1; 
-                        $_SESSION['email_admin'] = $adminAccount['email_admin']; 
-                    }
-                    $reqAdmin->closeCursor();
-                }
-            }
-            $req->closeCursor();
-        }
-    }
-
-
         
 }

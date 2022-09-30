@@ -1,70 +1,56 @@
-<!-- Alert message if the Admin is logged-in --> 
-<?php if(isset($_SESSION['connect'])) :?>
-    <?php foreach($admins as $admin) :?>
-        <?php if($admin->getEmail_admin() === $_SESSION['email_admin']) :?>
-            <section class="container mt-2">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-6">
+<!-- Title --> 
+
+<section class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12">
+            <h1 class="text-light">Liste des missions</h1>
+        </div>
+
+        <!-- Alert message if the Admin is logged-in --> 
+        <?php if(isset($_SESSION['connect'])) :?>
+            <?php foreach($admins as $admin) :?>
+                <?php if($admin->getEmail_admin() === $_SESSION['email_admin']) :?>
+                    <div class="col-12 col-md-6">
                         <div class="alert text-center text-white" role="alert">
                             - Ravi de vous revoir <?= $admin->getFirstname_admin()." ".$admin->getName_admin()." -"; ?>
                         </div>
                     </div>
-                </div>
-            </section>
+                <?php endif; ?>
+            <?php endforeach; ?>
         <?php endif; ?>
-    <?php endforeach; ?>
-<?php endif; ?>
-
-<!-- Alert message if the mission has been successfully udpated --> 
-<section class="container">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-10 text-center">
-            <?php if(isset($_SESSION['alertUpdate'])) :?>
-                <div class="alert alert-success mx-5" role="alert">
-                    <?= $_SESSION['alertUpdate']['msg'] ?>
-                </div>
-                <?php unset($_SESSION['alertUpdate']) ?>
-            <?php endif; ?>
-        </div>
     </div>
 </section>
+        
 
+<!-- Search a mission & Add a mission button --> 
 
-<!-- Title & Searchbar & Add button --> 
-<section >
-    <div class="row d-flex justify-content-center">
-        <div class="col-10 mb-2">
-            <h1 class="text-light">Liste des missions</h1>
-        </div>
-
-        <div class="col-12 mb-4">
-            <div class="row d-flex justify-content-center">
-
-                <!-- Search a mission -->
-                <div class="col-10 col-md-7 col-lg-5 mt-3">
-                    <div>
+<div class="row">
+    <section class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="row d-flex justify-content-center bg-dark bg-gradient bg-opacity-25 pb-3">
+                    <!-- Search a mission -->
+                    <div class="col-9 col-md-4 mt-3">
                         <input class="form-control input" type="text" placeholder="Rechercher une mission" aria-label="Search" id="searchInput">
                         <div id="suggestions"></div>
                     </div>
+                    <!-- Display Add mission button if the Admin is logged-in -->
+                    <?php if(isset($_SESSION['connect'])) :?>
+                        <div class="col-12 col-md-3 mt-3 d-flex justify-content-center">
+                            <a href="<?= URL?>createMission" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une mission" style="width: 1.5rem; height:1.5rem;"> Ajouter</a>
+                        </div>
+                    <?php endif ?>
                 </div>
-
-                <!-- Display Add mission button if the Admin is logged-in -->
-                <?php if(isset($_SESSION['connect'])) :?>
-                    <div class="col-12 col-md-3 mt-3 d-flex justify-content-center">
-                        <a href="<?= URL?>createMission" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une mission" style="width: 1.5rem; height:1.5rem;"> Ajouter</a>
-                    </div>
-                <?php endif ?>
-            </div>
-        </div>    
-    </div>
-</section>
+            </div>   
+        </div>
+    </section> 
+</div>
 
 
-<!-- Display all the missions --> 
+<!-- Missions cards -->
 
-<section class="container">
+<section class="container my-4">
     <div class="row">
-        <!-- Missions cards -->
         <article class="col-12 d-flex flex-wrap justify-content-center" id="missions-list">
             <?php foreach($missions as $mission) :?>
                 <div class="card m-2 list-item" style="width: 18rem;">
@@ -92,6 +78,7 @@
                 </div>
             <?php endforeach; ?>
         </article>
+
     </div>
 </section>
 

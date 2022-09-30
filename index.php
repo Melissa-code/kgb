@@ -1,6 +1,7 @@
 <?php session_start();
 
 require_once("controllers/MainController.php"); 
+require_once("controllers/AdminController.php"); 
 require_once("controllers/AgentController.php"); 
 require_once("controllers/ContactController.php"); 
 require_once("controllers/TargetController.php"); 
@@ -11,7 +12,8 @@ require_once("controllers/HideoutController.php");
 require_once("controllers/SpecialityController.php"); 
 
 
-$mainController = new MainController(); // to use the functions from the MainController
+$mainController = new MainController();
+$adminController = new AdminController();
 $agentController = new AgentController(); 
 $contactController = new ContactController(); 
 $targetController = new TargetController(); 
@@ -42,13 +44,13 @@ try {
 
         // login admin 
         case "login": 
-            $mainController->login();
+            $adminController->login();
         break;
         case "loginValidation": 
-            $mainController->loginValidation();
+            $adminController->loginValidation();
         break;
         case "logout": 
-            $mainController->logout();
+            $adminController->logout();
         break;
 
         // Mission

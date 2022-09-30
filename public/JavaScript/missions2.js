@@ -67,8 +67,8 @@ function showList() {
             // carte.style.width = '18rem';
             let dupNode = cards[i].cloneNode([true]);
 
-            //missions.appendChild(cards[i]); 
-            missions.appendChild(dupNode); 
+            missions.appendChild(cards[i]); 
+            //missions.appendChild(dupNode); 
             
            
             // list += 

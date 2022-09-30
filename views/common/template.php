@@ -29,7 +29,7 @@
     <?php require_once("views/common/header.php"); ?>
     
     <!-- main -->
-    <main class="container" >
+    <main class="container-fluid">
 
         <!-- Alert success / error message  --> 
         <section class="container">
@@ -38,7 +38,7 @@
                     <?php 
                         if(!empty($_SESSION['alert'])) {
                             foreach($_SESSION['alert'] as $alert){
-                                echo "<div class='alert ". $alert['type'] ."' role='alert'>
+                                echo "<div class='alert alert-dismissible ". $alert['type'] ."' role='alert'>
                                     ".$alert['message']." <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
                                 </div>";
                             }

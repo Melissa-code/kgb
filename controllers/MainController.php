@@ -17,7 +17,6 @@ require_once("models/Target_missionManager.php");
 require_once("models/Speciality_agentManager.php"); 
 
 
-
 class MainController {
 
     private MissionManager $missionManager;
@@ -70,7 +69,6 @@ class MainController {
         $mission = $this->missionManager->get(base64_decode(urldecode($params['q'])));
         //$mission = $this->missionManager->get($params['q']);
         $mission = $this->missionManager->get($mission->getCode_mission());
-        //var_dump($mission);
         return $mission; 
     }
 
@@ -129,8 +127,7 @@ class MainController {
     }
 
     /**
-    * Display all the data for one mission function
-    * 
+    * Display one mission function
     * 
     */
     public function oneMission(): void {
@@ -168,60 +165,6 @@ class MainController {
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
-        
-    }
-
-    /**
-    * Login Admin (page) function
-    * 
-    * 
-    */
-    public function login() : void {
-
-        $data_page = [
-            "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
-            "page_title" => "Connexion en tant qu'administrateur du site du KGB",
-            "view" => "views/loginView.php",
-            "template" => "views/common/template.php"
-        ];
-        $this->generatePage($data_page); 
-    }
-
-    /**
-    * Login Admin (validation) function 
-    * 
-    * 
-    */
-    public function loginValidation(): void {
-        session_start(); 
-
-        if($_POST){
-            $email_admin = htmlspecialchars($_POST['email_admin']); 
-            $password_admin = htmlspecialchars($_POST['password_admin']); 
-
-            if(!filter_var($email_admin, FILTER_VALIDATE_EMAIL)) {
-                header('location:'.URL."login"); 
-                exit(); 
-            } else {
-                $this->adminManager->loginDb($email_admin, $password_admin); 
-            }
-            
-        } else {
-            header('location:'.URL."login"); 
-        }
-    }
-
-    /**
-    * Logout Admin function
-    * 
-    */
-    public function logout(): void {
-        session_start(); 
-        session_unset();
-        session_destroy(); 
-        echo  "admin déconnecté";
-        //setcookie('auth', '', time() -1, '/', null, false, true); 
-        header('location:'.URL."home"); 
     }
 
 
@@ -257,7 +200,6 @@ class MainController {
             "template" => "views/common/template.php"
         ];
         $this->generatePage($data_page); 
-     
     }
 
     /**
@@ -266,14 +208,10 @@ class MainController {
     */
     public function createMissionValidation(): void {
 
-        //session_start();
-
         if($_POST){
             $newMission = new Mission($_POST);
 
-            /**
-             * Check the rule : one agent must have the same speciality as the mission 
-             */
+            // Check the rule :  One agent must have the same speciality as the mission 
             $id_agents = $newMission->getId_agent();
             $speciality = $newMission->getName_speciality();
             $one_agent = false;
@@ -290,49 +228,36 @@ class MainController {
                     }
                 }
             }
+
+            // Check the rule: The targets haven't to have the same nationality as the agents
+            $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
+
+            // Check the rule : The Contacts must have the same nationality as the mission
+            $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
             
+            // Check the rule : The Hideouts must be in the same country as the mission
+            $checkCountryHideout = $this->missionManager->checkCountryHideoutDb($newMission); 
+
+            // Display an alert message if one of the rules is wrong 
             if($one_agent === false) {
-                // $_SESSION['alert4'] = [
-                //     "type" => "error",
-                //     "msg" => "ERREUR: Au moins un agent doit avoir la même spécialité que la mission."
-                // ];
                 MessagesClass::addAlertMsg("ERREUR: Au moins un agent doit avoir la même spécialité que la mission.", MessagesClass::RED_COLOR); 
                 header("location:".URL."createMission");
                 exit();
             }
-
-            /**
-             * Check the rules : 
-             * 
-             * 
-             */
-            $checkNationalityTarget = $this->missionManager->checkNationalityTargetDb($newMission); 
-            $checkNationalityContact = $this->missionManager->checkNationalityContactDb($newMission); 
-            $checkCountryHideout = $this->missionManager->checkCountryHideoutDb($newMission); 
-
-            if($checkNationalityTarget) {
-                $_SESSION['alert1'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR : les cibles ne doivent pas avoir la même nationalité que les agents."
-                ];
-                header('location:'.URL."createMission");
+            elseif($checkNationalityTarget) {
+                MessagesClass::addAlertMsg("ERREUR : les cibles ne doivent pas avoir la même nationalité que les agents.", MessagesClass::RED_COLOR); 
+                header("location:".URL."createMission");
                 exit();
             } elseif($checkNationalityContact) {
-                $_SESSION['alert2'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR : les contacts doivent être de la nationalité du pays de la mission."
-                ];
-                header('location:'.URL."createMission");
+                MessagesClass::addAlertMsg("ERREUR : les contacts doivent être de la nationalité du pays de la mission.", MessagesClass::RED_COLOR); 
+                header("location:".URL."createMission");
                 exit();
             } elseif($checkCountryHideout) {
-                $_SESSION['alert3'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR: les planques doivent être dans le même pays que la mission."
-                ];
-                header('location:'.URL."createMission");
+                MessagesClass::addAlertMsg("ERREUR: les planques doivent être dans le même pays que la mission.", MessagesClass::RED_COLOR); 
+                header("location:".URL."createMission");
                 exit();
             } else {    
-                //var_dump($newMission->getDescription_mission());
+                // Create the new mission 
                 $this->missionManager->createMissionDb($newMission); 
                 header('location:'.URL."missions");
                 exit();
@@ -395,16 +320,17 @@ class MainController {
             $mission = new Mission($_POST);
             $this->missionManager->updateMissionDb($mission); 
         }
-        header('location:'.URL."missions");
+        header("location:".URL."missions");
+        exit();
     }
 
 
     /**
     * Delete a mission 
     *   
-    * 
     */
     public function deleteMission(): void {
+
         $mission = $this->getMissionByCode();
 
         $this->missionManager->deleteMissionDb($mission->getCode_mission());
@@ -413,14 +339,14 @@ class MainController {
             "msg" => "Suppression de la mission bien réalisée"
         ]; 
         unset($mission); 
-        header('location:'.URL."missions");
+        header("location:".URL."missions");
+        exit();
     }
 
 
     /**
     * Error page function 
     *
-    * 
     */
     public function errorPage($msg) : void {
         $data_page = [
@@ -432,6 +358,5 @@ class MainController {
         ];
         $this->generatePage($data_page); 
     }
-
 
 }

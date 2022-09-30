@@ -37,9 +37,7 @@ class MissionManager extends Model {
         $req->bindValue(':code_mission', $code_mission, PDO::PARAM_STR);
         $req->execute();
         $data = $req->fetch(); 
-        //print_r($data); 
         $mission = new Mission($data); 
-        //var_dump($mission); 
         $req->closeCursor();
         return $mission;
     }
@@ -47,6 +45,7 @@ class MissionManager extends Model {
 
     /**
     * Check the rule : the targets can't have the same nationality as the agents
+    *
     * id_agents(array)
     * code_targets(array)
     */
@@ -82,6 +81,7 @@ class MissionManager extends Model {
 
     /**
     * Check the rule : the nationality of the contacts must be the same as the country of a mission 
+    *
     * code_contacts(array)
     * code_mission (string)
     */
@@ -136,21 +136,25 @@ class MissionManager extends Model {
     /**
     * Create a mission
     *
-    * 
     */
     public function createMissionDb(Mission $newMission): void {
 
         $pdo = $this->getDb();
+
+        // Count the number of duplicates missions
         $req = $pdo->prepare('SELECT count(*) as numberCode FROM Missions WHERE code_mission = :code_mission'); 
         $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
         $req->execute();
        
+        // Check if the mission already exists 
         while($code_verification = $req->fetch()){
             if($code_verification['numberCode'] >= 1){
-                header('location:'.URL."createSpeciality"); 
+                MessagesClass::addAlertMsg("Cette mission existe déjà.", MessagesClass::RED_COLOR); 
+                header("location:".URL."createMission"); 
                 exit();
             }
             else {
+                // Create the new mission 
                 $req = $pdo->prepare("INSERT INTO Missions (code_mission, title_mission, description_mission, country_mission, id_duration, code_status, name_type, name_speciality) VALUES (:code_mission, :title_mission, :description_mission, :country_mission, :id_duration, :code_status, :name_type, :name_speciality)");
                 $req->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
                 $req->bindValue(':title_mission', $newMission->getTitle_mission(), PDO::PARAM_STR);
@@ -162,17 +166,17 @@ class MissionManager extends Model {
                 $req->bindValue(':name_speciality', $newMission->getName_speciality(), PDO::PARAM_STR);
                 $req->execute();
 
+                // Create the new agents in the Agents_missions table
                 $id_agent = $newMission->getId_agent();
-                print_r('id de l agent: ' .$id_agent);
                 foreach($id_agent as $agent){
                     $req2 = $pdo->prepare("INSERT INTO Agents_missions (id_agent, code_mission) VALUES (:id_agent, :code_mission)");
                     $req2->bindValue(':id_agent', (int)$agent, PDO::PARAM_INT);
                     $req2->bindValue(':code_mission', $newMission->getCode_mission(), PDO::PARAM_STR);
                     $req2->execute();
-
                 }
                 $req2->closeCursor();
 
+                // Create the new contacts in the Contacts_missions table  
                 $code_contact = $newMission->getCode_contact(); 
                 foreach($code_contact as $contact) {
                     $req3 = $pdo->prepare("INSERT INTO Contacts_missions (code_contact, code_mission) VALUES (:code_contact, :code_mission)");
@@ -182,6 +186,7 @@ class MissionManager extends Model {
                 }
                 $req3->closeCursor();
 
+                // Create the new targets in the Targets_missions table 
                 $code_target = $newMission->getCode_target(); 
                 foreach($code_target as $target) {
                     $req4 = $pdo->prepare("INSERT INTO Targets_missions (code_target, code_mission) VALUES (:code_target, :code_mission)");
@@ -191,6 +196,7 @@ class MissionManager extends Model {
                 }
                 $req4->closeCursor();
 
+                // Create the new targets in the Targets_missions table  
                 $id_hideout = $newMission->getId_hideout(); 
                 foreach($id_hideout as $hideout) {
                     $req5 = $pdo->prepare("INSERT INTO Hideouts_missions (id_hideout, code_mission) VALUES (:id_hideout, :code_mission)");
@@ -203,12 +209,12 @@ class MissionManager extends Model {
                 $req->closeCursor();
             }
         }
+        MessagesClass::addAlertMsg("La mission a bien été ajoutée", MessagesClass::GREEN_COLOR); 
     }
 
     /**
     * Update a mission in the database 
     *
-    * 
     */
     public function updateMissionDb(Mission $mission): void {
 
@@ -239,7 +245,6 @@ class MissionManager extends Model {
         } else {
             $id_hideouts = [];
         }
-
        
         // Check if the code_mission already exists
         $pdo = $this->getDb();
@@ -249,12 +254,9 @@ class MissionManager extends Model {
 
         while($code_verification = $req->fetch()){
             if($code_verification['numberCode'] >= 1  && $mission->getOldcode_mission() !== $mission->getCode_mission()) {
-                // Display an error alerte message 
-                $_SESSION['alertDuplicate'] = [
-                    "type" => "error",
-                    "msg" => "ERREUR : Ce nom de code existe déjà."
-                ];
-                header('location:'.URL."updateMission?q=".urlencode(base64_encode($mission->getOldcode_mission())));
+                // Display an error alert message 
+                MessagesClass::addAlertMsg("Ce nom de code existe déjà", MessagesClass::RED_COLOR);
+                header("location:".URL."updateMission?q=".urlencode(base64_encode($mission->getOldcode_mission())));
                 exit();
             }
             else {
@@ -296,7 +298,7 @@ class MissionManager extends Model {
                     }
                     $req2->closeCursor(); 
 
-                // if no id_agent is checked 
+                // if neither of id_agent is checked 
                 } else {
                     $id_agents = $_POST['oldid_agent'];
                   
@@ -341,7 +343,7 @@ class MissionManager extends Model {
                             $req3->closeCursor();
                         }
                     }
-                // if no code_contact is checked 
+                // if neither of code_contact is checked 
                 } else {
                     $code_contacts = $_POST['oldcode_contact'];
                     
@@ -386,7 +388,7 @@ class MissionManager extends Model {
                             $req3->closeCursor();
                         }
                     }
-                // if no code_target is checked 
+                // if neither of code_target is checked 
                 } else {
                     $code_targets = $_POST['oldcode_target'];
                     
@@ -456,17 +458,13 @@ class MissionManager extends Model {
             }
         }
         // Display a success alert message 
-        $_SESSION['alertUpdate'] = [
-            "type" => "success",
-            "msg" => "La mission a bien été modifiée"
-        ];
+        MessagesClass::addAlertMsg("La mission a bien été modifiée.", MessagesClass::GREEN_COLOR); 
     }
 
 
     /**
     * Delete a mission in the database
     *
-    * 
     */
     public function deleteMissionDb(string $code_mission): void {
 
@@ -500,6 +498,8 @@ class MissionManager extends Model {
         $req3->closeCursor();
         $req2->closeCursor();
         $req->closeCursor();
+        // Display a success alert message
+        MessagesClass::addAlertMsg("La mission a bien été supprimée.", MessagesClass::GREEN_COLOR); 
     }
 
 }
