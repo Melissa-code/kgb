@@ -95,7 +95,7 @@ class MainController {
         $data_page = [
             "page_description" => "Page d'accuel du site du KGB",
             "page_title" => "Page d'accuel du site du KGB",
-            // "page_css" => "home.css",
+            "page_css" => "home.css",
             "page_javascript" => ["home.js"],
             "view" => "views/homeView.php",
             "template" => "views/common/template.php"

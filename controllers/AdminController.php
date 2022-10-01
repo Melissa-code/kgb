@@ -72,6 +72,7 @@ class AdminController {
         session_start(); 
         session_unset();
         session_destroy(); 
+        MessagesClass::addAlertMsg("Déconnexion réussie.", MessagesClass::GREEN_COLOR); 
         header("location:".URL."home"); 
         exit();
     }

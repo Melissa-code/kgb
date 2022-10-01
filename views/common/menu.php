@@ -6,7 +6,7 @@
         <!-- Logo -->
         <div class="logo mx-4">
             <a class="navbar-brand" href="home" alt="logo du site">
-                <img src="<?= URL ?>public/assets/images/logo_kgb.png" width="80" />
+                <img src="<?= URL ?>public/assets/images/logo-spy.png" width="83"/>
             </a>
         </div>
 

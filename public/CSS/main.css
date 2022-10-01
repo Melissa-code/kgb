@@ -17,21 +17,18 @@ rouge foncé: #7F0B07
 body {
     /* height: 100vh;  */
     font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     background-color: #0D0B07;
     color:  #F7F5F3;
     /* display: flex;
     flex-direction: column; */
 }
 
-h1 {
+h1, h2 {
+    color:  #F7F5F3;
     font-family: 'Montserrat', sans-serif; 
     text-align: center;
-    padding-top: 5vh;
-}
-
-h2 {
-    font-family: 'Fira Sans Condensed', sans-serif;
+    padding-top: 2vh;
 }
 
 a {
@@ -39,9 +36,25 @@ a {
     text-decoration: none;
 }
 
+
+/* ***********************************************************
+                        Navigation 
+************************************************************ */
+
+#menu {
+    background-color: #F7F5F3;
+    color: #0D0B07;
+    height: 13vh;
+}
+
+/* ***********************************************************
+                        Footer
+************************************************************ */
+
 footer {
     background-color: #AAA8A5;
     color: #0D0B07;
+    height: 14vh;
 }
 
 .footer-link {
@@ -51,37 +64,36 @@ footer {
 
 .footer-link:hover {
     color: #F7F5F3;
-    text-decoration: none;
-}
-
-#menu {
-    background-color: #F7F5F3;
-    color: #0D0B07;
 }
 
 
-/* login */ 
-/* 
-#login-body {
-	max-width: 450px;
-	margin: auto;
-	background-color: #0D0B07;
-	border-radius: 5px;
-	padding: 50px;
-	margin: 70px auto 30px auto;
-    color:#F7F5F3;
-    font-size: 1em;
-    font-size: 18px;
-    opacity: 0.9;
-}  */
+/*****************************************************************
+                    Media queries 
+******************************************************************/
 
 
+@media screen and (min-width: 280px) and (max-width: 769px) {
+
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+    body {
+        font-size: 16px;
+        height: 100%;
+    }
+    #menu {
+        height: 15vh;
+    }
+    footer {
+        height: 15vh;
+    }
+}
 
 
-/* update mission */ 
+@media screen and (min-width: 768px) and (max-width: 1200px) {
 
-/* .update-mission {
-    width: 50vh;
-    height: 50vh;
-    background-color: #5D5B57;
-} */
+    h1, h2 {
+        font-size: 2rem;
+    }
+ 
+}

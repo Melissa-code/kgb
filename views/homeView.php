@@ -1,41 +1,29 @@
+<!-- Title --> 
 
-<!------------- Main --------------->
-
-    <section class="mb-4">
-        <h1>Bienvenu sur le site du KGB</h1>
-    </section>
+<section class="container pb-2">
+    <h1>Société d'agents secrets</h1>
+</section>
 
 
-    <section class="row">
-        <article class="col-12" id="home-bg">
+<!-- Website presentation --> 
 
-            <!------------- carrousel --------------->
-            <div id="carousel-home" class="carousel slide pb-4" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <!------------- 1st slide --------------->
-                    <div class="carousel-item active">
-                        <img src="<?= URL ?>public/assets/images/spy.png" class="d-block mx-auto w-50 pb-5" alt="...">
-                    </div>
-                    <!------------- 2nd slide --------------->
-                    <div class="carousel-item">
-                        <img src="<?= URL ?>public/assets/images/eye.png"  class="d-block mx-auto w-50 pb-5"  alt="...">
-                    </div>
-                    <!------------- 3rd slide --------------->
-                    <div class="carousel-item">
-                        <img src="<?= URL ?>public/assets/images/encoding.png"  class="d-block mx-auto w-50 pb-5"  alt="...">
-                    </div>
+<div class="row">
+    <section class="container">
+        <div class="row">
+            <div class="col-12" id="home-bg">
+                
+                <div class="row d-flex justify-content-center align-items-end h-100">
+                    <article class="col-11 col-md-8 col-lg-7 pb-4 mb-md-3">
+                        <div class="py-2 px-4" id="presentation">
+                            <h2 class="pb-2">Présentation</h2>
+                            <p>Nos espions recueillent et traitent des informations liées à des personnes ou à des événements qui sont susceptibles de porter atteinte à une nation et à ses intérêts.</p>
+                            <p>Ils ont pour mission de communiquer les informations qu’ils ont récoltées aux autorités compétentes de leur pays et sont spécialisés dans un domaine.</p>
+                        </div>
+                    </article>
                 </div>
-                <!------------- control buttons --------------->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-home" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carousel-home" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
 
-        </article>
+            </div>
+        </div>
     </section>
+</div>
 
