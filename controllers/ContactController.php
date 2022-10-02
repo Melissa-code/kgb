@@ -68,6 +68,7 @@ class ContactController {
         $data_page = [
             "page_description" => "Page de création d'un contact",
             "page_title" => "Création d'un contact",
+            "page_css" => "form.css",
             "view" => "views/create/createContactView.php",
             "template" => "views/common/template.php"
         ];
@@ -100,6 +101,7 @@ class ContactController {
         $data_page = [
             "page_description" => "Page de modification d'un contact",
             "page_title" => "Modification d'un contact",
+            "page_css" => "form.css",
             "contact" => $contact,
             "view" => "views/update/updateContactView.php",
             "template" => "views/common/template.php"

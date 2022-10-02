@@ -71,6 +71,7 @@ class DurationController {
         $data_page = [
             "page_description" => "Page de création d'une durée",
             "page_title" => "Création d'une durée",
+            "page_css" => "form.css",
             "view" => "views/create/createDurationView.php",
             "template" => "views/common/template.php"
         ];
@@ -103,6 +104,7 @@ class DurationController {
         $data_page = [
             "page_description" => "Page de modification de la durée d'une mission",
             "page_title" => "Modification d'une durée",
+            "page_css" => "form.css",
             "duration" => $duration,
             "view" => "views/update/updateDurationView.php",
             "template" => "views/common/template.php"

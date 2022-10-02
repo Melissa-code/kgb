@@ -78,6 +78,7 @@ class AgentController {
         $data_page = [
             "page_description" => "Page de création d'un agent",
             "page_title" => "Création d'un agent",
+            "page_css" => "form.css",
             "specialities" => $specialities,
             "view" => "views/create/createAgentView.php",
             "template" => "views/common/template.php"
@@ -114,6 +115,7 @@ class AgentController {
         $data_page = [
             "page_description" => "Page de modification d'un agent",
             "page_title" => "Modification d'un agent",
+            "page_css" => "form.css",
             "agent" => $agent,
             "specialities" => $specialities,
             "specialities_agents" => $specialities_agents,

@@ -112,7 +112,7 @@ function firstPage() {
 
 function showPageInfo() {
     pageInfo = document.getElementById('pageInfo');
-    pageInfo.innerHTML = `Page ${actualPage} / ${maxPages}`;
+    pageInfo.innerHTML = `${actualPage} / ${maxPages}`;
 }
 
 

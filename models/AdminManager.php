@@ -45,7 +45,7 @@ class AdminManager extends Model {
     * Admin login
     *
     */
-    public function loginDb($email_admin, $password_admin): void {
+    public function loginDb(string $email_admin, string $password_admin): void {
 
         // Check if the email_admin exists 
         $pdo = $this->getDb();
@@ -54,7 +54,7 @@ class AdminManager extends Model {
         $req->execute();
        
         while($email_verification = $req->fetch()){
-            // if the email doesn't exist in the DB 
+            // if the email doesn't exist in the DB display an error alert 
             if($email_verification['numberEmail'] != 1){
                 MessagesClass::addAlertMsg("Impossible de vous identifier.", MessagesClass::RED_COLOR); 
                 header('location:'.URL."login"); 

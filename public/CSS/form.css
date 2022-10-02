@@ -1,0 +1,96 @@
+.border-form {
+    border-radius: 10px;
+    opacity: 0.9;
+    color: white;
+    -webkit-box-shadow: 5px 5px 15px 5px #F7F5F3;
+    box-shadow: 5px 5px 15px 5px #F7F5F3;
+}
+
+/* ************************************************************* 
+    Mission background
+*************************************************************** */
+
+.bg-form {
+    min-width: 100%;
+    min-height: 100%;
+    background: url('../assets/images/tunnel.png');
+	background-size: cover;
+	background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+
+/* *********************************************************************************
+    Speciality, Duration, Agent, Contact Target, Hideout, Status & Type  backgrounds
+********************************************************************************** */
+
+.bg-form-speciality, .bg-form-duration, .bg-form-agent, .bg-form-contact, .bg-form-target, .bg-form-hideout, .bg-form-status, .bg-form-type {
+    height: 65vh;
+    min-width: 100%;
+    min-height: 100%;
+	background-size: center;
+    background-repeat: no-repeat;
+} 
+
+.bg-form-speciality {
+    background-position: center;
+    background: url('../assets/images/speciality.png');
+}
+
+.bg-form-duration {
+    background-position: center;
+	background: url('../assets/images/duration.png');
+}
+
+.bg-form-agent {
+    background-position: center;
+	background: url('../assets/images/agent.png');
+}
+
+.bg-form-contact {
+    background-position: bottom;
+	background: url('../assets/images/contact.png');
+    background-repeat: no-repeat;
+}
+
+.bg-form-target {
+    background-position: center;
+    background: url('../assets/images/target.png');
+}
+
+.bg-form-hideout {
+    background-position: center;
+	background: url('../assets/images/hideout.png');
+}
+
+.bg-form-status {
+    background-position: center;
+	background: url('../assets/images/status.png');
+}
+
+.bg-form-type {
+    background-position: bottom;
+    background: url('../assets/images/type.png');
+}
+
+
+
+/* ********************************************************************
+                    Media queries 
+********************************************************************* */
+
+
+@media screen and (min-width: 280px) and (max-width: 769px) {
+
+    body {
+        font-size: 16px;
+        height: 100%;
+    }
+    .bg-form-speciality, .bg-form-duration, .bg-form-agent, .bg-form-contact, .bg-form-target, .bg-form-hideout, .bg-form-status, .bg-form-type {
+        background: #0D0B07;
+    }
+    .bg-form-agent, .bg-form-contact, .bg-form-target, .bg-form-hideout {
+        height: 90vh;
+    }
+
+}

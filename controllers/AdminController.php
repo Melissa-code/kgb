@@ -32,6 +32,7 @@ class AdminController {
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",
+            "page_css" => "login.css",
             "view" => "views/loginView.php",
             "template" => "views/common/template.php"
         ];
@@ -51,12 +52,11 @@ class AdminController {
             $password_admin = htmlspecialchars($_POST['password_admin']); 
 
             if(!filter_var($email_admin, FILTER_VALIDATE_EMAIL)) {
-                header('location:'.URL."login"); 
+                header("location:".URL."login"); 
                 exit(); 
             } else {
                 $this->adminManager->loginDb($email_admin, $password_admin); 
             }
-            
         } else {
             header("location:".URL."login"); 
             exit();

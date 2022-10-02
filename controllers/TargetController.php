@@ -68,6 +68,7 @@ class TargetController {
         $data_page = [
             "page_description" => "Page de création d'une cible",
             "page_title" => "Création d'une cible",
+            "page_css" => "form.css",
             "view" => "views/create/createTargetView.php",
             "template" => "views/common/template.php"
         ];
@@ -100,6 +101,7 @@ class TargetController {
         $data_page = [
             "page_description" => "Page de modification d'une cible",
             "page_title" => "Modification d'une cible",
+            "page_css" => "form.css",
             "target" => $target,
             "view" => "views/update/updateTargetView.php",
             "template" => "views/common/template.php"

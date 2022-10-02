@@ -70,6 +70,7 @@ class StatusController {
         $data_page = [
             "page_description" => "Page de création du statut d'une mission",
             "page_title" => "Création du statut d'une mission",
+            "page_css" => "form.css",
             "view" => "views/create/createStatusView.php",
             "template" => "views/common/template.php"
         ];
@@ -103,6 +104,7 @@ class StatusController {
         $data_page = [
             "page_description" => "Page de modification du statut",
             "page_title" => "Modification du statut",
+            "page_css" => "form.css",
             "status" => $status,
             "view" => "views/update/updateStatusView.php",
             "template" => "views/common/template.php"

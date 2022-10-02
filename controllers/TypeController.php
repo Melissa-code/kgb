@@ -66,6 +66,7 @@ class TypeController {
         $data_page = [
             "page_description" => "Page de création du type d'une mission",
             "page_title" => "Création du type d'une mission",
+            "page_css" => "form.css",
             "view" => "views/create/createTypeView.php",
             "template" => "views/common/template.php"
         ];
@@ -97,6 +98,7 @@ class TypeController {
         $data_page = [
             "page_description" => "Page de modification du type d'une mission",
             "page_title" => "Modification du type d'une mission",
+            "page_css" => "form.css",
             "type" => $type,
             "view" => "views/update/updateTypeView.php",
             "template" => "views/common/template.php"

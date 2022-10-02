@@ -1,6 +1,6 @@
 <!-- Title --> 
 
-<section class="container">
+<section class="container pb-2">
     <div class="row d-flex justify-content-center">
         <div class="col-12">
             <h1 class="text-light">Liste des missions</h1>
@@ -10,9 +10,9 @@
         <?php if(isset($_SESSION['connect'])) :?>
             <?php foreach($admins as $admin) :?>
                 <?php if($admin->getEmail_admin() === $_SESSION['email_admin']) :?>
-                    <div class="col-12 col-md-6">
-                        <div class="alert text-center text-white" role="alert">
-                            - Ravi de vous revoir <?= $admin->getFirstname_admin()." ".$admin->getName_admin()." -"; ?>
+                    <div class="col-12 col-md-8">
+                        <div class="alert text-center text-white" role="alert" style="height: 10px; padding:0;">
+                            - Ravi de vous retrouver <?= $admin->getFirstname_admin()." ".$admin->getName_admin()." -"; ?>
                         </div>
                     </div>
                 <?php endif; ?>
@@ -24,11 +24,11 @@
 
 <!-- Search a mission & Add a mission button --> 
 
-<div class="row">
-    <section class="container-fluid">
+<div class="row mt-3">
+    <section class="container" id="search">
         <div class="row d-flex justify-content-center">
-            <div class="col-12">
-                <div class="row d-flex justify-content-center bg-dark bg-gradient bg-opacity-25 pb-3">
+            <div class="col-12 pt-4">
+                <div class="row d-flex justify-content-center pt-4">
                     <!-- Search a mission -->
                     <div class="col-9 col-md-4 mt-3">
                         <input class="form-control input" type="text" placeholder="Rechercher une mission" aria-label="Search" id="searchInput">
@@ -49,11 +49,11 @@
 
 <!-- Missions cards -->
 
-<section class="container my-4">
+<section class="container my-5">
     <div class="row">
         <article class="col-12 d-flex flex-wrap justify-content-center" id="missions-list">
             <?php foreach($missions as $mission) :?>
-                <div class="card m-2 list-item" style="width: 18rem;">
+                <div class="card m-2 list-item" style="width: 18rem; ">
                     <div class="card-body">
                     <a href="<?= URL ?>oneMission?q=<?= urlencode(base64_encode($mission->getCode_mission())) ?>" class="card-link"><h3 id="title" class="card-title mb-4 text-center text-danger fw-bold">Mission <?= $mission->getCode_mission(); ?></h3></a>
                     <h4 class="card-subtitle mb-2 text-center text-danger"><?= $mission->getTitle_mission() ; ?></h4>
@@ -91,7 +91,7 @@
             <ul class="pagination">
                 <li class="page-item"><a class="page-link text-dark previousP" href="#">Précédente</a></li>
                 <li class="page-item"><a class="page-link text-dark firstP"  href="#">1</a></li>
-                <li class="page-item"><span class="page-link text-dark" id="pageInfo">Page 1 / 3</span></li>
+                <li class="page-item"><span class="page-link text-dark" id="pageInfo">1 / 3</span></li>
                 <li class="page-item"><a class="page-link text-dark lastP"  href="#">3</a></li>
                 <li class="page-item"><a class="page-link text-dark nextP"  href="#">Suivante</a></li>
             </ul>

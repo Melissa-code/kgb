@@ -68,6 +68,7 @@ class HideoutController {
         $data_page = [
             "page_description" => "Page de création d'une planque",
             "page_title" => "Création d'un agent d'une planque",
+            "page_css" => "form.css",
             "view" => "views/create/createHideoutView.php",
             "template" => "views/common/template.php"
         ];
@@ -99,6 +100,7 @@ class HideoutController {
         $data_page = [
             "page_description" => "Page de modification d'une planque",
             "page_title" => "Modification d'une planque",
+            "page_css" => "form.css",
             "hideout" => $hideout,
             "view" => "views/update/updateHideoutView.php",
             "template" => "views/common/template.php"

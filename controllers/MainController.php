@@ -88,7 +88,6 @@ class MainController {
     /**
     * Home page function
     * 
-    * 
     */
     public function home() : void {
 
@@ -106,7 +105,6 @@ class MainController {
     /**
     * Display all the missions function
     *
-    * 
     */
     public function missions() : void {
 
@@ -118,6 +116,7 @@ class MainController {
             "page_title" => "Missions du KGB",
             "missions" => $missions,
             "admins" => $admins,
+            "page_css" => "list.css",
             // "page_javascript" => ["missions.js"],
             "page_javascript" => ["missions2.js"],
             "view" => "views/read/missionsView.php",
@@ -187,6 +186,7 @@ class MainController {
         $data_page = [
             "page_description" => "Page de création d'une mission",
             "page_title" => "Création d'un mission",
+            "page_css" => "form.css",
             "view" => "views/create/createMissionView.php",
             "agents" => $agents,
             "contacts" => $contacts,

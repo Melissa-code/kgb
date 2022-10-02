@@ -16,7 +16,7 @@
         </button>
     
         <!-- Target of burger menu -->
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
                 <!-- Home link -->
                 <li><a aria-current="page" href="home" class="nav-link px-2 text-dark">Accueil</a></li>

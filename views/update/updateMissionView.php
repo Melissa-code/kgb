@@ -1,7 +1,7 @@
 <!-- Title -->
 
 <section class="mb-4">
-    <h1 class="text-light">Modifier la mission <?= $mission->getCode_mission() ?></h1>
+    <h1>Modifier la mission <?= $mission->getCode_mission() ?></h1>
 </section>
 
 

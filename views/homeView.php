@@ -11,7 +11,6 @@
     <section class="container">
         <div class="row">
             <div class="col-12" id="home-bg">
-                
                 <div class="row d-flex justify-content-center align-items-end h-100">
                     <article class="col-11 col-md-8 col-lg-7 pb-4 mb-md-3">
                         <div class="py-2 px-4" id="presentation">
@@ -21,7 +20,6 @@
                         </div>
                     </article>
                 </div>
-
             </div>
         </div>
     </section>

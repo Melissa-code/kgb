@@ -1,36 +1,40 @@
 <!-- Page title & back button button --> 
 
-<section class="container">
-    <h1 class="text-light">Ajouter un agent</h1>
+<section class="container pb-3">
+    <h1>Ajouter un agent</h1>
 </section>
 
 
 <!-- Create agent  -->
-
-<section class="container my-5">
-    <div class="row d-flex justify-content-center">
-        <article class="col-10 col-md-7 col-lg-5 bg-dark bg-gradient bg-opacity-25 rounded-3 p-4">
+<div class="row bg-form-agent">
+<section class="container my-1 my-md-5">
+    <div class="row d-flex justify-content-center mt-1 mt-md-5">
+        <article class="col-10 col-md-7 col-lg-5 border-form p-4">
             <!-- create an agent form -->
             <form action="<?= URL ?>createAgentValidation" method="POST">
                 <!-- name_agent --> 
-                <div class="mb-3">
-                    <label for="name_agent" class="form-label">Nom : </label>
-                    <input type="text" class="form-control" id="name_agent" name="name_agent">
-                </div>
-                <!-- firstname_agent --> 
-                <div class="mb-3">
-                    <label for="name_agent" class="form-label">Prénom : </label>
-                    <input type="text" class="form-control" id="firstname_agent" name="firstname_agent">
+                <div class="row">
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="name_agent" class="form-label">Nom : </label>
+                        <input type="text" class="form-control" id="name_agent" name="name_agent">
+                    </div>
+                    <!-- firstname_agent --> 
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="name_agent" class="form-label">Prénom : </label>
+                        <input type="text" class="form-control" id="firstname_agent" name="firstname_agent">
+                    </div>
                 </div>
                 <!-- datebirthday_agent --> 
-                <div class="mb-3">
-                    <label for="datebirthday_agent" class="form-label">Date de naissance : </label>
-                    <input type="date" class="form-control" id="datebirthday_agent" name="datebirthday_agent">
-                </div>
-                <!-- nationality_agent --> 
-                <div class="mb-3">
-                    <label for="nationality_agent" class="form-label">Nationalité : </label>
-                    <input type="text" class="form-control" id="nationality_agent" name="nationality_agent">
+                <div class="row">
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="datebirthday_agent" class="form-label">Date de naissance : </label>
+                        <input type="date" class="form-control" id="datebirthday_agent" name="datebirthday_agent">
+                    </div>
+                    <!-- nationality_agent --> 
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="nationality_agent" class="form-label">Nationalité : </label>
+                        <input type="text" class="form-control" id="nationality_agent" name="nationality_agent">
+                    </div>
                 </div>
                 <!-- name_speciality --> 
                 <div class="row d-flex align-items-center my-3 p-2 border border-secondary rounded-3 mx-1">
@@ -61,3 +65,4 @@
         </article>
     </div>
 </section>
+</div>

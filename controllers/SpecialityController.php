@@ -72,6 +72,7 @@ class SpecialityController {
         $data_page = [
             "page_description" => "Page de création d'une spécialité d'une mission",
             "page_title" => "Création d'une spécialité d'une mission",
+            "page_css" => "form.css",
             "specialities" => $specialities, 
             "view" => "views/create/createSpecialityView.php",
             "template" => "views/common/template.php"
@@ -100,6 +101,7 @@ class SpecialityController {
         $data_page = [
             "page_description" => "Page de modification d'une spécialité d'une mission",
             "page_title" => "Modification d'une spécialité d'une mission",
+            "page_css" => "form.css",
             "speciality" => $speciality,
             "view" => "views/update/updateSpecialityView.php",
             "template" => "views/common/template.php"
