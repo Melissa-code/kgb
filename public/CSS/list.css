@@ -1,5 +1,9 @@
-.bg-list {
-    height:auto;
+/* *****************************************************
+    Lists views
+****************************************************** */
+
+.bg-list, #mission-bg {
+    height: auto;
     min-width: 100%;
     min-height: 100%;
 	background: url('../assets/images/spy.png');
@@ -11,16 +15,6 @@
 /* *****************************************************
     One mission view 
 ****************************************************** */
-
-#mission-bg {
-    height: auto;
-    min-width: 100%;
-    min-height: 100%;
-	background: url('../assets/images/spy.png');
-	background-size: cover;
-	background-position: top;
-    background-repeat: no-repeat;
-}
 
 .bg-card {
     opacity: 0.9;

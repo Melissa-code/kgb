@@ -111,13 +111,12 @@ class MainController {
         $admins = $this->adminManager->getAll();
 
         $data_page = [
-            "page_description" => "Page listant l'ensemble des missions secrètes du KGB",
-            "page_title" => "Missions du KGB",
+            "page_description" => "Page listant l'ensemble des missions secrètes de la société Spy",
+            "page_title" => "Missions de la société Spy",
             "missions" => $missions,
             "admins" => $admins,
             "page_css" => "list.css",
-            // "page_javascript" => ["missions.js"],
-            "page_javascript" => ["missions2.js"],
+            "page_javascript" => ["missions.js"],
             "view" => "views/read/missionsView.php",
             "template" => "views/common/template.php"
         ];
@@ -184,7 +183,7 @@ class MainController {
 
         $data_page = [
             "page_description" => "Page de création d'une mission",
-            "page_title" => "Création d'un mission",
+            "page_title" => "Création d'une mission",
             "page_css" => "form.css",
             "view" => "views/create/createMissionView.php",
             "agents" => $agents,

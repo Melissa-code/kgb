@@ -1,5 +1,5 @@
 <?php session_start();
-
+require_once("controllers/SecurityClass.php");
 require_once("controllers/MainController.php"); 
 require_once("controllers/AdminController.php"); 
 require_once("controllers/AgentController.php"); 
@@ -61,7 +61,13 @@ try {
             $mainController->oneMission();
         break;
         case "createMission": 
-            $mainController->createMission();
+            if(!SecurityClass::isloggedIn()) {
+                MessagesClass::addAlertMsg("Veuillez vous connecter.", MessagesClass::RED_COLOR);
+                header("location:".URL."login");
+                exit();
+            } else {
+                $mainController->createMission();
+            }
         break;
         case "createMissionValidation": 
             $mainController->createMissionValidation();

@@ -70,7 +70,7 @@ class AdminManager extends Model {
         while($admin = $req->fetch(PDO::FETCH_ASSOC)) {
             if($password_admin === $admin['password_admin']){
 
-                //To use the session connect anywhere in the website
+                // To use the session connect anywhere in the website (bool)
                 $_SESSION['connect'] = 1; 
                 $_SESSION['email_admin'] = $admin['email_admin']; 
                 header("location:".URL."missions"); 

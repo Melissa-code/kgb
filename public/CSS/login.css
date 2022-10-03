@@ -3,7 +3,7 @@
 ************************************************************ */
 
 #login-bg {
-	height: 65vh ;
+	height: auto ;
     min-width: 100%;
     min-height: 100%;
 	background: url('../assets/images/spy.png');
@@ -21,14 +21,3 @@
     box-shadow: 5px 5px 15px 5px #F7F5F3;
 } 
 
-
-/*****************************************************************
-                    Media queries 
-******************************************************************/
-
-
-@media screen and (min-width: 280px) and (max-width: 1200px) {
-    #login-bg {
-        height: 100%;
-    }
-}

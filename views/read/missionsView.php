@@ -24,19 +24,19 @@
 
 <!-- Search a mission & Add a mission button --> 
 
-<div class="row mt-3">
-    <section class="container bg-list" id="search">
+<div class="row mb-5">
+    <section class="container bg-list my-3" id="search">
         <div class="row d-flex justify-content-center">
             <div class="col-12 pt-4">
-                <div class="row d-flex justify-content-center pt-4">
+                <div class="row d-flex justify-content-center align-items-center pb-3">
                     <!-- Search a mission -->
-                    <div class="col-9 col-md-4 mt-3">
+                    <div class="col-9 col-md-4 my-2">
                         <input class="form-control input" type="text" placeholder="Rechercher une mission" aria-label="Search" id="searchInput">
                         <div id="suggestions"></div>
                     </div>
                     <!-- Display Add mission button if the Admin is logged-in -->
                     <?php if(isset($_SESSION['connect'])) :?>
-                        <div class="col-12 col-md-3 mt-3 d-flex justify-content-center">
+                        <div class="col-12 col-md-3 my-2 d-flex justify-content-center">
                             <a href="<?= URL?>createMission" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter une mission" style="width: 1.5rem; height:1.5rem;"> Ajouter</a>
                         </div>
                     <?php endif ?>
@@ -51,7 +51,7 @@
 
 <section class="container my-5">
     <div class="row">
-        <article class="col-12 d-flex flex-wrap justify-content-center" id="missions-list">
+        <article class="col-12 d-flex flex-wrap justify-content-center mb-5" id="missions-list">
             <?php foreach($missions as $mission) :?>
                 <div class="card m-2 list-item" style="width: 18rem; ">
                     <div class="card-body">

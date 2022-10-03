@@ -1,5 +1,3 @@
-console.log("HELLO !"); 
-
 const searchInput = document.querySelector('#searchInput'); 
 const cards = document.querySelectorAll('.card');
 
@@ -20,18 +18,30 @@ let maxPages = Math.ceil(cards.length / numberOfItems);
  * @param {*} elements (array cards of the missions)
  */
 function filterElements(letters, elements) {
+  
+    let missions = document.getElementById('missions-list');
+    
     if(letters.length > 2) {
         searchInput.style.borderColor = "green"; 
+
         for(let i = 0; i < elements.length; i++) {
             // textContent : text of the h3 h4 & p of each card   
             if(elements[i].textContent.toLowerCase().includes(letters)) {
+                missions.insertBefore(elements[i], missions.firstElementChild); 
                 elements[i].style.display = "inline-block"; 
+               
             } else {
                 elements[i].style.display = "none"; 
             }
         }
+    } else if (letters.length == 0) {
+        for(let i = 0; i < elements.length; i++) {
+            elements[i].style.display = "inline-block"; 
+        }
+        firstPage(); 
     } else {
         searchInput.style.borderColor = "red"; 
+
     }
 }
 
@@ -42,16 +52,20 @@ function filterElements(letters, elements) {
 
 /**
  * Display 4 cards per page & the number of the page
+ * 
  */
 function showList() {
-    let list = ""; 
+
+    let missions = document.getElementById('missions-list');
+    missions.innerHTML = "";
+  
     for (let i = first; i <  first + numberOfItems; i++){
         if(i < cards.length) {
-            list += 
-                `<div class="card m-2 list-item" style="width: 18rem;">${cards[i].innerHTML}</div>`;
+            let dupNode = cards[i].cloneNode([true]);
+            //missions.appendChild(cards[i]); 
+            missions.appendChild(dupNode); 
         }
     }
-    document.getElementById('missions-list').innerHTML = list;
     showPageInfo();
 }
 
@@ -86,9 +100,8 @@ function firstPage() {
 
 function showPageInfo() {
     pageInfo = document.getElementById('pageInfo');
-    pageInfo.innerHTML = `Page ${actualPage} / ${maxPages}`;
+    pageInfo.innerHTML = `${actualPage} / ${maxPages}`;
 }
-
 
 
 /* *********************************************************** */
@@ -106,7 +119,6 @@ function getCards() {
 
     xhr.onreadystatechange = function() {
         //console.log(this); 
-        console.log("HELLO !"); 
         if(this.readyState === 4 && this.status === 200){
             let data = xhr.response;
             setCardsInPage();
@@ -131,17 +143,19 @@ function setCardsInPage() {
 
     /**
      * Keyup event listener
+     * 
      */
     searchInput.addEventListener('keyup', (e) => {
         // e.target.value : letters in the searchInput
         const searchedLetters = e.target.value.toLowerCase();
         console.log(e); 
         console.log(searchedLetters); 
-        //filterElements(searchedLetters, cards);
+        filterElements(searchedLetters, cards);
     });
 
     /**
      * Click events listeners 
+     * 
      */
     document.querySelector('.nextP').addEventListener('click', (e)=> {
         e.preventDefault();
@@ -170,6 +184,7 @@ function setCardsInPage() {
  * Browser loads the HTML content (page & cards) event listener
  * 
  */
-// window.addEventListener("DOMContentLoaded", ()=> {
-//     getCards();
-// })
+window.addEventListener("DOMContentLoaded", ()=> {
+    getCards();
+    firstPage();
+})
