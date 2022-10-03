@@ -53,6 +53,8 @@ class StatusController {
         $data_page = [
             "page_description" => "Page listant les statuts",
             "page_title" => "Statuts",
+            "page_css" => "list.css",
+            "page_javascript" => ["list.js"],
             "status" => $status,
             "view" => "views/read/statusView.php",
             "template" => "views/common/template.php"

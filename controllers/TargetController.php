@@ -51,6 +51,8 @@ class TargetController {
         $data_page = [
             "page_description" => "Page listant les cibles",
             "page_title" => "Liste des cibles",
+            "page_css" => "list.css",
+            "page_javascript" => ["list.js"],
             "targets" => $targets,
             "view" => "views/read/targetsView.php",
             "template" => "views/common/template.php"

@@ -9,7 +9,7 @@
 <div class="row bg-form">
     <section class="container mb-5">
         <div class="row d-flex justify-content-center">
-            <div class="col-10 col-lg-8 p-4 create-form" id="create-mission">
+            <article class="col-10 col-lg-8 p-4 border-form" id="create-mission">
                 <!-- form -->        
                 <form action="<?= URL ?>createMissionValidation" method="POST" >
                     <div class="row"> 
@@ -168,7 +168,7 @@
                     </div>
                 </form>
 
-            </div>
+            </article>
         </div>
     </section>
 </div> 

@@ -56,7 +56,7 @@ class MainController {
 
 
     /**
-    * Get the mission by code 
+    * Get the mission by code function
     *
     * @return Mission $mission
     */
@@ -72,9 +72,8 @@ class MainController {
         return $mission; 
     }
 
-
     /**
-    * Generate a page
+    * Generate a page function
     */
     private function generatePage(array $data) : void {
 
@@ -144,10 +143,10 @@ class MainController {
         $hideouts = $this->hideoutManager->getAll(); 
         $hideouts_missions = $this->hideout_missionManager->getAll(); 
 
-
         $data_page = [
             "page_description" => "Page affichant le détail d'une mission secrète",
             "page_title" => "Détail d'une mission",
+            "page_css" => "list.css",
             "mission" => $mission,
             "agents_missions" => $agents_missions,
             "contacts_missions" => $contacts_missions,
@@ -264,7 +263,7 @@ class MainController {
             }
         }
     }
-
+    
     /**
     * Update a mission (page) function
     * 
@@ -289,6 +288,7 @@ class MainController {
         $data_page = [
             "page_description" => "Page de modification d'une mission",
             "page_title" => "Modification d'un mission",
+            "page_css" => "form.css",
             "agents" => $agents,
             "agents_missions" => $agents_missions,
             "specialities_agents" => $specialities_agents,
@@ -309,9 +309,8 @@ class MainController {
         $this->generatePage($data_page); 
     }
 
-
     /**
-    * Update a mission (validation) 
+    * Update a mission (validation) function
     *
     */
     public function updateMissionValidation(): void {
@@ -324,9 +323,8 @@ class MainController {
         exit();
     }
 
-
     /**
-    * Delete a mission 
+    * Delete a mission function
     *   
     */
     public function deleteMission(): void {
@@ -334,15 +332,10 @@ class MainController {
         $mission = $this->getMissionByCode();
 
         $this->missionManager->deleteMissionDb($mission->getCode_mission());
-        $_SESSION['alertDeleteMission'] = [
-            "type" => "success", 
-            "msg" => "Suppression de la mission bien réalisée"
-        ]; 
         unset($mission); 
         header("location:".URL."missions");
         exit();
     }
-
 
     /**
     * Error page function 

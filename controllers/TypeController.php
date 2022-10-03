@@ -49,6 +49,8 @@ class TypeController {
         $data_page = [
             "page_description" => "Page listant les types de missions",
             "page_title" => "Liste des types",
+            "page_css" => "list.css",
+            "page_javascript" => ["list.js"],
             "types" => $types,
             "view" => "views/read/typesView.php",
             "template" => "views/common/template.php"

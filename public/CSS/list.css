@@ -1,9 +1,5 @@
-/* ***********************************************************
-                        Mission list 
-************************************************************ */
-
-#search {
-    height: 18vh ;
+.bg-list {
+    height:auto;
     min-width: 100%;
     min-height: 100%;
 	background: url('../assets/images/spy.png');
@@ -12,13 +8,25 @@
     background-repeat: no-repeat;
 }
 
+/* *****************************************************
+    One mission view 
+****************************************************** */
 
-/*****************************************************************
-                    Media queries 
-******************************************************************/
-
-
-@media screen and (min-width: 280px) and (max-width: 1200px) {
-  
-   
+#mission-bg {
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+	background: url('../assets/images/spy.png');
+	background-size: cover;
+	background-position: top;
+    background-repeat: no-repeat;
 }
+
+.bg-card {
+    opacity: 0.9;
+    color: black;
+    -webkit-box-shadow: 0px 10px 13px -7px #F7F5F3;
+    box-shadow: 0px 10px 13px -7px #F7F5F3;
+}
+
+

@@ -1,20 +1,28 @@
 <!-- Page title & Back button & Add button --> 
+<div class="row">
+    <section class="container ">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 mb-3">
+                <h1 class="text-light">Liste des agents</h1>
+            </div>
+        </div>
+    </section>
 
-<section class="container ">
-    <div class="row d-flex justify-content-center">
-        <div class="col-12 mb-3">
-            <h1 class="text-light">Liste des agents</h1>
-        </div>
-        <div class="col-6 d-flex justify-content-end mt-3">
-            <!-- Back to create mission button --> 
-            <a href="<?= URL?>createMission" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1rem;"> Revenir</a>
-        </div>
-        <div class="col-6 d-flex justify-content-start mt-3">
-            <!-- Add a agent button --> 
-            <a href="<?= URL?>createAgent" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"> Ajouter</a>
-        </div>
+    <div class="row ">
+        <section class="container bg-list">  
+            <div class="row my-md-5">
+                <div class="col-6 d-flex justify-content-end mt-3">
+                    <!-- Back to create mission button --> 
+                    <a href="<?= URL?>createMission" class="btn btn-dark"><img src="<?= URL ?>/public/assets/images/back-light.svg" alt="retour à la création de mission" style="width: 1.5rem; height:1rem;"> Revenir</a>
+                </div>
+                <div class="col-6 d-flex justify-content-start mt-3">
+                    <!-- Add a agent button --> 
+                    <a href="<?= URL?>createAgent" class="btn btn-light"><img src="<?= URL ?>/public/assets/images/icon-add.svg" alt="ajouter un agent" style="width: 1.5rem;"> Ajouter</a>
+                </div>
+            </div>
+        </section>
     </div>
-</section>
+</div>
 
 
 <!-- Display all the agents -->
@@ -22,7 +30,7 @@
 <section class="container my-5">
     <div class="row">
         <!--  agents list -->
-        <article class="d-flex col-12 flex-wrap justify-content-center">
+        <article class="d-flex col-12 flex-wrap justify-content-center" id="lists">
             <!-- Agent card -->
             <?php foreach($agents as $agent) :?>
                 <div class="card m-2" style="width: 18rem;">
@@ -53,6 +61,23 @@
                 </div>
             <?php endforeach; ?>
         </article>
+    </div>
+</section>
+
+
+<!-- Pagination -->
+
+<section class="row mt-5 mb-3">
+    <div class="col-12 d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link text-dark previousP" href="#">Précédente</a></li>
+                <li class="page-item"><a class="page-link text-dark firstP"  href="#">1</a></li>
+                <li class="page-item"><span class="page-link text-dark" id="pageInfo">1 / 2</span></li>
+                <li class="page-item"><a class="page-link text-dark lastP"  href="#">3</a></li>
+                <li class="page-item"><a class="page-link text-dark nextP"  href="#">Suivante</a></li>
+            </ul>
+        </nav>
     </div>
 </section>
 

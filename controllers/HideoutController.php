@@ -51,6 +51,8 @@ class HideoutController {
         $data_page = [
             "page_description" => "Page listant les planques",
             "page_title" => "Liste des Planques",
+            "page_css" => "list.css",
+            "page_javascript" => ["list.js"],
             "hideouts" => $hideouts,
             "view" => "views/read/hideoutsView.php",
             "template" => "views/common/template.php"

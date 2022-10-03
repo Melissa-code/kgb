@@ -25,7 +25,7 @@
 <!-- Search a mission & Add a mission button --> 
 
 <div class="row mt-3">
-    <section class="container" id="search">
+    <section class="container bg-list" id="search">
         <div class="row d-flex justify-content-center">
             <div class="col-12 pt-4">
                 <div class="row d-flex justify-content-center pt-4">

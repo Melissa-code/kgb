@@ -59,6 +59,8 @@ class AgentController {
         $data_page = [
             "page_description" => "Page listant les agents",
             "page_title" => "Liste des agents",
+            "page_css" => "list.css",
+            "page_javascript" => ["list.js"],
             "agents" => $agents,
             "view" => "views/read/agentsView.php",
             "template" => "views/common/template.php"

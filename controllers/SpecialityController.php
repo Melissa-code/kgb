@@ -53,6 +53,8 @@ class SpecialityController {
         $data_page = [
             "page_description" => "Page listant les spécialités des missions",
             "page_title" => "Liste des spécialités des missions",
+            "page_css" => "list.css",
+            "page_javascript" => ["list.js"],
             "specialities" => $specialities,
             "view" => "views/read/specialitiesView.php",
             "template" => "views/common/template.php"
