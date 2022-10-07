@@ -6,8 +6,32 @@ abstract class Model {
 
     // Get DB Connection in $pdo
     private static function setDb() {
-        self::$pdo = new PDO("mysql:host=localhost;dbname=project_kgb;charset=utf8", "melissa", "melissa");
-        self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); //rapport erreurs  
+
+        $url = getenv('JAWSDB_URL');
+
+        if($url) {
+            $dbparts = parse_url($url);
+
+            $hostname = $dbparts['host'];
+            $username = $dbparts['user'];
+            $password = $dbparts['pass'];
+            $database = ltrim($dbparts['path'],'/');
+        }
+        else {
+            $hostname = 'localhost';
+            $username = 'melissa';
+            $password = 'melissa'; 
+            $database = 'project_kgb';
+        }
+
+        try {
+            self::$pdo = new PDO("mysql:host=$hostname;dbname=$database;charset=utf8", $username, $password);
+            // set the PDO error mode to exception
+            self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            echo "Connected successfully";
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
 
     // Make the DB connection 
