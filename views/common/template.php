@@ -30,6 +30,33 @@
             text-align: center;
             padding-top: 2vh;
         }
+
+        #home-bg {
+            height: 65vh;
+            min-width: 100%;
+            min-height: 100%;
+            background: url('../assets/images/spy-hat.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        #presentation {
+            border-radius: 10px;
+            background-color: #0D0B07;
+            opacity: 0.8;
+            text-align: justify;
+            color: white;
+            -webkit-box-shadow: 5px 5px 15px 5px #F7F5F3;
+            box-shadow: 5px 5px 15px 5px #F7F5F3;
+        }
+
+        @media screen and (min-width: 280px) and (max-width: 1200px) {
+            #home-bg {
+                height: 70vh;
+            }
+        }
+
     </style>
 </head>
 
