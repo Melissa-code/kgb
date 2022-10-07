@@ -35,7 +35,7 @@
             height: 65vh;
             min-width: 100%;
             min-height: 100%;
-            background: url('../assets/images/spy-hat.png');
+            background: url('public/assets/images/spy-hat.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
