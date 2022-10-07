@@ -22,7 +22,8 @@ function showList() {
     for (let i = first; i <  first + numberOfItems; i++){
         if(i < cards.length) {
             let dupNode = cards[i].cloneNode([true]);
-            lists.appendChild(dupNode); 
+            //lists.appendChild(dupNode); 
+            lists.appendChild(cards[i]); 
         }
     }
     showPageInfo();

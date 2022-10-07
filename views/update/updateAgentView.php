@@ -8,7 +8,7 @@
 <!-- Update agent form -->
 
 <div class="row bg-form-agent">
-    <section class="container mt-1 my-md-5">
+    <section class="container mt-1 my-md-4">
         <div class="row d-flex justify-content-center">
             <article class="col-10 col-md-7 col-lg-5 border-form p-4">
                 <form action="updateAgentValidation" method="POST">

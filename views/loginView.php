@@ -7,7 +7,7 @@
    
 <!-- Login admin  --> 
 
-<section class="container" id="login-bg">
+<section class="container pb-4" id="login-bg">
     <div class="row d-flex justify-content-center">
         <article class="col-10 col-md-6 col-lg-4 p-5 bg-dark bg-gradient bg-opacity-25" id="login-form">
             <!-- login form -->

@@ -29,7 +29,6 @@ function filterElements(letters, elements) {
             if(elements[i].textContent.toLowerCase().includes(letters)) {
                 missions.insertBefore(elements[i], missions.firstElementChild); 
                 elements[i].style.display = "inline-block"; 
-               
             } else {
                 elements[i].style.display = "none"; 
             }
@@ -41,7 +40,6 @@ function filterElements(letters, elements) {
         firstPage(); 
     } else {
         searchInput.style.borderColor = "red"; 
-
     }
 }
 
@@ -62,8 +60,8 @@ function showList() {
     for (let i = first; i <  first + numberOfItems; i++){
         if(i < cards.length) {
             let dupNode = cards[i].cloneNode([true]);
-            //missions.appendChild(cards[i]); 
-            missions.appendChild(dupNode); 
+            missions.appendChild(cards[i]); 
+            //missions.appendChild(dupNode); 
         }
     }
     showPageInfo();

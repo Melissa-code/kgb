@@ -27,8 +27,8 @@
 
 <!-- Display all the specialities -->
 
-<section class="container">
-    <div class="row">
+<section class="container mb-3">
+    <div class="row my-md-5">
         <!--  Specialities cards -->
         <article class="d-flex col-12 flex-wrap justify-content-center my-5" id="lists">
                 <?php foreach($specialities as $speciality) :?>
@@ -38,7 +38,7 @@
                     </div>
                     <!-- update & delete buttons -->
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex mx-auto "> 
+                        <li class="list-group-item d-flex mx-auto"> 
                             <!-- Udpate speciality button -->
                             <form method="POST" action="<?= URL ?>updateSpeciality?q=<?= $speciality->getName_speciality(); ?>">
                                 <button class="btn btn-warning me-2" type="submit"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une spécialité" style="width: 1.5rem;"></button>
@@ -58,7 +58,7 @@
 
 <!-- Pagination -->
 
-<section class="row mt-5 mb-3">
+<section class="row mt-5 mb-4">
     <div class="col-12 d-flex justify-content-center">
         <nav aria-label="Page navigation">
             <ul class="pagination">

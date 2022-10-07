@@ -9,7 +9,7 @@
         </div>
     </section>
 
-    <div class="row ">
+    <div class="row">
         <section class="container bg-list">  
             <div class="row my-md-5">
                 <div class="col-6 d-flex justify-content-end mt-3">
@@ -28,10 +28,10 @@
 
 <!-- Display all the types -->
 
-<section class="container my-5 ">
-    <div class="row my-5">
+<section class="container my-md-5">
+    <div class="row my-md-5">
         <!--  Types cards -->
-        <article class="d-flex col-12 flex-wrap justify-content-center my-5" id="lists">
+        <article class="d-flex col-12 flex-wrap justify-content-center my-md-5" id="lists">
                 <?php foreach($types as $type) :?>
                     <div class="card m-2" style="width: 18rem;">
                         <div class="card-body">
@@ -59,7 +59,7 @@
 
 <!-- Pagination -->
 
-<section class="row mt-5 mb-3">
+<section class="row mt-5 mb-4">
     <div class="col-12 d-flex justify-content-center">
         <nav aria-label="Page navigation">
             <ul class="pagination">

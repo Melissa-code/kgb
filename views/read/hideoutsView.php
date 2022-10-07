@@ -31,7 +31,7 @@
 
 <section class="container my-5">
     <div class="row">
-        <article class="d-flex col-12 flex-wrap justify-content-center" id="lists">
+        <article class="d-flex col-12 flex-wrap justify-content-center mb-md-5" id="lists">
             <!-- hideout card -->
             <?php foreach($hideouts as $hideout) :?>
                 <div class="card m-2" style="width: 18rem;">

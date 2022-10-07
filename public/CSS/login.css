@@ -3,7 +3,7 @@
 ************************************************************ */
 
 #login-bg {
-	height: auto ;
+	height: 65vh ;
     min-width: 100%;
     min-height: 100%;
 	background: url('../assets/images/spy.png');

@@ -91,8 +91,8 @@ class MainController {
     public function home() : void {
 
         $data_page = [
-            "page_description" => "Page d'accuel du site du KGB",
-            "page_title" => "Page d'accuel du site du KGB",
+            "page_description" => "Page d'accuel du site",
+            "page_title" => "Page d'accuel du site",
             "page_css" => "home.css",
             "page_javascript" => ["home.js"],
             "view" => "views/homeView.php",

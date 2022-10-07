@@ -47,7 +47,7 @@
 
                 <!-- Update & delete buttons -->
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item d-flex mx-auto "> 
+                    <li class="list-group-item d-flex mx-auto my-2"> 
                         <!-- Udpate target button -->
                         <form method="POST" action="<?= URL ?>updateTarget?q=<?= $target->getCode_target(); ?>">
                             <button class="btn btn-warning me-2" type="submit"><img src="<?= URL ?>/public/assets/images/icon-modify.svg" alt="modifier une cible" style="width: 1.5rem;"></button>
