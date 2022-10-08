@@ -19,45 +19,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
     <link href="<?= URL ?>public/CSS/main.css" rel="stylesheet">
-    <!-- <?php if(!empty($page_css)) : ?>
+    <?php if(!empty($page_css)) : ?>
         <link href="<?= URL ?>public/CSS/<?=$page_css?>" rel="stylesheet">
-    <?php endif; ?>  -->
-    <link rel="stylesheet" href="style.css">
-    <style>
-        h1, h2 {
-            color:  #F7F5F3;
-            font-family: 'Montserrat', sans-serif; 
-            text-align: center;
-            padding-top: 2vh;
-        }
-
-        #home-bg {
-            height: 65vh;
-            min-width: 100%;
-            min-height: 100%;
-            background: url('public/assets/images/spy-hat.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        #presentation {
-            border-radius: 10px;
-            background-color: #0D0B07;
-            opacity: 0.8;
-            text-align: justify;
-            color: white;
-            -webkit-box-shadow: 5px 5px 15px 5px #F7F5F3;
-            box-shadow: 5px 5px 15px 5px #F7F5F3;
-        }
-
-        @media screen and (min-width: 280px) and (max-width: 1200px) {
-            #home-bg {
-                height: 70vh;
-            }
-        }
-
-    </style>
+    <?php endif; ?> 
+    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 
 <body>

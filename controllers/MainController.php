@@ -93,8 +93,7 @@ class MainController {
         $data_page = [
             "page_description" => "Page d'accuel du site",
             "page_title" => "Page d'accuel du site",
-            // "page_css" => "home.css",
-            "page_javascript" => ["home.js"],
+            "page_css" => "home.css",
             "view" => "views/homeView.php",
             "template" => "views/common/template.php"
         ];
