@@ -10,7 +10,7 @@
         <!-- Copyright -->
         <div class="col-12 d-flex justify-content-center">
             <p>Tous droits réservés &copy;
-                <span id="year">2022 KGB</span>
+                <span id="year">2022 SPY</span>
             </p>
         </div>
     </div>

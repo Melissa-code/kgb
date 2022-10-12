@@ -126,7 +126,12 @@ function getCards() {
            // console.log("Une erreur est survenue");
         }
     }
-    xhr.open("GET", "http://localhost:8888/cours/kgb/missions", true);
+    $prod = getenv('PROD');
+    if($prod) {
+        xhr.open("GET", "http://spyagentssecrets.herokuapp.com/missions", true);
+    }else {
+        xhr.open("GET", "http://localhost:8888/cours/kgb/missions", true);
+    }
     xhr.responseType = "text"; 
     xhr.send();
 }
