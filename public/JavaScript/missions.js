@@ -119,17 +119,22 @@ function getCards() {
         //console.log(this); 
         if(this.readyState === 4 && this.status === 200){
             let data = xhr.response;
+            console.log('test');
             setCardsInPage();
             //console.log(data);
         } 
         else {
-           // console.log("Une erreur est survenue");
+           console.log("Une erreur est survenue");
         }
     }
     $prod = getenv('PROD');
+    console.log($prod);
+    console.log('test');
     if($prod) {
+        console.log($prod);
         xhr.open("GET", "http://spyagentssecrets.herokuapp.com/missions", true);
-    }else {
+    } else {
+        console.log("localhost");
         xhr.open("GET", "http://localhost:8888/cours/kgb/missions", true);
     }
     xhr.responseType = "text"; 
@@ -188,6 +193,7 @@ function setCardsInPage() {
  * 
  */
 window.addEventListener("DOMContentLoaded", ()=> {
+    console.log('test');
     getCards();
     firstPage();
 })
