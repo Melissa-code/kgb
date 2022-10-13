@@ -17,7 +17,7 @@
                     <!-- email_admin -->
                     <label class="form-label">Email : </label>
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="email_admin" name="email_admin" placeholder="name@example.com" required pattern="^[A-Za-z]+@{1}[A-Za-z]+\.{1}[A-Za-z]{2,}$" maxlength="99">
+                        <input type="email" class="form-control" id="email_admin" name="email_admin" placeholder="name@example.com" required pattern="^[A-Za-z]+@{1}[A-Za-z]+\.{1}[A-Za-z]{2,}$" maxlength="60">
                     </div>
                     <!-- password_admin -->
                     <label class="form-label">Mot de passe : </label>

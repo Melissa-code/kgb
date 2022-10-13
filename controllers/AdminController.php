@@ -51,19 +51,24 @@ class AdminController {
     */
     public function loginValidation(): void {
 
-        $uppercase = preg_match('@[A-Z]@', $_POST['password_admin']);
-        $lowercase = preg_match('@[a-z]@', $_POST['password_admin']);
-        $letterAtFirst = preg_match('@^[a-zA-Z]@', $_POST['password_admin']);
-        $specialCharacter = preg_match('@[^\w]@',  $_POST['password_admin']);
-        $number = preg_match('@[0-9]@', $_POST['password_admin']);
+        //$formatEmail = preg_match('/^[a-z][a-z0-9+]*@[a-z]+(\.[a-z]+)?$/i', $_POST['email_admin']);
+        $uppercase = preg_match('/[A-Z]/', $_POST['password_admin']);
+        $lowercase = preg_match('/[a-z]/', $_POST['password_admin']);
+        $specialCharacter = preg_match('/[^\w]/', $_POST['password_admin']);
+        $number = preg_match('/[0-9]/', $_POST['password_admin']);
 
-        if($_POST && strlen($_POST['email_admin']) <= 99){
+        if($_POST){
             $email_admin = SecurityClass::secureHtml($_POST['email_admin']); 
             $password_admin = SecurityClass::secureHtml($_POST['password_admin']); 
 
-            // Check if the email format is available 
-            if(!filter_var($email_admin, FILTER_VALIDATE_EMAIL)) {
+            // Check if the email format is available & the length < 60 characters
+            if(!filter_var($email_admin, FILTER_VALIDATE_EMAIL) && strlen($_POST['email_admin']) <= 60) {
                 MessagesClass::addAlertMsg("Email mal renseigné.", MessagesClass::RED_COLOR);
+                header("location:".URL."login"); 
+                exit(); 
+            // Check if the password  format is avalaible 
+            } elseif(!$uppercase || !$lowercase || !$specialCharacter || !$number || !strlen($_POST['password_admin'] < 8)) {
+                MessagesClass::addAlertMsg("Le mot de passe doit contenir au moins une majuscule, un minuscule, un chiffre et un caractère spécial.", MessagesClass::RED_COLOR);
                 header("location:".URL."login"); 
                 exit(); 
             } else { 
