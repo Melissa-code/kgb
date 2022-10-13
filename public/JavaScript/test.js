@@ -137,7 +137,7 @@ function getCards() {
     if($prod) {
         console.log('production');
         console.log($prod);
-        xhr.open("GET", "http://spyagentssecrets.herokuapp.com/missions", true);
+        xhr.open("GET", "https://spyagentssecrets.herokuapp.com/missions", true);
     } else {
         console.log("localhost");
         xhr.open("GET", "http://localhost:8888/cours/kgb/missions", true);
