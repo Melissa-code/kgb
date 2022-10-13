@@ -116,20 +116,21 @@ function getCards() {
     let xhr = new XMLHttpRequest(); 
 
     xhr.onreadystatechange = function() {
-        //console.log(this); 
+  
         if(this.readyState === 4 && this.status === 200){
             let data = xhr.response;
             console.log('test');
             setCardsInPage();
-            //console.log(data);
         } 
         else {
            console.log("Une erreur est survenue");
         }
     }
     console.log('test');
-    
-    $prod = getenv('PROD');
+
+    $prod = document.getElementById('prod').nodeValue
+    console.log($prod + " variable ici")
+
     //console.log($prod);
     console.log('test');
 

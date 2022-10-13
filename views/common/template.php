@@ -25,6 +25,7 @@
 </head>
 
 <body>
+    <input type="hidden" value="<?php getenv('PROD') ?>" name="prod" id="prod">
     <?php echo getenv('PROD')."hello"; ?>
     <!-- header -->
     <?php require_once("views/common/header.php"); ?>
