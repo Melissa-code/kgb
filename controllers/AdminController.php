@@ -1,6 +1,7 @@
 <?php
 require_once("models/AdminManager.php"); 
 
+
 class AdminController {
 
     private AdminManager $adminManager;
@@ -24,7 +25,7 @@ class AdminController {
 
 
      /**
-    * Login Admin (page) function
+    * Admin Login (page) function
     * 
     */
     public function login() : void {
@@ -41,23 +42,31 @@ class AdminController {
 
 
     /**
-    * Login Admin (validation) function 
+    * Admin Login (validation) function 
     * 
     */
     public function loginValidation(): void {
-        session_start(); 
 
         if($_POST){
-            $email_admin = htmlspecialchars($_POST['email_admin']); 
-            $password_admin = htmlspecialchars($_POST['password_admin']); 
+            $email_admin = SecurityClass::secureHtml($_POST['email_admin']); 
+            $password_admin = SecurityClass::secureHtml($_POST['password_admin']); 
 
+            // Check if the email format is available 
             if(!filter_var($email_admin, FILTER_VALIDATE_EMAIL)) {
+                MessagesClass::addAlertMsg("Email mal renseigné.", MessagesClass::RED_COLOR);
                 header("location:".URL."login"); 
                 exit(); 
-            } else {
-                $this->adminManager->loginDb($email_admin, $password_admin); 
+            } else { 
+                if($this->adminManager->isCombinationValid($email_admin, $password_admin)) {
+                    $this->adminManager->loginDb($email_admin); 
+                } else {
+                    MessagesClass::addAlertMsg("Impossible de vous identifier.", MessagesClass::RED_COLOR);
+                    header("location:".URL."login"); 
+                    exit(); 
+                }
             }
         } else {
+            MessagesClass::addAlertMsg("Email ou mot de passe non renseigné.", MessagesClass::RED_COLOR);
             header("location:".URL."login"); 
             exit();
         }
@@ -65,7 +74,7 @@ class AdminController {
 
 
     /**
-    * Logout Admin function
+    * Admin logout function
     * 
     */
     public function logout(): void {

@@ -3,6 +3,16 @@
     class SecurityClass {
 
         /**
+         * Prevent the special characters 
+         *
+         * @param string $typing
+         * @return string
+         */
+        public static function secureHtml(string $typing): string {
+            return htmlentities($typing); 
+        }
+
+        /**
          * Check if the Admin is logged-in
          *
          * @return boolean

@@ -22,7 +22,6 @@
     <?php if(!empty($page_css)) : ?>
         <link href="<?= URL ?>public/CSS/<?=$page_css?>" rel="stylesheet">
     <?php endif; ?> 
-    <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 
 <body>

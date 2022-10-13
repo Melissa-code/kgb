@@ -16,7 +16,7 @@ class MissionManager extends Model {
         $pdo = $this->getDb();
         $req = $pdo->prepare("SELECT * FROM Missions");
         $req->execute();
-        $data = $req->fetchAll(PDO::FETCH_ASSOC); // pour éviter d'avoir 2 fois les datas retournées
+        $data = $req->fetchAll(PDO::FETCH_ASSOC); 
         
         foreach($data as $mission) {
             $missions[] = new Mission($mission);

@@ -15,8 +15,7 @@ class AdminManager extends Model {
         $pdo = $this->getDb();
         $req = $pdo->prepare("SELECT * FROM Admins");
         $req->execute();
-        $data = $req->fetchAll(PDO::FETCH_ASSOC); // pour éviter d'avoir 2 fois les datas retournées
-        
+        $data = $req->fetchAll(PDO::FETCH_ASSOC); 
         foreach($data as $admin) {
             $admins[] = new Admin($admin);
         }
@@ -39,50 +38,71 @@ class AdminManager extends Model {
         $req->closeCursor();
         return $adminProfil; 
     }
-    
+
 
     /**
-    * Admin login
+     * Get the hash password from the DB 
+     *
+     * @param string $email_admin
+     * @return string
+     */
+    public function getPasswordAdmin(string $email_admin) {
+        $pdo = $this->getDb();
+        $req = $pdo->prepare('SELECT password_admin FROM Admins WHERE email_admin = :email_admin');
+        $req->bindValue(':email_admin', $email_admin, PDO::PARAM_STR);
+        $req->execute();
+        $result = $req->fetch(PDO::FETCH_ASSOC);
+        $req->closeCursor();
+        return $result['password_admin']; 
+    }
+
+
+    /**
+     * Compare the hash DB password to the Admin typing password 
+     *
+     * @param string $email_admin
+     * @param string $password_admin
+     * @return boolean
+     */
+    public function isCombinationValid(string $email_admin, string $password_admin): bool {
+        $passwordDb = $this->getPasswordAdmin($email_admin);
+        return password_verify($password_admin, $passwordDb);
+    }
+
+
+    /**
+    * Admin login function 
     *
     */
-    public function loginDb(string $email_admin, string $password_admin): void {
+    public function loginDb(string $email_admin): void {
 
-        // Check if the email_admin exists 
+        // Count how many times is the email in the DB to check if it already exists 
         $pdo = $this->getDb();
         $req = $pdo->prepare('SELECT count(*) as numberEmail FROM Admins WHERE email_admin = :email_admin'); 
         $req->bindValue(':email_admin', $email_admin, PDO::PARAM_STR);
         $req->execute();
-       
+
+        // If the email doesn't exist in the DB, display an error alert 
         while($email_verification = $req->fetch()){
-            // if the email doesn't exist in the DB display an error alert 
             if($email_verification['numberEmail'] != 1){
-                MessagesClass::addAlertMsg("Impossible de vous identifier.", MessagesClass::RED_COLOR); 
+                MessagesClass::addAlertMsg("Impossible de vous identifier !!.", MessagesClass::RED_COLOR); 
                 header('location:'.URL."login"); 
                 exit();
             }
-        }
+            // Log in the Admin 
+            $req2 = $pdo->prepare('SELECT * FROM Admins WHERE email_admin = :email_admin');
+            $req2->bindValue(':email_admin', $email_admin, PDO::PARAM_STR);
+            $req2->execute();
 
-        // Login 
-        $req = $pdo->prepare('SELECT * FROM Admins WHERE email_admin = :email_admin');
-        $req->bindValue(':email_admin', $email_admin, PDO::PARAM_STR);
-        $req->execute();
-
-        while($admin = $req->fetch(PDO::FETCH_ASSOC)) {
-            if($password_admin === $admin['password_admin']){
-
-                // To use the session connect anywhere in the website (bool)
+            while($admin = $req2->fetch(PDO::FETCH_ASSOC)) {
                 $_SESSION['connect'] = 1; 
                 $_SESSION['email_admin'] = $admin['email_admin']; 
+                echo 'connexion';
                 header("location:".URL."missions"); 
                 exit();
             }
-            else {
-                MessagesClass::addAlertMsg("Impossible de vous identifier.", MessagesClass::RED_COLOR); 
-                header("location:".URL."login"); 
-                exit();
-            }
         }
+        $req2->closeCursor();
         $req->closeCursor();
     } 
-        
 }
