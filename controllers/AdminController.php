@@ -30,6 +30,8 @@ class AdminController {
     */
     public function login() : void {
 
+        //echo password_hash("nicolai111", PASSWORD_DEFAULT);
+
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",
