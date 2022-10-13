@@ -30,7 +30,9 @@ class AdminController {
     */
     public function login() : void {
 
-        //echo password_hash("nicolai111", PASSWORD_DEFAULT);
+        //echo password_hash("Nicolai-111", PASSWORD_DEFAULT);
+        //echo password_hash("hans22-Schmidt", PASSWORD_DEFAULT);
+        //echo password_hash("AgentSecret-333", PASSWORD_DEFAULT);
 
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
@@ -49,7 +51,13 @@ class AdminController {
     */
     public function loginValidation(): void {
 
-        if($_POST){
+        $uppercase = preg_match('@[A-Z]@', $_POST['password_admin']);
+        $lowercase = preg_match('@[a-z]@', $_POST['password_admin']);
+        $letterAtFirst = preg_match('@^[a-zA-Z]@', $_POST['password_admin']);
+        $specialCharacter = preg_match('@[^\w]@',  $_POST['password_admin']);
+        $number = preg_match('@[0-9]@', $_POST['password_admin']);
+
+        if($_POST && strlen($_POST['email_admin']) <= 99){
             $email_admin = SecurityClass::secureHtml($_POST['email_admin']); 
             $password_admin = SecurityClass::secureHtml($_POST['password_admin']); 
 

@@ -9,7 +9,10 @@
          * @return string
          */
         public static function secureHtml(string $typing): string {
-            return htmlentities($typing); 
+            $typing = trim($typing); 
+            $typing = stripslashes($typing); 
+            $typing = htmlentities($typing); 
+            return $typing; 
         }
 
         /**
