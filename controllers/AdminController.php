@@ -66,7 +66,7 @@ class AdminController {
                 MessagesClass::addAlertMsg("Email mal renseigné.", MessagesClass::RED_COLOR);
                 header("location:".URL."login"); 
                 exit(); 
-            // Check if the password  format is avalaible 
+            // Check if the password format is avalaible by regex & the length min > 8 characters
             } elseif(!$uppercase || !$lowercase || !$specialCharacter || !$number || !strlen($_POST['password_admin'] < 8)) {
                 MessagesClass::addAlertMsg("Le mot de passe doit contenir au moins une majuscule, un minuscule, un chiffre et un caractère spécial.", MessagesClass::RED_COLOR);
                 header("location:".URL."login"); 

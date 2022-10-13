@@ -15,7 +15,6 @@
             return $typing; 
         }
 
-
         /**
          * Check if the Admin is logged-in
          *

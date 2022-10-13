@@ -127,10 +127,14 @@ function getCards() {
            console.log("Une erreur est survenue");
         }
     }
-    $prod = getenv('PROD');
-    console.log($prod);
     console.log('test');
+    
+    $prod = getenv('PROD');
+    //console.log($prod);
+    console.log('test');
+
     if($prod) {
+        console.log('production');
         console.log($prod);
         xhr.open("GET", "http://spyagentssecrets.herokuapp.com/missions", true);
     } else {
