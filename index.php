@@ -33,10 +33,6 @@ if($_SERVER['SERVER_NAME'] === 'localhost'){
     define("URL", str_replace("index.php", "", "https". "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
 }
 
-//define("URL", str_replace("index.php", "", (isset($_SERVER['HTTP'])? "http" : "https"). "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
-//define("URL", str_replace("index.php", "", "https". "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
-
-
 try {
     if(empty($_GET['page'])){
         $page = "home"; 

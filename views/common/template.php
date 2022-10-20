@@ -63,7 +63,7 @@
      <!-- JS -->
     <?php if(!empty($page_javascript)): ?>
         <?php foreach($page_javascript as $file_javascript):?>
-            <script src="<?= URL ?>public/Javascript/<?= $file_javascript ?>"></script>
+            <script src="<?= URL ?>public/javascript/<?= $file_javascript ?>"></script>
         <?php endforeach ?>
     <?php endif ?>
 
