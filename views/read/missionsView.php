@@ -46,6 +46,7 @@
     </section> 
 </div>
 
+<input type="hidden" value="<?php getenv('PROD') ?>" name="prod" id="prod">
 
 <!-- Missions cards -->
 
