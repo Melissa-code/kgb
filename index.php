@@ -26,7 +26,14 @@ $specialityController = new SpecialityController();
 
 // To get the path from the root of the project
 //define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS'])? "https" : "http"). "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
-define("URL", str_replace("index.php", "", (isset($_SERVER['HTTP'])? "http" : "https"). "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
+
+if($_SERVER['SERVER_NAME'] === 'localhost'){
+    define("URL", str_replace("index.php", "", "http". "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
+} else {
+    define("URL", str_replace("index.php", "", "https". "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
+}
+
+//define("URL", str_replace("index.php", "", (isset($_SERVER['HTTP'])? "http" : "https"). "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
 //define("URL", str_replace("index.php", "", "https". "://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']));
 
 
@@ -39,12 +46,12 @@ try {
     }
 
     switch($page) {
-        // home
+        // Home
         case "home": 
             $mainController->home();
         break;
 
-        // login admin 
+        // Login Admin 
         case "login": 
             $adminController->login();
         break;
