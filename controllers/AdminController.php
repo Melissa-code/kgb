@@ -51,7 +51,6 @@ class AdminController {
     */
     public function loginValidation(): void {
 
-        //$formatEmail = preg_match('/^[a-z][a-z0-9+]*@[a-z]+(\.[a-z]+)?$/i', $_POST['email_admin']);
         $uppercase = preg_match('/[A-Z]/', $_POST['password_admin']);
         $lowercase = preg_match('/[a-z]/', $_POST['password_admin']);
         $specialCharacter = preg_match('/[^\w]/', $_POST['password_admin']);
@@ -67,10 +66,10 @@ class AdminController {
                 header("location:".URL."login"); 
                 exit(); 
             // Check if the password format is avalaible by regex & the length min > 8 characters
-            } elseif(!$uppercase || !$lowercase || !$specialCharacter || !$number || !strlen($_POST['password_admin'] < 8)) {
-                MessagesClass::addAlertMsg("Le mot de passe doit contenir au moins une majuscule, un minuscule, un chiffre et un caractère spécial.", MessagesClass::RED_COLOR);
-                header("location:".URL."login"); 
-                exit(); 
+            // } elseif(!$uppercase || !$lowercase || !$specialCharacter || !$number || !strlen($_POST['password_admin'] < 8)) {
+            //     MessagesClass::addAlertMsg("Le mot de passe doit contenir au moins une majuscule, un minuscule, un chiffre et un caractère spécial.", MessagesClass::RED_COLOR);
+            //     header("location:".URL."login"); 
+            //     exit(); 
             } else { 
                 if($this->adminManager->isCombinationValid($email_admin, $password_admin)) {
                     $this->adminManager->loginDb($email_admin); 
