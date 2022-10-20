@@ -106,8 +106,6 @@ class MainController {
     */
     public function missions() : void {
 
-        $url1 = getenv('JAWSDB_URL');
-        echo $url1;
         $url2 = getenv('PROD');
         echo $url2;
 
@@ -117,6 +115,7 @@ class MainController {
         $data_page = [
             "page_description" => "Page listant l'ensemble des missions secrètes de la société Spy",
             "page_title" => "Missions de la société Spy",
+            "url2" => $url2,
             "missions" => $missions,
             "admins" => $admins,
             "page_css" => "list.css",
