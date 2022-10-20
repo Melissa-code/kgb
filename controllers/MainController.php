@@ -107,7 +107,7 @@ class MainController {
     public function missions() : void {
 
         $url2 = getenv('PROD');
-        echo $url2;
+       // echo $url2;
 
         $missions = $this->missionManager->getAll();
         $admins = $this->adminManager->getAll();
