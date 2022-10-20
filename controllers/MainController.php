@@ -106,6 +106,11 @@ class MainController {
     */
     public function missions() : void {
 
+        $url1 = getenv('JAWSDB_URL');
+        echo $url1;
+        $url2 = getenv('PROD');
+        echo $url2;
+
         $missions = $this->missionManager->getAll();
         $admins = $this->adminManager->getAll();
 
