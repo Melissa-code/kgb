@@ -129,13 +129,14 @@ function getCards() {
 
     $prod = document.getElementById('prod').nodeValue
     console.log($prod + " variable ici")
-
-    console.log($prod);
     console.log('test');
 
-    if($prod) {
-        console.log('production');
-        console.log($prod);
+    let currentUrl = document.location.href; 
+    console.log(currentUrl);
+
+    if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {
+        //console.log('production');
+        //console.log($prod);
         xhr.open("GET", "https://spyagentssecrets.herokuapp.com/missions", true); 
     } else {
         console.log("localhost");

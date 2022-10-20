@@ -79,7 +79,7 @@
         </article>
 
         <!-- Get the env PROD variable -->
-        <input type="text" value="<?php getenv('PROD') ?>" name="prod" id="<?php getenv('PROD') ?>">
+        <input type="text" value="<?= getenv('PROD') ?>" name="prod" id="prod">
 
     </div>
 </section>
