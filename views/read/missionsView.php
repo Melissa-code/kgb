@@ -46,8 +46,6 @@
     </section> 
 </div>
 
-<input type="hidden" value="<?php getenv('PROD') ?>" name="prod" id="prod">
-
 <!-- Missions cards -->
 
 <section class="container my-5">
@@ -79,6 +77,9 @@
                 </div>
             <?php endforeach; ?>
         </article>
+
+        <!-- Get the env PROD variable -->
+        <input type="hidden" value="<?php getenv('PROD') ?>" name="prod" id="prod">
 
     </div>
 </section>

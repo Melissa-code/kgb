@@ -126,7 +126,6 @@ function getCards() {
         }
     }
     
-    //console.log('test');
 
     $prod = document.getElementById('prod').nodeValue
     console.log($prod + " variable ici")
@@ -142,7 +141,7 @@ function getCards() {
         console.log("localhost");
         xhr.open("GET", "http://localhost:8888/cours/kgb/missions", true);
     }
-    xhr.responseType = "text"; 
+    xhr.responseType = "json"; 
     xhr.send();
 }
 
