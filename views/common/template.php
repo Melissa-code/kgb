@@ -20,7 +20,7 @@
     <!-- Custom CSS -->
     <link href="<?= URL ?>public/CSS/main.css" rel="stylesheet">
     <?php if(!empty($page_css)) : ?>
-        <link href="<?= URL ?>public/CSS/<?=$page_css?>" rel="stylesheet">
+        <link type="text/css" href="<?= URL ?>public/CSS/<?=$page_css?>" rel="stylesheet">
     <?php endif; ?> 
 </head>
 
@@ -64,7 +64,7 @@
      <!-- JavaScript -->
     <?php if(!empty($page_javascript)): ?>
         <?php foreach($page_javascript as $file_javascript):?>
-            <script src="<?= URL ?>public/javascript/<?= $file_javascript ?>"></script>
+            <script type="text/javascript" src="<?= URL ?>public/javascript/<?= $file_javascript ?>"></script>
         <?php endforeach ?>
     <?php endif ?>
 
