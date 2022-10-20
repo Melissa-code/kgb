@@ -67,7 +67,6 @@ function showList() {
     showPageInfo();
 }
 
-
 function nextPage() {
     if(first + numberOfItems < cards.length) { 
         actualPage++;
@@ -119,14 +118,15 @@ function getCards() {
   
         if(this.readyState === 4 && this.status === 200){
             let data = xhr.response;
-            console.log('test');
+            console.log('data');
             setCardsInPage();
         } 
         else {
            console.log("Une erreur est survenue");
         }
     }
-    console.log('test');
+    
+    //console.log('test');
 
     $prod = document.getElementById('prod').nodeValue
     console.log($prod + " variable ici")
