@@ -140,17 +140,9 @@ function showPageInfo() {
             fetch('http://localhost:8888/cours/kgb/typesList')
                 .then(res => console.log(res))
                 .then(setCardsInPage())
+        default: 
+            console.log("Erreur.")
     }
-
-    // if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {
-    //     fetch('https://spyagentssecrets.herokuapp.com/missions')
-    //         .then(res => console.log(res))
-    //         .then(setCardsInPage())
-    // } else {
-    //     fetch('http://localhost:8888/cours/kgb/missions')
-    //         .then(res => console.log(res))
-    //         .then(setCardsInPage())
-    // }
 }
 
 /**

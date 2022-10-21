@@ -1,9 +1,47 @@
+const searchInput = document.querySelector('#searchInput'); 
 const cards = document.querySelectorAll('.card');
 
 let numberOfItems = 4;
 let first = 0;
 let actualPage = 1; 
 let maxPages = Math.ceil(cards.length / numberOfItems); 
+
+
+/* *********************************************************** */
+/*                        Searchbar                            */
+/* *********************************************************** */
+
+/**
+ * Search the mission (code mission or word in the title or description) in the searchbar
+ * 
+ * @param {*} letters (string letters in the searchInput)
+ * @param {*} elements (array cards of the missions)
+ */
+function filterElements(letters, elements) {
+  
+    let missions = document.getElementById('missions-list');
+    
+    if(letters.length > 2) {
+        searchInput.style.borderColor = "green"; 
+
+        for(let i = 0; i < elements.length; i++) {
+            // textContent : text of the h3 h4 & p of each card   
+            if(elements[i].textContent.toLowerCase().includes(letters)) {
+                missions.insertBefore(elements[i], missions.firstElementChild); 
+                elements[i].style.display = "inline-block"; 
+            } else {
+                elements[i].style.display = "none"; 
+            }
+        }
+    } else if (letters.length == 0) {
+        for(let i = 0; i < elements.length; i++) {
+            elements[i].style.display = "inline-block"; 
+        }
+        firstPage(); 
+    } else {
+        searchInput.style.borderColor = "red"; 
+    }
+}
 
 
 /* *********************************************************** */
@@ -16,14 +54,14 @@ let maxPages = Math.ceil(cards.length / numberOfItems);
  */
 function showList() {
 
-    let lists = document.getElementById('lists');
-    lists.innerHTML = "";
-
+    let missions = document.getElementById('missions-list');
+    missions.innerHTML = "";
+  
     for (let i = first; i <  first + numberOfItems; i++){
         if(i < cards.length) {
             let dupNode = cards[i].cloneNode([true]);
-            //lists.appendChild(dupNode); 
-            lists.appendChild(cards[i]); 
+            missions.appendChild(cards[i]); 
+            //missions.appendChild(dupNode); 
         }
     }
     showPageInfo();
@@ -68,28 +106,25 @@ function showPageInfo() {
 /* *********************************************************** */
 
 /**
- * xhr object : to get XML data via the URL (xhr.response)
- * All page is not refresh when there is a change function
+ * Fetch request 
  * 
  */
 function getCards() {
 
-    let xhr = new XMLHttpRequest(); 
+    $prod = document.getElementById('prod').nodeValue
+    console.log($prod + " variable ici")
 
-    xhr.onreadystatechange = function() {
+    let currentUrl = document.location.href; 
 
-        if(this.readyState === 4 && this.status === 200){
-            let data = xhr.response;
-            setCardsInPage();
-            //console.log(data);
-        } 
-        else {
-           //console.log("Une erreur est survenue");
-        }
+    if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {
+        fetch('https://spyagentssecrets.herokuapp.com/missions')
+            .then(res => console.log(res))
+            .then(setCardsInPage())
+    } else {
+        fetch('http://localhost:8888/cours/kgb/missions')
+            .then(res => console.log(res))
+            .then(setCardsInPage())
     }
-    xhr.open("GET", "http://localhost:8888/cours/kgb/agentsList", true);
-    xhr.responseType = "text"; 
-    xhr.send();
 }
 
 
@@ -99,6 +134,17 @@ function getCards() {
  * 
  */
 function setCardsInPage() {
+
+    /**
+     * Keyup event listener
+     */
+    searchInput.addEventListener('keyup', (e) => {
+        // e.target.value : letters in the searchInput
+        const searchedLetters = e.target.value.toLowerCase();
+        console.log(e); 
+        console.log(searchedLetters); 
+        filterElements(searchedLetters, cards);
+    });
 
     /**
      * Click events listeners 
