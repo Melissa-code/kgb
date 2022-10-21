@@ -106,45 +106,34 @@ function showPageInfo() {
 /* *********************************************************** */
 
 /**
- * xhr object : to get XML data via the URL (xhr.response)
- * All page is not refresh when there is a change function
+ * Fetch request 
  * 
  */
 function getCards() {
 
-    let xhr = new XMLHttpRequest(); 
-
-    xhr.onreadystatechange = function() {
-        if(this.readyState === 4 && this.status === 200){
-            let data = xhr.response;
-            //console.log(data);
-            setCardsInPage();
-        } 
-        else {
-           console.log("Une erreur est survenue");
-        }
-    }
-    
-
-    //$prod = document.getElementById('prod').nodeValue
-    //console.log($prod + " variable ici")
-    //console.log('test');
-
     let currentUrl = document.location.href; 
-    console.log("url est :" + currentUrl);
-
-    xhr.responseType = "arraybuffer"; 
+    console.log("L url est :" + currentUrl);
 
     if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {
-        //console.log('production');
-        //console.log($prod);
-        xhr.open("GET", "https://spyagentssecrets.herokuapp.com/missions", true); 
+        console.log("heroku");
+        fetch('https://spyagentssecrets.herokuapp.com/missions')
+            .then(res => console.log(res))
+            .then(setCardsInPage())
     } else {
         console.log("localhost");
-        xhr.open("GET", "http://localhost:8888/cours/kgb/missions", true);
+        fetch('http://localhost:8888/cours/kgb/missions')
+            .then(res => console.log(res))
+            .then(setCardsInPage())
+            // .then(res => {
+            //     if(res.ok) {
+            //         res.text().then(setCardsInPage())
+            //     } else {
+            //         console.log('erreur')
+            //         document.getElementById('erreur').innerHTML = "Erreur :("
+            //     }
+            // }) 
     }
-    //xhr.responseType = "text"; 
-    xhr.send();
+   
 }
 
 
