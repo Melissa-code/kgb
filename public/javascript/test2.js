@@ -112,28 +112,21 @@ function showPageInfo() {
 function getCards() {
 
     let currentUrl = document.location.href; 
-    console.log("L url est :" + currentUrl);
 
-    if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {
-        console.log("heroku");
-        fetch('https://spyagentssecrets.herokuapp.com/missions')
-            .then(res => console.log(res))
-            .then(setCardsInPage())
-    } else {
-        console.log("localhost");
-        fetch('http://localhost:8888/cours/kgb/missions')
-            .then(res => console.log(res))
-            .then(setCardsInPage())
-            // .then(res => {
-            //     if(res.ok) {
-            //         res.text().then(setCardsInPage())
-            //     } else {
-            //         console.log('erreur')
-            //         document.getElementById('erreur').innerHTML = "Erreur :("
-            //     }
-            // }) 
+    try {
+        if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {
+            fetch('https://spyagentssecrets.herokuapp.com/missions')
+                .then(res => console.log(res))
+                .then(setCardsInPage())
+        } else {
+            fetch('http://localhost:8888/cours/kgb/missions')
+                .then(res => console.log(res))
+                .then(setCardsInPage())
+        }
+    } catch(error) {
+        console.error(error); 
+        document.getElementById('error').innerHTML = "Erreur :("
     }
-   
 }
 
 
@@ -146,7 +139,6 @@ function setCardsInPage() {
 
     /**
      * Keyup event listener
-     * 
      */
     searchInput.addEventListener('keyup', (e) => {
         // e.target.value : letters in the searchInput
@@ -158,7 +150,6 @@ function setCardsInPage() {
 
     /**
      * Click events listeners 
-     * 
      */
     document.querySelector('.nextP').addEventListener('click', (e)=> {
         e.preventDefault();
@@ -179,7 +170,6 @@ function setCardsInPage() {
         e.preventDefault();
         lastPage();
     })
-    
 }
 
 

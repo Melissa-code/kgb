@@ -3,7 +3,7 @@
 <section class="container pb-2">
     <div class="row d-flex justify-content-center">
         <div class="col-12">
-            <h1 class="text-light">Liste des missions</h1>
+            <h1 class="text-light" id="error">Liste des missions</h1>
         </div>
 
         <!-- Alert message if the Admin is logged-in --> 

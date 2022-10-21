@@ -107,7 +107,6 @@ class MainController {
     public function missions() : void {
 
         $url2 = getenv('PROD');
-       // echo $url2;
 
         $missions = $this->missionManager->getAll();
         $admins = $this->adminManager->getAll();
@@ -119,9 +118,7 @@ class MainController {
             "missions" => $missions,
             "admins" => $admins,
             "page_css" => "list.css",
-            //"page_javascript" => ["missions.js"],
-            //"pagejavascript" => ["test.js"],
-            "pagejavascript" => ["test2.js"],
+            "pagejavascript" => ["missions.js"],
             "view" => "views/read/missionsView.php",
             "template" => "views/common/template.php"
         ];
