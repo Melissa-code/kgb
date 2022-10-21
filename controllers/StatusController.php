@@ -54,7 +54,7 @@ class StatusController {
             "page_description" => "Page listant les statuts",
             "page_title" => "Statuts",
             "page_css" => "list.css",
-            "page_javascript" => ["list.js"],
+            "pagejavascript" => ["lists.js"],
             "status" => $status,
             "view" => "views/read/statusView.php",
             "template" => "views/common/template.php"

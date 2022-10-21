@@ -111,6 +111,9 @@ function showPageInfo() {
  */
 function getCards() {
 
+    $prod = document.getElementById('prod').nodeValue
+    console.log($prod + " variable ici")
+
     let currentUrl = document.location.href; 
 
     if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {

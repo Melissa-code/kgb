@@ -55,7 +55,7 @@ class DurationController {
             "page_description" => "Page listant les durées",
             "page_title" => "Liste des durées",
             "page_css" => "list.css",
-            "page_javascript" => ["list.js"],
+            "pagejavascript" => ["lists.js"],
             "durations" => $durations,
             "view" => "views/read/durationsView.php",
             "template" => "views/common/template.php"

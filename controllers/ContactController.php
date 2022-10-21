@@ -52,7 +52,7 @@ class ContactController {
             "page_description" => "Page listant les contacts",
             "page_title" => "Liste des contacts",
             "page_css" => "list.css",
-            "page_javascript" => ["list.js"],
+            "pagejavascript" => ["lists.js"],
             "contacts" => $contacts,
             "view" => "views/read/contactsView.php",
             "template" => "views/common/template.php"

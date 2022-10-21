@@ -79,9 +79,8 @@
         </article>
 
         <!-- Get the env PROD variable -->
-        <div id="erreur">
-            <input type="hidden" value="<?= getenv('PROD') ?>" name="prod" id="prod">
-        </div>
+        <input type="hidden" value="<?= getenv('PROD') ?>" name="prod" id="prod">
+
 
     </div>
 </section>
