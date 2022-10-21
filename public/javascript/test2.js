@@ -113,19 +113,14 @@ function getCards() {
 
     let currentUrl = document.location.href; 
 
-    try {
-        if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {
-            fetch('https://spyagentssecrets.herokuapp.com/missions')
-                .then(res => console.log(res))
-                .then(setCardsInPage())
-        } else {
-            fetch('http://localhost:8888/cours/kgb/missions')
-                .then(res => console.log(res))
-                .then(setCardsInPage())
-        }
-    } catch(error) {
-        console.error(error); 
-        document.getElementById('error').innerHTML = "Erreur :("
+    if(currentUrl === "https://spyagentssecrets.herokuapp.com/missions") {
+        fetch('https://spyagentssecrets.herokuapp.com/missions')
+            .then(res => console.log(res))
+            .then(setCardsInPage())
+    } else {
+        fetch('http://localhost:8888/cours/kgb/missions')
+            .then(res => console.log(res))
+            .then(setCardsInPage())
     }
 }
 

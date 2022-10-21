@@ -118,7 +118,9 @@ class MainController {
             "missions" => $missions,
             "admins" => $admins,
             "page_css" => "list.css",
-            "pagejavascript" => ["missions.js"],
+            //"page_javascript" => ["missions.js"],
+            //"pagejavascript" => ["test.js"],
+            "pagejavascript" => ["test2.js"],
             "view" => "views/read/missionsView.php",
             "template" => "views/common/template.php"
         ];
