@@ -62,9 +62,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
      <!-- JavaScript -->
-    <?php if(!empty($page_javascript)): ?>
+    <!-- <?php if(!empty($page_javascript)): ?>
         <?php foreach($page_javascript as $file_javascript):?>
             <script type="text/javascript" src="<?= URL ?>public/javascript/<?= $file_javascript ?>"></script>
+        <?php endforeach ?>
+    <?php endif ?> -->
+    <?php if(!empty($pagejavascript)): ?>
+        <?php foreach($pagejavascript as $filejavascript):?>
+            <script type="text/javascript" src="<?= URL ?>public/javascript/<?= $filejavascript ?>"></script>
         <?php endforeach ?>
     <?php endif ?>
 

@@ -142,7 +142,7 @@ function getCards() {
         console.log("localhost");
         xhr.open("GET", "http://localhost:8888/cours/kgb/missions", true);
     }
-    xhr.responseType = "text"; 
+    xhr.responseType = "text/javascript"; 
     xhr.send();
 }
 

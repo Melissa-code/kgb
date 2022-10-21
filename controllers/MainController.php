@@ -120,7 +120,7 @@ class MainController {
             "admins" => $admins,
             "page_css" => "list.css",
             //"page_javascript" => ["missions.js"],
-            "page_javascript" => ["test.js"],
+            "pagejavascript" => ["test.js"],
             "view" => "views/read/missionsView.php",
             "template" => "views/common/template.php"
         ];
