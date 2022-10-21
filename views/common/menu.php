@@ -17,20 +17,20 @@
     
         <!-- Target of burger menu -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
+            <ul class="navbar-nav me-auto">
                 <!-- Home link -->
-                <li><a aria-current="page" href="home" class="nav-link px-2 text-dark">Accueil</a></li>
+                <li style="background: #F7F5F3; width:6rem;"><a aria-current="page" href="home" class="nav-link px-2 text-dark">Accueil</a></li>
                 <!-- Missions link -->
-                <li><a href="missions" class="nav-link px-2 text-dark">Missions</a></li>
+                <li style="background: #F7F5F3; width:6rem;"><a href="missions" class="nav-link px-2 text-dark">Missions</a></li>
             </ul>
-            <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
+            <ul class="navbar-nav ms-auto">
                 <!-- Login link -->
                 <?php if(!isset($_SESSION['connect'])) :?>
-                    <li><a href="login"><img src="<?= URL ?>public/assets/images/loginuser.svg" width="80" class="nav-link px-2" /></a></li>
+                    <li style="background: #F7F5F3; width:6rem;"><a href="login"><img src="<?= URL ?>public/assets/images/loginuser.svg" width="80" class="nav-link px-2" /></a></li>
                     <?php endif ?>
                 <!-- Logout link -->
                 <?php if(isset($_SESSION['connect'])) :?>
-                    <li><a href="logout"><img src="<?= URL ?>public/assets/images/logoutuser.svg"  width="80" class="nav-link px-2" /></a></li>
+                    <li style="background: #F7F5F3; width:6rem;"><a href="logout"><img src="<?= URL ?>public/assets/images/logoutuser.svg"  width="80" class="nav-link px-2" /></a></li>
                 <?php endif ?>
             </ul>
         </div>
