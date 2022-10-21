@@ -61,7 +61,7 @@
 
     <?php if(!empty($pagejavascript)): ?>
         <?php foreach($pagejavascript as $filejavascript):?>
-            <script type="text/javascript" src="<?= URL ?>public/javascript/<?= $filejavascript ?>"></script>
+            <script type="application/javascript" src="<?= URL ?>public/javascript/<?= $filejavascript ?>"></script>
         <?php endforeach ?>
     <?php endif ?>
 
