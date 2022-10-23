@@ -1,6 +1,6 @@
 <!------------- Footer --------------->
 
-<footer class="container-fluid pt-3">
+<footer class="container-fluid pt-2 pt-md-3">
     <div class="row py-3"> 
         <!-- Mentions politics and conditions -->
         <div class="col-12 d-flex justify-content-center align-items-center pb-3"> 

@@ -15,13 +15,12 @@ rouge foncé: #7F0B07
 }
 
 body {
-    /* height: 100vh;  */
+    height: 100vh; 
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     background-color: #0D0B07;
     color:  #F7F5F3;
-    /* display: flex;
-    flex-direction: column; */
+  
 }
 
 h1, h2 {
@@ -44,7 +43,7 @@ a {
 #menu {
     background-color: #F7F5F3;
     color: #0D0B07;
-    height: 13vh;
+    height: 14vh;
 }
 
 /* ***********************************************************

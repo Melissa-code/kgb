@@ -83,7 +83,7 @@
         font-size: 16px;
         height: 100%;
     }
-    .bg-form-speciality, .bg-form-duration, .bg-form-agent, .bg-form-contact, .bg-form-target, .bg-form-hideout, .bg-form-status, .bg-form-type {
+    .bg-form-speciality, .bg-form-duration, .bg-form-agent, .bg-form-contact, .bg-form-target, .bg-form-hideout, .bg-form-status, .bg-form-type, .bg-form {
         background: #0D0B07;
     }
     .bg-form-agent, .bg-form-contact, .bg-form-target, .bg-form-hideout {
