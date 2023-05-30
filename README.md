@@ -22,11 +22,11 @@ See the website : [Spy](https://spyagentssecrets.herokuapp.com/)
 2. [Prerequisites](#Prerequisites)
 3. [Installation](#Installation)
 4. [Run](#Run)
-5. [Log in as an Administrator](#login-as-an-administrator)
-5. [Built with](#Built-with)
-6. [Deploying](#Deploying)
-7. [Author](#Author)
-8. [License](#License)
+5. [Log in as an administrator](#Log-in-as-an-administrator)
+6. [Built with](#Built-with)
+7. [Deploying](#Deploying)
+8. [Author](#Author)
+9. [License](#License)
 
 
 
@@ -91,7 +91,7 @@ In phpMyAdmin, click on the tab User Account. Fill in the Username and the Passw
 
 
 
-## Log in as an Administrator
+## Log in as an administrator
 
 1. In the login function of the AdminController, write : 
 `echo password_hash("passwordToHash", PASSWORD_DEFAULT);`
