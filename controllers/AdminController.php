@@ -29,11 +29,6 @@ class AdminController {
     * 
     */
     public function login() : void {
-
-        //echo password_hash("Nicolai-111", PASSWORD_DEFAULT);
-        //echo password_hash("hans22-Schmidt", PASSWORD_DEFAULT);
-        //echo password_hash("AgentSecret-333", PASSWORD_DEFAULT);
-
         $data_page = [
             "page_description" => "Page de connexion en tant qu'administrateur du site du KGB pour créer, modifier ou supprimer des missions",
             "page_title" => "Connexion en tant qu'administrateur du site du KGB",

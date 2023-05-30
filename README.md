@@ -99,13 +99,13 @@ In phpMyAdmin, click on the tab User Account. Fill in the Username and the Passw
 2. Copy (Ctrl + C) the encrypted password displayed on the login page and remove it.
 
 3. Edit the password saved in the database for an Administrator (id_admin = 1) with a SQL query :
-`UPDATE admins SET password_admin = 'PasswordToHashEncrypted' WHERE id_admin = 1;`
+`UPDATE Admins SET password_admin = 'hashedPassword' WHERE id_admin = 1;`
 
 It is possible to change the email too : 
-`UPDATE admins SET email_admin = 'example@gmail.com' WHERE id_admin = 1;`
+`UPDATE Admins SET email_admin = 'example@gmail.com' WHERE id_admin = 1;`
 
 4. Or create a new user : 
-`INSERT INTO admins (name_admin, firstname_admin, email_admin, password_admin, secret_admin) VALUES ('NameExample', 'FirstnameExample','email@example.com', PasswordToHashEncrypted, SHA1('PasswordToHash'));`
+`INSERT INTO Admins (name_admin, firstname_admin, email_admin, password_admin, secret_admin) VALUES ('NameExample', 'FirstnameExample','email@example.com', hashedPassword, SHA1('password'));`
 
 
 
